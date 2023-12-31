@@ -1,0 +1,136 @@
+
+/*============== Media queries ============== */
+
+/* Desktop */
+@media (max-width:1024px){
+
+  html{
+    font-size: 55%;
+  }
+
+  /* about */
+  .about__right__content img{
+    width: 600px;
+  }
+
+
+}
+
+@media(max-width:970px){
+  /* about */
+  .about__container{
+    text-align: center;
+    align-items: center;
+  }
+  .about__left__content{
+    width: 100%;
+  }
+  .text-medium{
+    font-size: 1.6rem;
+  }
+  .about__right__content{
+    width: 100%;
+  }
+
+
+  /* signup */
+
+
+
+  .signup__container{
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+  }
+  .signup__content__right{
+    width: 100%;
+  }
+}
+
+
+
+/* Tablet */
+@media(max-width:767px){
+  /* navbar */
+  /* .toogle-btn{
+    display: flex;
+  }
+  .flex{
+    flex-direction: column;
+  }
+  .navbar{
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .navbar .nav__menu{
+    width: 100%;
+    flex-direction: column;
+  }
+  .nav__links{
+    width: 100%;
+  }
+  .nav__item{
+    text-align: center;
+  } */
+
+
+
+
+
+ 
+  /* features section */
+  .center-titled{
+    font-size: 5rem;
+  }
+
+  /* footer */
+  .footer-col-left{
+    width: 100%;
+  }
+
+
+  /* footer */
+  .footer__col__right{
+    margin: 4rem 0;
+  }
+
+  /* signup */
+  .signup__content__left{
+    width: 100%;
+  }
+
+
+}
+
+
+
+
+
+
+
+
+
+/* Phone */
+@media(max-width:560px){
+
+  /* about */
+  .about__right__content img{
+    width: 500px;
+  }
+
+  
+  
+
+
+
+
+
+
+}
+@media(max-width:450px){
+  
+}
+@media(max-width:254px){
+  
+}
