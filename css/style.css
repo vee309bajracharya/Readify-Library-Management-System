@@ -26,6 +26,10 @@
   --box-shadow-color: 0 .5rem 1rem rgba(0,0,0,.1);
   --border-color: .1rem solid var(--bg-black-color);
   --hover-color1: #7875F6;
+  --success-msg-color : #0FD76B;
+  --warning-msg-color : #F06F2E;
+  --alert-msg-color : #F1342F;
+  --info-msg-color : #5131F1;
 }
 
 ::-webkit-scrollbar{
@@ -161,7 +165,6 @@ section{
 }
 
 .header .flex{
-  height: 11rem;
   display: flex;
   justify-content: space-between;
   align-items: center;  
@@ -197,9 +200,11 @@ section{
   background-color: var(--bg-white-color);
   border-radius: 10px;
 } */
-.logo__container img{
+.logo__container{
   min-height: 20px;
+  width: 10%;
 }
+
 
 
 /* ==== Header Section ends ==== */
@@ -208,8 +213,10 @@ section{
 
 /* ===== Welcome Section starts ===== */
 .home__wrapper{
-  min-height: 54rem;
+  height: 90vh;
   background-image: linear-gradient(rgb(54 49 241 / 50%), rgb(2 0 127 / 55%)),url(../images/hero-section-bg.png);
+  background-size: cover;
+  background-position: center;
   text-align: center;
 }
 .home__welcome__info{
@@ -531,3 +538,26 @@ section{
 }
 
 /* ==== Signup page ends ===== */
+/* ============================================= */
+
+/* === User home page section starts === */
+.sub__header{
+  background-color: var(--content-bg-color);
+}
+
+.sub__flex{
+  flex-direction: row;
+}
+.user__nav{
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+
+
+
+
+
+/* === User home page section ends === */
