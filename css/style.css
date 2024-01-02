@@ -557,7 +557,40 @@ section{
 
 
 
-
-
-
 /* === User home page section ends === */
+/* ================================================== */
+
+/* ===== Terms and Conditions Page starts ============ */
+.terms__wrapper{
+  width: 100%;
+  min-height: 40vh;
+  background-image: linear-gradient(rgb(6 0 183 / 47%), rgb(0 0 0 / 45%)),url(../images/terms__bg.jpg);  background-size: cover;
+  background-position: center;
+}
+.terms__text__left h2{
+  margin: 2rem 0;
+  color: var(--bg-white-color);
+  font-size: 5rem;
+
+}
+.terms__agree__content{
+  margin: 4rem 0;
+
+}
+.terms__title{
+  padding: 2.7rem 0;
+  font-size: 2.8rem;
+  text-transform: uppercase;
+
+}
+.terms__intro__text{
+  text-align: justify;
+  font-size: 1.6rem;
+  font-weight: 400;
+  font-family: var(--primary-font);
+  margin: 2rem 0;
+}
+
+
+
+/* ===== Terms and Conditions Page ends ============ */
