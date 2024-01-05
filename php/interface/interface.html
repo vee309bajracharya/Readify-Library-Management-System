@@ -85,32 +85,54 @@
                         <div class="dropdown__options">
                             <a href="#">BCA</a>
                             <a href="#">BIM</a>
-                            <a href="#">BIT</a>
                         </div>
                     </div>
-                    
-
-
-
-
-
-                    <!-- <input type="text" id="categoryName" name="categoryName" placeholder="Category" class="book__search"></i>
-                    <select id="bookCategory" name="bookCategory">
-                        <option value="bca">BCA</option>
-                        <option value="bim">BIM</option>
-                        <option value="bba">BBA</option>
-                    </select> -->
-                    
-
-
-
-
                 </form>
             </div>
         </div>
     </section>
 
 
+    
+    <section><h2>BCA 1st Semester</h2></section>
+        
+    <section class="book__grid__container" id="bookGrid">
+      <!-- Images will be added dynamically using JavaScript -->
+    </section>
+    
+    <script>
+      // Book data with name and image link
+      const books = [
+        { name: 'Computer Fundamentals and Applications', image: 'https://sajhakitab.com/wp-content/uploads/2023/09/9ed9d978-1d5f-4f2e-88f1-ee1cc0df79c8.jpg' },
+        { name: 'Society and Technology', image: 'https://sajhakitab.com/wp-content/uploads/2023/09/88ec2348-8288-4d0d-ad0d-971d305968dd.jpg' },
+        { name: 'English-I', image: 'https://evyapari-v4masters.s3.ap-south-1.amazonaws.com/admin/images/cover_photos/1597227566055.jpg' },
+        { name: 'Mathematics-I', image: 'https://static-01.daraz.com.np/p/63f1b283fdad2dd52bd7d6f111e2a163.jpg' },
+        { name: 'Digital Logic', image: 'https://sajhakitab.com/wp-content/uploads/2023/07/IMG_5311.jpeg' },
+      ];
+
+      
+      // Function to add book elements to the grid container
+      function addBooks() {
+        const gridContainer = document.getElementById('bookGrid');
+    
+        books.forEach(book => {
+          const bookDiv = document.createElement('div');
+          bookDiv.classList.add('books');
+    
+          const image = document.createElement('img');
+          image.src = book.image;
+    
+          const bookName = document.createElement('p');
+          bookName.textContent = book.name;
+    
+          bookDiv.appendChild(image);
+          bookDiv.appendChild(bookName);
+          gridContainer.appendChild(bookDiv); // Append to the grid container
+        });
+      }
+    
+      // Call the function to add books
+      addBooks();
 
 
 
@@ -122,35 +144,12 @@
 
 
 
-
-
-
-
-
-
-
-
-
+    </script>
 
 
 
     <!-- ======= Book items Selection section ends ======= -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <!-- ======================================================== -->
 
 
   </body>
