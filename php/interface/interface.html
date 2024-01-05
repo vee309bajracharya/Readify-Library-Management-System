@@ -1,11 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Home</title>
     
-</body>
+    <!-- Title icon -->
+    <link rel="icon" href="../../icons/title_icon.png" type="image/x-icon" />
+
+    <!-- CSS Links -->
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" href="../../css/responsive.css" />
+
+     <!-- ==== Google Fonts Link ==== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@100;400;500;600;700;800&display=swap"  rel="stylesheet">
+
+  <!-- ==== Boxicons link ==== -->
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+  <!-- ==== RemixIcon link ==== -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet" />
+
+
+
+
+
+
+  </head>
+  <body>
+    <!--  ===== header section starts ===== -->
+    <header class="header sub__header" id="sub__header">
+        <section class="sub__flex" id="sub__flex">
+
+            <div class="user__panel__left" id="user__panel__left">
+                <figure class="sub__logo">
+                    <img src="../../svg/logo-2.svg" alt="" srcset="">
+                </figure>
+    
+                <nav class="navbar">
+                    <ul class="sub__nav__menu">
+                        <li class="sub__nav__item"><a href="./interface.html" class="sub__navlinks">Library</a></li>
+                        <li class="sub__nav__item"><a href="#" class="sub__navlinks">My Bookshelf</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="user__panel__right" id="user__panel__right">
+                <div class="user__profile" id="user__profile">
+                    <div class="user__details" id="user__details">
+                        <div class="user__info" id="user__info">
+                            <span id="user-name">Veerin Bajracharya</span>
+                            <small id="user-work">Student</small>
+                        </div>
+                        
+                        <figure class="user__img" id="user__img">
+                            <a href="#"><img src="../../images/user__profile.jpg" id="user__pp" alt="User"></a>
+                        </figure>
+                    </div>
+                </div>
+    
+                <figure class="logout__panel" id="logout__panel">
+                    <a href="#"><img src="../../svg/Logout.svg" alt="Logout" id="logout"></a>
+                </figure>
+            </div>
+        </section>
+    </header>
+    <!--  ===== Header section ends ===== -->
+    <!-- =========================================================== -->
+
+    <!-- ======= Book items Selection section starts ======= -->
+
+    <section class="search__book__wrapper" id="search__book__wrapper">
+        <div class="search__box__container">
+            <div class="search__form" id="search__form">
+                <form action="" method="POST">
+
+                    <input type="text" id="bookName" name="bookName" placeholder="What do you want to read ?" class="book__search"></i>
+                    <button onclick="searchByName()" class="search__book__btn"><i class='bx bx-search'></i></button>
+                    
+                    <div class="dropdown__category">
+                        <button class="box__category">Category</button>
+                        <div class="dropdown__options">
+                            <a href="#">BCA</a>
+                            <a href="#">BIM</a>
+                            <a href="#">BIT</a>
+                        </div>
+                    </div>
+                    
+
+
+
+
+
+                    <!-- <input type="text" id="categoryName" name="categoryName" placeholder="Category" class="book__search"></i>
+                    <select id="bookCategory" name="bookCategory">
+                        <option value="bca">BCA</option>
+                        <option value="bim">BIM</option>
+                        <option value="bba">BBA</option>
+                    </select> -->
+                    
+
+
+
+
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- ======= Book items Selection section ends ======= -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </body>
 </html>
