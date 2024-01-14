@@ -14,6 +14,7 @@
     - MySQL
 
 ======  System Functionalities ======
+
 For USER:
 
 1. Register
