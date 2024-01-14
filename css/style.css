@@ -213,7 +213,7 @@ section{
 
 /* ===== Welcome Section starts ===== */
 .home__wrapper{
-  height: 90vh;
+  min-height: 66rem;
   background-image: linear-gradient(rgb(54 49 241 / 50%), rgb(2 0 127 / 55%)),url(../images/hero-section-bg.png);
   background-size: cover;
   background-position: center;
@@ -496,24 +496,24 @@ section{
   color: var(--bg-white-color);
   text-align: center;
   width: 60%;
-  background-image: linear-gradient(rgb(3 0 109 / 93%), rgb(18 14 255 / 49%)),url(../images/sign-up__bg.png);
+  background-image: linear-gradient(rgb(3 0 109 / 45%), rgb(18 14 255 / 49%)),url(../images/sign-up__bg.png);
   background-size: cover;
   background-position: center;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 }
 .signup__content__right .welcome__content{
-  margin: 15rem 0;
+  margin: 20rem 0;
 }
 .signup__content__right .welcome__content h3{
   margin: 1.2rem 0;
-  font-weight: 100;
-  font-size: 3.1rem;
+  font-size: 2rem;
+  font-weight: 400;
 }
 .signup__content__right .welcome__content span{
   font-family: var(--primary-font);
   font-weight: bold;
-  font-size: 3.3rem;
+  font-size: 6rem;
 }
 .signup__content__left form{
   margin: 4rem 0;
@@ -543,7 +543,6 @@ section{
 /* ===== Terms and Conditions Page starts ============ */
 .terms__wrapper{
   width: 100%;
-  min-height: 40vh;
   background-image: linear-gradient(rgb(6 0 183 / 47%), rgb(0 0 0 / 45%)),url(../images/terms__bg.jpg);  background-size: cover;
   background-position: center;
 }
@@ -711,7 +710,7 @@ section{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
-  padding: 20px;
+  padding: 20px 0;
 }
 
 .books {
@@ -732,6 +731,8 @@ section{
 .books p {
   margin: 1.3rem 0;
   font-size: 1.4rem;
+  font-weight: 400;
+  font-family: var(--primary-font);
 }
 
 
