@@ -30,6 +30,8 @@
   --warning-msg-color : #F06F2E;
   --alert-msg-color : #F1342F;
   --info-msg-color : #5131F1;
+  --container-box-color : #3631F1;
+  --sidebar-hover-color : #AAAAAA;
 }
 
 ::-webkit-scrollbar{
@@ -150,6 +152,9 @@ section{
   font-size: 1.6rem;
   padding: 1.5rem 0;
   text-align: center;
+}
+.fields #must{
+  color: var(--alert-msg-color);
 }
 
 /* ==== Header Section starts ==== */
@@ -473,12 +478,14 @@ section{
 /* =================================================== */
 
 /* ==== Signup page starts ===== */
+
+
 .signup__container{
-  background-color: var(--bg-white-color);
   border-radius: 5px;
   display: flex;
   justify-content: space-between;
-  min-height: 80vh;
+  align-items: center;
+  height: 90vh;
   margin: 2rem 0;
 }
 
@@ -489,31 +496,38 @@ section{
 
 .signup__content__left{
   width: 60%;
-  padding: 3rem ;
+  padding: 2.5rem;
+  background-color: var(--bg-white-color);
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 
 .signup__content__right{
   color: var(--bg-white-color);
   text-align: center;
   width: 60%;
-  background-image: linear-gradient(rgb(3 0 109 / 45%), rgb(18 14 255 / 49%)),url(../images/sign-up__bg.png);
+  background-image: linear-gradient(rgb(13 6 255 / 66%), rgb(22 18 228 / 59%)),url(../images/sign-up__bg.png);
   background-size: cover;
-  background-position: center;
+  background-position:center;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 }
 .signup__content__right .welcome__content{
+  padding: 2.7rem;
   margin: 20rem 0;
+}
+.signup__content__right .welcome__content img{
+  height: 7rem;
 }
 .signup__content__right .welcome__content h3{
   margin: 1.2rem 0;
-  font-size: 2rem;
-  font-weight: 400;
+  font-size: 2.5rem;
+  font-weight: 200;
 }
 .signup__content__right .welcome__content span{
   font-family: var(--primary-font);
   font-weight: bold;
-  font-size: 6rem;
+  font-size: 2.3rem;
 }
 .signup__content__left form{
   margin: 4rem 0;
@@ -534,7 +548,7 @@ section{
   outline: none;
   padding: 0 10px;
   font-size: 1.3rem;
-  border: 1px solid var(--content-bg-color);
+  border: 2px solid var(--content-bg-color);
 }
 
 /* ==== Signup page ends ===== */
@@ -573,13 +587,97 @@ section{
 
 
 /* ===== Terms and Conditions Page ends ============ */
+
 /* =========================================================== */
 
+
+
 /* ========= User after login -- interface page starts ======== */
+.dashboard__wrapper{
+  width: 15%;
+}
+
+.sidebar{
+  display: flex;
+  flex-direction: column;
+  background-color: var(--container-box-color);
+  height: 100vh;
+}
+.logo-box{
+  margin-top: 1.7rem;
+  margin-bottom: 2rem;
+}
+.user__activities ul{
+  margin: 3rem 0;
+  color: var(--bg-white-color);
+  font-family: var(--secondary-font);
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+.user__activities li{
+  margin: 3rem 0;
+  transition: 0.3s linear;
+}
+.user__activities ul li:hover{
+  background-color: var(--sidebar-hover-color);
+  cursor: pointer;
+}
+.bx{
+  font-size: 2rem;
+  margin-right: 2rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Header */
 .sub__header{
-  background-color: var(--content-bg-color);
+  border: 1px solid var(--border-color);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .sub__flex{
   display: flex;
   justify-content: space-between;
