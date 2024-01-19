@@ -600,8 +600,14 @@ section{
 .sidebar{
   display: flex;
   flex-direction: column;
+  gap: 3rem;
   background-color: var(--container-box-color);
   height: 100vh;
+}
+.sidebar strong{
+  font-weight: 400;
+  color: var(--bg-white-color);
+  font-size: 1.6rem;
 }
 .logo-box{
   margin-top: 1.7rem;
@@ -616,9 +622,10 @@ section{
 }
 .user__activities li{
   margin: 3rem 0;
-  transition: 0.3s linear;
+  transition: 0.5s ease;
 }
 .user__activities ul li:hover{
+  margin: 1.2rem 0;
   background-color: var(--sidebar-hover-color);
   cursor: pointer;
 }
@@ -626,9 +633,16 @@ section{
   font-size: 2rem;
   margin-right: 2rem;
 }
-
-
-
+.dashboard_text{
+  color: var(--bg-white-color);
+  font-weight: 500;
+}
+.dashboard_text:hover{
+  color: var(--bg-white-color);
+}
+.dashboard__container{
+  display: flex;
+}
 
 
 
