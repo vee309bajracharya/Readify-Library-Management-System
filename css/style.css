@@ -576,7 +576,8 @@ section{
 /* ===== Terms and Conditions Page starts ============ */
 .terms__wrapper{
   width: 100%;
-  background-image: linear-gradient(rgb(6 0 183 / 47%), rgb(0 0 0 / 45%)),url(../images/terms__bg.jpg);  background-size: cover;
+  background-image: linear-gradient(rgb(6 0 183 / 47%), rgb(0 0 0 / 45%)),url(../images/terms__bg.jpg); 
+  background-size: cover;
   background-position: center;
 }
 .terms__text__left h2{
@@ -982,3 +983,12 @@ section{
 
 
 /* ========= User after login -- interface page ends ======== */
+
+
+/* ===== Privacy Page === */
+.privacy__wrapper{
+  background-image: url(../images/terms__bg.jpg);
+  background-size: cover;
+  background-position: center;
+}
+/* ===== Privacy Page === */
