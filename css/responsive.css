@@ -34,7 +34,9 @@
 
 
   /* signup */
-
+  .signup__wrapper{
+    margin: 10rem 0;
+  }
 
 
   .signup__container{
@@ -42,9 +44,7 @@
     justify-content: center;
     align-items: center;
   }
-  .signup__content__right{
-    width: 100%;
-  }
+
 }
 
 

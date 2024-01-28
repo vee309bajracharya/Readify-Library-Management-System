@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign up</title>
+  <title>Signup</title>
 
   <!-- Title icon -->
   <link rel="icon" href="../../icons/title_icon.png" type="image/x-icon">
@@ -34,24 +34,22 @@
     <div class="signup__container ">
 
       <!-- ==== php section === -->
-      <?php
+      <!-- <?php
 
-      include("../config.php");
-
-
-      if (isset($_POST['submit'])) {
-        $fullname = $_POST['fullname'];
-        $username = $_POST['username'];
-        $address = $_POST['address'];
-        $phone_number = $_POST['phone_number'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $library_card_number = $_POST['library_card_number'];
-      }
+      // include("../config.php");
 
 
+      // if (isset($_POST['submit'])) {
+      //   $fullname = $_POST['fullname'];
+      //   $username = $_POST['username'];
+      //   $address = $_POST['address'];
+      //   $phone_number = $_POST['phone_number'];
+      //   $email = $_POST['email'];
+      //   $password = $_POST['password'];
+      //   $library_card_number = $_POST['library_card_number'];
+      // }
 
-      ?>
+      ?> -->
 
 
       <div class="signup__content__left">
@@ -114,7 +112,7 @@
         </div>
         <div class="links">By signing up you have agreed to our <a href="../../pages/terms-and-conditions.html">Terms and
             Conditions</a> along with <a href="../../pages/privacy-policy.html">Privacy Policy</a>
-          <br> <br> <small> Already have an account ? </small><a href="../style/log-in.php" target="_blank">Log in</a>
+          <br> <br> <small> Already have an account ? </small><a href="../validation/log-in.php" target="_blank">Log in</a>
         </div>
         </form>
 

@@ -31,7 +31,12 @@
   --alert-msg-color : #F1342F;
   --info-msg-color : #5131F1;
   --container-box-color : #3631F1;
-  --sidebar-hover-color : #AAAAAA;
+  --sidebar-hover-color : rgba(170, 170, 170, 0.40);
+  --card-color-1: #33CC66;
+  --card-color-2: #F0943F;
+  --card-color-3: #3731F1;
+  --card-color-4: #FF3535;
+
 }
 
 ::-webkit-scrollbar{
@@ -56,6 +61,8 @@ section{
   margin: 0 auto;
   max-width: 1200px;
 }
+
+
 
 /* ==== Buttons ==== */
 .link__btn{
@@ -156,6 +163,18 @@ section{
 .fields #must{
   color: var(--alert-msg-color);
 }
+
+.material-icons-outlined{
+  vertical-align: middle;
+  font-size: 2rem;
+  margin-right: 1.5rem;
+}
+
+
+
+
+
+
 
 /* ==== Header Section starts ==== */
 
@@ -485,8 +504,8 @@ section{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 90vh;
   margin: 2rem 0;
+  box-shadow: var(--box-shadow-color);
 }
 
 .signup__form__container{
@@ -593,7 +612,7 @@ section{
 
 
 /* ========= User after login -- interface page starts ======== */
-.dashboard__wrapper{
+/* .dashboard__wrapper{
   width: 15%;
 }
 
@@ -639,10 +658,71 @@ section{
 }
 .dashboard_text:hover{
   color: var(--bg-white-color);
-}
-.dashboard__container{
-  display: flex;
-}
+} */
+
+
+
+/* ========= User Dashboard Section ========== */
+.dashboard__grid__wrapper{
+  display: grid;
+  grid-template-columns: 260px 1fr 1fr 1fr;
+  grid-template-rows: 0.2fr 3fr;
+  grid-template-areas: 
+    "sidebar sub__header sub__header sub__header"
+    "sidebar dashboard__main__content dashboard__main__content dashboard__main__content";
+  height: 100vh;
+  }
+
+  .sub__header{
+    grid-area: sub__header;
+    height: 70px;
+    box-shadow: var(--box-shadow-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 3rem;
+  }
+
+  .sidebar{
+    padding: 2rem 3rem;
+    grid-area: sidebar;
+    height: 100%;
+    background-color: var(--container-box-color);
+    overflow-y: auto;
+    transition: all 0.5s;
+    --webkit-transition: all 0.5s;
+  }
+  .readify-logo img{
+    width: 100px;
+  }
+
+  .sidebar > span{
+    display: none;
+  }
+
+  .sidebar_items{
+    margin-top: 5rem;
+    transition: 0.5s ease;
+    cursor: pointer;
+  }
+  .sidebar_items:hover{
+    padding: 7rem;
+    width: 100%;
+    background-color: var(--sidebar-hover-color);
+  }
+  .sidebar_items > a{
+    color: var(--bg-white-color);
+    font-family: var(--secondary-font);
+    font-size: 1.5rem;
+  }
+
+  .sidebar__responsive{
+    display: inline !important;
+    position: absolute;
+  }
+  .sidebar_items a:hover{
+    padding: 7rem;
+  }
 
 
 
@@ -650,19 +730,61 @@ section{
 
 
 
-
-
-
-
-
-
-
-/* Header */
-.sub__header{
-  border: 1px solid var(--border-color);
-}
-
-
+  .dashboard__main__content{
+    padding: 2rem 3rem;
+    grid-area: dashboard__main__content;
+    overflow-y: auto;
+  }
+  .dashboard__title{
+    font-size: 1.7rem;
+    font-family: var(--secondary-font);
+    margin: 4rem 0;
+  }
+  .text-left{
+    padding: 0;
+    font-weight: 500;
+  }
+  .card-flex{
+    margin: 2rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3rem;
+  }
+  .cards__grid{
+    color: var(--bg-white-color);
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(40rem,2fr));
+    grid-gap: 2.5rem;
+  }
+  .card{
+    border-radius: 5px;
+    padding: 2rem;
+    height: 20rem;
+    font-size: 1.9rem;
+  }
+  .card__info > a{
+    color: var(--bg-white-color);
+  }
+  .card:first-child{
+    background-color: var(--card-color-1);
+  }
+  .card:nth-child(2){
+    background-color: var(--card-color-2);
+  }
+  .card:nth-child(3){
+    background-color: var(--card-color-3);
+  }
+  .card:nth-child(4){
+    background-color: var(--card-color-4);
+  }
+  .card-info-icon img{
+    width: 90px;
+    height: 90px;
+  }
+  .show-details{
+    margin-top: 2rem;
+  }
 
 
 
@@ -844,7 +966,7 @@ section{
   margin: 1.3rem 0;
   font-size: 1.4rem;
   font-weight: 400;
-  font-family: var(--primary-font);
+  font-family: var(--secondary-font);
 }
 
 

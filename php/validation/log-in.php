@@ -59,7 +59,7 @@
           </div>
 
           <div class="links">Don't have an account ?
-            <a href="../style/sign-up.html" target="_blank">Sign Up</a>
+            <a href="../validation/sign-up.php" target="_blank">Sign Up</a>
           </div>
         </form>
       </div>
