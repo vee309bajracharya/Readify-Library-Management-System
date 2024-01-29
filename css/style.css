@@ -579,6 +579,7 @@ section{
   background-image: linear-gradient(rgb(6 0 183 / 47%), rgb(0 0 0 / 45%)),url(../images/terms__bg.jpg); 
   background-size: cover;
   background-position: center;
+  min-height: 28rem;
 }
 .terms__text__left h2{
   margin: 2rem 0;
@@ -987,8 +988,25 @@ section{
 
 /* ===== Privacy Page === */
 .privacy__wrapper{
-  background-image: url(../images/terms__bg.jpg);
-  background-size: cover;
-  background-position: center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(89, 85, 231, 0.42)),url(../images/-914088634.png);
+  min-height: 28rem;
+}
+
+.privacy-policy_intro_content{
+  margin: 4rem 0;
+}
+
+.privacy-policy_title{
+  padding: 2.7rem 0;
+  font-size: 2.8rem;
+  text-transform: uppercase;
+
+}
+.privacy-policy_text{
+  text-align: justify;
+  font-size: 1.6rem;
+  font-weight: 400;
+  font-family: var(--primary-font);
+  margin: 2rem 0;
 }
 /* ===== Privacy Page === */
