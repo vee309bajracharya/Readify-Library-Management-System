@@ -175,7 +175,6 @@ section{
 
 
 
-
 /* ==== Header Section starts ==== */
 
 .header{
@@ -569,6 +568,7 @@ section{
   font-size: 1.3rem;
   border: 2px solid var(--content-bg-color);
 }
+
 
 /* ==== Signup page ends ===== */
 /* ============================================= */

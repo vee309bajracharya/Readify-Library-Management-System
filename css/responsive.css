@@ -1,56 +1,50 @@
-
 /*============== Media queries ============== */
 
 /* Desktop */
-@media (max-width:1024px){
-
-  html{
+@media (max-width: 1024px) {
+  html {
     font-size: 55%;
   }
 
   /* about */
-  .about__right__content img{
+  .about__right__content img {
     width: 600px;
   }
-
-
 }
 
-@media(max-width:970px){
+@media (max-width: 970px) {
   /* about */
-  .about__container{
+  .about__container {
     text-align: center;
     align-items: center;
   }
-  .about__left__content{
+  .about__left__content {
     width: 100%;
   }
-  .text-medium{
+  .text-medium {
     font-size: 1.6rem;
   }
-  .about__right__content{
+  .about__right__content {
     width: 100%;
   }
 
-
   /* signup */
-  .signup__wrapper{
-    margin: 10rem 0;
+
+  .signup__content__right {
+    display: none;
+  }
+  .signup__content__left {
+    width: 100%;
+  }
+  .signup__form__container {
+    grid-template-columns: repeat(auto-fit, minmax(45rem, 2fr));
   }
 
-
-  .signup__container{
-    flex-direction: column-reverse;
-    justify-content: center;
-    align-items: center;
-  }
 
 }
 
-
-
 /* Tablet */
-@media(max-width:767px){
+@media (max-width: 767px) {
   /* navbar */
   /* .toogle-btn{
     display: flex;
@@ -74,63 +68,64 @@
     text-align: center;
   } */
 
-
-
-
-
- 
   /* features section */
-  .center-titled{
+  .center-titled {
     font-size: 5rem;
   }
 
   /* footer */
-  .footer-col-left{
+  .footer-col-left {
     width: 100%;
   }
 
-
   /* footer */
-  .footer__col__right{
+  .footer__col__right {
     margin: 4rem 0;
   }
 
   /* signup */
-  .signup__content__left{
+  .signup__content__left {
     width: 100%;
   }
-
-
+  .signup__form__container {
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 2fr));
+  }
 }
 
-
-
-
-
-
-
-
+@media (max-width: 882px) {
+  /* signup */
+  .signup__form__container {
+    grid-template-columns: repeat(auto-fit, minmax(29rem, 2fr));
+  }
+}
 
 /* Phone */
-@media(max-width:560px){
-
+@media (max-width: 560px) {
   /* about */
-  .about__right__content img{
+  .about__right__content img {
     width: 500px;
   }
 
-  
-  
-
-
-
-
-
-
+  /* signup */
+  .fields label{
+    font-size: 1.4rem;
+  }
+  .fields input{
+    width: 100%;
+    height: 6rem;
+    font-size: 1.6rem;
+  }
 }
-@media(max-width:450px){
+
+@media (max-width: 450px) {
+  /* signup */
   
 }
-@media(max-width:254px){
-  
+
+@media (max-width: 254px) {
+  /* signup */
+  .signup__form__container {
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  }
+
 }
