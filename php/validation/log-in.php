@@ -27,6 +27,57 @@
 
 <body bgcolor="#eee">
 
+  <!-- ====== php validation starts here ===== -->
+
+  <?php
+
+  //variables
+  $email = $password  = "";
+  $emailErr = $passwordErr = "";
+
+  if ($_SERVER["REQUEST_METHOD"] == 'POST') {
+
+    //======== email validation ============
+    if (empty($_POST['email'])) {
+      $emailErr = 'Please enter your email'; //if email is empty
+    } else {
+      $email = test_input($_POST['email']); // a proper valid email
+
+      //if not a valid email
+      if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $emailErr = 'Invalid Email Format';
+      }
+    }
+
+    //======== password validation ===========
+    if (empty($_POST['password'])) {
+      $passwordErr = "Please enter a password";
+    }
+    else {
+      $password  = test_input($_POST['password']);
+
+      //check password format
+      if (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/", $password)) {
+        $passwordErr = "Use atleast 8 characters. Include both an uppercase,lowercase and a number";
+      }
+    }
+
+  }
+
+  //test_input function
+
+  function test_input($data)
+  {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+  }
+
+  ?>
+  <!-- ====== php validation ends here ===== -->
+
+
   <!-- =================================================================== -->
   <section class="form__wrapper">
     <div class="form__container">
@@ -40,17 +91,20 @@
           </p>
         </div>
 
-        <!-- Form -->
-        <form action="" method="post">
+        <!-- ========= Form ============== -->
+        <form action="" method="POST">
 
           <div class="field input">
             <label for="email">Email</label>
-            <input type="email" name="email" id="email" placeholder="" required>
+            <input type="email" name="email" id="email" placeholder="">
+            <span class="error-msg"><?php echo $emailErr; ?></span>
           </div>
 
           <div class="field input">
             <label for="password">Password</label>
-            <input type="password" name="password" id="password" placeholder="" required>
+            <input type="password" name="password" id="password" placeholder="">
+            <span class="error-msg"><?php echo $passwordErr; ?></span>
+
           </div>
 
           <div class="field">
@@ -61,6 +115,8 @@
           <div class="links">Don't have an account ?
             <a href="../validation/sign-up.php" target="_blank">Sign Up</a>
           </div>
+
+
         </form>
       </div>
 
@@ -68,7 +124,7 @@
   </section>
 
   <!-- ==== JavaScript Link ==== -->
-  <script src="../js/app.js"></script>
+  <script src="../../js/app.js"></script>
 </body>
 
 </html>

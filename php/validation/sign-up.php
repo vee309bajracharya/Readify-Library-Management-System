@@ -31,76 +31,58 @@
   <!-- =================================================================== -->
 
   <section class="signup__wrapper">
-    <div class="signup__container ">
+    <div class="signup__container">
 
-      <!-- ==== php section === -->
-      <!-- <?php
-
-      // include("../config.php");
-
-
-      // if (isset($_POST['submit'])) {
-      //   $fullname = $_POST['fullname'];
-      //   $username = $_POST['username'];
-      //   $address = $_POST['address'];
-      //   $phone_number = $_POST['phone_number'];
-      //   $email = $_POST['email'];
-      //   $password = $_POST['password'];
-      //   $library_card_number = $_POST['library_card_number'];
-      // }
-
-      ?> -->
-
-
+    <!-- =========== content left ============= -->
       <div class="signup__content__left">
         <div class="signup__intro login__intro">
           <h3>Sign up</h3>
 
-          <form action="" method="POST">
+          <form action="sign-up.php" method="POST" id="signupForm">
             <div class="signup__form__container">
 
               <div class="fields">
                 <label for="fullname">Full Name <span id="must">&#x002A;</span></label>
-                <input type="text" name="fullname" id="fullname" placeholder="" required>
+                <input type="text" class="input-fields" name="fullname" id="fullname" placeholder="">
               </div>
 
               <div class="fields">
                 <label for="username">Username <span id="must">&#x002A;</span></label>
-                <input type="text" name="username" id="username" placeholder="" required>
+                <input type="text" class="input-fields" name="username" id="username" placeholder="">
               </div>
 
               <div class="fields">
                 <label for="email">Email <span id="must">&#x002A;</span></label>
-                <input type="email" name="email" id="email" placeholder="" required>
+                <input type="email" class="input-fields" name="email" id="email" placeholder="">
               </div>
 
               <div class="fields">
                 <label for="phone">Phone Number <span id="must">&#x002A;</span></label>
-                <input type="tel" id="phone_number" name="phone_number" placeholder="+977" required>
+                <input type="tel" class="input-fields" id="phone_number" name="phone_number" placeholder="+977">
               </div>
 
               <div class="fields">
                 <label for="password">Password <span id="must">&#x002A;</span></label>
-                <input type="password" name="password" id="password" placeholder="" required>
+                <input type="password" class="input-fields" name="pwd" id="pwd" placeholder="">
               </div>
 
               <div class="fields">
                 <label for="cpassword">Confirm Password <span id="must">&#x002A;</span></label>
-                <input type="password" name="cpassword" id="cpassword" placeholder="" required>
+                <input type="password" class="input-fields" name="cpwd" id="cpwd" placeholder="">
               </div>
 
               <div class="fields">
                 <label for="address">Address <span id="must">&#x002A;</span></label>
-                <input type="text" name="address" id="address" placeholder="" required>
+                <input type="text" class="input-fields" name="address" id="address" placeholder="">
               </div>
 
               <div class="fields">
                 <label for="library_card_number">Library Card Number</label>
-                <input type="text" name="library_card_number" id="library_card_number" placeholder="">
+                <input type="text" class="input-fields" name="library_card_number" id="library_card_number" placeholder="">
               </div>
 
               <div class="fields">
-                <input type="submit" class="btn-primary" name="submit" value="Cancel" required>
+                <input type="submit" class="btn-secondary btn-primary" name="cancel" value="Cancel" onclick="resetForm()">
               </div>
 
               <div class="fields">
@@ -118,8 +100,7 @@
 
       </div>
 
-
-
+    <!-- =========== content right ============= -->
       <div class="signup__content__right">
         <div class="welcome__content">
           <img src="../../svg/R__logo_1.svg" alt="">
@@ -130,11 +111,102 @@
 
     </div>
 
+    <!--  ===== php section starts ====-->
+    <?php
+    if (isset($_POST['submit'])) {
+      $fullname = $_POST['fullname'];
+      $username = $_POST['username'];
+      $email = $_POST['email'];
+      $phone_number = $_POST['phone_number'];
+      $pwd = $_POST['pwd'];
+      $cpwd = $_POST['cpwd'];
+      $address = $_POST['address'];
+      $library_card_number = isset($_POST['library_card_number']) ? $_POST['library_card_number'] : NULL;
+
+      $pwdHash = password_hash($pwd, PASSWORD_DEFAULT);
+
+      //for any errors in any fields
+      $errors = array();
+
+      //check if fields are empty
+      if (empty($fullname) || empty($username) || empty($email) || empty($phone_number) || empty($pwd) || empty($cpwd) || empty($address)) {
+        array_push($errors, "Fill up required fields");
+      }
+
+      //  ====== fields validation ======
+      if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        array_push($errors, "Enter a valid email");
+      }
+
+      if (strlen($pwd) < 8) {
+        array_push($errors, "Password must be atleast 8 characters long");
+      }
+
+      if ($pwd !== $cpwd) {
+        array_push($errors, "Passwords do not match");
+      }
+
+      if (strlen($phone_number) != 10) {
+        array_push($errors, "Mobile no. must contain 10 digits");
+      }
+
+      require_once "../config.php"; //database config file
+
+
+      $sql = "SELECT * FROM library_users WHERE email = '$email'";
+      $result = mysqli_query($conn,$sql);
+      $rowCount = mysqli_num_rows($result);
+
+      if($rowCount>0){
+        array_push($errors, 'Email already exists');
+      }
+
+
+      if (count($errors) > 0) {
+        foreach ($errors as $error) {
+          echo "<section class='alert-error-msg'>$error</section>";
+        }
+      } else {
+
+        // insert data into database
+        $sql = "INSERT INTO library_users(fullname, username, email, phone_number, password, address, library_card_number)
+        VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        //mysqli_stmt_init() -> mysqli_stmt_init() function initializes a statement and returns an object suitable for mysqli_stmt_prepare(). 
+        $stmt = mysqli_stmt_init($conn);
+
+        $prepareStmt = mysqli_stmt_prepare($stmt, $sql);
+
+        if ($prepareStmt) {
+          mysqli_stmt_bind_param($stmt, "sssisss", $fullname, $username, $email, $phone_number, $pwdHash, $address, $library_card_number);          mysqli_stmt_execute($stmt);
+          echo "<section class='alert-success-msg'>Successfully Registered!!! Proceed to login</section>";
+        } else {
+          die("Something went wrong");
+        }
+      }
+    }
+
+
+
+    ?>
+
+
+    <!--  ===== php section ends ====-->
   </section>
 
 
-  <!-- ==== JavaScript Link ==== -->
-  <script src="../../js/app.js"></script>
+  <!-- ==== JavaScript  ==== -->
+  <script>
+    //reset the form using cancel button
+    function resetForm(){
+
+      var form = document.getElementById('signupForm'); //get the form by its id
+
+      form.reset(); //reset form
+    }
+  </script>
+
+
 </body>
 
 </html>

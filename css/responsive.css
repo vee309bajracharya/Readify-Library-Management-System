@@ -39,8 +39,6 @@
   .signup__form__container {
     grid-template-columns: repeat(auto-fit, minmax(45rem, 2fr));
   }
-
-
 }
 
 /* Tablet */
@@ -97,6 +95,11 @@
   .signup__form__container {
     grid-template-columns: repeat(auto-fit, minmax(29rem, 2fr));
   }
+
+  /* login */
+  .box {
+    height: 560px;
+  }
 }
 
 /* Phone */
@@ -107,19 +110,24 @@
   }
 
   /* signup */
-  .fields label{
+  .fields label {
     font-size: 1.4rem;
   }
-  .fields input{
+  .fields input {
     width: 100%;
     height: 6rem;
     font-size: 1.6rem;
   }
+
+  /* login */
+
+  .form__container {
+    margin-top: 10rem;
+    display: block;
+  }
 }
 
 @media (max-width: 450px) {
-  /* signup */
-  
 }
 
 @media (max-width: 254px) {
@@ -127,5 +135,4 @@
   .signup__form__container {
     grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
   }
-
 }

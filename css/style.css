@@ -28,7 +28,7 @@
   --hover-color1: #7875F6;
   --success-msg-color : #0FD76B;
   --warning-msg-color : #F06F2E;
-  --alert-msg-color : #F1342F;
+  --alert-msg-color : #f54c46e8;
   --info-msg-color : #5131F1;
   --container-box-color : #3631F1;
   --sidebar-hover-color : rgba(170, 170, 170, 0.40);
@@ -123,9 +123,19 @@ section{
   font-size: 1.7rem;
   cursor: pointer;
   transition: 0.2s linear;
+  width: 90%;
 }
 .btn-primary:hover{
   background-color: var(--hover-color1);
+}
+.btn-secondary{
+  background-color: transparent;
+  outline: 1px solid var(--info-msg-color);
+  color: var(--bg-dark-purple);
+}
+.btn-secondary:hover{
+  outline: none;
+  color: var(--bg-white-color);
 }
 
 /* ==== Globally declared classes ===== */
@@ -169,6 +179,22 @@ section{
   font-size: 2rem;
   margin-right: 1.5rem;
 }
+
+.alert-error-msg, .alert-success-msg{
+  color: var(--bg-white-color);
+  font-family: var(--secondary-font);
+  margin: 0.5rem 0;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.alert-success-msg{
+  background-color: var(--success-msg-color);
+}
+.alert-error-msg{
+  background-color: var(--alert-msg-color);
+}
+
 
 
 
@@ -440,6 +466,7 @@ section{
     padding: 4rem;
     border-radius: 5px;
     box-shadow: var(--box-shadow-color);
+    height: 610px;
   }
   .form__box{
     text-align: center;
@@ -460,18 +487,19 @@ section{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 2rem;
     text-align: left;
   }
   .form__box form .field{
     display: flex;
     flex-direction: column;
-    margin: 0 7rem;
+    margin: 1rem 7rem;
     width: 25rem;
   }
   .form__box form label{
-    margin: 1rem 0;
-    font-size: 1.5rem;
+    margin-top: 1rem;
+    font-size: 1.8rem;
+    font-family: var(--title-font);
+
   }
   .form__box form .input input{
     padding: 0 10px;
@@ -502,15 +530,14 @@ section{
   border-radius: 5px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin: 2rem 0;
   box-shadow: var(--box-shadow-color);
 }
 
 .signup__form__container{
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(20rem,2fr));
+  grid-template-columns: repeat(auto-fit,minmax(21rem,2fr));
 }
+
 
 .signup__content__left{
   width: 60%;
@@ -548,7 +575,8 @@ section{
   font-size: 2.3rem;
 }
 .signup__content__left form{
-  margin: 4rem 0;
+  margin-top: 2.3rem;
+  margin-bottom: 2rem;
 }
 .signup__content__left form .fields{
   display: flex;
@@ -558,7 +586,7 @@ section{
   font-size: 1.3rem;
   font-weight: 500;
 }
-.fields input{
+.fields .input-fields{
   border-radius: 5px;
   margin: 1.3rem 0;
   width: 90%;
@@ -707,11 +735,7 @@ section{
     transition: 0.5s ease;
     cursor: pointer;
   }
-  .sidebar_items:hover{
-    padding: 7rem;
-    width: 100%;
-    background-color: var(--sidebar-hover-color);
-  }
+
   .sidebar_items > a{
     color: var(--bg-white-color);
     font-family: var(--secondary-font);
