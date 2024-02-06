@@ -1,3 +1,9 @@
+<?php 
+    session_start();
+    if(isset($_SESSION['user'])){
+        header("Location : ../user/home.php"); //if user is registered , redirect it to  home/dashboard page
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,57 +33,6 @@
 
 <body bgcolor="#eee">
 
-  <!-- ====== php validation starts here ===== -->
-
-  <?php
-
-  //variables
-  $email = $password  = "";
-  $emailErr = $passwordErr = "";
-
-  if ($_SERVER["REQUEST_METHOD"] == 'POST') {
-
-    //======== email validation ============
-    if (empty($_POST['email'])) {
-      $emailErr = 'Please enter your email'; //if email is empty
-    } else {
-      $email = test_input($_POST['email']); // a proper valid email
-
-      //if not a valid email
-      if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $emailErr = 'Invalid Email Format';
-      }
-    }
-
-    //======== password validation ===========
-    if (empty($_POST['password'])) {
-      $passwordErr = "Please enter a password";
-    }
-    else {
-      $password  = test_input($_POST['password']);
-
-      //check password format
-      if (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/", $password)) {
-        $passwordErr = "Use atleast 8 characters. Include both an uppercase,lowercase and a number";
-      }
-    }
-
-  }
-
-  //test_input function
-
-  function test_input($data)
-  {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-  }
-
-  ?>
-  <!-- ====== php validation ends here ===== -->
-
-
   <!-- =================================================================== -->
   <section class="form__wrapper">
     <div class="form__container">
@@ -92,23 +47,21 @@
         </div>
 
         <!-- ========= Form ============== -->
-        <form action="" method="POST">
+        <form action="../validation/log-in.php" method="POST">
 
           <div class="field input">
             <label for="email">Email</label>
             <input type="email" name="email" id="email" placeholder="">
-            <span class="error-msg"><?php echo $emailErr; ?></span>
           </div>
 
           <div class="field input">
             <label for="password">Password</label>
-            <input type="password" name="password" id="password" placeholder="">
-            <span class="error-msg"><?php echo $passwordErr; ?></span>
+            <input type="password" name="pwd" id="pwd" placeholder="">
 
           </div>
 
           <div class="field">
-            <input type="submit" class="btn-primary" name="submit" value="Login" required>
+            <input type="submit" class="btn-primary" name="login" value="Login" required>
 
           </div>
 
@@ -121,6 +74,97 @@
       </div>
 
     </div>
+
+    <!-- =========== php section starts ============== -->
+    <?php 
+      if(isset($_POST['login'])){
+        $email = $_POST['email'];
+        $pwd = $_POST['pwd'];
+
+        //check if the entered email and password exists on database or not
+
+        require_once "../config.php";
+
+        $sql = "SELECT * FROM library_users WHERE email = '$email'";
+        $result = mysqli_query($conn,$sql);
+
+        $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
+        if($user){
+
+          //checking encrypted pwd
+          
+          if(password_verify($pwd,$user['password'])){
+
+            //creating session as : dashboard page is available for registered users only
+            session_start();
+            $_SESSION['user'] = 'yes';
+            header("Location: ../user/home.php");
+            die();
+          }else{
+            echo "<section class='alert-warning-msg'>Password does not match</section>";
+          }
+
+        }else{
+          echo "<section class='alert-warning-msg'>Email does not exist</section>";
+        }
+      }
+
+    
+    
+    
+    ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- =========== php section ends ============== -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   </section>
 
   <!-- ==== JavaScript Link ==== -->

@@ -1,3 +1,9 @@
+<?php 
+    session_start();
+    if(isset($_SESSION['user'])){
+        header("Location : ../user/home.php"); //if user is registered , redirect it to  home/dashboard page no need to signup again
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,7 +39,7 @@
   <section class="signup__wrapper">
     <div class="signup__container">
 
-    <!-- =========== content left ============= -->
+      <!-- =========== content left ============= -->
       <div class="signup__content__left">
         <div class="signup__intro login__intro">
           <h3>Sign up</h3>
@@ -64,11 +70,15 @@
               <div class="fields">
                 <label for="password">Password <span id="must">&#x002A;</span></label>
                 <input type="password" class="input-fields" name="pwd" id="pwd" placeholder="">
+                <span class="password-toggle" onclick="togglePassword('pwd')">SHOW</span>
+
               </div>
 
               <div class="fields">
                 <label for="cpassword">Confirm Password <span id="must">&#x002A;</span></label>
                 <input type="password" class="input-fields" name="cpwd" id="cpwd" placeholder="">
+                <span class="password-toggle" onclick="togglePassword('cpwd')">SHOW</span>
+
               </div>
 
               <div class="fields">
@@ -100,7 +110,7 @@
 
       </div>
 
-    <!-- =========== content right ============= -->
+      <!-- =========== content right ============= -->
       <div class="signup__content__right">
         <div class="welcome__content">
           <img src="../../svg/R__logo_1.svg" alt="">
@@ -154,10 +164,10 @@
 
 
       $sql = "SELECT * FROM library_users WHERE email = '$email'";
-      $result = mysqli_query($conn,$sql);
+      $result = mysqli_query($conn, $sql);
       $rowCount = mysqli_num_rows($result);
 
-      if($rowCount>0){
+      if ($rowCount > 0) {
         array_push($errors, 'Email already exists');
       }
 
@@ -167,6 +177,9 @@
           echo "<section class='alert-error-msg'>$error</section>";
         }
       } else {
+
+        // Generate a random alphanumeric library card number
+        $library_card_number = generateRandomString(8);
 
         // insert data into database
         $sql = "INSERT INTO library_users(fullname, username, email, phone_number, password, address, library_card_number)
@@ -178,12 +191,26 @@
         $prepareStmt = mysqli_stmt_prepare($stmt, $sql);
 
         if ($prepareStmt) {
-          mysqli_stmt_bind_param($stmt, "sssisss", $fullname, $username, $email, $phone_number, $pwdHash, $address, $library_card_number);          mysqli_stmt_execute($stmt);
-          echo "<section class='alert-success-msg'>Successfully Registered!!! Proceed to login</section>";
+          mysqli_stmt_bind_param($stmt, "sssisss", $fullname, $username, $email, $phone_number, $pwdHash, $address, $library_card_number);
+          mysqli_stmt_execute($stmt);
+          echo "<section class='alert-success-msg'>Successfully Registered!!! Your Library Card Number is $library_card_number. Proceed to login</section>";
         } else {
           die("Something went wrong");
         }
       }
+    }
+
+    // Function to generate a random alphanumeric string
+    function generateRandomString($length)
+    {
+      $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      $randomString = '';
+
+      for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, strlen($characters) - 1)];
+      }
+
+      return $randomString;
     }
 
 
@@ -198,15 +225,27 @@
   <!-- ==== JavaScript  ==== -->
   <script>
     //reset the form using cancel button
-    function resetForm(){
+    function resetForm() {
 
       var form = document.getElementById('signupForm'); //get the form by its id
 
       form.reset(); //reset form
     }
+
+    // Toggle between showing and hiding the password
+    function togglePassword(inputId) {
+      var passwordInput = document.getElementById(inputId);
+      var passwordToggle = document.querySelector(`#${inputId} + .password-toggle`);
+
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        passwordToggle.textContent = "HIDE";
+      } else {
+        passwordInput.type = "password";
+        passwordToggle.textContent = "SHOW";
+      }
+    }
   </script>
 
-
-</body>
 
 </html>
