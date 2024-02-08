@@ -198,16 +198,16 @@ section{
   background-color: var(--alert-msg-color);
 }
 
-.fields span.password-toggle {
-  text-align: end;
+.password-toggle {
+  text-align: right;
   margin-top: -36px;
   margin-bottom: 24px;
-  margin-right: 35px;
+  margin-left: 232px;
   font-size: 9px;
   font-family: var(--primary-font);
   cursor: pointer;
+  width: 30px;
 }
-
 .bx{
   font-size: 2rem;
   margin-right: 1.3rem;
@@ -557,7 +557,7 @@ section{
 
 
 .signup__content__left{
-  width: 60%;
+  width: 80%;
   padding: 2.5rem;
   background-color: var(--bg-white-color);
   border-top-left-radius: 5px;
@@ -568,12 +568,13 @@ section{
   color: var(--bg-white-color);
   text-align: center;
   width: 60%;
-  background-image: linear-gradient(rgb(13 6 255 / 66%), rgb(22 18 228 / 59%)),url(../images/sign-up__bg.png);
+  background-image: linear-gradient(rgb(0 18 174 / 65%), rgb(1 0 23 / 87%)),url(../images/sign-up__bg.png);
   background-size: cover;
   background-position:center;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 }
+
 .signup__content__right .welcome__content{
   padding: 2.7rem;
   margin: 20rem 0;
@@ -602,6 +603,7 @@ section{
 .fields label{
   font-size: 1.3rem;
   font-weight: 500;
+  width: 90%;
 }
 .fields .input-fields{
   border-radius: 5px;

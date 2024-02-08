@@ -57,6 +57,8 @@
           <div class="field input">
             <label for="password">Password</label>
             <input type="password" name="pwd" id="pwd" placeholder="">
+            <span class="password-toggle" onclick="togglePassword('pwd')">SHOW</span>
+
 
           </div>
 
