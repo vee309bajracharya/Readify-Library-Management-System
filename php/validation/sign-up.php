@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['user'])) {
-  header("Location : ../user/home.php"); //if user is registered , redirect it to  home/dashboard page no need to signup again
+  header("Location: ../user/home.php"); //if user is registered , redirect it to  home/dashboard page no need to signup again
 }
 ?>
 

@@ -1,7 +1,7 @@
 <?php 
     session_start();
     if(isset($_SESSION['user'])){
-        header("Location : ../user/home.php"); //if user is registered , redirect it to  home/dashboard page
+        header("Location: ../user/home.php"); //if user is registered , redirect it to  home/dashboard page
     }
 ?>
 <!DOCTYPE html>
@@ -57,7 +57,6 @@
           <div class="field input">
             <label for="password">Password</label>
             <input type="password" name="pwd" id="pwd" placeholder="">
-            <span class="password-toggle" onclick="togglePassword('pwd')">SHOW</span>
 
 
           </div>
@@ -110,63 +109,10 @@
           echo "<section class='alert-warning-msg'>Email does not exist</section>";
         }
       }
-
-    
-    
     
     ?>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <!-- =========== php section ends ============== -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   </section>
 
   <!-- ==== JavaScript Link ==== -->

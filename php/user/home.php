@@ -1,10 +1,11 @@
 <?php 
     session_start();
     if(!isset($_SESSION['user'])){
-        header("Location : ../validation/log-in.php"); //if user isn't registered , take it to login page
+        header("Location: ../validation/log-in.php"); //if user isn't registered , take it to login page
     }
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,6 +35,8 @@
 </head>
 
 <body>
+
+
 <!-- === for page layout ===  -->
 <div class="dashboard__grid__wrapper">
     <!-- === page header starts === -->
@@ -62,7 +65,7 @@
 
       <ul class="sidebar__list__items">
         <li class="sidebar_items">
-          <a href="../user/home.html"><i class='bx bxs-home'></i></span>Home</a>
+          <a href="../user/home.php"><i class='bx bxs-home'></i></span>Home</a>
         </li>
 
         <li class="sidebar_items">
@@ -87,7 +90,7 @@
         </li>
 
         <li class="sidebar_items">
-          <a href=""><i class='bx bx-log-out'></i>Logout</a>
+          <a href="../user/logOut.php"><i class='bx bx-log-out'></i>Logout</a>
         </li>
       </ul>
     </aside>
