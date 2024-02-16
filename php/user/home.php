@@ -69,11 +69,11 @@
         </li>
 
         <li class="sidebar_items">
-          <a href=""><i class='bx bxs-dashboard'></i></span>Dashboard</a>
+          <a href="../user/dashboard.php"><i class='bx bxs-dashboard'></i></span>Dashboard</a>
         </li>
 
         <li class="sidebar_items">
-          <a href=""><i class='bx bx-user-circle' ></i>My Profile</a>
+          <a href="../user/profileSettings.php"><i class='bx bx-user-circle' ></i>My Profile</a>
         </li>
 
         <li class="sidebar_items">
@@ -98,7 +98,7 @@
 
     <!-- ======= Book items Selection section starts ======= -->
     
-    <div class="search__book__wrapper" id="search__book__wrapper">
+    <section class="search__book__wrapper" id="search__book__wrapper">
         <div class="search__box__container">
             <div class="search__form" id="search__form">
                 <form action="" method="POST">
@@ -171,10 +171,10 @@
             <section class="book__grid__container" id="bookGrid8">
             </section>
         </section>
-    </div>
 
-   
-        </div>
+
+  </section>
+</div>
 
     <!-- ======= Book items Selection section ends ======= -->
     <!-- ======================================================== -->

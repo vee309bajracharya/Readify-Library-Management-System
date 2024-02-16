@@ -60,7 +60,7 @@
         </li>
 
         <li class="sidebar_items">
-          <a href=""><i class='bx bx-user-circle' ></i>My Profile</a>
+          <a href=""><i class='bx bx-user-circle'></i>My Profile</a>
         </li>
 
         <li class="sidebar_items">
@@ -73,7 +73,7 @@
         </li>
 
         <li class="sidebar_items">
-          <a href=""><i class='bx bx-help-circle' ></i>Support & Help</a>
+          <a href=""><i class='bx bx-help-circle'></i>Support & Help</a>
         </li>
 
         <li class="sidebar_items">
