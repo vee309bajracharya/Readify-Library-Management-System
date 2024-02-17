@@ -192,7 +192,7 @@ if (isset($_SESSION['user'])) {
         $library_card_number = generateRandomString(8);
 
         // insert data into database
-        $sql = "INSERT INTO library_users(fullname, username, email, phone_number, password, address, library_card_number)
+        $sql = "INSERT INTO library_users(fullname, username, email, phone_number, pwd, address, library_card_number)
         VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         //mysqli_stmt_init() -> mysqli_stmt_init() function initializes a statement and returns an object suitable for mysqli_stmt_prepare(). 

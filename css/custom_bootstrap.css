@@ -1,0 +1,54 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat',sans-serif;
+
+}
+
+:root{
+    --primary-color: #5955E7;
+    --width-canvas: 270px;
+    --top-navbar-height: 68px;
+}
+
+
+/* ========== ADMIN Panel starts ================= */
+
+/* navbar */
+.custom-navbar{
+    background-color: var(--primary-color);
+  }
+
+.user-icon{
+    object-fit: cover;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+}
+  
+/* sidebar */
+.sidebar-nav{
+    width: var(--width-canvas) !important;
+}
+
+
+@media (min-width: 992px){
+
+    .offcanvas-backdrop{
+        display: none !important;
+    }
+
+
+    .sidebar-nav{
+        transform: none !important;
+        visibility: visible !important;
+        top: var(--top-navbar-height) !important;
+    
+    }
+}
+
+
+
+
+  
+  /* ========== ADMIN Panel ends ================= */

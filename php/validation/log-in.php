@@ -94,7 +94,7 @@
 
           //checking encrypted pwd
           
-          if(password_verify($pwd,$user['password'])){
+          if(password_verify($pwd,$user['pwd'])){
 
             //creating session as : dashboard page is available for registered users only
             session_start();
