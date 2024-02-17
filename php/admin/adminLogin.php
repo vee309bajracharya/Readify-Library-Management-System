@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,15 +30,16 @@
       <div class="box form__box">
 
         <div class="login__intro">
-          <img src="../../svg/R__logo_2.svg"></div>
-          
+          <img src="../../svg/R__logo_2.svg">
+        </div>
+
         <div class="login__intro login__intro__admin">
-        <p>Welcome Admin</p>
+          <p>Welcome Admin</p>
         </div>
 
 
         <!-- ========= Form ============== -->
-        <form method="POST" class="admin-form-container">
+
 
           <div class="field input">
             <label for="name">Name</label>
@@ -61,6 +61,7 @@
       </div>
 
     </div>
+
 
     <!-- =========== php section starts ============== -->
 <?php
@@ -91,7 +92,9 @@ if(isset($_POST['adminlogin'])){
 
 
     <!-- =========== php section ends ============== -->
+
   </section>
 
 </body>
+
 </html>
