@@ -39,7 +39,7 @@
 
         <div class="login__intro">
           <img src="../../svg/R__logo_2.svg">
-          <h2>Login</h2>p
+          <h2>Login</h2>
           <p>Welcome Back <br>
             <span>We’re thrilled to see you again &#x1F44B; <br>Please login to get back to your account</span>
           </p>

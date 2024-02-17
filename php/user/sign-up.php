@@ -133,6 +133,7 @@ if (isset($_SESSION['user'])) {
       $address = $_POST['address'];
       $library_card_number = isset($_POST['library_card_number']) ? $_POST['library_card_number'] : NULL;
 
+      //HashPassword
       $pwdHash = password_hash($pwd, PASSWORD_DEFAULT);
 
       //for any errors in any fields
@@ -171,12 +172,22 @@ if (isset($_SESSION['user'])) {
       require_once "../config.php"; //database config file
 
 
+      // ==== check for duplicate email =====
       $sql = "SELECT * FROM library_users WHERE email = '$email'";
       $result = mysqli_query($conn, $sql);
       $rowCount = mysqli_num_rows($result);
 
       if ($rowCount > 0) {
         array_push($errors, 'Email already exists');
+      }
+
+      // ==== check for duplicate username ====
+      $usernameCheckQuery = "SELECT * FROM library_users WHERE username = '$username'";
+      $usernameResult = mysqli_query($conn, $usernameCheckQuery);
+      $usernameRowCount = mysqli_num_rows($usernameResult);
+
+      if ($usernameRowCount > 0) {
+        array_push($errors, 'Username already exists');
       }
 
 
@@ -253,4 +264,5 @@ if (isset($_SESSION['user'])) {
   </script>
 
 </body>
+
 </html>
