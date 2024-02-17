@@ -1,16 +1,11 @@
-<?php 
-    session_start();
-    if(isset($_SESSION['user'])){
-        header("Location: ../user/home.php"); //if user is registered , redirect it to  home/dashboard page
-    }
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
+  <title>Admin Login</title>
   <!-- Title icon -->
   <link rel="icon" href="../../icons/title_icon.png" type="image/x-icon">
 
@@ -26,9 +21,6 @@
   <!-- ==== Boxicons link ==== -->
   <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 
-  <!-- ==== RemixIcon link ==== -->
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet" />
-
 </head>
 
 <body bgcolor="#eee">
@@ -38,38 +30,33 @@
     <div class="form__container">
       <div class="box form__box">
 
-        <div class="login__intro login__intro_admin">
-          <img src="../../svg/R__logo_2.svg">
-   
-          <p>Welcome Admin <br>
-           
-          </p>
+        <div class="login__intro">
+          <img src="../../svg/R__logo_2.svg"></div>
+          
+        <div class="login__intro login__intro__admin">
+        <p>Welcome Admin</p>
         </div>
 
+
         <!-- ========= Form ============== -->
-        <form action="../validation/log-in.php" method="POST">
+        <form action="../admin/adminLogin.html" method="POST" class="admin-form-container">
 
           <div class="field input">
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" placeholder="">
+            <label for="name">Name</label>
+            <input type="text" name="adminName" id="adminName">
           </div>
 
           <div class="field input">
             <label for="password">Password</label>
-            <input type="password" name="pwd" id="pwd" placeholder="">
+            <input type="password" name="Adinpwd" id="Adminpwd">
 
 
           </div>
 
           <div class="field">
-            <input type="submit" class="btn-primary" name="login" value="Login" required>
+            <input type="submit" class="btn-primary btn-submit" name="login" value="Login" required>
 
           </div>
-
-          <div class="links">Don't have an account ?
-            <a href="../validation/sign-up.php" target="_blank">Sign Up</a>
-          </div>
-
 
         </form>
       </div>
@@ -77,7 +64,7 @@
     </div>
 
     <!-- =========== php section starts ============== -->
-    <?php 
+    <!-- <?php 
       if(isset($_POST['login'])){
         $email = $_POST['email'];
         $pwd = $_POST['pwd'];
@@ -110,13 +97,10 @@
         }
       }
     
-    ?>
+    ?> -->
 
     <!-- =========== php section ends ============== -->
   </section>
 
-  <!-- ==== JavaScript Link ==== -->
-  <script src="../../js/app.js"></script>
 </body>
-
 </html>
