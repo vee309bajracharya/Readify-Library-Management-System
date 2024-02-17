@@ -78,7 +78,7 @@
 
     <!-- =========== php section starts ============== -->
     <?php 
-        
+        require("adminConnection.php");
      ?>
     <!-- =========== php section ends ============== -->
   </section>
