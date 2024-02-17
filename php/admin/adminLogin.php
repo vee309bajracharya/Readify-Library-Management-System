@@ -39,7 +39,7 @@
 
 
         <!-- ========= Form ============== -->
-        <form action="" method="POST" class="admin-form-container">
+
 
           <div class="field input">
             <label for="name">Name</label>
@@ -48,13 +48,12 @@
 
           <div class="field input">
             <label for="password">Password</label>
-            <input type="password" name="Adinpwd" id="Adminpwd">
-
+            <input type="password" name="adminPwd" id="adminPwd">
 
           </div>
 
           <div class="field">
-            <input type="submit" class="btn-primary btn-submit" name="login" value="Login" required>
+            <input type="submit" class="btn-primary btn-submit" name="adminlogin" value="Login" required>
 
           </div>
 
@@ -65,7 +64,33 @@
 
 
     <!-- =========== php section starts ============== -->
-require("adminConnection.php");
+<?php
+require_once "../admin/adminConnection.php";
+
+if(isset($_POST['adminlogin'])){
+    $adminName = mysqli_real_escape_string($conn, $_POST['adminName']);
+    $adminPwd = mysqli_real_escape_string($conn, $_POST['adminPwd']);
+    
+    $query = "SELECT * FROM `admin_login` WHERE `Admin_name`='$adminName' AND `Admin_password`='$adminPwd'";
+    
+    $result = mysqli_query($conn, $query);
+    
+    if($result){
+        if(mysqli_num_rows($result) == 1){
+            session_start();
+            $_SESSION['AdminLoginId'] = $adminName;
+            header("Location: ./adminDashboard.php");
+            exit();
+        } else {
+            echo "<script> alert('Incorrect Password'); </script>";
+        }
+    } else {
+        echo "<script> alert('Error in query execution'); </script>";
+    }
+}
+?>
+
+
     <!-- =========== php section ends ============== -->
 
   </section>
