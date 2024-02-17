@@ -64,6 +64,10 @@
     </div>
 
 
+    <!-- =========== php section starts ============== -->
+require("adminConnection.php");
+    <!-- =========== php section ends ============== -->
+
   </section>
 
 </body>
