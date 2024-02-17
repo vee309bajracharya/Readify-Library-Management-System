@@ -38,11 +38,11 @@
     <div class="form__container">
       <div class="box form__box">
 
-        <div class="login__intro">
+        <div class="login__intro login__intro_admin">
           <img src="../../svg/R__logo_2.svg">
-          <h2>Login</h2>
-          <p>Welcome Back <br>
-            <span>We’re thrilled to see you again &#x1F44B; <br>Please login to get back to your account</span>
+   
+          <p>Welcome Admin <br>
+           
           </p>
         </div>
 
@@ -68,10 +68,6 @@
 
           <div class="links">Don't have an account ?
             <a href="../validation/sign-up.php" target="_blank">Sign Up</a>
-          </div>
-
-          <div class="links">Log in as 
-            <a href="../admin/adminLogin.php">Admin</a>
           </div>
 
 

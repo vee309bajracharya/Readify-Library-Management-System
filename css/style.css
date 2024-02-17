@@ -1083,7 +1083,12 @@ max-height: 0rem;
   font-size: 1.9rem;
   font-weight: 400;
 }
+
 /* ===== FAQ Page Ends === */
 
-
+/* admin login starts */
+.login__intro_admin{
+  margin-top:2rem;
+}
+/* admin login ends */
 
