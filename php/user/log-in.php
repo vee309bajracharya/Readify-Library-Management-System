@@ -1,12 +1,11 @@
 <?php 
     session_start();
     if(isset($_SESSION['user'])){
-        header("Location: ../user/home.php"); //if user is registered , redirect it to  home/dashboard page
+        header("Location: ./userHome.php"); //if user is registered , redirect it to  home/dashboard page
     }
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,16 +39,16 @@
 
         <div class="login__intro">
           <img src="../../svg/R__logo_2.svg">
-          <h2>Login</h2>
+          <h2>Login</h2>p
           <p>Welcome Back <br>
             <span>We’re thrilled to see you again &#x1F44B; <br>Please login to get back to your account</span>
           </p>
         </div>
 
         <!-- ========= Form ============== -->
-        <form action="../validation/log-in.php" method="POST">
+        <form action="./log-in.php" method="POST">
 
-          <div class="field input">
+        <div class="field input">
             <label for="email">Email</label>
             <input type="email" name="email" id="email" placeholder="">
           </div>
@@ -57,8 +56,6 @@
           <div class="field input">
             <label for="password">Password</label>
             <input type="password" name="pwd" id="pwd" placeholder="">
-
-
           </div>
 
           <div class="field">
@@ -67,7 +64,7 @@
           </div>
 
           <div class="links">Don't have an account ?
-            <a href="../validation/sign-up.php" target="_blank">Sign Up</a>
+            <a href="./sign-up.php" target="_blank">Sign Up</a>
           </div>
 
           <div class="links">Log in as 
@@ -77,7 +74,6 @@
 
         </form>
       </div>
-
     </div>
 
     <!-- =========== php section starts ============== -->
@@ -103,7 +99,7 @@
             //creating session as : dashboard page is available for registered users only
             session_start();
             $_SESSION['user'] = 'yes';
-            header("Location: ../user/home.php");
+            header("Location: ./userHome.php");
             die();
           }else{
             echo "<section class='alert-warning-msg'>Password does not match</section>";
@@ -115,12 +111,13 @@
       }
     
     ?>
-
     <!-- =========== php section ends ============== -->
   </section>
 
   <!-- ==== JavaScript Link ==== -->
   <script src="../../js/app.js"></script>
+
+  
 </body>
 
 </html>

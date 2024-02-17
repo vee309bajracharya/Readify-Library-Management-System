@@ -1,10 +1,9 @@
 <?php
 session_start();
 if (isset($_SESSION['user'])) {
-  header("Location: ../user/home.php"); //if user is registered , redirect it to  home/dashboard page no need to signup again
+  header("Location: ./userHome.php"); //if user is registered , redirect it to  home/dashboard page no need to signup again
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +45,7 @@ if (isset($_SESSION['user'])) {
         <div class="signup__intro login__intro">
           <h3>Sign up</h3>
 
-          <form action="sign-up.php" method="POST" id="signupForm">
+          <form action="./sign-up.php" method="POST" id="signupForm">
             <div class="signup__form__container">
 
               <div class="fields">
@@ -106,7 +105,7 @@ if (isset($_SESSION['user'])) {
         </div>
         <div class="links">By signing up you have agreed to our <a href="../../pages/terms-and-conditions.html">Terms and
             Conditions</a> along with <a href="../../pages/privacy-policy.html">Privacy Policy</a>
-          <br> <br> <small> Already have an account ? </small><a href="../validation/log-in.php" target="_blank">Log in</a>
+          <br> <br> <small> Already have an account ? </small><a href="./log-in.php" target="_blank">Log in</a>
         </div>
         </form>
 
@@ -120,7 +119,6 @@ if (isset($_SESSION['user'])) {
         </div>
 
       </div>
-
     </div>
 
     <!--  ===== php section starts ====-->
@@ -162,7 +160,7 @@ if (isset($_SESSION['user'])) {
         array_push($errors, "Mobile no. must contain 10 digits");
       }
 
-      if (!preg_match("/^[a-zA-Z ]*$/", $fullname)) {
+      if (!preg_match("/^[a-zA-Z]*$/", $fullname)) {
         array_push($errors, "Fullname should only contain letters and spaces");
       }
 
@@ -254,5 +252,5 @@ if (isset($_SESSION['user'])) {
     }
   </script>
 
-
+</body>
 </html>

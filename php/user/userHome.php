@@ -1,7 +1,7 @@
 <?php 
     session_start();
     if(!isset($_SESSION['user'])){
-        header("Location: ../validation/log-in.php"); //if user isn't registered , take it to login page
+        header("Location: ./log-in.php"); //if user isn't registered , take it to login page
     }
 
 ?>
@@ -11,7 +11,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
+    <title>User Panel</title>
     <!-- Title icon -->
     <link rel="icon" href="../../icons/title_icon.png" type="image/x-icon" />
 
@@ -27,8 +27,6 @@
     <!-- ==== Boxicons link ==== -->
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css" />
 
-    <!-- ==== RemixIcon link ==== -->
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet" />
     
     <!-- Material Icon Link -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
@@ -65,7 +63,7 @@
 
       <ul class="sidebar__list__items">
         <li class="sidebar_items">
-          <a href="../user/home.php"><i class='bx bxs-home'></i></span>Home</a>
+          <a href="./userHome.php"><i class='bx bxs-home'></i></span>Home</a>
         </li>
 
         <li class="sidebar_items">
@@ -90,7 +88,7 @@
         </li>
 
         <li class="sidebar_items">
-          <a href="../user/logOut.php"><i class='bx bx-log-out'></i>Logout</a>
+          <a href="./logOut.php"><i class='bx bx-log-out'></i>Logout</a>
         </li>
       </ul>
     </aside>

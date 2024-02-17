@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,15 +30,16 @@
       <div class="box form__box">
 
         <div class="login__intro">
-          <img src="../../svg/R__logo_2.svg"></div>
-          
+          <img src="../../svg/R__logo_2.svg">
+        </div>
+
         <div class="login__intro login__intro__admin">
-        <p>Welcome Admin</p>
+          <p>Welcome Admin</p>
         </div>
 
 
         <!-- ========= Form ============== -->
-        <form action="../admin/adminLogin.html" method="POST" class="admin-form-container">
+        <form action="" method="POST" class="admin-form-container">
 
           <div class="field input">
             <label for="name">Name</label>
@@ -63,44 +63,9 @@
 
     </div>
 
-    <!-- =========== php section starts ============== -->
-    <!-- <?php 
-      if(isset($_POST['login'])){
-        $email = $_POST['email'];
-        $pwd = $_POST['pwd'];
 
-        //check if the entered email and password exists on database or not
-
-        require_once "../config.php";
-
-        $sql = "SELECT * FROM library_users WHERE email = '$email'";
-        $result = mysqli_query($conn,$sql);
-
-        $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
-        if($user){
-
-          //checking encrypted pwd
-          
-          if(password_verify($pwd,$user['pwd'])){
-
-            //creating session as : dashboard page is available for registered users only
-            session_start();
-            $_SESSION['user'] = 'yes';
-            header("Location: ../user/home.php");
-            die();
-          }else{
-            echo "<section class='alert-warning-msg'>Password does not match</section>";
-          }
-
-        }else{
-          echo "<section class='alert-warning-msg'>Email does not exist</section>";
-        }
-      }
-    
-    ?> -->
-
-    <!-- =========== php section ends ============== -->
   </section>
 
 </body>
+
 </html>
