@@ -39,9 +39,8 @@
 
 
         <!-- ========= Form ============== -->
-
-
-          <div class="field input">
+        <form action="" method="POST">
+        <div class="field input">
             <label for="name">Name</label>
             <input type="text" name="adminName" id="adminName">
           </div>
@@ -56,8 +55,8 @@
             <input type="submit" class="btn-primary btn-submit" name="adminlogin" value="Login" required>
 
           </div>
-
         </form>
+
       </div>
 
     </div>

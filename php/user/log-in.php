@@ -59,7 +59,7 @@
           </div>
 
           <div class="field">
-            <input type="submit" class="btn-primary" name="login" value="Login" required>
+            <input type="submit" class="btn-primary btn-submit" name="login" value="Login" required>
 
           </div>
 
