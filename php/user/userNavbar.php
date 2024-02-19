@@ -10,7 +10,7 @@
     <link rel="icon" href="../../icons/title_icon.png" type="image/x-icon" />
 
     <!-- ==== CSS Links ==== -->
-    <link rel="stylesheet" href="../../css/custom_bootstrap.css"/>
+    <link rel="stylesheet" href="../../css/custom_bootstrap.css" />
 
     <!-- ==== Google Fonts Link ==== -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -25,42 +25,78 @@
 </head>
 
 <body>
-    
 
 
-<!-- ====== navbar starts =========== -->
-<nav class="navbar navbar-expand-lg custom-navbar">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- ====== navbar starts =========== -->
+    <nav class="navbar navbar-inverse">
         <div class="container-fluid">
-            <a class="navbar-brand navbar-logo" href="./userHome.php">
-                <img src="../../svg/logo-1.svg" alt="">
-            </a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active text-white ms-5 me-5" aria-current="page" href="./userHome.php">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="./books.php">Books</a>
-                    </li>
-
-
-                </ul>
-
-                
-
+            <div class="navbar-header">
+                <a class="navbar-brand-active" href="./userHome.php">
+                    <img src="../../svg/logo-1.svg" alt="">
+                </a>
             </div>
+
+            <ul class="nav navbar-nav">
+                <li><a href="">Home</a></li>
+                <li><a href="./books.php">Books</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <!-- check if user is logged in or not -->
+
+                <?php
+                session_start();
+                if (isset($_SESSION['user'])) {
+                    echo '<ul class="navbar-nav ms-auto">
+                    <div class="nav-item text-white me-3">
+                        <span class="nav-link text-white">' . $_SESSION['user'] . '</span>
+                    </div>
+                    <a class="nav-link text-white" href="./logOut.php"> Logout</a>
+                </ul>';
+                }
+
+                ?>
+            </ul>
+
+
+
+
+
+
+        </div>
         </div>
     </nav>
     <!-- ====== navbar ends =========== -->
 
 
+    <!-- === Bootstrap JavaScript Link==== -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> -->
+
 </body>
+
 </html>
-
-
-

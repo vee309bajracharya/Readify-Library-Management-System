@@ -8,7 +8,7 @@
 :root{
     --primary-color: #5955E7;
     --width-canvas: 270px;
-    --top-navbar-height: 68px;
+    --top-navbar-height: 50px;
 }
 
 section{
@@ -24,16 +24,14 @@ section{
     background-color: var(--primary-color);
   }
 
-.user-icon{
-    object-fit: cover;
-    width: 30px;
-    height: 30px;
-    border-radius: 100%;
-}
   
 /* sidebar */
 .sidebar-nav{
     width: var(--width-canvas) !important;
+    background-color: var(--primary-color);
+}
+.bx{
+    font-size: 2rem;
 }
 
 

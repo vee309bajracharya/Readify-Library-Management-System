@@ -4,6 +4,7 @@
         header("Location: ./userHome.php"); //if user is registered , redirect it to  home/dashboard page
     }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -98,8 +99,8 @@
 
             //creating session as : dashboard page is available for registered users only
             session_start();
-            $_SESSION['user'] = 'yes';
-            header("Location: ./userHome.php");
+            $_SESSION['user'] = $user['fullname'];
+            header("Location: ./books.php");
             die();
           }else{
             echo "<section class='alert-warning-msg'>Password does not match</section>";
@@ -119,5 +120,4 @@
 
   
 </body>
-
 </html>
