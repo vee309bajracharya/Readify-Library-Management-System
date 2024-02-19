@@ -78,7 +78,7 @@ if(isset($_POST['adminlogin'])){
         if(mysqli_num_rows($result) == 1){
             session_start();
             $_SESSION['AdminLoginId'] = $adminName;
-            header("Location: ./adminDashboard.php");
+            header("Location: ./adminDashboard/index.php");
             exit();
         } else {
             echo "<script> alert('Incorrect Password'); </script>";
