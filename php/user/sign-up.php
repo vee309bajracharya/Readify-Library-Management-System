@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['user'])) {
-  header("Location: ./userHome.php"); //if user is registered , redirect it to  home/dashboard page no need to signup again
+  header("Location: ./list_book_for_user.php"); //if user is registered , redirect it to  home/dashboard page no need to signup again
 }
 ?>
 
@@ -161,7 +161,7 @@ if (isset($_SESSION['user'])) {
         array_push($errors, "Mobile no. must contain 10 digits");
       }
 
-      if (!preg_match("/^[a-zA-Z]*$/", $fullname)) {
+      if (!preg_match("/^[a-zA-Z\s]*$/", $fullname)) {
         array_push($errors, "Fullname should only contain letters and spaces");
       }
 

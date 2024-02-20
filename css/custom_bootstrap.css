@@ -6,9 +6,16 @@
 }
 
 :root{
+  --content-bg-color : #EEEEEE;
+    --sidebar-hover-color : rgba(170, 170, 170, 0.40);
+    --bold-font-weight: 500;
+    --white-color: #fff;
     --primary-color: #5955E7;
+    --hover-color1: #7875F6;
     --width-canvas: 270px;
     --top-navbar-height: 50px;
+    --box-shadow-color: 0 .5rem 1rem rgba(0,0,0,.1);
+
 }
 
 section{
@@ -17,41 +24,162 @@ section{
     max-width: 1200px;
 }
 
-/* ========== ADMIN Panel starts ================= */
+body{
+    transition: background-color .5s;
+
+}
+
+/* ========== USER Panel starts ================= */
 
 /* navbar */
 .custom-navbar{
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--box-shadow-color);
     background-color: var(--primary-color);
+    height: 7rem;
+    border: transparent !important;
+  }
+.navbar-left{
+    margin-top: 2rem;
+    margin-bottom: 0 !important;
+}
+.navbar-brand>img {
+    margin-top: -2.3rem;
+    margin-right: 2rem;
+}
+
+.custom-ul{
+    margin-top: 1.5rem !important;
+}
+
+.custom-links{
+    font-size: 1.7rem;
+    font-weight: var(--bold-font-weight);
+    color: var(--white-color) !important;
+    margin-left: 3rem;
+}
+.user{
+    cursor: pointer;
+}
+
+/* Sidebar */
+
+.sidenav {
+    margin-top: 70px;
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: var(--hover-color1);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+  
+  .sidenav a {
+    margin: 1.5rem 0;
+    font-weight: var(--bold-font-weight);
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 1.3rem;
+    color: var(--white-color);
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidenav a:hover {
+    background-color: var(--sidebar-hover-color);
+    color: var(--white-color);
+    text-decoration: none;
+
+  }
+  
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+
+  }
+  .sidenav .closebtn:hover{
+    background-color: none;
   }
 
+  .toggle-trigger{
+    color: var(--white-color);
+    font-size:30px;
+    cursor:pointer;
+  }
   
-/* sidebar */
-.sidebar-nav{
-    width: var(--width-canvas) !important;
+  #main {
+    transition: margin-left .5s;
+    padding: 16px;
+  }
+  
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+  
+  /* Searchbar */
+  .searchBar_field{
+    display: flex;
+    gap: 2rem;
+    width: 50%;
+  }
+
+  .btn-search{
     background-color: var(--primary-color);
-}
-.bx{
-    font-size: 2rem;
-}
+    color: white;
+    padding: 5px 30px;
+    border-radius: 10px;
+    border: none;
+  }
 
 
-@media (min-width: 992px){
 
-    .offcanvas-backdrop{
-        display: none !important;
-    }
+  /*  Book List table */
+  table{
+    margin: 4rem 0;
+    border-radius: 10px;
+  }
+  table th{
+    background-color: var(--primary-color);
+    color: var(--white-color);
+
+  }
+
+  /* User Profile */
+  .profile__wrapper{
+    width: 500px;
+    margin: 0 auto;
+    color: var(--primary-color);
+    background-color: black;
+  }
+
+  .inf-content{
+    border:1px solid #DDDDDD;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    border-radius:10px;
+    box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);
+}		
 
 
-    .sidebar-nav{
-        transform: none !important;
-        visibility: visible !important;
-        top: var(--top-navbar-height) !important;
-    
-    }
-}
+
+
+
+
+
+
+
 
 
 
 
   
-  /* ========== ADMIN Panel ends ================= */
+  /* ========== USER Panel ends ================= */

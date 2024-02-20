@@ -1,7 +1,7 @@
 <?php 
     session_start();
     if(isset($_SESSION['user'])){
-        header("Location: ./userHome.php"); //if user is registered , redirect it to  home/dashboard page
+        header("Location: ./list_book_for_user.php"); //if user is registered , redirect it to  home/dashboard page
     }
 ?>
 
@@ -100,7 +100,7 @@
             //creating session as : dashboard page is available for registered users only
             session_start();
             $_SESSION['user'] = $user['fullname'];
-            header("Location: ./books.php");
+            header("Location: ./list_book_for_user.php");
             die();
           }else{
             echo "<section class='alert-warning-msg'>Password does not match</section>";
