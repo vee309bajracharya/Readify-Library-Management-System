@@ -960,7 +960,7 @@ section{
 
 /* ===== Privacy Page === */
 .privacy__wrapper{
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(89, 85, 231, 0.42)),url(../images/-914088634.png);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(89, 85, 231, 0.42)),url(../images/privacypolicy.jpg);
   min-height: 28rem;
 }
 
