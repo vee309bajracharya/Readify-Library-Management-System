@@ -41,7 +41,10 @@
         <a href="#"><i class='bx bxs-folder-open'></i> Manage Books</a>
         <a href="#"><i class='bx bx-money-withdraw'></i> Fine Collected</a>
         <a href="./manageUser.php"><i class='bx bxs-user-account' ></i> Manage Users</a>
-        <a href="#"><i class='bx bxs-help-circle' ></i> About Readify</a>
+        <a href="#"><i class='bx bxs-help-circle'></i> About Readify</a>
+        <a href="./admin-LogOut.php"><i class="bx bx-log-out"></i> Log out</a>
+
+
       </div>
       
       <div id="main">

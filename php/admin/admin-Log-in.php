@@ -86,16 +86,15 @@
         $sql = "SELECT * FROM `admin` WHERE email = '$email'";
         $result = mysqli_query($conn,$sql);
 
-        $admin = mysqli_fetch_array($result, MYSQLI_ASSOC);
-        if($admin){
+        if($admin= mysqli_fetch_assoc($result)){
 
           //checking encrypted pwd
-          
           if(password_verify($pwd,$admin['pwd'])){
 
             //creating session as : dashboard page is available for registered admins only
             session_start();
             $_SESSION['admin'] = $admin['username'];
+            $_SESSION['pic'] = $admin['pic'];
             header("Location: ./adminDashboard.php");
             die();
           }else{
@@ -106,6 +105,7 @@
           echo "<section class='alert-warning-msg'>Email does not exist</section>";
         }
       }
+      
     
     ?>
     <!-- =========== php section ends ============== -->

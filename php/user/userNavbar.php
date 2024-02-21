@@ -51,25 +51,20 @@ if (!isset($_SESSION['user'])) {
             <span onclick="openNav()" class="toggle-trigger">&#9776;</span>
               </div>
 
-    
+              <ul class="nav navbar-nav navbar-right custom-ul">
+                    <?php
+                    // Display fullname and profile image if user is logged in
+                    echo '<div class="custom-links d-flex align-items-center">';
+                    echo '<img class="img-circle profile_img" width="50" height="50" src="' . $_SESSION['pic'] . '" style="background-color: white; border-radius: 50%; overflow: hidden; margin-right: 10px;">';
+                    echo '<span class="user">' . $_SESSION['user']  . ' </span>';
 
-                <ul class="nav navbar-nav navbar-right custom-ul">
-                <?php
-
-                //display fullname if user is logged in
-                    echo '<ul class="nav navbar-nav custom-ul">
-                    <div class="custom-links">
-                        <span class="custom-links user">' . $_SESSION['user'] . '</span>
-                        
-                    </div>
-                </ul>';
-                ?>
-                    <li><a href="./logOut.php" class="custom-links"><i class='bx bx-log-out'></i> Logout</a></li>
-                </ul>
+                    echo '</div>';
+                    ?>
+            </ul>
         </div>
     </nav>
     <!-- ====== navbar ends =========== -->
-    <!-- Latest compiled JavaScript -->
+    <!-- Bootstrap JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 </body>

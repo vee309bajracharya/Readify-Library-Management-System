@@ -40,6 +40,7 @@ if (!isset($_SESSION['admin'])) {
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet"/>
 
 
+
 </head>
 
 <body>
@@ -51,23 +52,22 @@ if (!isset($_SESSION['admin'])) {
             <span onclick="openNav()" class="toggle-trigger">&#9776;</span>
               </div>
 
-                <ul class="nav navbar-nav navbar-right custom-ul">
-                <?php
+              <ul class="nav navbar-nav navbar-right custom-ul">
+                    <?php
+                    // Display username and profile image if admin is logged in
+                    echo '<div class="custom-links d-flex align-items-center">';
+                    echo '<img class="img-circle profile_img" width="50" height="50" src="' . $_SESSION['pic'] . '" style="background-color: white; border-radius: 50%; overflow: hidden; margin-right: 10px;">';
+                    echo '<span class="admin">' . $_SESSION['admin']  . ' </span>';
 
-                //display username if admin is logged in
+                    echo '</div>';
+                    ?>
+            </ul>
 
-                    echo '<ul class="nav navbar-nav custom-ul">
-                    <div class="custom-links">
-                        <span class="custom-links admin">' . $_SESSION['admin'] . '</span>
-                    </div>
-                </ul>';
-                ?>
-                    <li><a href="./admin-LogOut.php" class="custom-links"><i class='bx bx-log-out'></i> Logout</a></li>
-                </ul>
+
         </div>  
     </nav>
     <!-- ====== navbar ends =========== -->
-    <!-- Latest compiled JavaScript -->
+    <!-- Bootstrap JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 </body>

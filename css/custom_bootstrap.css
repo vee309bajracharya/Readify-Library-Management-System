@@ -58,11 +58,12 @@ body{
     font-size: 1.7rem;
     font-weight: var(--bold-font-weight);
     color: var(--white-color) !important;
-    margin-left: 3rem;
+    margin: 0 3rem !important;
 }
-.user{
-    cursor: pointer;
-}
+  .user,.profile-img-container{
+      cursor: pointer;
+  }
+
 
 /* Sidebar */
 

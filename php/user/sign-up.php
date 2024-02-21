@@ -105,7 +105,7 @@ if (isset($_SESSION['user'])) {
         </div>
         <div class="links">By signing up you have agreed to our <a href="../../pages/terms-and-conditions.html">Terms and
             Conditions</a> along with <a href="../../pages/privacy-policy.html">Privacy Policy</a>
-          <br> <br> <small> Already have an account ? </small><a href="./log-in.php" target="_blank">Log in</a>
+          <br> <br> <small> Already have an account ? </small><a href="./log-in.php">Log in</a>
         </div>
         </form>
 
@@ -201,8 +201,8 @@ if (isset($_SESSION['user'])) {
         $library_card_number = generateRandomString(8);
 
         // insert data into database
-        $sql = "INSERT INTO library_users(fullname, username, email, phone_number, pwd, address, library_card_number)
-        VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO library_users(fullname, username, email, phone_number, pwd, address, library_card_number,pic)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         //mysqli_stmt_init() -> mysqli_stmt_init() function initializes a statement and returns an object suitable for mysqli_stmt_prepare(). 
         $stmt = mysqli_stmt_init($conn);
@@ -210,7 +210,9 @@ if (isset($_SESSION['user'])) {
         $prepareStmt = mysqli_stmt_prepare($stmt, $sql);
 
         if ($prepareStmt) {
-          mysqli_stmt_bind_param($stmt, "sssisss", $fullname, $username, $email, $phone_number, $pwdHash, $address, $library_card_number);
+          $pic = 'user__profile__default.png';
+
+          mysqli_stmt_bind_param($stmt, "sssissss", $fullname, $username, $email, $phone_number, $pwdHash, $address, $library_card_number,$pic);
           mysqli_stmt_execute($stmt);
           echo "<section class='alert-success-msg'>Successfully Registered!!! Your Library Card Number is $library_card_number. Proceed to login</section>";
         } else {

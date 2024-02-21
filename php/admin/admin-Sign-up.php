@@ -212,8 +212,8 @@ if (isset($_SESSION['user'])) {
        
 
         // insert data into database
-        $sql = "INSERT INTO admin(fullname, username, email, phone_number, pwd, address)
-        VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO admin(fullname, username, email, phone_number, pwd, address,pic)
+        VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         //mysqli_stmt_init() -> mysqli_stmt_init() function initializes a statement and returns an object suitable for mysqli_stmt_prepare(). 
         $stmt = mysqli_stmt_init($conn);
@@ -221,11 +221,13 @@ if (isset($_SESSION['user'])) {
         $prepareStmt = mysqli_stmt_prepare($stmt, $sql);
 
         if ($prepareStmt) {
-          mysqli_stmt_bind_param($stmt, "sssiss", $fullname, $username, $email, $phone_number, $pwdHash, $address);
-          mysqli_stmt_execute($stmt);
+          $pic = 'user__profile__default.png';
+
+          mysqli_stmt_bind_param($stmt, "sssisss", $fullname, $username, $email, $phone_number, $pwdHash, $address,$pic);
+          mysqli_stmt_execute($stmt);   
           echo "<section class='alert-success-msg register__admin'>Successfully Registered!!! Proceed to login</section>";
         } else {
-          die("Something went wrong");
+          die("Something went wrong"); 
         }
       }
     }

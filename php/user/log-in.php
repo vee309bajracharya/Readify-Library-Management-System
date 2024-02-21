@@ -65,13 +65,8 @@
           </div>
 
           <div class="links">Don't have an account ?
-            <a href="./sign-up.php" target="_blank">Sign Up</a>
+            <a href="./sign-up.php">Sign Up</a>
           </div>
-
-          <div class="links">Log in as 
-            <a href="../admin/adminLogin.php">Admin</a>
-          </div>
-
 
         </form>
       </div>
@@ -90,8 +85,7 @@
         $sql = "SELECT * FROM library_users WHERE email = '$email'";
         $result = mysqli_query($conn,$sql);
 
-        $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
-        if($user){
+        if($user=mysqli_fetch_array($result)){
 
           //checking encrypted pwd
           
@@ -100,6 +94,8 @@
             //creating session as : dashboard page is available for registered users only
             session_start();
             $_SESSION['user'] = $user['fullname'];
+            $_SESSION['pic'] = $user['pic'];
+
             header("Location: ./list_book_for_user.php");
             die();
           }else{
