@@ -1,3 +1,13 @@
+<?php 
+session_start();
+
+if (!isset($_SESSION['admin'])) {
+    header("Location: ./admin-Log-in.php"); //if admin isn't logged in, redirect it to login page
+    exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,18 +51,16 @@
             <span onclick="openNav()" class="toggle-trigger">&#9776;</span>
               </div>
 
-    
-
                 <ul class="nav navbar-nav navbar-right custom-ul">
                 <?php
-                session_start();
-                if (isset($_SESSION['admin'])) {
+
+                //display username if admin is logged in
+
                     echo '<ul class="nav navbar-nav custom-ul">
                     <div class="custom-links">
                         <span class="custom-links admin">' . $_SESSION['admin'] . '</span>
                     </div>
                 </ul>';
-                }
                 ?>
                     <li><a href="./admin-LogOut.php" class="custom-links"><i class='bx bx-log-out'></i> Logout</a></li>
                 </ul>

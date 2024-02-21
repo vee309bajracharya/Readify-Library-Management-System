@@ -1,3 +1,13 @@
+<?php 
+session_start();
+
+if (!isset($_SESSION['user'])) {
+    header("Location: ./log-in.php"); //if user isn't logged in, redirect it to login page
+    exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,14 +55,14 @@
 
                 <ul class="nav navbar-nav navbar-right custom-ul">
                 <?php
-                session_start();
-                if (isset($_SESSION['user'])) {
+
+                //display fullname if user is logged in
                     echo '<ul class="nav navbar-nav custom-ul">
                     <div class="custom-links">
                         <span class="custom-links user">' . $_SESSION['user'] . '</span>
+                        
                     </div>
                 </ul>';
-                }
                 ?>
                     <li><a href="./logOut.php" class="custom-links"><i class='bx bx-log-out'></i> Logout</a></li>
                 </ul>
