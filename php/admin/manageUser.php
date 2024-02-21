@@ -1,3 +1,4 @@
+
 <?php 
     include "./adminNavbar.php"; //navbar along with sidenav
     require_once "../config.php"; //database connection file
@@ -10,7 +11,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library Books</title>
+    <title>Manage Users</title>
 
     <!-- Title icon -->
     <link rel="icon" href="../../icons/title_icon.png" type="image/x-icon">
@@ -40,7 +41,7 @@
         <a href="#"><i class='bx bxs-book-add'></i> Issued Books</a>
         <a href="#"><i class='bx bxs-folder-open'></i> Manage Books</a>
         <a href="#"><i class='bx bx-money-withdraw'></i> Fine Collected</a>
-        <a href="./manageUser.php"><i class='bx bxs-user-account' ></i> Manage Users</a>
+        <a href="#"><i class='bx bxs-user-account' ></i> Manage Users</a>
         <a href="#"><i class='bx bxs-help-circle' ></i> About Readify</a>
       </div>
       
@@ -67,78 +68,76 @@
 
 
     <!--  ===== Seachbar for books ===== -->
+    <h1> List of Users </h1>
     <div class="searchBar__wrapper">
             <form action="" class="navbar-form" method="POST" name="form-1">
                 <div class="searchBar_field">
-                    <input class="form-control" type="text" name="search" placeholder="Type Book Name" style="width:100%" ; required>
+                    <input class="form-control" type="text" name="search" placeholder="Search User" style="width:100%" ; required>
                     <button type="submit" name="submit" class="btn-search">Search</button>
                 </div>
             </form>
     </div>
 
-
+      
     <?php
 // ========== search book names =================
 if (isset($_POST['submit'])) {
     $search = mysqli_real_escape_string($conn, $_POST['search']);
-    $searchBarQuery = mysqli_query($conn, "SELECT * FROM library_books WHERE books_name LIKE '%$search%'");
+    $searchBarQuery = mysqli_query($conn, "SELECT fullname, username, email, phone_number, address, library_card_number FROM library_users WHERE fullname LIKE '%$search%'");
 
     if (mysqli_num_rows($searchBarQuery) == 0) {
-        echo "<section>Book not Found</section>";
+        echo "<section> User not found </section>";
     } else {
         echo "<div>";
         echo "<table class='table table-bordered table-hover'>";
         echo "<tr>";
         //Table header
-        echo "<th>"; echo "Books ID"; echo "</th>";
-        echo "<th>"; echo "Books Name"; echo "</th>";
-        echo "<th>"; echo "Edition"; echo "</th>";
-        echo "<th>"; echo "Authors"; echo "</th>";
-        echo "<th>"; echo "Status"; echo "</th>";
-        echo "<th>"; echo "Quantity"; echo "</th>";
-        echo "<th>"; echo "Department"; echo "</th>";
+        echo "<th>"; echo "Full Name"; echo "</th>";
+        echo "<th>"; echo "Username"; echo "</th>";
+        echo "<th>"; echo "Email"; echo "</th>";
+        echo "<th>"; echo "Phone Number"; echo "</th>";
+        echo "<th>"; echo "Address"; echo "</th>";
+        echo "<th>"; echo "Library Card Number"; echo "</th>";
         echo "</tr>";
 
         while ($row = mysqli_fetch_assoc($searchBarQuery)) {
             echo "<tr>";
             //fetch data from library_books table
-            echo "<td>" . $row['books_id'] . "</td>";
-            echo "<td>" . $row['books_name'] . "</td>";
-            echo "<td>" . $row['edition'] . "</td>";
-            echo "<td>" . $row['authors'] . "</td>";
-            echo "<td>" . $row['status'] . "</td>";
-            echo "<td>" . $row['quantity'] . "</td>";
-            echo "<td>" . $row['department'] . "</td>";
+            echo "<td>" . $row['fullname'] . "</td>";
+                echo "<td>" . $row['username'] . "</td>";
+                echo "<td>" . $row['email'] . "</td>";
+                echo "<td>" . $row['phone_number'] . "</td>";
+                echo "<td>" . $row['address'] . "</td>";
+                echo "<td>" . $row['library_card_number'] . "</td>";
             echo "</tr>";
         }
         echo "</table>";
         echo "</div>";
         }
         }else {
-            $result = mysqli_query($conn, "SELECT * FROM `library_books` ORDER BY `library_books`.`books_name` ASC;");
+            $result = mysqli_query($conn, "SELECT fullname, username, email, phone_number, address, library_card_number FROM `library_users`;");
             echo "<div>";
             echo "<table class='table table-bordered table-hover'>";
             echo "<tr>";
             //Table header
-            echo "<th>"; echo "Books ID"; echo "</th>";
-            echo "<th>"; echo "Books Name"; echo "</th>";
-            echo "<th>"; echo "Edition"; echo "</th>";
-            echo "<th>"; echo "Authors"; echo "</th>";
-            echo "<th>"; echo "Status"; echo "</th>";
-            echo "<th>"; echo "Quantity"; echo "</th>";
-            echo "<th>"; echo "Department"; echo "</th>";
+            echo "<th>"; echo "Full Name"; echo "</th>";
+        echo "<th>"; echo "Username"; echo "</th>";
+        echo "<th>"; echo "Email"; echo "</th>";
+        echo "<th>"; echo "Phone Number"; echo "</th>";
+        echo "<th>"; echo "Address"; echo "</th>";
+        echo "<th>"; echo "Library Card Number  "; echo "</th>";
             echo "</tr>";
 
             while ($row = mysqli_fetch_assoc($result)) {
                 echo "<tr>";
                 //fetch data from library_books table
-                echo "<td>" . $row['books_id'] . "</td>";
-                echo "<td>" . $row['books_name'] . "</td>";
-                echo "<td>" . $row['edition'] . "</td>";
-                echo "<td>" . $row['authors'] . "</td>";
-                echo "<td>" . $row['status'] . "</td>";
-                echo "<td>" . $row['quantity'] . "</td>";
-                echo "<td>" . $row['department'] . "</td>";
+                echo "<td>" . $row['fullname'] . "</td>";
+                echo "<td>" . $row['username'] . "</td>";
+                echo "<td>" . $row['email'] . "</td>";
+                echo "<td>" . $row['phone_number'] . "</td>";
+                echo "<td>" . $row['address'] . "</td>";
+                echo "<td>" . $row['library_card_number'] . "</td>";
+             
                 echo "</tr>";
             }
             echo "</table>";
