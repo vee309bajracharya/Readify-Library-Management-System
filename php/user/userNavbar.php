@@ -45,7 +45,7 @@ if (!isset($_SESSION['user'])) {
 <body>
 
     <!-- ====== navbar starts =========== -->
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar custom-navbar">
         <div class="container-fluid custom-navbar">
             <div class="navbar-header navbar-left">
             <span onclick="openNav()" class="toggle-trigger">&#9776;</span>
@@ -55,7 +55,7 @@ if (!isset($_SESSION['user'])) {
                     <?php
                     // Display fullname and profile image if user is logged in
                     echo '<div class="custom-links d-flex align-items-center">';
-                    echo '<img class="img-circle profile_img" width="50" height="50" src="' . $_SESSION['pic'] . '" style="background-color: white; border-radius: 50%; overflow: hidden; margin-right: 10px;">';
+                    echo '<img class="img-circle profile_img" width="50" height="50" src="' . $_SESSION['pic'] . '" style="background-color: white; border-radius: 50%; overflow: hidden; margin-right: 10px; object-fit:cover;">';
                     echo '<span class="user">' . $_SESSION['user']  . ' </span>';
 
                     echo '</div>';
