@@ -38,7 +38,7 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         
         <a href="./adminDashboard.php"><i class='bx bxs-dashboard' ></i> Dashboard</a>
-        <a href="#"><i class='bx bxs-book-add'></i> Issued Books</a>
+        <a href="./Issued.php"><i class='bx bxs-book-add'></i> Issued Books</a>
         <a href="#"><i class='bx bxs-folder-open'></i> Manage Books</a>
         <a href="#"><i class='bx bx-money-withdraw'></i> Fine Collected</a>
         <a href="#"><i class='bx bxs-user-account' ></i> Manage Users</a>

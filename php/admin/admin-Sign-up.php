@@ -221,7 +221,7 @@ if (isset($_SESSION['user'])) {
         $prepareStmt = mysqli_stmt_prepare($stmt, $sql);
 
         if ($prepareStmt) {
-          $pic = 'user__profile__default.png';
+          $pic = 'user_profile_default.png';
 
           mysqli_stmt_bind_param($stmt, "sssisss", $fullname, $username, $email, $phone_number, $pwdHash, $address,$pic);
           mysqli_stmt_execute($stmt);   

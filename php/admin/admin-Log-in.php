@@ -85,7 +85,7 @@
 
         $sql = "SELECT * FROM `admin` WHERE email = '$email'";
         $result = mysqli_query($conn,$sql);
-
+        
         if($admin= mysqli_fetch_assoc($result)){
 
           //checking encrypted pwd
