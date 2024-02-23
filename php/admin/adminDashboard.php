@@ -27,7 +27,45 @@
     <!-- ===== Bootstrap link ======== -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
-   
+   <style>
+   .bxs-book-add{
+    margin-right: 1.3rem;
+   }
+    .navbar-form-c{
+    width: 100%;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-right: 0px;
+    border: 0;
+    box-shadow: none;
+  }
+    .form-control-search{
+        padding: 10px;
+    }
+
+    .btn-search{
+    background-color: var(--primary-color);
+    color: white;
+    width: 40%;
+    height: 10%;
+    padding: 10px;
+    border-radius: 3px;
+    border: none;
+    text-align: center;
+    transition: 0.3s ease-in-out ;
+  }
+  .btn-search:hover{
+    text-decoration: none;
+    color: white;
+    background-color: var( --hover-color1);
+  }
+
+  .btn-add-book:hover{
+    text-decoration: none;
+    color: white;
+    background-color: var( --hover-color1);
+  }
+   </style>
 
 </head>
 <body>
@@ -71,10 +109,12 @@
 
     <!--  ===== Seachbar for books ===== -->
     <div class="searchBar__wrapper">
-            <form action="" class="navbar-form" method="POST" name="form-1">
+        <h2> Manage Books </h2>
+            <form action="" class="navbar-form-c" method="POST" name="form-1">
                 <div class="searchBar_field">
-                    <input class="form-control" type="text" name="search" placeholder="Type Book Name" style="width:100%" ; required>
+                    <input class="form-control-search" type="text" name="search" placeholder="Type Book Name" style="width:100%" ; required>
                     <button type="submit" name="submit" class="btn-search">Search</button>
+                 <a href="./Issued.php " class="btn-add-book btn-search" role="button"><i class='bx bxs-book-add'></i>       Add Book</a>
                 </div>
             </form>
     </div>
@@ -100,6 +140,8 @@ if (isset($_POST['submit'])) {
         echo "<th>"; echo "Status"; echo "</th>";
         echo "<th>"; echo "Quantity"; echo "</th>";
         echo "<th>"; echo "Department"; echo "</th>";
+        echo "<th>"; echo "Date and time"; echo "</th>";
+        echo "<th>"; echo "Action"; echo "</th>";
         echo "</tr>";
 
         while ($row = mysqli_fetch_assoc($searchBarQuery)) {
@@ -112,6 +154,8 @@ if (isset($_POST['submit'])) {
             echo "<td>" . $row['status'] . "</td>";
             echo "<td>" . $row['quantity'] . "</td>";
             echo "<td>" . $row['department'] . "</td>";
+            echo "<td>" . $row['Added_at'] . "</td>";
+            echo "<td><button type='button' class='btn btn-success' style='margin-right: 5px;' onclick=\"window.location.href='Edit.php?id={$row['books_id']}'\">Edit</button> <a href='Delete.php?id={$row['books_id']}' class='btn btn-danger' onclick='return confirm(\"Are you sure you want to delete this book?\")'>Delete</a>";
             echo "</tr>";
         }
         echo "</table>";
@@ -130,6 +174,8 @@ if (isset($_POST['submit'])) {
             echo "<th>"; echo "Status"; echo "</th>";
             echo "<th>"; echo "Quantity"; echo "</th>";
             echo "<th>"; echo "Department"; echo "</th>";
+            echo "<th>"; echo "Date and time"; echo "</th>";
+            echo "<th>"; echo "Action"; echo "</th>";
             echo "</tr>";
 
             while ($row = mysqli_fetch_assoc($result)) {
@@ -142,6 +188,8 @@ if (isset($_POST['submit'])) {
                 echo "<td>" . $row['status'] . "</td>";
                 echo "<td>" . $row['quantity'] . "</td>";
                 echo "<td>" . $row['department'] . "</td>";
+                echo "<td>" . $row['Added_at'] . "</td>";
+                echo "<td><button type='button' class='btn btn-success' style='margin-right: 5px;' onclick=\"window.location.href='Edit.php?id={$row['books_id']}'\">Edit</button> <a href='Delete.php?id={$row['books_id']}' class='btn btn-danger' onclick='return confirm(\"Are you sure you want to delete this book?\")'>Delete</a>";
                 echo "</tr>";
             }
             echo "</table>";
