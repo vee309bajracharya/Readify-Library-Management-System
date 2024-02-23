@@ -14,7 +14,7 @@
     --hover-color1: #7875F6;
     --width-canvas: 270px;
     --top-navbar-height: 50px;
-    --box-shadow-color: 0 .5rem 1rem rgba(0,0,0,.1);
+    --box-shadow-color: .3rem 0.5rem .5rem rgba(0,0,0,.1);  
 
 }
 
@@ -32,14 +32,16 @@ body{
 /* ========== USER Panel starts ================= */
 
 /* navbar */
+
 .custom-navbar{
     position: sticky;
     top: 0;
     z-index: 100;
     box-shadow: var(--box-shadow-color);
     background-color: var(--primary-color);
+    border-radius: 0;
+    border: 0;
     height: 7rem;
-    border: transparent !important;
   }
 .navbar-left{
     margin-top: 2rem;
