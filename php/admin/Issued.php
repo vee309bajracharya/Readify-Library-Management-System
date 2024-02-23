@@ -2,6 +2,28 @@
     include "./adminNavbar.php"; //navbar along with sidenav
     require_once "../config.php"; //database connection file
 
+    if (isset($_POST['submit'])) {
+      if (isset($_SESSION['admin'])) {  
+          $books_name = $_POST['books_name'];
+          $authors = $_POST['authors'];
+          $edition = $_POST['edition'];
+          $status = $_POST['status'];
+          $quantity = $_POST['quantity'];
+          $department = $_POST['department'];
+  
+          $stmt = $conn->prepare("INSERT INTO library_books (books_name, authors, edition, status, quantity, department) VALUES (?, ?, ?, ?, ?, ?)");
+          $stmt->bind_param("ssssis", $books_name, $authors, $edition, $status, $quantity, $department);
+          
+          if ($stmt->execute()) {
+              echo "<section class='alert-success-msg register__admin'>Successfully Books Added</section>";
+          } else {
+              echo "<section class='alert-error-msg  register__admin'>Error Adding Book: " . $stmt->error . "</section>";
+          }
+          
+          $stmt->close();
+  }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +61,6 @@
               width: 35rem;
               height: 4rem;
           }
-
 
           .add_button{
               display: block;
@@ -80,7 +101,6 @@
       <form class="book" action="./Issued.php" method="POST">
       <br>
 
-<<<<<<<<< Temporary merge branch 1
         <input type="text" name="books_name" id="books_name" class="form-control" placeholder="Book Name" required=""><br>
         <input type="text" name="authors" id="authors" class="form-control" placeholder="Authors" required=""><br>
         <input type="text" name="edition" id="edition" class="form-control" placeholder="Edition" required=""><br>
@@ -90,29 +110,9 @@
        
         <button class="add_button" type="submit" value="submit">Submit</button>
         </form>
-=========
-       
-        <input type="text" name="name" class="form-control" placeholder="Book Name" required=""><br>
-        <input type="text" name="authors" class="form-control" placeholder="Authors" required=""><br>
-        <input type="text" name="edition" class="form-control" placeholder="Edition" required=""><br>
-        <input type="text" name="status" class="form-control" placeholder="Status" required=""><br>
-        <input type="text" name="quantity" class="form-control" placeholder="Quantity" required=""><br>
-        <input type="text" name="department" class="form-control" placeholder="Department" required=""><br>
-       
-        <button class="add_button" type="submit">Submit</button>
-      </div>
->>>>>>>>> Temporary merge branch 2
 
     
 
-<<<<<<<<< Temporary merge branch 1
-=========
-      <?php 
-       if(isset($_POST['submit'])){
-        if(isset($_SESSION['admin'])){
-            mysqli_query($db,"INSERT INTO library_books VALUES ('$_POST[name]', '$_POST[authors]', '$_POST[edition]', '$_POST[status]', '$_POST[quantity]', '$_POST[department]',);");
-            ?>
->>>>>>>>> Temporary merge branch 2
 
       <script>
       function openNav() {
