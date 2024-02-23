@@ -46,7 +46,7 @@ if (!isset($_SESSION['admin'])) {
 <body>
 
     <!-- ====== navbar starts =========== -->
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar custom-navbar">
         <div class="container-fluid custom-navbar">
             <div class="navbar-header navbar-left">
             <span onclick="openNav()" class="toggle-trigger">&#9776;</span>

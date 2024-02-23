@@ -28,7 +28,26 @@ include "./userNavbar.php";
     <!-- ===== Bootstrap link ======== -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
+    <!-- ==== Inline CSS ==== -->
 
+
+    <style>
+        .profile__wrapper {
+            text-align: center;
+            width: 70%;
+            margin-top: 50px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .img-thumbnail {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 5px;
+        }
+    </style>
 
 </head>
 
@@ -45,6 +64,8 @@ include "./userNavbar.php";
         <a href="#"><i class='bx bxs-book'></i> View Archieve Books</a>
         <a href="#"><i class='bx bxs-book'></i> Submit Book Request</a>
         <a href="#"><i class='bx bxs-help-circle'></i> About Readify</a>
+        <a href="./logOut.php"><i class="bx bx-log-out"></i> Log out</a>
+
     </div>
 
     <div id="main">
@@ -64,134 +85,78 @@ include "./userNavbar.php";
         </script>
 
         <!-- ==== Sidebar ends here ===== -->
-        <!-- 
-      <div class="container">
-        <form action="" method="post">
-            <button class="btn btn-default" name="submit1" style="float:right; width:70px"; >Edit</button>
-        </form>
-      </div>
 
-      <div class="profile__wrapper">
-        <h3>ds</h3>
-      </div>
-          -->
+        <div class="profile__wrapper">
+            <?php
+            $query = mysqli_query($conn, "SELECT * FROM library_users WHERE fullname = '$_SESSION[user]';");
 
-        <div class="container bootstrap snippets bootdey">
-            <div class="panel-body inf-content">
-                <div class="row">
-                    <div class="col-md-4">
-                        <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src="https://bootdey.com/img/Content/avatar/avatar7.png" data-original-title="Usuario">
-                        <ul title="Ratings" class="list-inline ratings text-center">
-                            <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6">
-                        <strong>Information</strong><br>
-                        <div class="table-responsive">
-                            <table class="table table-user-information">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <strong>
-                                                <span class="glyphicon glyphicon-asterisk text-primary"></span>
-                                                Identificacion
-                                            </strong>
-                                        </td>
-                                        <td class="text-primary">
-                                            123456789
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>
-                                                <span class="glyphicon glyphicon-user  text-primary"></span>
-                                                Name
-                                            </strong>
-                                        </td>
-                                        <td class="text-primary">
-                                            Bootdey
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>
-                                                <span class="glyphicon glyphicon-cloud text-primary"></span>
-                                                Lastname
-                                            </strong>
-                                        </td>
-                                        <td class="text-primary">
-                                            Bootstrap
-                                        </td>
-                                    </tr>
+            if (!$query) {
+                die(mysqli_error($conn)); // Print any error message
+            }
 
-                                    <tr>
-                                        <td>
-                                            <strong>
-                                                <span class="glyphicon glyphicon-bookmark text-primary"></span>
-                                                Username
-                                            </strong>
-                                        </td>
-                                        <td class="text-primary">
-                                            bootnipets
-                                        </td>
-                                    </tr>
+            // Check if any rows are returned
+            if (mysqli_num_rows($query) > 0) {
+                $row = mysqli_fetch_assoc($query);
+
+                echo "<div class='row'>";
+                echo "<div class='col-md-4'>";
+                echo "<img class='img-thumbnail' width='300' height='300' src='" . $_SESSION['pic'] . "'>";
+                echo "</div>";
+
+                echo "<div class='col-md-8'>";
+                echo "<h4><b>Welcome, </b>" . $_SESSION['user'] . "</h4>";
+
+                echo "<table class='table table-bordered'>";
+                echo "<tr>";
+                echo "<th scope='row'>Full Name</th>";
+                echo "<td>" . $row['fullname'] . "</td>";
+                echo "</tr>";
+
+                echo "<tr>";
+                echo "<th scope='row'>Username</th>";
+                echo "<td>" . $row['username'] . "</td>";
+                echo "</tr>";
+
+                echo "<tr>";
+                echo "<th scope='row'>Email</th>";
+                echo "<td>" . $row['email'] . "</td>";
+                echo "</tr>";
+
+                echo "<tr>";
+                echo "<th scope='row'>Phone Number</th>";
+                echo "<td>" . $row['phone_number'] . "</td>";
+                echo "</tr>";
+
+                echo "<tr>";
+                echo "<th scope='row'>Address</th>";
+                echo "<td>" . $row['address'] . "</td>";
+                echo "</tr>";
+
+                echo "<tr>";
+                echo "<th scope='row'>Library Card Number</th>";
+                echo "<td>" . $row['library_card_number'] . "</td>";
+                echo "</tr>";
+
+                echo "</table>";
+
+                // Edit button
+                echo "<div class='text-center'>";
+                echo "<form action='' method='post'>";
+                echo "<button class='btn btn-primary' name='submit1' style='width: 20%; padding: 10px 15px; margin-top: 10px;'>";
+                echo "<i class='bx bx-edit'></i> Edit";
+                echo "</form>";
+                echo "</div>";
 
 
-                                    <tr>
-                                        <td>
-                                            <strong>
-                                                <span class="glyphicon glyphicon-eye-open text-primary"></span>
-                                                Role
-                                            </strong>
-                                        </td>
-                                        <td class="text-primary">
-                                            Admin
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>
-                                                <span class="glyphicon glyphicon-envelope text-primary"></span>
-                                                Email
-                                            </strong>
-                                        </td>
-                                        <td class="text-primary">
-                                            noreply@email.com
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>
-                                                <span class="glyphicon glyphicon-calendar text-primary"></span>
-                                                created
-                                            </strong>
-                                        </td>
-                                        <td class="text-primary">
-                                            20 jul 20014
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>
-                                                <span class="glyphicon glyphicon-calendar text-primary"></span>
-                                                Modified
-                                            </strong>
-                                        </td>
-                                        <td class="text-primary">
-                                            20 jul 20014 20:00:00
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                echo "</div>";
+                echo "</div>";
+            } else {
+                echo "No user found with the specified username.";
+            }
+            ?>
         </div>
+
+
 
 
 
