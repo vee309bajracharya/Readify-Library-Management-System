@@ -80,13 +80,7 @@
       <form class="book" action="./Issued.php" method="POST">
       <br>
 
-       
-        <input type="text" name="name" class="form-control" placeholder="Book Name" required=""><br>
-        <input type="text" name="authors" class="form-control" placeholder="Authors" required=""><br>
-        <input type="text" name="edition" class="form-control" placeholder="Edition" required=""><br>
-        <input type="text" name="status" class="form-control" placeholder="Status" required=""><br>
-        <input type="text" name="quantity" class="form-control" placeholder="Quantity" required=""><br>
-        <input type="text" name="department" class="form-control" placeholder="Department" required=""><br>
+<<<<<<<<< Temporary merge branch 1
         <input type="text" name="books_name" id="books_name" class="form-control" placeholder="Book Name" required=""><br>
         <input type="text" name="authors" id="authors" class="form-control" placeholder="Authors" required=""><br>
         <input type="text" name="edition" id="edition" class="form-control" placeholder="Edition" required=""><br>
@@ -94,33 +88,31 @@
         <input type="text" name="quantity" id="quantity" class="form-control" placeholder="Quantity" required=""><br>
         <input type="text" name="department" id="department" class="form-control" placeholder="Department" required=""><br>
        
+        <button class="add_button" type="submit" value="submit">Submit</button>
+        </form>
+=========
+       
+        <input type="text" name="name" class="form-control" placeholder="Book Name" required=""><br>
+        <input type="text" name="authors" class="form-control" placeholder="Authors" required=""><br>
+        <input type="text" name="edition" class="form-control" placeholder="Edition" required=""><br>
+        <input type="text" name="status" class="form-control" placeholder="Status" required=""><br>
+        <input type="text" name="quantity" class="form-control" placeholder="Quantity" required=""><br>
+        <input type="text" name="department" class="form-control" placeholder="Department" required=""><br>
+       
         <button class="add_button" type="submit">Submit</button>
       </div>
+>>>>>>>>> Temporary merge branch 2
 
-    </form>
-      </div>
+    
 
+<<<<<<<<< Temporary merge branch 1
+=========
       <?php 
        if(isset($_POST['submit'])){
         if(isset($_SESSION['admin'])){
             mysqli_query($db,"INSERT INTO library_books VALUES ('$_POST[name]', '$_POST[authors]', '$_POST[edition]', '$_POST[status]', '$_POST[quantity]', '$_POST[department]',);");
             ?>
-
-            <script type="text/javascript"> alert("Books Added Sucessfully!"); </script>
-            <?php
-
-        }else{
-            ?>
-            <script type="text/javascript"> alert("Please Login First"); </script>
-            <?php
-        }
-       }
-      ?>
-        <button class="add_button" type="submit" value="submit">Submit</button>
-        </form>
-
-    
-
+>>>>>>>>> Temporary merge branch 2
 
       <script>
       function openNav() {
