@@ -41,7 +41,7 @@
         height: 4rem;
     }
 
-    .Add_button{
+    .add_button{
         display: block;
         margin: 0 auto;
         text-align: center;
@@ -80,7 +80,7 @@
       <form  class="book" action="" method="post">
       <br>
 
-        <input type="text" name="bid" class="form-control" placeholder="Book id" required=""><br>
+       
         <input type="text" name="name" class="form-control" placeholder="Book Name" required=""><br>
         <input type="text" name="authors" class="form-control" placeholder="Authors" required=""><br>
         <input type="text" name="edition" class="form-control" placeholder="Edition" required=""><br>
@@ -88,7 +88,7 @@
         <input type="text" name="quantity" class="form-control" placeholder="Quantity" required=""><br>
         <input type="text" name="department" class="form-control" placeholder="Department" required=""><br>
        
-        <button class="Add_button" type="submit">Submit</button>
+        <button class="add_button" type="submit">Submit</button>
       </div>
 
     </form>
@@ -97,7 +97,7 @@
       <?php 
        if(isset($_POST['submit'])){
         if(isset($_SESSION['admin'])){
-            mysqli_query($db,"INSERT INTO library_books VALUES ('$_POST[bid]', '$_POST[name]', '$_POST[authors]', '$_POST[edition]', '$_POST[status]', '$_POST[quantity]', '$_POST[department]',);");
+            mysqli_query($db,"INSERT INTO library_books VALUES ('$_POST[name]', '$_POST[authors]', '$_POST[edition]', '$_POST[status]', '$_POST[quantity]', '$_POST[department]',);");
             ?>
 
             <script type="text/javascript"> alert("Books Added Sucessfully!"); </script>
