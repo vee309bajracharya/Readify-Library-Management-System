@@ -40,16 +40,7 @@
               height: 4rem;
           }
 
-    .add_button{
-        display: block;
-        margin: 0 auto;
-        text-align: center;
-        height: 4rem;
-        width:35rem ;
-        color: white;
-        background-color: #5955e7;
-        border-radius: 0.5rem;
-    }
+
           .add_button{
               display: block;
               margin: 0 auto;
