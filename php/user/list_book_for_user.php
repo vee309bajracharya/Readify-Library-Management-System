@@ -35,6 +35,21 @@
     <!-- ====== Sidebar ======== -->
     <div id="mySidenav" class="sidenav">    
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+        <!-- profile preview -->
+        <div style="margin-top:1.4rem; margin-bottom: 2rem;" class="d-flex flex-column align-items-center text-center">
+        <?php
+                    echo '<div class="custom-links">';
+                    echo '<img class="img-circle profile_img" width="110" height="110" src="./images/' . $_SESSION['pic'] . '" style="background-color: white; border-radius: 50%; overflow: hidden; margin-right: 10px; object-fit:cover;">';
+                    echo "Welcome," .  $_SESSION['user'];
+                    echo '</div>';
+        ?>
+
+        </div>
+
+
+
+
         
         <a href="./list_book_for_user.php"><i class='bx bxs-dashboard' ></i> Dashboard</a>
         <a href="#"><i class="ri-lock-password-fill"></i> Change Password</a>

@@ -93,7 +93,7 @@
 
             //creating session as : dashboard page is available for registered users only
             session_start();
-            $_SESSION['user'] = $user['fullname'];
+            $_SESSION['user'] = $user['username'];
             $_SESSION['pic'] = $user['pic'];
 
             header("Location: ./list_book_for_user.php");

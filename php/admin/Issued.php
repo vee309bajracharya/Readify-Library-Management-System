@@ -1,6 +1,5 @@
 <?php 
     include "./adminNavbar.php"; //navbar along with sidenav
-    require_once "../config.php"; //database connection file
 
     if (isset($_POST['submit'])) {
       if (isset($_SESSION['admin'])) {  
@@ -10,17 +9,34 @@
           $status = $_POST['status'];
           $quantity = $_POST['quantity'];
           $department = $_POST['department'];
-  
-          $stmt = $conn->prepare("INSERT INTO library_books (books_name, authors, edition, status, quantity, department) VALUES (?, ?, ?, ?, ?, ?)");
-          $stmt->bind_param("ssssis", $books_name, $authors, $edition, $status, $quantity, $department);
-          
-          if ($stmt->execute()) {
-              echo "<section class='alert-success-msg register__admin'>Successfully Books Added</section>";
-          } else {
-              echo "<section class='alert-error-msg  register__admin'>Error Adding Book: " . $stmt->error . "</section>";
+
+          require_once "../config.php"; //database connection file
+
+          $query = "INSERT INTO library_books(books_name, authors, edition, status, quantity, department)
+          VALUES($books_name, $authors, $edition, $status, $quantity, $department)";
+
+          $result = mysqli_query($conn,$query);
+
+          if($result){
+            echo "<section class='alert-success-msg register__admin'>Successfully Books Added</section>";
+          }else{
+            echo "<section class='alert-error-msg register__admin'>Error in  Books Added</section>";
           }
+
+
+
+
+
+          // $stmt = $conn->prepare("INSERT INTO library_books (books_name, authors, edition, status, quantity, department) VALUES (?, ?, ?, ?, ?, ?)");
+          // $stmt->bind_param("ssssis", $books_name, $authors, $edition, $status, $quantity, $department);
           
-          $stmt->close();
+          // if ($stmt->execute()) {
+          //     echo "<section class='alert-success-msg register__admin'>Successfully Books Added</section>";
+          // } else {
+          //     echo "<section class='alert-error-msg  register__admin'>Error Adding Book: " . $stmt->error . "</section>";
+          // }
+          
+          // $stmt->close();
   }
 }
 

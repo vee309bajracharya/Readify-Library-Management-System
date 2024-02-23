@@ -4,7 +4,6 @@ include "./userNavbar.php";
 
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,7 +34,7 @@ include "./userNavbar.php";
         .profile__wrapper {
             text-align: center;
             width: 70%;
-            margin-top: 50px;
+            margin-top: 30px;
             background-color: #fff;
             padding: 30px;
             border-radius: 5px;
@@ -106,48 +105,50 @@ include "./userNavbar.php";
                 echo "<div class='col-md-8'>";
                 echo "<h4><b>Welcome, </b>" . $_SESSION['user'] . "</h4>";
 
-                echo "<table class='table table-bordered'>";
+                // Edit form
+                echo "<form action='./myProfileEdit.php' method='post' enctype='multipart/form-data'>";
+                echo "<table class='table table-bordered table-custom'>";
                 echo "<tr>";
                 echo "<th scope='row'>Full Name</th>";
-                echo "<td>" . $row['fullname'] . "</td>";
+                echo "<td><input class='custom-input' type='text' name='fullname' value='" . $row['fullname'] . "'></td>";
                 echo "</tr>";
 
                 echo "<tr>";
                 echo "<th scope='row'>Username</th>";
-                echo "<td>" . $row['username'] . "</td>";
+                echo "<td><input class='custom-input' type='text' name='username' value='" . $row['username'] . "'></td>";
                 echo "</tr>";
 
                 echo "<tr>";
                 echo "<th scope='row'>Email</th>";
-                echo "<td>" . $row['email'] . "</td>";
+                echo "<td><input class='custom-input' type='email' name='email' value='" . $row['email'] . "'></td>";
                 echo "</tr>";
 
                 echo "<tr>";
                 echo "<th scope='row'>Phone Number</th>";
-                echo "<td>" . $row['phone_number'] . "</td>";
+                echo "<td><input class='custom-input' type='tel' name='phone_number' value='" . $row['phone_number'] . "'></td>";
                 echo "</tr>";
 
                 echo "<tr>";
                 echo "<th scope='row'>Address</th>";
-                echo "<td>" . $row['address'] . "</td>";
+                echo "<td><input class='custom-input' type='text' name='address' value='" . $row['address'] . "'></td>";
                 echo "</tr>";
 
+
                 echo "<tr>";
-                echo "<th scope='row'>Library Card Number</th>";
-                echo "<td>" . $row['library_card_number'] . "</td>";
+                echo "<th scope='row'>Profile Image</th>";
+                echo "<td><input class='custom-input' type='file' name='file'></td>";
                 echo "</tr>";
 
                 echo "</table>";
 
-                // Edit button
+                // Submit button
                 echo "<div class='text-center'>";
-                echo "<form action='./myProfileEdit.php' method='post'>";
-                echo "<a href='./myProfileEdit.php' class='btn btn-primary' name='submit1' style='width: 30%; padding: 10px 15px; margin-top: 10px;'>";
-                echo "<i class='bx bx-edit'></i> Edit Profile";
-                echo "</a>";
-                echo "</form>";
+                echo "<button type='submit' class='btn btn-primary' name='submit' style='width: 40%; padding: 10px 15px; margin-top: 10px;'>";
+                echo "<i class='bx bx-edit'></i> Update Profile";
+                echo "</button>";
                 echo "</div>";
 
+                echo "</form>";
 
                 echo "</div>";
                 echo "</div>";
@@ -161,6 +162,62 @@ include "./userNavbar.php";
         <!-- === Bootstrap JavaScript Link==== -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     </div>
+
+
+    <!-- update user information query  -->
+    <?php
+    if (isset($_POST['submit'])) {
+
+        //for custom image upload 
+        move_uploaded_file($_FILES['file']['tmp_name'], "./images/" . $_FILES['file']['name']);
+
+
+
+        $fullname = $_POST['fullname'];
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $phone_number = $_POST['phone_number'];
+        $address = $_POST['address'];
+        $pic = $_FILES['file']['name'];
+
+        // Validate phone number length
+        if (strlen($phone_number) == 10) {
+
+            // Validate email format
+            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+
+                // Validate username 
+                if (preg_match("/^[a-zA-Z0-9_]+$/", $username)) {
+                    $sql1 = "UPDATE library_users SET 
+                    pic='$pic',
+                    fullname='$fullname',
+                    username='$username',
+                    email='$email',
+                    phone_number='$phone_number',
+                    address='$address' WHERE username='" . $_SESSION['user'] . "'";
+
+                    if (mysqli_query($conn, $sql1)) {
+                        echo "<section class='alert-success-msg'>Update Success!!</section>";
+ 
+                    } else {
+                        echo "<section class='alert-error-msg'>Error updating record: " . mysqli_error($conn) . "</section>";
+                    }
+                } else {
+                    echo "<section class='alert-error-msg'>Only alphanumeric characters and underscores are valid</section>";
+                }
+            } else {
+                echo "<section class='alert-error-msg'>Please provide a valid email</section>";
+            }
+        } else {
+            echo "<section class='alert-error-msg'>Invalid phone number length. Please provide a 10-digit phone number</section>";
+        }
+    }
+    ?>
+
+
+
+
 </body>
 
 </html>

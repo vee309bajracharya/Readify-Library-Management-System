@@ -52,14 +52,16 @@ if (!isset($_SESSION['user'])) {
               </div>
 
               <ul class="nav navbar-nav navbar-right custom-ul">
+                <a href="./myProfile.php" style="text-decoration: none;">
                     <?php
                     // Display fullname and profile image if user is logged in
                     echo '<div class="custom-links d-flex align-items-center">';
-                    echo '<img class="img-circle profile_img" width="50" height="50" src="' . $_SESSION['pic'] . '" style="background-color: white; border-radius: 50%; overflow: hidden; margin-right: 10px; object-fit:cover;">';
+                    echo '<img class="img-circle profile_img" width="40" height="40" src="./images/' . $_SESSION['pic'] . '" style="background-color: white; border-radius: 50%; overflow: hidden; margin-right: 10px; object-fit:cover;">';
                     echo '<span class="user">' . $_SESSION['user']  . ' </span>';
 
                     echo '</div>';
                     ?>
+                   </a>
             </ul>
         </div>
     </nav>
