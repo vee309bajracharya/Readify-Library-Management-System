@@ -52,6 +52,7 @@ if (!isset($_SESSION['user'])) {
               </div>
 
               <ul class="nav navbar-nav navbar-right custom-ul">
+                <a href=""></a>
                 <a href="./myProfile.php" style="text-decoration: none;">
                     <?php
                     // Display fullname and profile image if user is logged in

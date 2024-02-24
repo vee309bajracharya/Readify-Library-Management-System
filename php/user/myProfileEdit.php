@@ -157,7 +157,7 @@ include "./userNavbar.php";
                 echo "<th scope='row'>Profile Image</th>";
                 echo "<td><input class='custom-input' type='file' name='file'></td>";
                 echo "</tr>";
-
+                
                 echo "</table>";
 
                 // Submit button
