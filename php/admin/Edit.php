@@ -39,7 +39,7 @@ if (isset($_GET['id'])) {
     $sql = "SELECT * FROM library_books WHERE books_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $books_id);
-    $stmt->execute();   
+    $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->num_rows === 0) {
@@ -75,6 +75,8 @@ if (isset($_GET['id'])) {
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@100;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- ===== Bootstrap link ======== -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    
+    
     <style>
         .book {
             width: 400px;
@@ -88,58 +90,71 @@ if (isset($_GET['id'])) {
         }
 
         .add-cancel {
-    display: flex;
-    margin: 0 auto;
-    align-items: center; 
-    justify-content: center; 
-    margin-top: 1.5rem;
-    height: 4rem;
-    width: 35rem;
-    color: white;
-    background-color: #5955e7;
-    border-radius: 0.5rem;
-    transition: 0.3s ease-in-out ;
-}
+            display: flex;
+            margin: 0 auto;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1.5rem;
+            height: 4rem;
+            width: 35rem;
+            color: white;
+            background-color: #5955e7;
+            border-radius: 0.5rem;
+            transition: 0.3s ease-in-out;
+        }
 
-.add-cancel:hover {
-    color: white;   
-    text-decoration: none;
-    cursor: pointer; 
-    background-color: var( --hover-color1);
-}
+        .add-cancel:hover {
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+            background-color: var(--hover-color1);
+        }
 
-.add_button {
-    display: block;
-    margin: 0 auto;
-    text-align: center;
-    height: 4rem;
-    width: 35rem;
-    color: white;
-    background-color: #5955e7;
-    border-radius: 0.5rem;
-    transition: 0.3s ease-in-out ;
-}
+        .add_button {
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+            height: 4rem;
+            width: 35rem;
+            color: white;
+            background-color: #5955e7;
+            border-radius: 0.5rem;
+            transition: 0.3s ease-in-out;
+        }
 
-.add_button:hover{
-    background-color: var( --hover-color1);
-}
-
-        
+        .add_button:hover {
+            background-color: var(--hover-color1);
+        }
     </style>
 </head>
 
 <body>
     <!-- ====== Sidebar ======== -->
+
     <div id="mySidenav" class="sidenav">
+    <div class="logo-container">
+            <a href="./adminDashboard.php">
+                <img src="../../svg/logo-1.svg" alt="Readify Logo">
+            </a>
+        </div>
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        
+        <div class="links">
         <a href="./adminDashboard.php"><i class='bx bxs-dashboard'></i> Dashboard</a>
+        <a href="./Approve.php"><i class='bx bxs-dashboard'></i> Manage Request</a>
         <a href="./Issued.php"><i class='bx bxs-book-add'></i> Issued Books</a>
-        <a href="./manageUser.php"><i class='bx bxs-folder-open'></i> Manage Books</a>
+        <a href=""><i class='bx bxs-folder-open'></i> Manage Books</a>
         <a href="#"><i class='bx bx-money-withdraw'></i> Fine Collected</a>
-        <a href="./manageUser.php"><i class='bx bxs-user-account'></i> Manage Users</a>
+        <a href="./manageUser.php"><i class='bx bxs-user-account' ></i> Manage Users</a>
         <a href="#"><i class='bx bxs-help-circle'></i> About Readify</a>
         <a href="./admin-LogOut.php"><i class="bx bx-log-out"></i> Log out</a>
-    </div>
+
+        </div>
+      </div>
+
+
+
+
     <div class="add_from" id="main">
         <h2 style="text-align:center"><i class='bx bxs-edit'></i> Edit Books</h2>
         <form class="book" action="./Edit.php" method="POST">
@@ -169,4 +184,5 @@ if (isset($_GET['id'])) {
         </script>
     </div>
 </body>
+
 </html>

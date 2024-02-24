@@ -71,23 +71,41 @@ include "./userNavbar.php";
 
 <body>
 
-    <!-- ====== Sidebar ======== -->
+    <!-- Sidebar -->
     <div id="mySidenav" class="sidenav">
+        <div class="logo-container">
+            <a href="./list_book_for_user.php">
+                <img src="../../svg/logo-1.svg" alt="">
+            </a>
+        </div>
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
-        <a href="./list_book_for_user.php"><i class='bx bxs-dashboard'></i> Dashboard</a>
-        <a href="#"><i class="ri-lock-password-fill"></i> Change Password</a>
-        <a href="./myProfile.php"><i class='bx bxs-user-circle'></i> My Profile</a>
-        <a href="#"><i class='bx bxs-book'></i> View Issued Books</a>
-        <a href="#"><i class='bx bxs-book'></i> View Archieve Books</a>
-        <a href="#"><i class='bx bxs-book'></i> Submit Book Request</a>
-        <a href="#"><i class='bx bxs-help-circle'></i> About Readify</a>
-        <a href="./logOut.php"><i class="bx bx-log-out"></i> Log out</a>
+
+        <!-- Profile preview -->
+        <div style="margin-top:1.4rem; margin-bottom: 2rem;" class="d-flex flex-column align-items-center text-center">
+            <?php
+            echo '<div class="custom-links">';
+            echo '<img class="img-circle profile_img" width="80" height="80" src="./images/' . $_SESSION['pic'] . '" style="background-color: white; border-radius: 50%; overflow: hidden; margin-right: 10px; object-fit:cover; margin-top:1.3rem;">';
+            echo "Welcome," . $_SESSION['user'];
+            echo '</div>';
+            ?>
+        </div>
+
+        <div class="links">
+            <a href="./list_book_for_user.php"><i class='bx bxs-dashboard'></i> Dashboard</a>
+            <a href="#"><i class="ri-lock-password-fill"></i> Change Password</a>
+            <a href="./myProfile.php"><i class='bx bxs-user-circle'></i> My Profile</a>
+            <a href="#"><i class='bx bxs-book'></i> View Issued Books</a>
+            <a href="#"><i class='bx bxs-book'></i> View Archieve Books</a>
+            <a href="#"><i class='bx bxs-book'></i> Submit Book Request</a>
+            <a href="#"><i class='bx bxs-help-circle'></i> About Readify</a>
+            <a href="./logOut.php"><i class="bx bx-log-out"></i> Log out</a>
+        </div>
 
     </div>
 
     <div id="main">
-
+        <!-- JavaScript for sidebar -->
         <script>
             function openNav() {
                 document.getElementById("mySidenav").style.width = "300px";
@@ -126,7 +144,7 @@ include "./userNavbar.php";
 
                 // Edit form
                 echo "<form action='./myProfileEdit.php' method='post' enctype='multipart/form-data'>";
-                echo "<table class='table table-bordered table-custom'>";
+                echo "<table class='table-custom'>";
                 echo "<tr>";
                 echo "<th scope='row'>Full Name</th>";
                 echo "<td><input class='custom-input' type='text' name='fullname' value='" . $row['fullname'] . "'></td>";
@@ -162,7 +180,7 @@ include "./userNavbar.php";
 
                 // Submit button
                 echo "<div class='text-center'>";
-                echo "<button type='submit' class='btn btn-primary' name='submit' style='width: 40%; padding: 10px 15px; margin-top: 10px;'>";
+                echo "<button type='submit' class='btn-search' name='submit' style='width: 40%; padding: 10px 15px; margin-top: 10px;'>";
                 echo "<i class='bx bx-edit'></i> Update Profile";
                 echo "</button>";
                 echo "</div>";
@@ -178,8 +196,7 @@ include "./userNavbar.php";
         </div>
 
 
-        <!-- === Bootstrap JavaScript Link==== -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        
     </div>
 
 
@@ -237,7 +254,7 @@ include "./userNavbar.php";
 
 
 
-
+<!-- === Bootstrap JavaScript Link==== -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </body>
-
 </html>
