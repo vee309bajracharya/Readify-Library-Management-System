@@ -77,7 +77,34 @@ if (isset($_POST['submit'])) {
             color: white;
             background-color: #5955e7;
             border-radius: 0.5rem;
+            transition: 0.3s ease-in-out ;
         }
+
+        .add_button:hover{
+            background-color: var( --hover-color1);
+        }
+
+        .add-cancel {
+    display: flex;
+    margin: 0 auto;
+    align-items: center; 
+    justify-content: center; 
+    margin-top: 1.5rem;
+    height: 4rem;
+    width: 35rem;
+    color: white;
+    background-color: #5955e7;
+    border-radius: 0.5rem;
+    transition: 0.3s ease-in-out ;
+}
+
+.add-cancel:hover {
+    color: white;   
+    text-decoration: none;
+    cursor: pointer; 
+    background-color: var( --hover-color1);
+}
+
 
     </style>
 
@@ -115,6 +142,8 @@ if (isset($_POST['submit'])) {
             <input type="text" name="department" id="department" class="form-control" placeholder="Department" required=""><br>
 
             <button class="add_button" type="submit" name="submit" value="submit">Submit</button>
+            <a class="add-cancel" style=" margin-top: 1.5rem;" href="./adminDashboard.php">Cancel</a>
+
         </form>
 
 

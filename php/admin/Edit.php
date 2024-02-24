@@ -39,7 +39,7 @@ if (isset($_GET['id'])) {
     $sql = "SELECT * FROM library_books WHERE books_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $books_id);
-    $stmt->execute();
+    $stmt->execute();   
     $result = $stmt->get_result();
 
     if ($result->num_rows === 0) {
@@ -87,16 +87,44 @@ if (isset($_GET['id'])) {
             height: 4rem;
         }
 
-        .add_button {
-            display: block;
-            margin: 0 auto;
-            text-align: center;
-            height: 4rem;
-            width: 35rem;
-            color: white;
-            background-color: #5955e7;
-            border-radius: 0.5rem;
-        }
+        .add-cancel {
+    display: flex;
+    margin: 0 auto;
+    align-items: center; 
+    justify-content: center; 
+    margin-top: 1.5rem;
+    height: 4rem;
+    width: 35rem;
+    color: white;
+    background-color: #5955e7;
+    border-radius: 0.5rem;
+    transition: 0.3s ease-in-out ;
+}
+
+.add-cancel:hover {
+    color: white;   
+    text-decoration: none;
+    cursor: pointer; 
+    background-color: var( --hover-color1);
+}
+
+.add_button {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    height: 4rem;
+    width: 35rem;
+    color: white;
+    background-color: #5955e7;
+    border-radius: 0.5rem;
+    transition: 0.3s ease-in-out ;
+}
+
+.add_button:hover{
+    background-color: var( --hover-color1);
+}
+
+        
     </style>
 </head>
 
@@ -124,7 +152,7 @@ if (isset($_GET['id'])) {
             <input type="text" name="quantity" id="quantity" class="form-control" placeholder="Quantity" value="<?php echo $quantity; ?>" required=""><br>
             <input type="text" name="department" id="department" class="form-control" placeholder="Department" value="<?php echo $department; ?>" required=""><br>
             <button class="add_button" type="submit" name="submit" value="submit">Save Changes</button>
-            <a class="add_button" href="./adminDashboard.php">Cancel</a>
+            <a class="add-cancel" style=" margin-top: 1.5rem;" href="./adminDashboard.php">Cancel</a>
         </form>
         <script>
             function openNav() {
