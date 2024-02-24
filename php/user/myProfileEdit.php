@@ -46,6 +46,25 @@ include "./userNavbar.php";
             border-radius: 5px;
             padding: 5px;
         }
+
+        .btn-search {
+            background-color: var(--primary-color);
+            border: 0;
+            outline: 0;
+            padding: 3rem 10rem;
+        }
+
+
+        .submit-success {
+            text-align: center;
+            font-weight: bold;
+            color: var(--success-msg-color);
+            font-size: 2rem;
+        }
+
+        .submit-error {
+            color: var(--alert-msg-color);
+        }
     </style>
 
 </head>
@@ -198,19 +217,20 @@ include "./userNavbar.php";
                     address='$address' WHERE username='" . $_SESSION['user'] . "'";
 
                     if (mysqli_query($conn, $sql1)) {
-                        echo "<section class='alert-success-msg'>Update Success!!</section>";
- 
+                        // Update the session variable with the new image filename
+                        $_SESSION['pic'] = $pic;
+                        echo "<section class='submit-success'>Update Success!!</section>";
                     } else {
-                        echo "<section class='alert-error-msg'>Error updating record: " . mysqli_error($conn) . "</section>";
+                        echo "<section class='submit-error submit-success'>Error updating record: " . mysqli_error($conn) . "</section>";
                     }
                 } else {
-                    echo "<section class='alert-error-msg'>Only alphanumeric characters and underscores are valid</section>";
+                    echo "<section class='submit-error submit-success'>Only alphanumeric characters and underscores are valid</section>";
                 }
             } else {
-                echo "<section class='alert-error-msg'>Please provide a valid email</section>";
+                echo "<section class='submit-error submit-success'>Please provide a valid email</section>";
             }
         } else {
-            echo "<section class='alert-error-msg'>Invalid phone number length. Please provide a 10-digit phone number</section>";
+            echo "<section class='submit-error submit-success'>Invalid phone number length. Please provide a 10-digit phone number</section>";
         }
     }
     ?>
