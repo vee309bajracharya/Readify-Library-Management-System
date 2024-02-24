@@ -1,45 +1,3 @@
-<<<<<<< HEAD
-<?php 
-    include "./adminNavbar.php"; //navbar along with sidenav
-
-    if (isset($_POST['submit'])) {
-      if (isset($_SESSION['admin'])) {  
-          $books_name = $_POST['books_name'];
-          $authors = $_POST['authors'];
-          $edition = $_POST['edition'];
-          $status = $_POST['status'];
-          $quantity = $_POST['quantity'];
-          $department = $_POST['department'];
-
-          require_once "../config.php"; //database connection file
-
-          $query = "INSERT INTO library_books(books_name, authors, edition, status, quantity, department)
-          VALUES($books_name, $authors, $edition, $status, $quantity, $department)";
-
-          $result = mysqli_query($conn,$query);
-
-          if($result){
-            echo "<section class='alert-success-msg register__admin'>Successfully Books Added</section>";
-          }else{
-            echo "<section class='alert-error-msg register__admin'>Error in  Books Added</section>";
-          }
-
-
-
-
-
-          // $stmt = $conn->prepare("INSERT INTO library_books (books_name, authors, edition, status, quantity, department) VALUES (?, ?, ?, ?, ?, ?)");
-          // $stmt->bind_param("ssssis", $books_name, $authors, $edition, $status, $quantity, $department);
-          
-          // if ($stmt->execute()) {
-          //     echo "<section class='alert-success-msg register__admin'>Successfully Books Added</section>";
-          // } else {
-          //     echo "<section class='alert-error-msg  register__admin'>Error Adding Book: " . $stmt->error . "</section>";
-          // }
-          
-          // $stmt->close();
-  }
-=======
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -69,7 +27,6 @@ if (isset($_POST['submit'])) {
 
         $stmt->close();
     }
->>>>>>> f711b5239949f2f1f245d95ffb4db465e8356834
 }
 ?>
 
