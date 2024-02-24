@@ -146,45 +146,46 @@ include "./userNavbar.php";
                 echo "<form action='./myProfileEdit.php' method='post' enctype='multipart/form-data'>";
                 echo "<table class='table-custom'>";
                 echo "<tr>";
-                echo "<th scope='row'>Full Name</th>";
+                echo "<th scope='row' class='custom-th'>Full Name</th>";
                 echo "<td><input class='custom-input' type='text' name='fullname' value='" . $row['fullname'] . "'></td>";
                 echo "</tr>";
 
                 echo "<tr>";
-                echo "<th scope='row'>Username</th>";
+                echo "<th scope='row' class='custom-th'>Username</th>";
                 echo "<td><input class='custom-input' type='text' name='username' value='" . $row['username'] . "'></td>";
                 echo "</tr>";
 
                 echo "<tr>";
-                echo "<th scope='row'>Email</th>";
+                echo "<th scope='row' class='custom-th'>Email</th>";
                 echo "<td><input class='custom-input' type='email' name='email' value='" . $row['email'] . "'></td>";
                 echo "</tr>";
 
                 echo "<tr>";
-                echo "<th scope='row'>Phone Number</th>";
+                echo "<th scope='row' class='custom-th'>Phone Number</th>";
                 echo "<td><input class='custom-input' type='tel' name='phone_number' value='" . $row['phone_number'] . "'></td>";
                 echo "</tr>";
 
                 echo "<tr>";
-                echo "<th scope='row'>Address</th>";
+                echo "<th scope='row' class='custom-th'>Address</th>";
                 echo "<td><input class='custom-input' type='text' name='address' value='" . $row['address'] . "'></td>";
                 echo "</tr>";
 
 
                 echo "<tr>";
-                echo "<th scope='row'>Profile Image</th>";
+                echo "<th scope='row' class='custom-th'>Profile Image</th>";
                 echo "<td><input class='custom-input' type='file' name='file'></td>";
                 echo "</tr>";
                 
                 echo "</table>";
 
-                // Submit button
-                echo "<div class='text-center'>";
+               
+
+                // Submit button for Update Profile
                 echo "<button type='submit' class='btn-search' name='submit' style='width: 40%; padding: 10px 15px; margin-top: 10px;'>";
                 echo "<i class='bx bx-edit'></i> Update Profile";
                 echo "</button>";
-                echo "</div>";
 
+                
                 echo "</form>";
 
                 echo "</div>";

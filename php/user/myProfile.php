@@ -126,32 +126,32 @@ include "./userNavbar.php";
 
                 echo "<table class='table table-bordered'>";
                 echo "<tr>";
-                echo "<th scope='row'>Full Name</th>";
+                echo "<th scope='row'  class='custom-th'>Full Name</th>";
                 echo "<td>" . $row['fullname'] . "</td>";
                 echo "</tr>";
 
                 echo "<tr>";
-                echo "<th scope='row'>Username</th>";
+                echo "<th scope='row'  class='custom-th'>Username</th>";
                 echo "<td>" . $row['username'] . "</td>";
                 echo "</tr>";
 
                 echo "<tr>";
-                echo "<th scope='row'>Email</th>";
+                echo "<th scope='row' class='custom-th'>Email</th>";
                 echo "<td>" . $row['email'] . "</td>";
                 echo "</tr>";
 
                 echo "<tr>";
-                echo "<th scope='row'>Phone Number</th>";
+                echo "<th scope='row' class='custom-th'>Phone Number</th>";
                 echo "<td>" . $row['phone_number'] . "</td>";
                 echo "</tr>";
 
                 echo "<tr>";
-                echo "<th scope='row'>Address</th>";
+                echo "<th scope='row' class='custom-th'>Address</th>";
                 echo "<td>" . $row['address'] . "</td>";
                 echo "</tr>";
 
                 echo "<tr>";
-                echo "<th scope='row'>Library Card Number</th>";
+                echo "<th scope='row' class='custom-th'>Library Card Number</th>";
                 echo "<td>" . $row['library_card_number'] . "</td>";
                 echo "</tr>";
 
@@ -160,7 +160,7 @@ include "./userNavbar.php";
                 // Edit button
                 echo "<div class='text-center'>";
                 echo "<form action='./myProfileEdit.php' method='post'>";
-                echo "<a href='./myProfileEdit.php' class='btn btn-primary' name='submit1' style='width: 30%; padding: 10px 15px; margin-top: 10px;'>";
+                echo "<a href='./myProfileEdit.php' class='btn btn-search' name='submit1' style='width: 30%; padding: 10px 15px; margin-top: 10px;'>";
                 echo "<i class='bx bx-edit'></i> Edit Profile";
                 echo "</a>";
                 echo "</form>";

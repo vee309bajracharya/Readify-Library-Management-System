@@ -203,8 +203,12 @@ body{
     border-radius: 10px;
   }
   table th{
+    background-color: var(--primary-color);
+    color: var(--white-color) !important;
+  }
+  .custom-th{
+    background-color: transparent;
     color: var(--dark-color) !important;
-
   }
 
   /* User Profile */
