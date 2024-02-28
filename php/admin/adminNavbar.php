@@ -54,7 +54,7 @@ if (!isset($_SESSION['admin'])) {
                 </div>
 
                 <ul class="nav navbar-nav navbar-right custom-ul navbar-flex">
-                    <a href="#"><i class='bx bx-bell'></i></a>
+                    <a href="./Approve.php"><i class='bx bx-bell'></i></a>
                     <!-- <i class='bx bxs-bell-ring' ></i> -->
                     <a href="#" style="text-decoration: none;">
                         <?php
