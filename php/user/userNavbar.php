@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 
 if (!isset($_SESSION['user'])) {
@@ -32,12 +32,13 @@ if (!isset($_SESSION['user'])) {
 
     <!-- ===== Bootstrap link ======== -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-   
+
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    
+
     <!-- ==== RemixIcon link ==== -->
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
+
 
 
 </head>
@@ -45,30 +46,35 @@ if (!isset($_SESSION['user'])) {
 <body>
 
     <!-- ====== navbar starts =========== -->
-    <nav class="navbar custom-navbar">
-        <div class="container-fluid custom-navbar">
-            <div class="navbar-header navbar-left">
-            <span onclick="openNav()" class="toggle-trigger">&#9776;</span>
-              </div>
+    <header style='position: sticky !important;top: 0;left: 0;right: 0;z-index: 1000'>
+        <nav class="navbar custom-navbar ">
+            <div class="container-fluid custom-navbar fixed-top">
+                <div class="navbar-header navbar-left">
+                    <span onclick="openNav()" class="toggle-trigger custom-toogle-left" style="color: var(--dark-color)" ;>&#9776;<span>
+                </div>
 
-              <ul class="nav navbar-nav navbar-right custom-ul">
-                <a href=""></a>
-                <a href="./myProfile.php" style="text-decoration: none;">
-                    <?php
-                    // Display fullname and profile image if user is logged in
-                    echo '<div class="custom-links d-flex align-items-center">';
-                    echo '<img class="img-circle profile_img" width="40" height="40" src="./images/' . $_SESSION['pic'] . '" style="background-color: white; border-radius: 50%; overflow: hidden; margin-right: 10px; object-fit:cover;">';
-                    echo '<span class="user">' . $_SESSION['user']  . ' </span>';
+                <ul class="nav navbar-nav navbar-right custom-ul navbar-flex">
+                    <a href="#"><i class='bx bx-bell'></i></a>
+                    <!-- <i class='bx bxs-bell-ring' ></i> -->
+                    <a href="./myProfile.php" style="text-decoration: none;">
+                        <?php
+                        // Display fullname and profile image if user is logged in
+                        echo '<div class="custom-links d-flex align-items-center">';
+                        echo '<img class="img-circle profile_img" width="40" height="40" src="./images/' . $_SESSION['pic'] . '" style="background-color: white; border-radius: 50%; overflow: hidden; margin-right: 10px; object-fit:cover;">';
+                        echo '<span class="user" style="color:#000;">' . $_SESSION['user']  . ' </span>';
 
-                    echo '</div>';
-                    ?>
-                   </a>
-            </ul>
-        </div>
-    </nav>
+                        echo '</div>';
+                        ?>
+                    </a>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
     <!-- ====== navbar ends =========== -->
     <!-- Bootstrap JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 </body>
+
 </html>

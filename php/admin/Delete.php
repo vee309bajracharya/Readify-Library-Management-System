@@ -15,7 +15,7 @@ if(isset($_GET["id"])){
 
     $stmt->close();
     $conn->close();
-    header("location:adminDashboard.php");
+    header("location: ./adminDashboard.php");
     exit;
 }
 ?>

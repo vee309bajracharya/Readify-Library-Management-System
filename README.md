@@ -41,3 +41,6 @@ For ADMIN:
 12. Send message to students regarding their books pending to submit until due date
 13. Charge fine (if necessary)
 14. Logout
+
+Preview Link :
+    https://vee309bajracharya.github.io/Readify-Library-Management-System/pages/index.html

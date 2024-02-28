@@ -46,26 +46,30 @@ if (!isset($_SESSION['admin'])) {
 <body>
 
     <!-- ====== navbar starts =========== -->
-    <nav class="navbar custom-navbar">
-        <div class="container-fluid custom-navbar">
-            <div class="navbar-header navbar-left">
-            <span onclick="openNav()" class="toggle-trigger">&#9776;</span>
-              </div>
+    <header style='position: sticky !important;top: 0;left: 0;right: 0;z-index: 1000'>
+        <nav class="navbar custom-navbar ">
+            <div class="container-fluid custom-navbar fixed-top">
+                <div class="navbar-header navbar-left">
+                    <span onclick="openNav()" class="toggle-trigger custom-toogle-left" style="color: var(--dark-color)" ;>&#9776;<span>
+                </div>
 
-              <ul class="nav navbar-nav navbar-right custom-ul">
-                    <?php
-                    // Display username and profile image if admin is logged in
-                    echo '<div class="custom-links d-flex align-items-center">';
-                    echo '<img class="img-circle profile_img" width="50" height="50" src="' . $_SESSION['pic'] . '" style="background-color: white; border-radius: 50%; overflow: hidden; margin-right: 10px;">';
-                    echo '<span class="admin">' . $_SESSION['admin']  . ' </span>';
+                <ul class="nav navbar-nav navbar-right custom-ul navbar-flex">
+                    <a href="#"><i class='bx bx-bell'></i></a>
+                    <!-- <i class='bx bxs-bell-ring' ></i> -->
+                    <a href="#" style="text-decoration: none;">
+                        <?php
+                        // Display fullname and profile image if user is logged in
+                        echo '<div class="custom-links d-flex align-items-center">';
+                        echo '<img class="img-circle profile_img" width="40" height="40" src="' . $_SESSION['pic'] . '" style="background-color: white; border-radius: 50%; overflow: hidden; margin-right: 10px; object-fit:cover;">';
+                        echo '<span class="admin" style="color:#000;">' . $_SESSION['admin']  . ' </span>';
 
-                    echo '</div>';
-                    ?>
-            </ul>
-
-
-        </div>  
-    </nav>
+                        echo '</div>';
+                        ?>
+                    </a>
+                </ul>
+            </div>
+        </nav>
+    </header>
     <!-- ====== navbar ends =========== -->
     <!-- Bootstrap JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>

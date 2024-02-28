@@ -46,29 +46,66 @@ include "./userNavbar.php";
             border-radius: 5px;
             padding: 5px;
         }
+
+        .btn-search {
+            background-color: var(--primary-color);
+            border: 0;
+            outline: 0;
+            padding: 3rem 10rem;
+        }
+
+
+        .submit-success {
+            text-align: center;
+            font-weight: bold;
+            color: var(--success-msg-color);
+            font-size: 2rem;
+        }
+
+        .submit-error {
+            color: var(--alert-msg-color);
+        }
     </style>
 
 </head>
 
 <body>
 
-    <!-- ====== Sidebar ======== -->
+    <!-- Sidebar -->
     <div id="mySidenav" class="sidenav">
+        <div class="logo-container">
+            <a href="./list_book_for_user.php">
+                <img src="../../svg/logo-1.svg" alt="">
+            </a>
+        </div>
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
-        <a href="./list_book_for_user.php"><i class='bx bxs-dashboard'></i> Dashboard</a>
-        <a href="#"><i class="ri-lock-password-fill"></i> Change Password</a>
-        <a href="./myProfile.php"><i class='bx bxs-user-circle'></i> My Profile</a>
-        <a href="#"><i class='bx bxs-book'></i> View Issued Books</a>
-        <a href="#"><i class='bx bxs-book'></i> View Archieve Books</a>
-        <a href="#"><i class='bx bxs-book'></i> Submit Book Request</a>
-        <a href="#"><i class='bx bxs-help-circle'></i> About Readify</a>
-        <a href="./logOut.php"><i class="bx bx-log-out"></i> Log out</a>
+
+        <!-- Profile preview -->
+        <div style="margin-top:1.4rem; margin-bottom: 2rem;" class="d-flex flex-column align-items-center text-center">
+            <?php
+            echo '<div class="custom-links">';
+            echo '<img class="img-circle profile_img" width="80" height="80" src="./images/' . $_SESSION['pic'] . '" style="background-color: white; border-radius: 50%; overflow: hidden; margin-right: 10px; object-fit:cover; margin-top:1.3rem;">';
+            echo "Welcome," . $_SESSION['user'];
+            echo '</div>';
+            ?>
+        </div>
+
+        <div class="links">
+            <a href="./list_book_for_user.php"><i class='bx bxs-dashboard'></i> Dashboard</a>
+            <a href="#"><i class="ri-lock-password-fill"></i> Change Password</a>
+            <a href="./myProfile.php"><i class='bx bxs-user-circle'></i> My Profile</a>
+            <a href="#"><i class='bx bxs-book'></i> View Issued Books</a>
+            <a href="#"><i class='bx bxs-book'></i> View Archieve Books</a>
+            <a href="#"><i class='bx bxs-book'></i> Submit Book Request</a>
+            <a href="#"><i class='bx bxs-help-circle'></i> About Readify</a>
+            <a href="./logOut.php"><i class="bx bx-log-out"></i> Log out</a>
+        </div>
 
     </div>
 
     <div id="main">
-
+        <!-- JavaScript for sidebar -->
         <script>
             function openNav() {
                 document.getElementById("mySidenav").style.width = "300px";
@@ -107,47 +144,48 @@ include "./userNavbar.php";
 
                 // Edit form
                 echo "<form action='./myProfileEdit.php' method='post' enctype='multipart/form-data'>";
-                echo "<table class='table table-bordered table-custom'>";
+                echo "<table class='table-custom'>";
                 echo "<tr>";
-                echo "<th scope='row'>Full Name</th>";
+                echo "<th scope='row' class='custom-th'>Full Name</th>";
                 echo "<td><input class='custom-input' type='text' name='fullname' value='" . $row['fullname'] . "'></td>";
                 echo "</tr>";
 
                 echo "<tr>";
-                echo "<th scope='row'>Username</th>";
+                echo "<th scope='row' class='custom-th'>Username</th>";
                 echo "<td><input class='custom-input' type='text' name='username' value='" . $row['username'] . "'></td>";
                 echo "</tr>";
 
                 echo "<tr>";
-                echo "<th scope='row'>Email</th>";
+                echo "<th scope='row' class='custom-th'>Email</th>";
                 echo "<td><input class='custom-input' type='email' name='email' value='" . $row['email'] . "'></td>";
                 echo "</tr>";
 
                 echo "<tr>";
-                echo "<th scope='row'>Phone Number</th>";
+                echo "<th scope='row' class='custom-th'>Phone Number</th>";
                 echo "<td><input class='custom-input' type='tel' name='phone_number' value='" . $row['phone_number'] . "'></td>";
                 echo "</tr>";
 
                 echo "<tr>";
-                echo "<th scope='row'>Address</th>";
+                echo "<th scope='row' class='custom-th'>Address</th>";
                 echo "<td><input class='custom-input' type='text' name='address' value='" . $row['address'] . "'></td>";
                 echo "</tr>";
 
 
                 echo "<tr>";
-                echo "<th scope='row'>Profile Image</th>";
+                echo "<th scope='row' class='custom-th'>Profile Image</th>";
                 echo "<td><input class='custom-input' type='file' name='file'></td>";
                 echo "</tr>";
                 
                 echo "</table>";
 
-                // Submit button
-                echo "<div class='text-center'>";
-                echo "<button type='submit' class='btn btn-primary' name='submit' style='width: 40%; padding: 10px 15px; margin-top: 10px;'>";
+               
+
+                // Submit button for Update Profile
+                echo "<button type='submit' class='btn-search' name='submit' style='width: 40%; padding: 10px 15px; margin-top: 10px;'>";
                 echo "<i class='bx bx-edit'></i> Update Profile";
                 echo "</button>";
-                echo "</div>";
 
+                
                 echo "</form>";
 
                 echo "</div>";
@@ -159,8 +197,7 @@ include "./userNavbar.php";
         </div>
 
 
-        <!-- === Bootstrap JavaScript Link==== -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        
     </div>
 
 
@@ -198,26 +235,27 @@ include "./userNavbar.php";
                     address='$address' WHERE username='" . $_SESSION['user'] . "'";
 
                     if (mysqli_query($conn, $sql1)) {
-                        echo "<section class='alert-success-msg'>Update Success!!</section>";
- 
+                        // Update the session variable with the new image filename
+                        $_SESSION['pic'] = $pic;
+                        echo "<section class='submit-success'>Update Success!!</section>";
                     } else {
-                        echo "<section class='alert-error-msg'>Error updating record: " . mysqli_error($conn) . "</section>";
+                        echo "<section class='submit-error submit-success'>Error updating record: " . mysqli_error($conn) . "</section>";
                     }
                 } else {
-                    echo "<section class='alert-error-msg'>Only alphanumeric characters and underscores are valid</section>";
+                    echo "<section class='submit-error submit-success'>Only alphanumeric characters and underscores are valid</section>";
                 }
             } else {
-                echo "<section class='alert-error-msg'>Please provide a valid email</section>";
+                echo "<section class='submit-error submit-success'>Please provide a valid email</section>";
             }
         } else {
-            echo "<section class='alert-error-msg'>Invalid phone number length. Please provide a 10-digit phone number</section>";
+            echo "<section class='submit-error submit-success'>Invalid phone number length. Please provide a 10-digit phone number</section>";
         }
     }
     ?>
 
 
 
-
+<!-- === Bootstrap JavaScript Link==== -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </body>
-
 </html>
