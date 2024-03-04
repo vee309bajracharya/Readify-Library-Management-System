@@ -75,7 +75,7 @@ if (!isset($_SESSION['user'])) {
             <a href="#"><i class='bx bxs-book'></i> View Issued Books</a>
             <a href="#"><i class='bx bxs-book'></i> View Archieve Books</a>
             <a href="#"><i class='bx bxs-book'></i> Submit Book Request</a>
-            <a href="#"><i class='bx bxs-help-circle'></i> About Readify</a>
+            <a href="./about_readify.php"><i class='bx bxs-help-circle'></i> About Readify</a>
             <a href="./logOut.php"><i class="bx bx-log-out"></i> Log out</a>
         </div>
 
