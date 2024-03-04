@@ -210,7 +210,12 @@ section{
 }
 .bx{
   font-size: 2rem;
-  margin-right: 1.3rem;
+  /* margin-right: 1.3rem; */
+}
+
+.custom__box{
+  padding: 3rem;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
 
@@ -531,8 +536,8 @@ section{
     margin-top: 1.9rem;
     font-weight: 400;
     font-size: 1.2rem;
-    text-align: center;
-  }
+    text-align: left;
+  } 
   .links a{
     font-weight: 500;
     color: var(--bg-dark-purple);

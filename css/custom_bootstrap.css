@@ -28,11 +28,6 @@ section{
     max-width: 1200px;
 }
 
-body{
-    transition: background-color .5s;
-    background-color: #eee;
-}
-
 ::-webkit-scrollbar{
   width: 0.5rem;
   height: .5rem;
@@ -242,6 +237,7 @@ body{
   .table-custom{
     margin: 1.4rem 0;
   }
+
 
 
 
