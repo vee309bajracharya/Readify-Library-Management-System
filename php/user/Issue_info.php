@@ -2,7 +2,15 @@
 include "./userNavbar.php"; // Include navbar along with sidenav
 require_once "../config.php"; // Include database connection file
 
- ?>
+$searchBarQuery = null; // Set a default value for $searchBarQuery
+
+if (isset($_SESSION['user'])) {
+    $searchBarQuery = mysqli_query($conn, "SELECT books_id, approve, issue, `return` FROM issue_book WHERE username='$_SESSION[user]'");
+} else {
+    echo "No user specified.";
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,8 +18,7 @@ require_once "../config.php"; // Include database connection file
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library Books</title>
-
+    <title>Issued Books</title>
     <!-- Title icon -->
     <link rel="icon" href="../../icons/title_icon.png" type="image/x-icon">
 
@@ -29,13 +36,14 @@ require_once "../config.php"; // Include database connection file
     <!-- ===== Bootstrap link ======== -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <style>
-        .requestBar__wrapper{
+        .requestBar__wrapper {
             margin-bottom: 10px;
         }
     </style>
 </head>
 
 <body>
+    
     <!-- Sidebar -->
     <div id="mySidenav" class="sidenav">
         <div class="logo-container">
@@ -60,9 +68,9 @@ require_once "../config.php"; // Include database connection file
             <a href="./list_book_for_user.php"><i class='bx bxs-dashboard'></i> Dashboard</a>
             <a href="#"><i class="ri-lock-password-fill"></i> Change Password</a>
             <a href="./myProfile.php"><i class='bx bxs-user-circle'></i> My Profile</a>
-            <a href="./Issue_info"><i class='bx bxs-book'></i> View Issued Books</a>
+            <a href="#"><i class='bx bxs-book'></i> View Issued Books</a>
             <a href="#"><i class='bx bxs-book'></i> View Archieve Books</a>
-            <a href="./Request.php"><i class='bx bxs-book'></i> Book Request</a>
+            <a href="./Request.php"><i class='bx bxs-book'></i>Book Request</a>
             <a href="#"><i class='bx bxs-help-circle'></i> About Readify</a>
             <a href="./logOut.php"><i class="bx bx-log-out"></i> Log out</a>
         </div>
@@ -84,79 +92,56 @@ require_once "../config.php"; // Include database connection file
                 document.body.style.backgroundColor = "white";
             }
         </script>
-
-        <!-- Search bar for books -->
-        <div class="searchBar__wrapper">
-    
-
-            <form action="" class="navbar-form-c" method="POST" name="form-1">
-                <div class="searchBar_field">
-                    <input class="form-control-search" type="text" name="search" placeholder="Type Book Name" style="width:100%" required>
-                    <button type="submit" name="submit" class="btn-search">Search Book</button>
-                </div>
-            </form>
-        </div>
-
         
-
-        <!-- PHP code to display books -->
         <?php
-        // Fetch book data from the database
-        if (isset($_POST['submit'])) {
-            $search = mysqli_real_escape_string($conn, $_POST['search']);
-            $searchBarQuery = mysqli_query($conn, "SELECT * FROM library_books WHERE books_name LIKE '%$search%'");
-        } else {
-            $searchBarQuery = mysqli_query($conn, "SELECT * FROM `library_books` ORDER BY `library_books`.`books_name` ASC;");
-        }
-        
-
-        if (mysqli_num_rows($searchBarQuery) == 0) {
-            echo "<section>Book not Found</section>";
-        } else {
-            echo "<div>";
-            echo "<table class='table table-bordered table-hover'>";
-            echo "<tr>";
-            //Table header
-            echo "<th>";
-            echo "Books ID";
-            echo "</th>";
-            echo "<th>";
-            echo "Books Name";
-            echo "</th>";
-            echo "<th>";
-            echo "Edition";
-            echo "</th>";
-            echo "<th>";
-            echo "Authors";
-            echo "</th>";
-            echo "<th>";
-            echo "Status";
-            echo "</th>";
-            echo "<th>";
-            echo "Quantity";
-            echo "</th>";
-            echo "<th>";
-            echo "Department";
-            echo "</th>";
-            echo "</tr>";
-
-            while ($row = mysqli_fetch_assoc($searchBarQuery)) {
+        if ($searchBarQuery) {
+            if (mysqli_num_rows($searchBarQuery) == 0) {
+                echo "There is no pending request";
+            } else {
+                echo "<div>";
+                echo "<table class='table table-bordered table-hover'>";
                 echo "<tr>";
-                //fetch data from library_books table
-                echo "<td>" . $row['books_id'] . "</td>";
-                echo "<td>" . $row['books_name'] . "</td>";
-                echo "<td>" . $row['edition'] . "</td>";
-                echo "<td>" . $row['authors'] . "</td>";
-                echo "<td>" . $row['status'] . "</td>";
-                echo "<td>" . $row['quantity'] . "</td>";
-                echo "<td>" . $row['department'] . "</td>";
+                //Table header
+
+                echo "<th>";
+                echo "Book ID";
+                echo "</th>";
+                echo "<th>";
+                echo "Approve Status";
+                echo "</th>";
+                echo "<th>";
+                echo "Request Date";
+                echo "</th>";
+                echo "<th>";
+                echo "Issued Date";
+                echo "</th>";
+                echo "<th>";
+                echo "Return Date";
+                echo "</th>";
+
+
                 echo "</tr>";
+                while ($row = mysqli_fetch_assoc($searchBarQuery)) {
+                    echo "<tr>";
+                    //fetch data from issue_book table
+                    echo "<td>" . $row['books_id'] . "</td>";
+                    echo "<td>" . $row['approve'] . "</td>";
+                    echo "<td>" . $row['issue'] . "</td>";
+                    echo "<td>" . $row['return'] . "</td>";
+
+                    echo "<td>";
+
+                    echo "</tr>";
+                }
+                echo "</table>";
             }
-            echo "</table>";
-            echo "</div>";
+        } else {
+            echo "<br><br><br>";
+            echo "<h2> Please log in first <h2>";
         }
         ?>
-
     </div>
+
 </body>
+
 </html>
