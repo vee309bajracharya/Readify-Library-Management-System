@@ -9,7 +9,7 @@ if (!isset($_SESSION['admin'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">                 
 
 <head>
     <meta charset="UTF-8" />
@@ -44,7 +44,7 @@ if (!isset($_SESSION['admin'])) {
 </head>
 
 <body>
-
+HELLO THERE
     <!-- ====== navbar starts =========== -->
     <header style='position: sticky !important;top: 0;left: 0;right: 0;z-index: 1000'>
         <nav class="navbar custom-navbar ">
@@ -54,7 +54,7 @@ if (!isset($_SESSION['admin'])) {
                 </div>
 
                 <ul class="nav navbar-nav navbar-right custom-ul navbar-flex">
-                    <a href="#"><i class='bx bx-bell'></i></a>
+                    <a href="./Approve.php"><i class='bx bx-bell'></i></a>
                     <!-- <i class='bx bxs-bell-ring' ></i> -->
                     <a href="#" style="text-decoration: none;">
                         <?php

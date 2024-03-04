@@ -1,41 +1,43 @@
 <?php
-include "./userNavbar.php"; //navbar along with sidenav
-require_once "../config.php"; //database connection file
+include "./userNavbar.php"; // Include navbar along with sidenav
+require_once "../config.php"; // Include database connection file
 
-if (isset($_POST['submit_req'])) {
-    $books_id = $_POST["books_id"];
-    $books_name = $_POST["books_name"];
-    $authors = $_POST['authors'];
-    $edition = $_POST['edition'];
-    $status = $_POST['status'];
-    $quantity = $_POST['quantity'];
-    $department = $_POST['department'];
+// if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_req'])) {
+//     $books_id = $_POST["books_id"];
+//     $books_name = $_POST["books_name"];
+//     $authors = $_POST['authors'];
+//     $edition = $_POST['edition'];
+//     $status = $_POST['status'];
+//     $quantity = $_POST['quantity'];
+//     $department = $_POST['department'];
 
-    // Check if the book exists and quantity is less than 40
-    $checkbook_query = "SELECT * FROM library_books WHERE books_name = '$books_name' AND quantity < 40";
-    $checkbook_result = mysqli_query($conn, $checkbook_query);
+//     // Check if the book exists and quantity is less than 40
+//     $checkbook_query = "SELECT * FROM library_books WHERE books_id = '$books_id' AND quantity < 40";
+//     $checkbook_result = mysqli_query($conn, $checkbook_query);
 
-    if (mysqli_num_rows($checkbook_result) > 0) {
-        // Check if the book has already been requested by the user
-        $check_request_query = "SELECT * FROM pending_req WHERE books_id = '$books_id' AND status = 'Pending'";
-        $check_request_result = mysqli_query($conn, $check_request_query);
+//     if (mysqli_num_rows($checkbook_result) > 0) {
+//         // Check if the book has already been requested by the user
+//         $check_request_query = "SELECT * FROM pending_req WHERE books_id = '$books_id' AND status = 'Pending'";
+//         $check_request_result = mysqli_query($conn, $check_request_query);
 
-        if (mysqli_num_rows($check_request_result) > 0) {
-            echo "Book request is already pending!";
-        } else {
-            // Book exists and quantity is less than 40, insert into pending_req table
-            $insert_query = "INSERT INTO pending_req (books_id, books_name, authors, edition, status, quantity, department) VALUES ('$books_id', '$books_name', '$authors', '$edition', '$status', '$quantity', '$department')";
-            if (mysqli_query($conn, $insert_query)) {
-                echo "Book request sent successfully!";
-            } else {
-                echo "Error: " . mysqli_error($conn);
-            }
-        }
-    } else {
-        echo "Book doesn't exist or quantity is not less than 40";
-    }
-}
-?>
+//         if (mysqli_num_rows($check_request_result) > 0) {
+//             echo "Book request is already pending!";
+//         } else {
+//             // Book exists and quantity is less than 40, insert into pending_req table
+//             $insert_query = "INSERT INTO pending_req (books_id, books_name, authors, edition, status, quantity, department) VALUES ('$books_id', '$books_name', '$authors', '$edition', '$status', '$quantity', '$department')";
+//             if (mysqli_query($conn, $insert_query)) {
+//                 // Redirect to prevent resubmission
+//                 header("Location: ".$_SERVER['PHP_SELF']);
+//                 exit();
+//             } else {
+//                 echo "Error: " . mysqli_error($conn);
+//             }
+//         }
+//     } else {
+//         echo "Book doesn't exist or quantity is not less than 40";
+//     }
+// }
+// ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -61,6 +63,11 @@ if (isset($_POST['submit_req'])) {
 
     <!-- ===== Bootstrap link ======== -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+        .requestBar__wrapper{
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -117,13 +124,24 @@ if (isset($_POST['submit_req'])) {
         <div class="searchBar__wrapper">
             <h2> Request Book </h2>
 
+            <div class="requestBar__wrapper">
             <form action="" class="navbar-form-c" method="POST" name="form-1">
                 <div class="searchBar_field">
-                    <input class="form-control-search" type="text" name="search" placeholder="Type Book Name" style="width:100%" required>
-                    <button type="submit" name="submit" class="btn-search">Search</button>
+                    <input class="form-control-search" type="text" name="books_id" placeholder="Enter book id" style="width:100%" required>
+                    <button type="submit" name="request" class="btn-search">Request book</button>
                 </div>
             </form>
         </div>
+
+            <form action="" class="navbar-form-c" method="POST" name="form-1">
+                <div class="searchBar_field">
+                    <input class="form-control-search" type="text" name="search" placeholder="Type Book Name" style="width:100%" required>
+                    <button type="submit" name="submit" class="btn-search">Search Book</button>
+                </div>
+            </form>
+        </div>
+
+        
 
         <!-- PHP code to display books and handle book request submission -->
         <?php
@@ -134,6 +152,7 @@ if (isset($_POST['submit_req'])) {
         } else {
             $searchBarQuery = mysqli_query($conn, "SELECT * FROM `library_books` ORDER BY `library_books`.`books_name` ASC;");
         }
+        
 
         if (mysqli_num_rows($searchBarQuery) == 0) {
             echo "<section>Book not Found</section>";
@@ -163,30 +182,28 @@ if (isset($_POST['submit_req'])) {
             echo "<th>";
             echo "Department";
             echo "</th>";
-            echo "<th>";
-            echo "Action";
-            echo "</th>";
+            // echo "<th>";
+            // echo "Action";
+            // echo "</th>";
             echo "</tr>";
 
             while ($row = mysqli_fetch_assoc($searchBarQuery)) {
-                echo "<tr>";
-                //fetch data from library_books table
-                echo "<td>" . $row['books_id'] . "</td>";
-                echo "<td>" . $row['books_name'] . "</td>";
-                echo "<td>" . $row['edition'] . "</td>";
-                echo "<td>" . $row['authors'] . "</td>";
-                echo "<td>" . $row['status'] . "</td>";
-                echo "<td>" . $row['quantity'] . "</td>";
-                echo "<td>" . $row['department'] . "</td>";
-                echo "<td>";
-
                 // Check if the book has already been requested by the user
                 $check_request_query = "SELECT * FROM pending_req WHERE books_id = '{$row['books_id']}' AND status = 'Pending'";
                 $check_request_result = mysqli_query($conn, $check_request_query);
 
-                if (mysqli_num_rows($check_request_result) > 0) {
-                    echo "Request Pending";
-                } else {
+                // If the book hasn't been requested, display it
+                if (mysqli_num_rows($check_request_result) == 0) {
+                    echo "<tr>";
+                    //fetch data from library_books table
+                    echo "<td>" . $row['books_id'] . "</td>";
+                    echo "<td>" . $row['books_name'] . "</td>";
+                    echo "<td>" . $row['edition'] . "</td>";
+                    echo "<td>" . $row['authors'] . "</td>";
+                    echo "<td>" . $row['status'] . "</td>";
+                    echo "<td>" . $row['quantity'] . "</td>";
+                    echo "<td>" . $row['department'] . "</td>";
+                    echo "<td>";
                     // Book request form for each book
                     echo "<form action='' method='POST'>";
                     echo "<input type='hidden' name='books_id' value='" . $row['books_id'] . "'>";
@@ -196,18 +213,30 @@ if (isset($_POST['submit_req'])) {
                     echo "<input type='hidden' name='status' value='" . $row['status'] . "'>";
                     echo "<input type='hidden' name='quantity' value='" . $row['quantity'] . "'>";
                     echo "<input type='hidden' name='department' value='" . $row['department'] . "'>";
-                    echo "<button type='submit' name='submit_req' class='btn btn-success'>Request</button>";
+                    // echo "<button type='submit' name='submit_req' class='btn btn-success' >Request</button>";
                     echo "</form>";
+                    echo "</td>";
+                    echo "</tr>";
                 }
-                echo "</td>";
-                echo "</tr>";
             }
             echo "</table>";
             echo "</div>";
+        }
+        if(isset($_POST['request']))
+        {
+           if(isset($_SESSION['user'])) {
+            
+                mysqli_query($db,"INSERT INTO issued_book Values('$_SESSION[user]','$_POST[books_id]','','','');");
+           }else{
+            ?>
+            <script type="text/javascript"> alert("Your must login first to Request a book"); </script>
+            <?php 
+            
+            
+           }
         }
         ?>
 
     </div>
 </body>
-
 </html>
