@@ -1,8 +1,14 @@
 <?php
-include "./adminNavbar.php"; //navbar along with sidenav
+include "./userNavbar.php"; // Include navbar along with sidenav
 require_once "../config.php"; // Include database connection file
 
 $searchBarQuery = null; // Set a default value for $searchBarQuery
+
+if (isset($_SESSION['user'])) {
+    $searchBarQuery = mysqli_query($conn, "SELECT books_id, approve, issue, `return` FROM issue_book WHERE username='$_SESSION[user]'");
+} else {
+    echo "No user specified.";
+}
 
 ?>
 
@@ -37,8 +43,9 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
 </head>
 
 <body>
- <!-- Sidebar -->
- <div id="mySidenav" class="sidenav">
+    
+    <!-- Sidebar -->
+    <div id="mySidenav" class="sidenav">
         <div class="logo-container">
             <a href="./list_book_for_user.php">
                 <img src="../../svg/logo-1.svg" alt="Readify Logo">
@@ -61,8 +68,8 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
             <a href="./list_book_for_user.php"><i class='bx bxs-dashboard'></i> Dashboard</a>
             <a href="#"><i class="ri-lock-password-fill"></i> Change Password</a>
             <a href="./myProfile.php"><i class='bx bxs-user-circle'></i> My Profile</a>
-            <a href="./issue_info.php"><i class='bx bxs-book'></i> View Issued Books</a>
-            <a href="#"><i class='bx bxs-book'></i> View Archive Books</a>
+            <a href="#"><i class='bx bxs-book'></i> View Issued Books</a>
+            <a href="#"><i class='bx bxs-book'></i> View Archieve Books</a>
             <a href="./Request.php"><i class='bx bxs-book'></i>Book Request</a>
             <a href="#"><i class='bx bxs-help-circle'></i> About Readify</a>
             <a href="./logOut.php"><i class="bx bx-log-out"></i> Log out</a>
@@ -85,3 +92,56 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
                 document.body.style.backgroundColor = "white";
             }
         </script>
+        
+        <?php
+        if ($searchBarQuery) {
+            if (mysqli_num_rows($searchBarQuery) == 0) {
+                echo "There is no pending request";
+            } else {
+                echo "<div>";
+                echo "<table class='table table-bordered table-hover'>";
+                echo "<tr>";
+                //Table header
+
+                echo "<th>";
+                echo "Book ID";
+                echo "</th>";
+                echo "<th>";
+                echo "Approve Status";
+                echo "</th>";
+                echo "<th>";
+                echo "Request Date";
+                echo "</th>";
+                echo "<th>";
+                echo "Issued Date";
+                echo "</th>";
+                echo "<th>";
+                echo "Return Date";
+                echo "</th>";
+
+
+                echo "</tr>";
+                while ($row = mysqli_fetch_assoc($searchBarQuery)) {
+                    echo "<tr>";
+                    //fetch data from issue_book table
+                    echo "<td>" . $row['books_id'] . "</td>";
+                    echo "<td>" . $row['approve'] . "</td>";
+                    echo "<td>" . $row['issue'] . "</td>";
+                    echo "<td>" . $row['return'] . "</td>";
+
+                    echo "<td>";
+
+                    echo "</tr>";
+                }
+                echo "</table>";
+            }
+        } else {
+            echo "<br><br><br>";
+            echo "<h2> Please log in first <h2>";
+        }
+        ?>
+    </div>
+
+</body>
+
+</html>

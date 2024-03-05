@@ -44,7 +44,6 @@ if (!isset($_SESSION['admin'])) {
 </head>
 
 <body>
-HELLO THERE
     <!-- ====== navbar starts =========== -->
     <header style='position: sticky !important;top: 0;left: 0;right: 0;z-index: 1000'>
         <nav class="navbar custom-navbar ">
