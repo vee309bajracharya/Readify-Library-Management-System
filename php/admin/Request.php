@@ -65,7 +65,7 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
             <a href="#"><i class='bx bxs-book'></i> View Archive Books</a>
             <a href="./Request.php"><i class='bx bxs-book'></i>Book Request</a>
             <a href="#"><i class='bx bxs-help-circle'></i> About Readify</a>
-            <a href="./logOut.php"><i class="bx bx-log-out"></i> Log out</a>
+            <a href="./admin-LogOut.php"><i class="bx bx-log-out"></i> Log out</a>
         </div>
 
     </div>
