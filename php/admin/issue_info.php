@@ -33,6 +33,13 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
         .requestBar__wrapper {
             margin-bottom: 10px;
         }
+
+        .scroll{
+            width: 100%;
+            height: 500px;
+            overflow: auto;
+
+        }
     </style>
 </head>
 
@@ -80,7 +87,83 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
             <div class="container">
             <h2>Information of Borrowed Books</h2>
             <?php
+    if (isset($_SESSION["admin"])) {
+        $sql ="SELECT 
+        library_users.username, 
+        user_id, 
+        issue_book.books_id, 
+        library_books.books_name, 
+        library_books.authors, 
+        library_books.edition,
+        issue_book.issue,
+        issue_book.return                
+    FROM 
+        library_users 
+    INNER JOIN 
+        issue_book ON library_users.username = issue_book.username 
+    INNER JOIN 
+        library_books ON issue_book.books_id = library_books.books_id 
+    WHERE 
+        issue_book.approve = 'Yes' 
+    ORDER BY 
+        issue_book.return ASC;
+    ";
+   $res = mysqli_query($conn, $sql);
+   echo "<div>";
+   echo"<div class='scroll'>";
+   echo "<table class='table table-bordered table-hover'>";
+  
+   echo "<tr>";
+   //Table header
 
+   echo "<th>";
+   echo "Student Username";
+   echo "</th>";
+   echo "<th>";
+   echo "User ID";
+   echo "</th>";
+   echo "<th>";
+   echo "Book ID";
+   echo "</th>";
+   echo "<th>";
+   echo "Books Name";
+   echo "</th>";
+   echo "<th>";
+   echo "Authors";
+   echo "</th>";
+   echo "<th>";
+   echo "Edition";
+   echo "</th>";
+   echo "<th>";
+   echo "Issued Date";
+   echo "</th>";
+   echo "<th>";
+   echo "Return Date";
+   echo "</th>";
+
+   echo "</tr>";
+   while ($row = mysqli_fetch_assoc($res)) {
+       echo "<tr>";
+       //fetch data from issue_book table
+       echo "<td>" . $row['username'] . "</td>";
+       echo "<td>" . $row["user_id"] . "</td>";
+       echo "<td>" . $row['books_id'] . "</td>";
+       echo "<td>" . $row['books_name'] . "</td>";
+       echo "<td>" . $row['authors'] . "</td>";
+       echo "<td>" . $row['edition'] . "</td>";
+       echo "<td>" . $row['issue'] . "</td>";
+       echo "<td>" . $row['return'] . "</td>";
+
+       echo "</tr>";
+   }
+  
+   echo "</table>";
+   echo"</div>";
+
+    }else{
+      ?>  <h3> Please login first </h3>
+        <?php
+    }
             ?>
             </div>
         <body>
