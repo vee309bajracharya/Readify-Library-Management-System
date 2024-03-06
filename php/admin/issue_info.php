@@ -40,6 +40,10 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
             overflow: auto;
 
         }
+
+        th,td{
+            width: 10%;
+        }
     </style>
 </head>
 
@@ -87,6 +91,7 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
             <div class="container">
             <h2>Information of Borrowed Books</h2>
             <?php
+            $c=0;
     if (isset($_SESSION["admin"])) {
         $sql ="SELECT 
         library_users.username, 
@@ -110,11 +115,11 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
     ";
    $res = mysqli_query($conn, $sql);
    echo "<div>";
-   echo"<div class='scroll'>";
-   echo "<table class='table table-bordered table-hover'>";
+
+   echo "<table class='table table-bordered table-hover' style='width:100%;'> ";
   
    echo "<tr>";
-   //Table header
+   //Table header   
 
    echo "<th>";
    echo "Student Username";
@@ -142,7 +147,18 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
    echo "</th>";
 
    echo "</tr>";
+   echo "</table>";
+
+   echo"<div class='scroll'>";
+   echo "<table class='table table-bordered table-hover'>";
    while ($row = mysqli_fetch_assoc($res)) {
+    $d = date("Y-m-d");
+
+    if($d>$row['return']){
+        $c=$c+1;
+        mysqli_query($conn, "UPDATE issue_book SET approve='Expired' WHERE `return`='{$row['return']}' AND approve ='Yes' limit $c;");
+    }
+    echo $d."</br>";
        echo "<tr>";
        //fetch data from issue_book table
        echo "<td>" . $row['username'] . "</td>";
@@ -157,7 +173,7 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
        echo "</tr>";
    }
   
-   echo "</table>";
+   
    echo"</div>";
 
     }else{
