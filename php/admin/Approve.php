@@ -1,5 +1,5 @@
 <?php
-include "./adminNavbar.php"; //navbar along with sidenav
+include "./adminNavbar.php"; // Include navbar along with sidenav
 require_once "../config.php"; // Include database connection file
 
 $searchBarQuery = null; // Set a default value for $searchBarQuery
@@ -12,7 +12,7 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Issued Books</title>
+    <title>Approve Request</title>
     <!-- Title icon -->
     <link rel="icon" href="../../icons/title_icon.png" type="image/x-icon">
 
@@ -33,12 +33,35 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
         .requestBar__wrapper {
             margin-bottom: 10px;
         }
+
+        .form-control {
+            margin: 0 auto;
+            width: 35rem;
+            height: 4rem;
+        }
+
+        .approve_button {
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+            height: 4rem;
+            width: 35rem;
+            color: white;
+            background-color: #5955e7;
+            border-radius: 0.5rem;
+            transition: 0.3s ease-in-out;
+        }
+
+        .approve_button:hover {
+            background-color: var(--hover-color1);
+        }
     </style>
 </head>
 
 <body>
- <!-- Sidebar -->
- <div id="mySidenav" class="sidenav">
+    <!-- Sidebar -->
+    <div id="mySidenav" class="sidenav">
+        <!-- Sidebar content -->
         <div class="logo-container">
             <a href="./list_book_for_user.php">
                 <img src="../../svg/logo-1.svg" alt="Readify Logo">
@@ -46,28 +69,15 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
         </div>
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
-
-        <!-- Profile preview -->
-        <div style="margin-top:1.4rem; margin-bottom: 2rem;" class="d-flex flex-column align-items-center text-center">
-            <?php
-            echo '<div class="custom-links">';
-            echo '<img class="img-circle profile_img" width="80" height="80" src="./images/' . $_SESSION['pic'] . '" style="background-color: white; border-radius: 50%; overflow: hidden; margin-right: 10px; object-fit:cover; margin-top:1.3rem;">';
-            echo "Welcome," . $_SESSION['user'];
-            echo '</div>';
-            ?>
-        </div>
-
         <div class="links">
-            <a href="./list_book_for_user.php"><i class='bx bxs-dashboard'></i> Dashboard</a>
-            <a href="#"><i class="ri-lock-password-fill"></i> Change Password</a>
-            <a href="./myProfile.php"><i class='bx bxs-user-circle'></i> My Profile</a>
-            <a href="./issue_info.php"><i class='bx bxs-book'></i> View Issued Books</a>
-            <a href="#"><i class='bx bxs-book'></i> View Archive Books</a>
-            <a href="./Request.php"><i class='bx bxs-book'></i>Book Request</a>
-            <a href="#"><i class='bx bxs-help-circle'></i> About Readify</a>
-            <a href="./logOut.php"><i class="bx bx-log-out"></i> Log out</a>
+            <a href="./adminDashboard.php"><i class='bx bxs-dashboard'></i> Dashboard</a>
+            <a href="./Request.php"><i class='bx bxs-dashboard'></i> Manage Request</a>
+            <a href="./Issued.php"><i class='bx bxs-book-add'></i> Add Books</a>
+            <a href="./Managebooks.php"><i class='bx bxs-folder-open'></i> Manage Books</a>
+            <a href="#"><i class='bx bx-money-withdraw'></i> Fine Collected</a>
+            <a href="./manageUser.php"><i class='bx bxs-user-account'></i> Manage Users</a>
+            <a href="./admin-LogOut.php"><i class="bx bx-log-out"></i> Log out</a>
         </div>
-
     </div>
 
     <div id="main">
@@ -85,3 +95,55 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
                 document.body.style.backgroundColor = "white";
             }
         </script>
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 30px;">Approve Request</h2>
+            <form class="Approve" action="" method="post">
+                <input class="form-control" type="text" name="approve" placeholder="Approve or not" required><br>
+                <input class="form-control" type="text" name="issue" placeholder="Issue Date yyyy-mm-dd" required><br>
+                <input class="form-control" type="text" name="return" placeholder="Return Date yyyy-mm-dd" required><br>
+                <button class="btn btn-default approve_button" type="submit" name="submit">Approve</button>
+            </form>
+            <?php
+            if (isset($_POST["submit"])) {
+                $approve = $_POST['approve'];
+                $issue = $_POST['issue'];
+                $return = $_POST['return'];
+                $username = $_SESSION['username'];
+                $books_id = $_SESSION['books_id']; // Assuming books_id is stored in $_SESSION['bid']
+
+                // Establish database connection
+                $conn = mysqli_connect("localhost", "root", "", "readify_lms");
+
+                // Check connection
+                if (!$conn) {
+                    die("Connection failed: " . mysqli_connect_error());
+                }
+
+                // Update issue_book table
+
+                $sql = "UPDATE issue_book SET approve='$approve', issue='$issue', `return`='$return' WHERE username='$username' AND books_id='$books_id';";
+                if (mysqli_query($conn, $sql)) {
+                    // Update library_books table
+                    $sql = "UPDATE library_books SET quantity = quantity-1 WHERE books_id='$books_id'";
+                    mysqli_query($conn, $sql);
+
+                    // Check quantity and update status
+                    $res = mysqli_query($conn, "SELECT quantity FROM library_books WHERE books_id='$books_id'");
+                    $row = mysqli_fetch_assoc($res);
+                    if ($row['quantity'] == 0) {
+                        mysqli_query($conn, "UPDATE library_books SET status='not-available' WHERE books_id='$books_id'");
+                    }
+
+                    echo '<script>alert("Updated Successfully"); window.location="request.php";</script>';
+                } else {
+                    echo "Error updating record: " . mysqli_error($conn);
+                }
+
+                mysqli_close($conn);
+            }
+            ?>
+        </div>
+    </div>
+</body>
+
+</html>
