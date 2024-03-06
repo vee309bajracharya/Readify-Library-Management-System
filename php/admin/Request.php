@@ -58,14 +58,14 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
         </div>
 
         <div class="links">
-            <a href="./list_book_for_user.php"><i class='bx bxs-dashboard'></i> Dashboard</a>
-            <a href="#"><i class="ri-lock-password-fill"></i> Change Password</a>
-            <a href="./myProfile.php"><i class='bx bxs-user-circle'></i> My Profile</a>
-            <a href="./issue_info.php"><i class='bx bxs-book'></i> View Issued Books</a>
-            <a href="#"><i class='bx bxs-book'></i> View Archive Books</a>
-            <a href="./Request.php"><i class='bx bxs-book'></i>Book Request</a>
-            <a href="#"><i class='bx bxs-help-circle'></i> About Readify</a>
-            <a href="./admin-LogOut.php"><i class="bx bx-log-out"></i> Log out</a>
+        <a href="./adminDashboard.php"><i class='bx bxs-dashboard'></i> Dashboard</a>
+        <a href="./Request.php"><i class='bx bxs-dashboard'></i> Manage Request</a>
+        <a href="./Issued.php"><i class='bx bxs-book-add'></i> Add Books</a>
+        <a href="./Managebooks.php"><i class='bx bxs-folder-open'></i> Manage Books</a>
+        <a href="#"><i class='bx bx-money-withdraw'></i> Fine Collected</a>
+        <a href="./manageUser.php"><i class='bx bxs-user-account' ></i> Manage Users</a>
+        <a href="./admin-LogOut.php"><i class="bx bx-log-out"></i> Log out</a>
+
         </div>
 
     </div>
@@ -91,7 +91,7 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
             <form action="" class="navbar-form-c" method="POST" name="form-1">
                 <div class="searchBar_field">
                     <input class="form-control-search" type="text" name="username" placeholder="Username" style="width:100%" required>
-                    <input type="text" name="book_id" class="form-control" placeholder="BID" style="width:100%" required>
+                    <input type="text" name="book_id" class="form-control" placeholder="books_id" style="width:100%" required>
                     <button type="submit" name="submit" class="btn-search">Search Book</button>
                 </div>
             </form>
@@ -171,8 +171,8 @@ if (isset($_SESSION['admin'])) {
     <?php
 }
 if(isset($_POST['submit'])){
-    $_SESSION['st_name'] = $_POST['username'];
-    $_SESSION['bid'] = $_POST['Book_id'];
+    $_SESSION['username'] = $_POST['username'];
+    $_SESSION['books_id'] = $_POST['book_id'];
     ?>
     <script>
         window.location="Approve.php"
