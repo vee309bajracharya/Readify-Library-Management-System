@@ -47,25 +47,17 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
 
-        <!-- Profile preview -->
-        <div style="margin-top:1.4rem; margin-bottom: 2rem;" class="d-flex flex-column align-items-center text-center">
-            <?php
-            echo '<div class="custom-links">';
-            echo '<img class="img-circle profile_img" width="80" height="80" src="./images/' . $_SESSION['pic'] . '" style="background-color: white; border-radius: 50%; overflow: hidden; margin-right: 10px; object-fit:cover; margin-top:1.3rem;">';
-            echo "Welcome," . $_SESSION['user'];
-            echo '</div>';
-            ?>
-        </div>
 
         <div class="links">
-            <a href="./list_book_for_user.php"><i class='bx bxs-dashboard'></i> Dashboard</a>
-            <a href="#"><i class="ri-lock-password-fill"></i> Change Password</a>
-            <a href="./myProfile.php"><i class='bx bxs-user-circle'></i> My Profile</a>
-            <a href="./issue_info.php"><i class='bx bxs-book'></i> View Issued Books</a>
-            <a href="#"><i class='bx bxs-book'></i> View Archive Books</a>
-            <a href="./Request.php"><i class='bx bxs-book'></i>Book Request</a>
-            <a href="#"><i class='bx bxs-help-circle'></i> About Readify</a>
-            <a href="./admin-LogOut.php"><i class="bx bx-log-out"></i> Log out</a>
+        <a href="./adminDashboard.php"><i class='bx bxs-dashboard'></i> Dashboard</a>
+        <a href="./Request.php"><i class='bx bxs-dashboard'></i> Manage Request</a>
+        <a href="./Issued.php"><i class='bx bxs-book-add'></i> Issued Books</a>
+        <a href=""><i class='bx bxs-folder-open'></i> Manage Books</a>
+        <a href="#"><i class='bx bx-money-withdraw'></i> Fine Collected</a>
+        <a href="./manageUser.php"><i class='bx bxs-user-account' ></i> Manage Users</a>
+        <a href="#"><i class='bx bxs-help-circle'></i> About Readify</a>
+        <a href="./admin-LogOut.php"><i class="bx bx-log-out"></i> Log out</a>
+
         </div>
 
     </div>

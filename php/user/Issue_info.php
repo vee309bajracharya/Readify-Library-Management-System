@@ -66,12 +66,12 @@ if (isset($_SESSION['user'])) {
 
         <div class="links">
             <a href="./list_book_for_user.php"><i class='bx bxs-dashboard'></i> Dashboard</a>
-            <a href="#"><i class="ri-lock-password-fill"></i> Change Password</a>
+            <a href="./change_password.php"><i class="ri-lock-password-fill"></i> Change Password</a>
             <a href="./myProfile.php"><i class='bx bxs-user-circle'></i> My Profile</a>
-            <a href="#"><i class='bx bxs-book'></i> View Issued Books</a>
-            <a href="#"><i class='bx bxs-book'></i> View Archieve Books</a>
+            <a href="./issue_info.php"><i class='bx bxs-book'></i> View Issued Books</a>
+            <a href="#"><i class='bx bxs-book'></i> View Archive Books</a>
             <a href="./Request.php"><i class='bx bxs-book'></i>Book Request</a>
-            <a href="#"><i class='bx bxs-help-circle'></i> About Readify</a>
+            <a href="./about_readify.php"><i class='bx bxs-help-circle'></i> About Readify</a>
             <a href="./logOut.php"><i class="bx bx-log-out"></i> Log out</a>
         </div>
 
