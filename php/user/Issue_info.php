@@ -1,6 +1,6 @@
 <?php
-include "./userNavbar.php"; // Include navbar along with sidenav
-require_once "../config.php"; // Include database connection file
+include "./userNavbar.php";
+require_once "../config.php"; 
 
 $searchBarQuery = null; // Set a default value for $searchBarQuery
 
@@ -19,22 +19,10 @@ if (isset($_SESSION['user'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Issued Books</title>
-    <!-- Title icon -->
-    <link rel="icon" href="../../icons/title_icon.png" type="image/x-icon">
 
     <!-- ==== CSS Links ==== -->
     <link rel="stylesheet" href="../../css/custom_bootstrap.css">
 
-    <!-- ==== Google Fonts Link ==== -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@100;400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- ==== Boxicons link ==== -->
-    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css" />
-
-    <!-- ===== Bootstrap link ======== -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <style>
         .requestBar__wrapper {
             margin-bottom: 10px;
@@ -103,21 +91,11 @@ if (isset($_SESSION['user'])) {
                 echo "<tr>";
                 //Table header
 
-                echo "<th>";
-                echo "Book ID";
-                echo "</th>";
-                echo "<th>";
-                echo "Approve Status";
-                echo "</th>";
-                echo "<th>";
-                echo "Request Date";
-                echo "</th>";
-                echo "<th>";
-                echo "Issued Date";
-                echo "</th>";
-                echo "<th>";
-                echo "Return Date";
-                echo "</th>";
+                echo "<th>";echo "Book ID";echo "</th>";
+                echo "<th>";echo "Approve Status";echo "</th>";
+                echo "<th>";echo "Request Date";echo "</th>";
+                echo "<th>";echo "Issued Date";echo "</th>";
+                echo "<th>";echo "Return Date";echo "</th>";
 
 
                 echo "</tr>";
