@@ -90,17 +90,43 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
             }
         </script>
             <div class="container">
-            <h2>Information of Borrowed Books</h2>
+
+            <?php
+            if(isset($_SESSION['admin'])){
+                ?>
+  <div class="searchBar__wrapper">
+            <h2> Request Book </h2>
+            <form action="" class="navbar-form-c" method="POST" name="form-1">
+                <div class="searchBar_field">
+                    <input class="form-control-search" type="text" name="username" placeholder="Username" style="width:100%" required>
+                    <input type="text" name="book_id" class="form-control" placeholder="books_id" style="width:100%" required>
+                    <button type="submit" name="submit" class="btn-search">Search Book</button>
+                </div>
+            </form>
+        </div>
+                <?php 
+
+if(isset($_POST['submit'])){
+    $var1 = '<p> Returned </P>';
+    $sql = "UPDATE issue_book SET approve='$var1' WHERE username='$_POST[username]' AND books_id='$_POST[book_id]'";
+    mysqli_query($conn, $sql);
+}
+
+            }
+            ?>
+            <h2>Books Past Due Date</h2>
             <?php
             $c=0;
     if (isset($_SESSION["admin"])) {
-        $sql ="SELECT 
+     
+        $sql = "SELECT 
         library_users.username, 
         user_id, 
         issue_book.books_id, 
         library_books.books_name, 
         library_books.authors, 
         library_books.edition,
+        issue_book.approve,  
         issue_book.issue,
         issue_book.return                
     FROM 
@@ -110,10 +136,10 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
     INNER JOIN 
         library_books ON issue_book.books_id = library_books.books_id 
     WHERE 
-        issue_book.approve = 'Yes' 
+        issue_book.approve != ''  AND  issue_book.approve != 'Yes'
     ORDER BY 
-        issue_book.return ASC;
-    ";
+        issue_book.return ASC";
+
    $res = mysqli_query($conn, $sql);
    echo "<div>";
 
@@ -141,6 +167,9 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
    echo "Edition";
    echo "</th>";
    echo "<th>";
+   echo "Status";
+   echo "</th>";
+   echo "<th>";
    echo "Issued Date";
    echo "</th>";
    echo "<th>";
@@ -153,14 +182,7 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
    echo"<div class='scroll'>";
    echo "<table class='table table-bordered table-hover'>";
    while ($row = mysqli_fetch_assoc($res)) {
-    $d = date("Y-m-d");
-
-    if($d>$row['return']){
-        $c=$c+1;
-        $var = '<p> Expired </P>';
-        mysqli_query($conn, "UPDATE issue_book SET approve='$var' WHERE `return`='{$row['return']}' AND approve ='Yes' limit $c;");
-        echo $d."</br>";
-    }
+   
     
        echo "<tr>";
        //fetch data from issue_book table
@@ -170,6 +192,7 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
        echo "<td>" . $row['books_name'] . "</td>";
        echo "<td>" . $row['authors'] . "</td>";
        echo "<td>" . $row['edition'] . "</td>";
+       echo "<td>" . $row['approve'] . "</td>";
        echo "<td>" . $row['issue'] . "</td>";
        echo "<td>" . $row['return'] . "</td>";
 
