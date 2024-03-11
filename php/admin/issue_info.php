@@ -19,16 +19,6 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
     <!-- ==== CSS Links ==== -->
     <link rel="stylesheet" href="../../css/custom_bootstrap.css">
 
-    <!-- ==== Google Fonts Link ==== -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@100;400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- ==== Boxicons link ==== -->
-    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css" />
-
-    <!-- ===== Bootstrap link ======== -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <style>
         .requestBar__wrapper {
             margin-bottom: 10px;
@@ -56,9 +46,6 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
             </a>
         </div>
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-
-
-        
 
         <div class="links">
         <a href="./adminDashboard.php"><i class='bx bxs-dashboard'></i> Dashboard</a>
@@ -121,30 +108,14 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
    echo "<tr>";
    //Table header   
 
-   echo "<th>";
-   echo "Student Username";
-   echo "</th>";
-   echo "<th>";
-   echo "User ID";
-   echo "</th>";
-   echo "<th>";
-   echo "Book ID";
-   echo "</th>";
-   echo "<th>";
-   echo "Books Name";
-   echo "</th>";
-   echo "<th>";
-   echo "Authors";
-   echo "</th>";
-   echo "<th>";
-   echo "Edition";
-   echo "</th>";
-   echo "<th>";
-   echo "Issued Date";
-   echo "</th>";
-   echo "<th>";
-   echo "Return Date";
-   echo "</th>";
+   echo "<th>";echo "Student Username";echo "</th>";
+   echo "<th>";echo "User ID";echo "</th>";
+   echo "<th>";echo "Book ID";echo "</th>";
+   echo "<th>";echo "Books Name";echo "</th>";
+   echo "<th>";echo "Authors";echo "</th>";
+   echo "<th>";echo "Edition";echo "</th>";
+   echo "<th>";echo "Issued Date";echo "</th>";
+   echo "<th>";echo "Return Date";echo "</th>";
 
    echo "</tr>";
    echo "</table>";
@@ -156,7 +127,8 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
 
     if($d>$row['return']){
         $c=$c+1;
-        mysqli_query($conn, "UPDATE issue_book SET approve='Expired' WHERE `return`='{$row['return']}' AND approve ='Yes' limit $c;");
+        $var = '<p style="color: red;">Expired</p>';
+        mysqli_query($conn, "UPDATE issue_book SET approve='$var' WHERE `return`='{$row['return']}' AND approve ='Yes' limit $c;");
     }
     echo $d."</br>";
        echo "<tr>";
