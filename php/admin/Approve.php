@@ -99,8 +99,8 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
             <h2 style="text-align: center; margin-bottom: 30px;">Approve Request</h2>
             <form class="Approve" action="" method="post">
                 <input class="form-control" type="text" name="approve" placeholder="Approve or not" required><br>
-                <input class="form-control" type="text" name="issue" placeholder="Issue Date yyyy-mm-dd" required><br>
-                <input class="form-control" type="text" name="return" placeholder="Return Date yyyy-mm-dd" required><br>
+                <input class="form-control" type="date" name="issue" placeholder="Issue Date yyyy-mm-dd" required><br>
+                <input class="form-control" type="date" name="return" placeholder="Return Date yyyy-mm-dd" required><br>
                 <button class="btn btn-default approve_button" type="submit" name="submit">Approve</button>
             </form>
             <?php
