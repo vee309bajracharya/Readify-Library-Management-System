@@ -67,7 +67,7 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
         <a href="./Managebooks.php"><i class='bx bxs-folder-open'></i> Manage Books</a>
         <a href="#"><i class='bx bx-money-withdraw'></i> Fine Collected</a>
         <a href="./manageUser.php"><i class='bx bxs-user-account' ></i> Manage Users</a>
-        <a href="./Expried.php"><i class='bx bxs-user-account' ></i> Expired Date</a>
+        <a href="./Expired.php"><i class='bx bxs-user-account' ></i> Expired Date</a>
         <a href="./admin-LogOut.php"><i class="bx bx-log-out"></i> Log out</a>
 
         </div>
@@ -90,11 +90,17 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
             }
         </script>
             <div class="container">
+                <button name="submit2" class="btn btn-default">Returned</button>
+                <button name="submit3" class="btn btn-default">Expired</button>
+
+
+
+
 
             <?php
             if(isset($_SESSION['admin'])){
                 ?>
-  <div class="searchBar__wrapper">
+            <div class="searchBar__wrapper">
             <h2> Request Book </h2>
             <form action="" class="navbar-form-c" method="POST" name="form-1">
                 <div class="searchBar_field">
@@ -107,7 +113,7 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
                 <?php 
 
 if(isset($_POST['submit'])){
-    $var1 = '<p> Returned </P>';
+    $var1 = '<p> Returned </p>';
     $sql = "UPDATE issue_book SET approve='$var1' WHERE username='$_POST[username]' AND books_id='$_POST[book_id]'";
     mysqli_query($conn, $sql);
 }
@@ -115,30 +121,32 @@ if(isset($_POST['submit'])){
             }
             ?>
             <h2>Books Past Due Date</h2>
+
+
+
             <?php
             $c=0;
     if (isset($_SESSION["admin"])) {
      
-        $sql = "SELECT 
-        library_users.username, 
-        user_id, 
-        issue_book.books_id, 
-        library_books.books_name, 
-        library_books.authors, 
-        library_books.edition,
-        issue_book.approve,  
-        issue_book.issue,
-        issue_book.return                
-    FROM 
-        library_users 
-    INNER JOIN 
-        issue_book ON library_users.username = issue_book.username 
-    INNER JOIN 
-        library_books ON issue_book.books_id = library_books.books_id 
-    WHERE 
-        issue_book.approve != ''  AND  issue_book.approve != 'Yes'
-    ORDER BY 
-        issue_book.return ASC";
+        $sql = "SELECT library_users.username, user_id, issue_book.books_id, library_books.books_name, library_books.authors, 
+        library_books.edition,issue_book.approve,  issue_book.issue,issue_book.return                
+        FROM library_users INNER JOIN issue_book ON library_users.username = issue_book.username 
+        INNER JOIN library_books ON issue_book.books_id = library_books.books_id WHERE issue_book.approve != ''  AND  issue_book.approve != 'Yes'ORDER BY 
+        issue_book.return DESC";
+
+        if(isset($_POST['submit2'])){
+            
+
+        }else if($_POST['submit3']){
+
+        }
+
+
+
+
+
+
+
 
    $res = mysqli_query($conn, $sql);
    echo "<div>";

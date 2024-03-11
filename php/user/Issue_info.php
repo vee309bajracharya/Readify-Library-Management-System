@@ -5,7 +5,7 @@ require_once "../config.php";
 $searchBarQuery = null; // Set a default value for $searchBarQuery
 
 if (isset($_SESSION['user'])) {
-    $searchBarQuery = mysqli_query($conn, "SELECT books_id, approve, issue, `return` FROM issue_book WHERE username='$_SESSION[user]'");
+    $searchBarQuery = mysqli_query($conn, "SELECT books_id, approve,request, issue, `return` FROM issue_book WHERE username='$_SESSION[user]'");
 } else {
     echo "No user specified.";
 }
@@ -104,6 +104,7 @@ if (isset($_SESSION['user'])) {
                     //fetch data from issue_book table
                     echo "<td>" . $row['books_id'] . "</td>";
                     echo "<td>" . $row['approve'] . "</td>";
+                    echo "<td>" . $row['request'] . "</td>";
                     echo "<td>" . $row['issue'] . "</td>";
                     echo "<td>" . $row['return'] . "</td>";
 
