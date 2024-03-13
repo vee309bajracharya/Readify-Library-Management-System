@@ -391,7 +391,7 @@ section{
   gap: 3rem;
 }
 .footer-col-left{
-  width: 30%;
+  width: 40%;
 }
 .footer__about{
   margin: 1.5rem 0;
@@ -810,8 +810,31 @@ max-height: 0rem;
 }
 
 
+/* ============== */
 
+/*  === contact page starts ==== */
+.contact_wrapper{
+  background-image: linear-gradient(rgb(6 0 183 / 47%), rgb(0 0 0 / 45%)),url(../images/contact.jpg); 
+}
+.contact_info_container{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.map{
+  margin: 2rem 0;
+}
 
-/* admin login ends */
-/* ================================== */
+.contact_right{
+  margin: 10rem 0;
+}
+.contact-details{
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  padding: 4rem;
+  height: 40rem;
+    box-shadow: var(--box-shadow-color);
+}
 
