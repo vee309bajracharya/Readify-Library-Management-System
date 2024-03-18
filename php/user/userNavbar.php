@@ -49,9 +49,9 @@ if (!isset($_SESSION['user'])) {
     <header style='position: sticky !important;top: 0;left: 0;right: 0;z-index: 1000'>
         <nav class="navbar custom-navbar ">
             <div class="container-fluid custom-navbar fixed-top">
-                <div class="navbar-header navbar-left">
+                <!-- <div class="navbar-header navbar-left">
                     <span onclick="openNav()" class="toggle-trigger custom-toogle-left" style="color: var(--dark-color)" ;>&#9776;<span>
-                </div>
+                </div> -->
 
                 <ul class="nav navbar-nav navbar-right custom-ul navbar-flex">
                     <a href="#"><i class='bx bx-bell'></i></a>

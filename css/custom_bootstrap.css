@@ -19,6 +19,8 @@
     --success-msg-color : #0FD76B;
     --warning-msg-color : #F06F2E;
     --alert-msg-color : #f54c46e8;
+    --content-bg-color : #EEEEEE;
+
 
 }
 
@@ -118,22 +120,38 @@ section{
     margin-right: 0!important;
   }
 
+    /* Errors in search */
+    .error_container{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #notFound{
+      width: 400px;
+      margin: 10rem 0;
+      opacity: 0.4;
+    }
+  
 
 /* Sidebar */
 
-.sidenav {
-    height: 100vh;
-    width: 0;
+  .sidenav {
+    width: 300px; 
+    height: 100%; 
     position: fixed;
-    z-index: 1000;
-    top: 0;
-    left: 0;
+    top: 0; 
+    left: 0; 
     background-color: var(--primary-color);
-    overflow-x: hidden;
-    transition: 0.5s;
+    overflow-x: hidden; 
+    padding-top: 20px;
+    z-index: 1000;
+  }
+
+  .links{
+    margin-top: 4rem;
   }
   
-  .sidenav a {
+  .sidenav .sidebar-links {
     margin: 1.5rem 0;
     font-size: 15px;
     font-weight: var(--bold-font-weight);
@@ -144,49 +162,30 @@ section{
     transition: 0.3s linear all;
   }
   
-  .sidenav a:hover {
+  .sidenav .sidebar-links:hover {
     color: var(--white-color);
     text-decoration: none;
 
   }
-  
-  .sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 2rem;
-
-  }
-  .sidenav .closebtn:hover{
-    background-color: none;
-  }
-  .custom-toogle-left{
-    color: var(--dark-color);
+  .logo-container{
+    margin-top: -1rem;
+    padding: 8px 8px 8px 32px;
   }
 
-  .toggle-trigger{
-    position: relative;
-    color: var(--white-color);
-    font-size:30px;
-    cursor:pointer;
-  }
   
-  #main {
-    transition: margin-left .5s;
-    padding: 16px;
-  }
+
   
+  .list_container {
+    padding: 3rem;
+    display: grid;
+    margin-left: 30rem;
+  }
+
   @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
   }
   
-  /* Searchbar */
-  .searchBar_field{
-    display: flex;
-    gap: 2rem;
-    width: 50%;
-  }
 
  
 
@@ -196,6 +195,7 @@ section{
   table{
     margin: 4rem 0;
     border-radius: 10px;
+    width: 100%;
   }
   table th{
     background-color: var(--primary-color);
@@ -208,10 +208,24 @@ section{
 
   /* User Profile */
   .profile__wrapper{
-    width: 500px;
-    margin: 0 auto;
     color: var(--primary-color);
-    background-color: black;
+    text-align: center;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgb(0 0 0 / 32%);
+  }
+
+  .profile-img {
+    border-radius: 5px;
+    padding: 5px;
+  }
+
+  .profileMsg{
+    float: left;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 3rem;
+    color: var(--primary-color);
   }
 
   .inf-content{
@@ -229,10 +243,7 @@ section{
     border: 1px solid #eee;
     width: 80%;
   }
-  .custom-input[type=file]{
-    width: 80%;
-    margin-left: 3.8rem;
-  }
+
 
   .table-custom{
     margin: 1.4rem 0;
@@ -240,16 +251,79 @@ section{
 
 
 
+  .requestBar__wrapper {
+    margin-bottom: 10px;
+    width: 50%;
+}
 
+  /* book request */
+    .searchBar_container{
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 2rem;
+    }
 
+    /* Searchbar */
+    .searchBar_field{
+      display: flex;
+      gap: 2rem;
+    }
+    .search{
+      width: 50%;
+    }
 
+    /* update password form */
+    .custom__box{
+      width: 40%;
+      padding: 3rem;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    }
 
+    .container-form{
+      display: grid;
+      place-items: center;
+      text-align: center;
+    }
 
+    .form__box {
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
 
+  .signup__intro h2 {
+      font-weight: bold;
+      color: #5955E7;
+      margin-bottom: 20px;
+  }
 
+  .signup__intro p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+  }
 
+  .field {
+      margin-bottom: 20px;
+  }
 
+  .field label {
+      font-weight: bold;
+      color: #555;
+      font-size: 1.2rem;
+      display: block;
+      margin-bottom: 5px;
+      text-align: left;
+  }
 
+  .field input{
+      padding: 10px;
+      height: 40px;
+      width: 100%;
+      font-size: 1.4rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      transition: border-color 0.3s ease;
+  }
 
-  
   /* ========== USER Panel ends ================= */

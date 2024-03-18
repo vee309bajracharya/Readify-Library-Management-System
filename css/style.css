@@ -73,16 +73,16 @@ section{
   margin-right: 2rem;
   border: 1px solid var(--bg-white-color);
   color: var(--bg-white-color);
-  padding: 12px 40px;
-  font-size: 2rem;
+  padding: 12px 25px;
+  font-size: 1.3rem;
   font-family: var(--secondary-font);
   border-radius: 25px;
   cursor: pointer;
   transition: 0.3s ease-in;
 }
 .link__btn:hover{
-  background-color: var(--btn-bg-color);
-  color: var(--primary-color);
+  background-color: var(--bg-white-color);
+  color: var(--bg-black-color);
 }
 
 .hero_btn{
@@ -213,10 +213,7 @@ section{
   /* margin-right: 1.3rem; */
 }
 
-.custom__box{
-  padding: 3rem;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-}
+
 
 
 
@@ -225,7 +222,7 @@ section{
 
 /* ==== Header Section starts ==== */
 
-.header{
+.subheader{
   background-color: var(--primary-color);
   box-shadow: var(--box-shadow-color);
   position: sticky;
@@ -233,6 +230,10 @@ section{
   left: 0;
   right: 0;
   z-index: 1000;
+}
+.navbar{
+  display: flex;
+  align-items: center;
 }
 
 .header .flex{
@@ -249,7 +250,7 @@ section{
 .header .nav__links{
   padding: 1.2rem;
   color: var(--bg-white-color);
-  font-size: 1.9rem;
+  font-size: 1.5rem;
   font-weight: 500;
   font-family: var(--primary-font);
   text-align: center;
@@ -284,18 +285,20 @@ section{
 
 /* ===== Welcome Section starts ===== */
 .home__wrapper{
-  min-height: 66rem;
-  background-image: linear-gradient(rgb(54 49 241 / 50%), rgb(2 0 127 / 55%)),url(../images/hero-section-bg.png);
+  margin-top: -10rem;
+  min-height: 80rem;
+  background-image: linear-gradient(rgb(0 0 0 / 50%), rgb(0 0 0 / 55%)), url(../images/hero-section.jpg);
   background-size: cover;
   background-position: center;
   text-align: center;
 }
 .home__welcome__info{
-  margin-top: 7rem;
+  margin-top: 15rem;
   padding: 2.3rem;
   color: var(--bg-white-color);
 }
 .home__welcome__info h3{
+  margin-top: 7rem;
   font-size: 7rem;
   font-weight: 800;
 }
@@ -414,12 +417,14 @@ section{
 .footer__col__middle{
   display: flex;
   gap: 4rem;
+  margin-top: -6.2rem;
+  font-size: 1.5rem;
 }
 .footer-info-col{
   display: flex;
   flex-direction: column;
-  gap: 4rem;
-  font-size: 1.8rem;
+  gap: 2.7rem;
+  font-size: 1.5rem;
 }
 .footer-click-link{
   color: var(--bg-black-color);
@@ -468,7 +473,7 @@ section{
 }
 .copyright__text{
   text-align: right;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
 }
 
 /* ===== Footer section ends ===== */
@@ -826,7 +831,7 @@ max-height: 0rem;
 }
 
 .contact_right{
-  margin: 10rem 0;
+  margin-top: 10rem;
 }
 .contact-details{
   font-size: 2rem;
@@ -834,7 +839,7 @@ max-height: 0rem;
   flex-direction: column;
   gap: 4rem;
   padding: 4rem;
-  height: 40rem;
-    box-shadow: var(--box-shadow-color);
+  height: 45.3rem;
+  box-shadow: var(--box-shadow-color);
 }
 
