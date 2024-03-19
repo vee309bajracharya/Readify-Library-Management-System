@@ -28,8 +28,6 @@ if (isset($_SESSION['user'])) {
   <!-- ==== Boxicons link ==== -->
   <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 
-  <!-- ==== RemixIcon link ==== -->
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet" />
 
 </head>
 
@@ -71,14 +69,12 @@ if (isset($_SESSION['user'])) {
               <div class="fields">
                 <label for="password">Password <span id="must">&#x002A;</span></label>
                 <input type="password" class="input-fields" name="pwd" id="pwd" placeholder="">
-                <span class="password-toggle" onclick="togglePassword('pwd')">SHOW</span>
 
               </div>
 
               <div class="fields">
                 <label for="cpassword">Confirm Password <span id="must">&#x002A;</span></label>
                 <input type="password" class="input-fields" name="cpwd" id="cpwd" placeholder="">
-                <span class="password-toggle" onclick="togglePassword('cpwd')">SHOW</span>
 
               </div>
 
@@ -103,7 +99,8 @@ if (isset($_SESSION['user'])) {
             </div>
 
         </div>
-        <div class="links">By signing up you have agreed to our <a href="../../pages/terms-and-conditions.html">Terms and
+        <div class="links">
+        By signing up you have agreed to our <a href="../../pages/terms-and-conditions.html">Terms and
             Conditions</a> along with <a href="../../pages/privacy-policy.html">Privacy Policy</a>
           <br> <br> <small> Already have an account ? </small><a href="./log-in.php">Log in</a>
         </div>
@@ -198,7 +195,7 @@ if (isset($_SESSION['user'])) {
       } else {
 
         // Generate a random alphanumeric library card number
-        $library_card_number = generateRandomString(8);
+        $library_card_number = generateRandomString('Rfy',8);
 
         // insert data into database
         $sql = "INSERT INTO library_users(fullname, username, email, phone_number, pwd, address, library_card_number,pic)
@@ -212,9 +209,9 @@ if (isset($_SESSION['user'])) {
         if ($prepareStmt) {
           $pic = 'user__profile__default.png';
 
-          mysqli_stmt_bind_param($stmt, "sssissss", $fullname, $username, $email, $phone_number, $pwdHash, $address, $library_card_number,$pic);
+          mysqli_stmt_bind_param($stmt, "sssissss", $fullname, $username, $email, $phone_number, $pwdHash, $address, $library_card_number, $pic);
           mysqli_stmt_execute($stmt);
-          echo "<section class='alert-success-msg'>Successfully Registered!!! Your Library Card Number is $library_card_number. Proceed to login</section>";
+          echo "<section class='alert-success-msg'>Successfully Registered!!! Your Library Card Number is $library_card_number. Proceed to Login</section>";
         } else {
           die("Something went wrong");
         }
@@ -222,17 +219,25 @@ if (isset($_SESSION['user'])) {
     }
 
     // Function to generate a random alphanumeric string
-    function generateRandomString($length)
+    function generateRandomString($prefix, $length)
     {
-      $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-      $randomString = '';
+      // Define the characters for the numbers
+      $numbers = '0123456789';
 
-      for ($i = 0; $i < $length; $i++) {
-        $randomString .= $characters[rand(0, strlen($characters) - 1)];
+      // Initialize the random string with the fixed prefix
+      $randomString = $prefix;
+
+      // Calculate the remaining length for random numbers
+      $remainingLength = $length - strlen($prefix);
+
+      // Generate random numbers and append them to the string
+      for ($i = 0; $i < $remainingLength; $i++) {
+        $randomString .= $numbers[rand(0, strlen($numbers) - 1)];
       }
 
       return $randomString;
     }
+    $randomString = generateRandomString('Rfy', 8); //'Rfy' and 5random numbers
     ?>
 
 
@@ -248,20 +253,6 @@ if (isset($_SESSION['user'])) {
       var form = document.getElementById('signupForm'); //get the form by its id
 
       form.reset(); //reset form
-    }
-
-    // Toggle between showing and hiding the password
-    function togglePassword(inputId) {
-      var passwordInput = document.getElementById(inputId);
-      var passwordToggle = document.querySelector(`#${inputId} + .password-toggle`);
-
-      if (passwordInput.type === "password") {
-        passwordInput.type = "text";
-        passwordToggle.textContent = "HIDE";
-      } else {
-        passwordInput.type = "password";
-        passwordToggle.textContent = "SHOW";
-      }
     }
   </script>
 

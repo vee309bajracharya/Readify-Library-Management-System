@@ -40,7 +40,7 @@
       <div class="box form__box">
 
         <div class="login__intro">
-          <img src="../../svg/R__logo_2.svg">
+          <a href="../../pages/index.html"><img src="../../svg/R__logo_2.svg"></a>
           <h2>Login</h2>
           <p>Welcome Back Admin!<br>
             <span>Please login to get back to your dashboard</span>

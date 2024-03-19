@@ -30,8 +30,9 @@ if (!isset($_SESSION['user'])) {
     <!-- ==== Boxicons link ==== -->
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css" />
 
+
     <!-- ===== Bootstrap link ======== -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -40,40 +41,56 @@ if (!isset($_SESSION['user'])) {
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
 
 
-
 </head>
 
 <body>
 
     <!-- ====== navbar starts =========== -->
+
     <header style='position: sticky !important;top: 0;left: 0;right: 0;z-index: 1000'>
-        <nav class="navbar custom-navbar ">
-            <div class="container-fluid custom-navbar fixed-top">
-                <!-- <div class="navbar-header navbar-left">
-                    <span onclick="openNav()" class="toggle-trigger custom-toogle-left" style="color: var(--dark-color)" ;>&#9776;<span>
-                </div> -->
+        <nav class="custom-navbar ">
+            <div class="custom-navbar fixed-top">
 
-                <ul class="nav navbar-nav navbar-right custom-ul navbar-flex">
-                    <a href="#"><i class='bx bx-bell'></i></a>
-                    <!-- <i class='bx bxs-bell-ring' ></i> -->
-                    <a href="./myProfile.php" style="text-decoration: none;">
-                        <?php
-                        // Display fullname and profile image if user is logged in
-                        echo '<div class="custom-links d-flex align-items-center">';
-                        echo '<img class="img-circle profile_img" width="40" height="40" src="./images/' . $_SESSION['pic'] . '" style="background-color: white; border-radius: 50%; overflow: hidden; margin-right: 10px; object-fit:cover;">';
-                        echo '<span class="user" style="color:#000;">' . $_SESSION['user']  . ' </span>';
 
-                        echo '</div>';
-                        ?>
-                    </a>
+                <ul class="custom-ul navbar-flex flex-row-reverse ">
+
+                    <li class="nav-item">
+                       
+                    <!-- Profile dropdown -->
+                        <div class="nav-link dropdown">
+                            <span class="dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                
+                            <!-- Profile image -->
+                                <img class="img-circle profile_img" width="40" height="40" src="./images/<?php echo $_SESSION['pic']; ?>" style="background-color: white; border-radius: 50%; overflow: hidden; margin-right: 10px; object-fit:cover;">
+                                
+                                <!-- User name -->
+                                <span class="user" style="color:#000;"><?php echo $_SESSION['user']; ?></span>
+                            </span>
+
+                            <!-- Dropdown menu -->
+                            <div class="dropdown-menu custom-dropdown" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="./myProfile.php">View Profile</a>
+                                <a class="dropdown-item" href="./change_password.php">Change Password</a>
+                                <a class="dropdown-item" href="./logOut.php">Log Out</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <!-- Bell icon -->
+                        <a href="#"><i class="bx bx-bell"></i></a>
+                    </li>
                 </ul>
+
             </div>
         </nav>
     </header>
 
     <!-- ====== navbar ends =========== -->
-    <!-- Bootstrap JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 
 </body>
 

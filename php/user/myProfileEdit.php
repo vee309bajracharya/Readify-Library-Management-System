@@ -103,7 +103,7 @@ include "./userNavbar.php";
 
 
                     // Submit button for Update Profile
-                    echo "<button type='submit' class='btn-search' name='submit' style='width: 40%; padding: 10px 15px; margin-top: 10px; float:left;'>";
+                    echo "<button type='submit' class='btn btn-search' name='submit' style='width: 20%; padding: 10px 15px; margin-top: 10px; float:left;'>";
                     echo "<i class='bx bx-edit'></i> Update Profile";
                     echo "</button>";
 
