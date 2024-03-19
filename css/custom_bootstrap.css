@@ -1,73 +1,73 @@
 *{
-    margin: 0;
-    padding: 0;
-    font-family: 'Montserrat',sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat',sans-serif;
 
 }
 
 :root{
-    --bg-dark-grey-color :  #d7d7ff;
-    --sidebar-hover-color : rgba(170, 170, 170, 0.40);
-    --bold-font-weight: 500;
-    --white-color: #fff;
-    --dark-color: #000;
-    --primary-color: #5955E7;
-    --hover-color1: #7875F6;
-    --width-canvas: 270px;
-    --top-navbar-height: 50px;
-    --box-shadow-color: .3rem 0.5rem .5rem rgba(0,0,0,.1);  
-    --success-msg-color : #0FD76B;
-    --warning-msg-color : #F06F2E;
-    --alert-msg-color : #f54c46e8;
+  --bg-dark-grey-color :  #d7d7ff;
+  --sidebar-hover-color : rgba(170, 170, 170, 0.40);
+  --bold-font-weight: 500;
+  --white-color: #fff;
+  --dark-color: #000;
+  --primary-color: #5955E7;
+  --hover-color1: #7875F6;
+  --width-canvas: 270px;
+  --top-navbar-height: 50px;
+  --box-shadow-color: .3rem 0.5rem .5rem rgba(0,0,0,.1);  
+  --success-msg-color : #0FD76B;
+  --warning-msg-color : #F06F2E;
+  --alert-msg-color : #f54c46e8;
 
 }
 
 section{
-    padding: 2rem 3rem;
-    margin: 0 auto;
-    max-width: 1200px;
+  padding: 2rem 3rem;
+  margin: 0 auto;
+  max-width: 1200px;
 }
 
 ::-webkit-scrollbar{
-  width: 0.5rem;
-  height: .5rem;
+width: 0.5rem;
+height: .5rem;
 }
 
 ::-webkit-scrollbar-track{
-  background-color: transparent;
+background-color: transparent;
 }
 ::-webkit-scrollbar-thumb{
-  background-color: var(--bg-dark-grey-color);
+background-color: var(--bg-dark-grey-color);
 }
 
 .btn-search{
-  background-color: var(--primary-color) !important;
-  color: white !important;
-  width: 40%;
-  height: 10%;
-  padding: 10px;
-  border-radius: 3px;
-  border: none;
-  text-align: center;
-  transition: 0.3s ease-in-out;
+background-color: var(--primary-color) !important;
+color: white !important;
+width: 40%;
+height: 10%;
+padding: 10px;
+border-radius: 3px;
+border: none;
+text-align: center;
+transition: 0.3s ease-in-out;
 }
 .form-control-search {
-  padding: 10px;
+padding: 10px;
 }
 
 .alert-error-msg, .alert-success-msg{
-  color: var(--white-color);
-  font-family: var(--secondary-font);
-  margin: 0.5rem 0;
-  font-size: 2rem;
-  font-weight: 500;
+color: var(--white-color);
+font-family: var(--secondary-font);
+margin: 0.5rem 0;
+font-size: 2rem;
+font-weight: 500;
 }
 
 .alert-success-msg{
-  background-color: var(--success-msg-color);
+background-color: var(--success-msg-color);
 }
 .alert-error-msg{
-  background-color: var(--alert-msg-color);
+background-color: var(--alert-msg-color);
 }
 
 /* ========== USER Panel starts ================= */
@@ -75,170 +75,168 @@ section{
 /* navbar */
 
 .custom-navbar{
-    background-color: var(--white-color);
-    border-bottom: 1px solid var(--dark-color) ;
-    border-radius: none !important;
-    height: 7rem;
-  }
+  background-color: var(--white-color);
+  border-bottom: 1px solid var(--dark-color) ;
+  border-radius: none !important;
+  height: 7rem;
+}
 
 .navbar-left{
-    margin-top: 2rem;
-    margin-bottom: 0 !important;
+  margin-top: 2rem;
+  margin-bottom: 0 !important;
 }
 .navbar-flex{
-  display: flex;
-  align-items: center;
+display: flex;
+align-items: center;
 }
 .navbar-brand>img {
-    margin-top: -2.3rem;
-    margin-right: 2rem;
+  margin-top: -2.3rem;
+  margin-right: 2rem;
 }
 .bx-bell{
-  font-size: 2.7rem;
-  margin: 7px 2px;
+font-size: 2.7rem;
+margin: 7px 2px;
 
 }
 
 .custom-ul{
-  display: flex;
-    margin-top: 1.5rem !important;
+display: flex;
+  margin-top: 1.5rem !important;
 }
 
 .custom-links{
-    font-size: 1.7rem;
-    font-weight: var(--bold-font-weight);
-    color: var(--white-color) !important;
-    margin: 0 3rem !important;
+  font-size: 1.7rem;
+  font-weight: var(--bold-font-weight);
+  color: var(--white-color) !important;
+  margin: 0 3rem !important;
 }
-  .user,.admin,.profile-img-container{
-      cursor: pointer;
-  }
+.user,.admin,.profile-img-container{
+    cursor: pointer;
+}
 
-  .bxs-book-add{
-    margin-right: 0!important;
-  }
+.bxs-book-add{
+  margin-right: 0!important;
+}
 
 
 /* Sidebar */
 
 .sidenav {
-    height: 100vh;
-    width: 0;
-    position: fixed;
-    z-index: 1000;
-    top: 0;
-    left: 0;
-    background-color: var(--primary-color);
-    overflow-x: hidden;
-    transition: 0.5s;
-  }
-  
-  .sidenav a {
-    margin: 1.5rem 0;
-    font-size: 15px;
-    font-weight: var(--bold-font-weight);
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    color: var(--bg-dark-grey-color);
-    display: block;
-    transition: 0.3s linear all;
-  }
-  
-  .sidenav a:hover {
-    color: var(--white-color);
-    text-decoration: none;
+  height: 100vh;
+  width: 0;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  background-color: var(--primary-color);
+  overflow-x: hidden;
+  transition: 0.5s;
+}
 
-  }
-  
-  .sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 2rem;
+.sidenav a {
+  margin: 1.5rem 0;
+  font-size: 15px;
+  font-weight: var(--bold-font-weight);
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  color: var(--bg-dark-grey-color);
+  display: block;
+  transition: 0.3s linear all;
+}
 
-  }
-  .sidenav .closebtn:hover{
-    background-color: none;
-  }
-  .custom-toogle-left{
-    color: var(--dark-color);
-  }
+.sidenav a:hover {
+  color: var(--white-color);
+  text-decoration: none;
 
-  .toggle-trigger{
-    position: relative;
-    color: var(--white-color);
-    font-size:30px;
-    cursor:pointer;
-  }
-  
-  #main {
-    transition: margin-left .5s;
-    padding: 16px;
-  }
-  
-  @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
-  }
-  
-  /* Searchbar */
-  .searchBar_field{
-    display: flex;
-    gap: 2rem;
-    width: 50%;
-  }
+}
 
- 
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 2rem;
+
+}
+.sidenav .closebtn:hover{
+  background-color: none;
+}
+.custom-toogle-left{
+  color: var(--dark-color);
+}
+
+.toggle-trigger{
+  position: relative;
+  color: var(--white-color);
+  font-size:30px;
+  cursor:pointer;
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 16px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+/* Searchbar */
+.searchBar_field{
+  display: flex;
+  gap: 2rem;
+  width: 50%;
+}
 
 
 
-  /*  Book List table */
-  table{
-    margin: 4rem 0;
-    border-radius: 10px;
-  }
-  table th{
-    background-color: var(--primary-color);
-    color: var(--white-color) !important;
-  }
-  .custom-th{
-    background-color: transparent;
-    color: var(--dark-color) !important;
-  }
-
-  /* User Profile */
-  .profile__wrapper{
-    width: 500px;
-    margin: 0 auto;
-    color: var(--primary-color);
-    background-color: black;
-  }
-
-  .inf-content{
-    border:1px solid #DDDDDD;
-    -webkit-border-radius:10px;
-    -moz-border-radius:10px;
-    border-radius:10px;
-    box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);
-
-  }
-  
-  .custom-input{
-    border-radius: 5px;
-    padding: 1rem;
-    border: 1px solid #eee;
-    width: 80%;
-  }
-  .custom-input[type=file]{
-    width: 80%;
-    margin-left: 3.8rem;
-  }
-
-  .table-custom{
-    margin: 1.4rem 0;
-  }
 
 
+/*  Book List table */
+table{
+  margin: 4rem 0;
+  border-radius: 10px;
+}
+table th{
+  background-color: var(--primary-color);
+  color: var(--white-color) !important;
+}
+.custom-th{
+  background-color: transparent;
+  color: var(--dark-color) !important;
+}
+
+/* User Profile */
+.profile__wrapper{
+  width: 500px;
+  margin: 0 auto;
+  color: var(--primary-color);
+  background-color: black;
+}
+
+.inf-content{
+  border:1px solid #DDDDDD;
+  -webkit-border-radius:10px;
+  -moz-border-radius:10px;
+  border-radius:10px;
+  box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);
+
+}
+
+.custom-input{
+  border-radius: 5px;
+  padding: 1rem;
+  border: 1px solid #eee;
+  width: 80%;
+}
+.custom-input[type=file]{
+  width: 80%;
+  margin-left: 3.8rem;
+}
+
+.table-custom{
+  margin: 1.4rem 0;
+}
 
 
 
@@ -251,5 +249,7 @@ section{
 
 
 
-  
-  /* ========== USER Panel ends ================= */
+
+
+
+/* ========== USER Panel ends ================= */
