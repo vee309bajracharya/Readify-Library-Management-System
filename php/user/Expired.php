@@ -17,7 +17,7 @@
     <div>
         <h1>Your fine is :
             <?php
-            // echo "रु॰ " . ($_SESSION['fine']);
+            echo "रु॰ " . ($_SESSION['fine']);
             ?>
         </h1>
     </div>
