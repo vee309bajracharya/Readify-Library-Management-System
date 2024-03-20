@@ -1,7 +1,6 @@
 ===== READIFY LIBRARY MANAGEMENT SYSTEM =====
-- ongoing semester project with my partner. Stay tuned for updates as we shape the future of READIFY together
 
-  Project Members:
+Members:
    1. Bishant Kayastha
    2. Veerin Bajracharya
 
