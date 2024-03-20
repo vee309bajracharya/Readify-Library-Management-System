@@ -5,10 +5,10 @@ Members:
    2. Veerin Bajracharya
 
   Tools used in Project:
-    - UI Design : Figma
-    - Frontend : HTML,CSS, JavaScript, Bootstrap
-    - Backend : php
-    - Database : MySQL
+       - UI Design : Figma
+       - Frontend : HTML,CSS, JavaScript, Bootstrap
+       - Backend : php
+       - Database : MySQL
 
 ======  System Functionalities ======
 
