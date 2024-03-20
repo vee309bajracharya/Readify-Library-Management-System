@@ -59,8 +59,8 @@ if (!isset($_SESSION['admin'])) {
                         <?php
                         // Display fullname and profile image if user is logged in
                         echo '<div class="custom-links d-flex align-items-center">';
-                        echo '<img class="img-circle profile_img" width="40" height="40" src="' . $_SESSION['pic'] . '" style="background-color: white; border-radius: 50%; overflow: hidden; margin-right: 10px; object-fit:cover;">';
-                        echo '<span class="admin" style="color:#000;">' . $_SESSION['admin']  . ' </span>';
+                        echo '<img class="img-circle profile_img" width="35" height="35" src="' . $_SESSION['pic'] . '" style="background-color: white; border-radius: 50%; overflow: hidden; margin-right: 10px; object-fit:cover;">';
+                        echo '<span class="admin" style="color:#000; font-size: 1.3rem;">' . $_SESSION['admin']  . ' </span>';
 
                         echo '</div>';
                         ?>
@@ -70,8 +70,6 @@ if (!isset($_SESSION['admin'])) {
         </nav>
     </header>
     <!-- ====== navbar ends =========== -->
-    <!-- Bootstrap JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 </body>
 </html>

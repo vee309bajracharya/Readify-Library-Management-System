@@ -39,7 +39,11 @@ if (isset($_SESSION['user'])) {
         <?php
         if ($searchBarQuery) {
             if (mysqli_num_rows($searchBarQuery) == 0) {
-                echo "There is no pending request";
+                echo "<section>";
+                echo "<div class='error_container'>";
+                echo "<img src='../../images/no_pending_req.png' alt='No pending request image' id='notFound'>";
+                echo "</div>";
+                echo "</section>";         
             } else {
                 echo "<div>";
                 echo "<table class='table table-bordered table-hover'>";
@@ -48,9 +52,9 @@ if (isset($_SESSION['user'])) {
 
                 echo "<th>";echo "Book ID";echo "</th>";
                 echo "<th>";echo "Approve Status";echo "</th>";
-                echo "<th>";echo "Request Date";echo "</th>";
-                echo "<th>";echo "Issued Date";echo "</th>";
-                echo "<th>";echo "Return Date";echo "</th>";
+                // echo "<th>";echo "Request Date";echo "</th>";
+                echo "<th>";echo "Book Issueed Date";echo "</th>";
+                echo "<th>";echo "Book Return Date";echo "</th>";
 
 
                 echo "</tr>";
@@ -59,11 +63,11 @@ if (isset($_SESSION['user'])) {
                     //fetch data from issue_book table
                     echo "<td>" . $row['books_id'] . "</td>";
                     echo "<td>" . $row['approve'] . "</td>";
-                    echo "<td>" . $row['request'] . "</td>";
+                    // echo "<td>" . $row['request'] . "</td>";
                     echo "<td>" . $row['issue'] . "</td>";
                     echo "<td>" . $row['return'] . "</td>";
 
-                    echo "<td>";
+                
 
                     echo "</tr>";
                 }

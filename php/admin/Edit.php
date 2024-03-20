@@ -23,7 +23,7 @@ if (isset($_POST['submit'])) {
 
     if ($stmt->execute()) {
         $successMessage = "Book Updated Successfully :)";
-        header("location:adminDashboard.php"); // Redirect to adminDashboard.php after successful update
+        header("location: viewBook.php");
         exit;
     } else {
         $errorMessage = "Error Updating Book: " . $stmt->error;
@@ -64,123 +64,87 @@ if (isset($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library Books</title>
+    <title>Edit Book</title>
+
     <!-- Title icon -->
     <link rel="icon" href="../../icons/title_icon.png" type="image/x-icon">
+
     <!-- ==== CSS Links ==== -->
     <link rel="stylesheet" href="../../css/custom_bootstrap.css">
-    <!-- ==== Google Fonts Link ==== -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@100;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- ===== Bootstrap link ======== -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    
-    
-    <style>
-        .book {
-            width: 400px;
-            margin: 0 auto;
-        }
 
-        .form-control {
-            margin: 0 auto;
-            width: 35rem;
-            height: 4rem;
-        }
-
-        .add-cancel {
-            display: flex;
-            margin: 0 auto;
-            align-items: center;
-            justify-content: center;
-            margin-top: 1.5rem;
-            height: 4rem;
-            width: 35rem;
-            color: white;
-            background-color: #5955e7;
-            border-radius: 0.5rem;
-            transition: 0.3s ease-in-out;
-        }
-
-        .add-cancel:hover {
-            color: white;
-            text-decoration: none;
-            cursor: pointer;
-            background-color: var(--hover-color1);
-        }
-
-        .add_button {
-            display: block;
-            margin: 0 auto;
-            text-align: center;
-            height: 4rem;
-            width: 35rem;
-            color: white;
-            background-color: #5955e7;
-            border-radius: 0.5rem;
-            transition: 0.3s ease-in-out;
-        }
-
-        .add_button:hover {
-            background-color: var(--hover-color1);
-        }
-    </style>
 </head>
 
 <body>
-    <!-- ====== Sidebar ======== -->
 
-    <div id="mySidenav" class="sidenav">
-    <div class="logo-container">
-            <a href="./adminDashboard.php">
-                <img src="../../svg/logo-1.svg" alt="Readify Logo">
-            </a>
+    <!-- include Sidebar -->
+    <?php
+    include "./adminSidebar.php";
+    ?>
+
+    <div class="list_container">
+        <div id="main">
+
+            <section class="container-form">
+                <div class="form__box custom__box book-box">
+
+                    <div class="signup__intro">
+                        <h2 style="font-weight: bold; color: #5955E7;"><i class='bx bxs-edit'></i> Edit Book</h2>
+
+                    </div>
+
+                    <form class="bookForm" action="./Edit.php" method="POST">
+
+
+                        <input type="hidden" name="books_id" value="<?php echo $books_id; ?>">
+
+                        <div class="field input">
+                            <label for="bookName">Book Name</label>
+                            <input type="text" name="books_name" id="books_name" value="<?php echo $books_name; ?>" required=""><br>
+                        </div>
+
+                        <div class="field input">
+                            <label for="bookAuthor">Book Author</label>
+                            <input type="text" name="authors" id="authors" value="<?php echo $authors; ?>" required=""><br>
+                        </div>
+
+                        <div class="field input">
+                            <label for="bookEdition">Book Edition</label>
+                            <input type="text" name="edition" id="edition" value="<?php echo $edition; ?>" required=""><br>
+                        </div>
+
+                        <div class="field input">
+                            <label for="bookStatus">Book Status</label>
+                            <input type="text" name="status" id="status" value="<?php echo $status; ?>" required=""><br>
+                        </div>
+
+                        <div class="field input">
+                            <label for="bookQty">Book Quantity</label>
+                            <input type="number" name="quantity" id="quantity" value="<?php echo $quantity; ?>" required=""><br>
+                        </div>
+
+                        <div class="field input">
+                            <label for="bookDept">Book Department</label>
+                            <input type="text" name="department" id="department" value="<?php echo $department; ?>" required=""><br>
+                        </div>
+
+
+                        <div class="btn-container">
+                            <button class="btn-search" type="submit" name="submit" value="submit">Save</button>
+                        </div>
+                    </form>
+
+
+
+
+
+                </div>
+            </section>
+
+
+
+
+
         </div>
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        
-        <div class="links">
-        <a href="./adminDashboard.php"><i class='bx bxs-dashboard'></i> Dashboard</a>
-        <a href="./Request.php"><i class='bx bxs-dashboard'></i> Manage Request</a>
-        <a href="./Issued.php"><i class='bx bxs-book-add'></i> Add Books</a>
-        <a href="./Managebooks.php"><i class='bx bxs-folder-open'></i> Manage Books</a>
-        <a href="#"><i class='bx bx-money-withdraw'></i> Fine Collected</a>
-        <a href="./manageUser.php"><i class='bx bxs-user-account' ></i> Manage Users</a>
-        <a href="./admin-LogOut.php"><i class="bx bx-log-out"></i> Log out</a>
-
-        </div>
-      </div>
-
-
-
-
-    <div class="add_from" id="main">
-        <h2 style="text-align:center"><i class='bx bxs-edit'></i> Edit Books</h2>
-        <form class="book" action="./Edit.php" method="POST">
-            <input type="hidden" name="books_id" value="<?php echo $books_id; ?>">
-            <br>
-            <input type="text" name="books_name" id="books_name" class="form-control" placeholder="Book Name" value="<?php echo $books_name; ?>" required=""><br>
-            <input type="text" name="authors" id="authors" class="form-control" placeholder="Authors" value="<?php echo $authors; ?>" required=""><br>
-            <input type="text" name="edition" id="edition" class="form-control" placeholder="Edition" value="<?php echo $edition; ?>" required=""><br>
-            <input type="text" name="status" id="status" class="form-control" placeholder="Status" value="<?php echo $status; ?>" required=""><br>
-            <input type="text" name="quantity" id="quantity" class="form-control" placeholder="Quantity" value="<?php echo $quantity; ?>" required=""><br>
-            <input type="text" name="department" id="department" class="form-control" placeholder="Department" value="<?php echo $department; ?>" required=""><br>
-            <button class="add_button" type="submit" name="submit" value="submit">Save Changes</button>
-            <a class="add-cancel" style=" margin-top: 1.5rem;" href="./adminDashboard.php">Cancel</a>
-        </form>
-        <script>
-            function openNav() {
-                document.getElementById("mySidenav").style.width = "300px";
-                document.getElementById("main").style.marginLeft = "300px";
-                document.body.style.backgroundColor = "white";
-            }
-
-            function closeNav() {
-                document.getElementById("mySidenav").style.width = "0";
-                document.getElementById("main").style.marginLeft = "0";
-                document.body.style.backgroundColor = "white";
-            }
-        </script>
     </div>
 </body>
 

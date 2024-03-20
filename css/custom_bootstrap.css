@@ -25,6 +25,10 @@
   --warning-msg-color : #F06F2E;
   --alert-msg-color : #f54c46e8;
   --content-bg-color : #EEEEEE;
+  --info-msg-color : #5131F1;
+  --bg-dark-purple : rgb(55, 49, 241);
+
+
 
 
 }
@@ -58,6 +62,14 @@ border: none;
 text-align: center;
 transition: 0.3s ease-in-out;
 }
+
+
+
+.btn-secondary:hover{
+  outline: none;
+  color: var(--bg-white-color);
+}
+
 .form-control-search {
 padding: 10px;
 }
@@ -77,6 +89,10 @@ background-color: var(--success-msg-color);
 background-color: var(--alert-msg-color);
 }
 
+.action-div{
+  display: flex;
+}
+
 /* ========== USER Panel starts ================= */
 
 /* navbar */
@@ -93,17 +109,19 @@ background-color: var(--alert-msg-color);
   margin-bottom: 0 !important;
 }
 .navbar-flex{
-display: flex;
-align-items: center;
+  display: flex;
+  align-items: center;
 }
 .navbar-brand>img {
   margin-top: -2.3rem;
   margin-right: 2rem;
 }
+.bx{
+  font-size: 2rem !important;
+}
 .bx-bell{
 font-size: 2.7rem;
 margin: 7px 2px;
-
 }
 
 .custom-ul{
@@ -117,7 +135,7 @@ margin-right: 3.2rem;
   font-size: 1.7rem;
   font-weight: var(--bold-font-weight);
   color: var(--white-color) !important;
-  margin: 0 3rem !important;
+  margin: 0 1rem !important;
 }
 .user,.admin,.profile-img-container{
     cursor: pointer;
@@ -135,7 +153,7 @@ margin-right: 3.2rem;
   }
   #notFound{
     width: 400px;
-    margin: 10rem 0;
+    margin: 5rem 0;
     opacity: 0.4;
   }
 
@@ -166,10 +184,11 @@ margin-right: 3.2rem;
   text-decoration: none;
   color: var(--bg-dark-grey-color);
   display: block;
-  transition: 0.3s linear all;
+  transition: 0.1s linear all;
 }
 
 .sidenav .sidebar-links:hover {
+  background-color: var(--hover-color1);
   color: var(--white-color);
   text-decoration: none;
 
@@ -211,6 +230,7 @@ table th{
 .custom-th{
   background-color: transparent;
   color: var(--dark-color) !important;
+  width: 35%;
 }
 
 /* User Profile */
@@ -219,7 +239,6 @@ table th{
   text-align: center;
   padding: 30px;
   border-radius: 5px;
-  box-shadow: 0 0 10px rgb(0 0 0 / 32%);
 }
 
 .profile-img {
@@ -260,7 +279,7 @@ span#navbarDropdown.dropdown-toggle::after{
   border-radius: 5px;
   padding: 1rem;
   border: 1px solid #eee;
-  width: 80%;
+  width: 65%;
 }
 
 
@@ -346,3 +365,25 @@ span#navbarDropdown.dropdown-toggle::after{
 }
 
 /* ========== USER Panel ends ================= */
+
+/* ==== admin panel ==== */
+
+/* admin sidebar */
+.manage-books-menu{
+  padding: 0 3rem;
+}
+
+/* add new book */
+.bookForm{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  grid-gap: 3rem;
+  margin-top: 3.3rem;
+}
+.book-box{
+  width: 60%;
+}
+.btn-container{
+  display: table;
+  text-align: left;
+}

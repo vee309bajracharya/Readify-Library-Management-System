@@ -31,6 +31,7 @@ include "./userNavbar.php";
         .submit-error {
             color: var(--alert-msg-color);
         }
+
     </style>
 
 </head>
@@ -67,7 +68,7 @@ include "./userNavbar.php";
 
                     // Edit form
                     echo "<form action='./myProfileEdit.php' method='post' enctype='multipart/form-data'>";
-                    echo "<table style='height:30rem;text-align: left; font-size:1.5rem;'>";                    echo "<tr>";
+                    echo "<table style='height:30rem;text-align: left; font-size:1.5rem; color: black;'>"; echo "<tr>";
                     echo "<th scope='row' class='custom-th'>Full Name</th>";
                     echo "<td><input class='custom-input' type='text' name='fullname' value='" . $row['fullname'] . "'></td>";
                     echo "</tr>";

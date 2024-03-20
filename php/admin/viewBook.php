@@ -1,6 +1,6 @@
-<?php
-    include "./userNavbar.php"; // Include navbar along with sidenav
-    require_once "../config.php"; // Include database connection file
+<?php 
+    include "./adminNavbar.php"; //navbar along with sidenav
+    require_once "../config.php"; //database connection file
 
 ?>
 
@@ -12,36 +12,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library Books</title>
 
+    <!-- Title icon -->
+    <link rel="icon" href="../../icons/title_icon.png" type="image/x-icon">
+
     <!-- ==== CSS Links ==== -->
     <link rel="stylesheet" href="../../css/custom_bootstrap.css">
 
 </head>
-
 <body>
-
-    <!-- include Dashboard -->
-    <?php
-        include "./userDashboard.php";
+    
+<!-- include Sidebar -->
+    <?php 
+        include "./adminSidebar.php";
     ?>
 
     <div class="list_container">
     <div id="main">
-                <!-- Search bar for books -->
-            <div class="searchBar__wrapper">
-                <h3>Library Inventory</h3>
+      
 
+      <!--  ===== Seachbar for books ===== -->
+      <div class="searchBar__wrapper">
+          <h2> View Books </h2>
+              <form action="" class="navbar-form-c" method="POST" name="form-1">
+                  <div class="search searchBar_field">
+                      <input class="form-control-search" type="text" name="search" placeholder="Type Book Name" style="width:100%" ; required>
+                      <button type="submit" name="submit" class="btn-search">Search</button>
+                  </div>
+              </form>
+      </div>
 
-            <form action="" class="navbar-form-c" method="POST" name="form-1">
-                <div class="search searchBar_field">
-                    <input class="form-control-search" type="text" name="search" placeholder="Type Book Name" style="width:100%" required>
-                    <button type="submit" name="submit" class="btn-search">Search Book</button>
-                </div>
-            </form>
-            </div>
-
-
-        <!-- PHP code to display books -->
-        <?php
+       <!-- PHP code to display books -->
+       <?php
         // Fetch book data from the database
         if (isset($_POST['submit'])) {
             $search = mysqli_real_escape_string($conn, $_POST['search']);
@@ -89,9 +90,12 @@
         }
         ?>
 
-    </div>
-    </div>
+  
+  
 
+    </div>
+      
+
+    </div>
 </body>
-
 </html>

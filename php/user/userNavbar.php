@@ -26,13 +26,10 @@ include "../config.php"; // Include database connection file
     <!-- ==== Google Fonts Link ==== -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@100;400;500;600;700;800&display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@100;400;500;600;700;800&display=swap" rel="stylesheet" />
 
     <!-- ==== Boxicons link ==== -->
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css" />
-
 
     <!-- ===== Bootstrap link ======== -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
@@ -40,8 +37,6 @@ include "../config.php"; // Include database connection file
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-    <!-- ==== RemixIcon link ==== -->
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
 
 
 </head>
@@ -121,19 +116,19 @@ include "../config.php"; // Include database connection file
                             $fine += $differenceInDays * 0.10;
 
                             // Output the number of days overdue
-                            echo "Number of days overdue: " . $differenceInDays . " days<br>";
+                            // echo "Number of days overdue: " . $differenceInDays . " days<br>";
                         } else {
                             // Book is not overdue
-                            echo "Book is not overdue<br>";
+                            // echo "Book is not overdue<br>";
                         }
                     } else {
                         // Book is not overdue
-                        echo "Book is not overdue<br>";
+                        // echo "Book is not overdue<br>";
                     }
                 }
 
                 // Output the total fine
-                echo "Total fine: रु॰ " . number_format($fine, 2);
+                // echo "Total fine: रु॰ " . number_format($fine, 2);
             } else {
                 // Query failed
                 echo "Error: " . mysqli_error($conn);

@@ -46,7 +46,7 @@ include "./userNavbar.php";
                     echo "<h4 style='text-align: left; font-size:3rem;'><b>Welcome, </b>" . $_SESSION['user'] . "</h4>";
                     echo "<span class='profileMsg'>Get a sneak peek of your profile</span>";
 
-                    echo "<table style='height:30rem;text-align: left; font-size:1.7rem;'>";
+                    echo "<table style='height:30rem;text-align: left; font-size:1.7rem; color: black;'>";
                     echo "<tr>";
                     echo "<th scope='row'  class='custom-th'>Full Name</th>";
                     echo "<td>" . $row['fullname'] . "</td>";
