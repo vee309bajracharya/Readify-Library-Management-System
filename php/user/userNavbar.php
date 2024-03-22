@@ -26,13 +26,16 @@ include "../config.php"; // Include database connection file
     <!-- ==== Google Fonts Link ==== -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@100;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@100;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
 
     <!-- ==== Boxicons link ==== -->
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css" />
 
     <!-- ===== Bootstrap link ======== -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -53,16 +56,21 @@ include "../config.php"; // Include database connection file
                 <ul class="custom-ul navbar-flex flex-row-reverse ">
 
                     <li class="nav-item">
-                       
-                    <!-- Profile dropdown -->
+
+                        <!-- Profile dropdown -->
                         <div class="nav-link dropdown">
-                            <span class="dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                
-                            <!-- Profile image -->
-                                <img class="img-circle profile_img" width="40" height="40" src="./images/<?php echo $_SESSION['pic']; ?>" style="background-color: white; border-radius: 50%; overflow: hidden; margin-right: 10px; object-fit:cover;">
-                                
+                            <span class="dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+
+                                <!-- Profile image -->
+                                <img class="img-circle profile_img" width="40" height="40"
+                                    src="./images/<?php echo $_SESSION['pic']; ?>"
+                                    style="background-color: white; border-radius: 50%; overflow: hidden; margin-right: 10px; object-fit:cover;">
+
                                 <!-- User name -->
-                                <span class="user" style="color:#000;"><?php echo $_SESSION['user']; ?></span>
+                                <span class="user" style="color:#000;">
+                                    <?php echo $_SESSION['user']; ?>
+                                </span>
                             </span>
 
                             <!-- Dropdown menu -->
@@ -113,7 +121,7 @@ include "../config.php"; // Include database connection file
                         // Calculate the fine if overdue
                         if ($differenceInDays > 0) {
                             // Calculate the fine
-                            $fine += $differenceInDays * 0.10;
+                            $fine += $differenceInDays * 40;
 
                             // Output the number of days overdue
                             // echo "Number of days overdue: " . $differenceInDays . " days<br>";
@@ -141,7 +149,9 @@ include "../config.php"; // Include database connection file
 
 
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+        crossorigin="anonymous"></script>
 
 </body>
 

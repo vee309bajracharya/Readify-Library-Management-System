@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['user'])) {
+if (isset ($_SESSION['admin'])) {
   header("Location: ./adminDashboard.php"); //if admin is registered , redirect it to  home/dashboard page no need to signup again
 }
 ?>
@@ -23,7 +23,9 @@ if (isset($_SESSION['user'])) {
   <!-- ==== Google Fonts Link ==== -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@100;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@100;400;500;600;700;800&display=swap"
+    rel="stylesheet">
 
   <!-- ==== Boxicons link ==== -->
   <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
@@ -33,24 +35,26 @@ if (isset($_SESSION['user'])) {
 
   <!-- ==Inline CSS== -->
   <style>
-      .signup__admin{
-        width: 50%;
-      }
+    .signup__admin {
+      width: 50%;
+    }
 
     .admin__signup__container {
       display: grid;
       place-items: center;
     }
 
-    .admin__signup__form__container{
+    .admin__signup__form__container {
       display: flex;
       flex-direction: column;
       margin-left: 4rem;
     }
-    .toggle__admin{
+
+    .toggle__admin {
       margin-left: 376px;
     }
-    .register__admin{
+
+    .register__admin {
       width: 48%;
       margin-left: 30rem;
     }
@@ -114,10 +118,11 @@ if (isset($_SESSION['user'])) {
                 <input type="text" class="input-fields" name="address" id="address" placeholder="">
               </div>
 
-              
+
 
               <div class="fields">
-                <input type="submit" class="btn-secondary btn-primary" name="cancel" value="Cancel" onclick="resetForm()">
+                <input type="submit" class="btn-secondary btn-primary" name="cancel" value="Cancel"
+                  onclick="resetForm()">
               </div>
 
               <div class="fields">
@@ -127,7 +132,8 @@ if (isset($_SESSION['user'])) {
             </div>
 
         </div>
-          <h5 style="text-align: center; font-size: 1.4rem; font-weight: 400;"> Already have an account ? <a href="./admin-Log-in.php">Log in</a> </h5> 
+        <h5 style="text-align: center; font-size: 1.4rem; font-weight: 400;"> Already have an account ? <a
+            href="./admin-Log-in.php">Log in</a> </h5>
         </form>
 
       </div>
@@ -135,7 +141,7 @@ if (isset($_SESSION['user'])) {
 
     <!--  ===== php section starts ====-->
     <?php
-    if (isset($_POST['submit'])) {
+    if (isset ($_POST['submit'])) {
       $fullname = $_POST['fullname'];
       $username = $_POST['username'];
       $email = $_POST['email'];
@@ -143,7 +149,7 @@ if (isset($_SESSION['user'])) {
       $pwd = $_POST['pwd'];
       $cpwd = $_POST['cpwd'];
       $address = $_POST['address'];
-   
+
 
       //HashPassword
       $pwdHash = password_hash($pwd, PASSWORD_DEFAULT);
@@ -152,7 +158,7 @@ if (isset($_SESSION['user'])) {
       $errors = array();
 
       //check if fields are empty
-      if (empty($fullname) || empty($username) || empty($email) || empty($phone_number) || empty($pwd) || empty($cpwd) || empty($address)) {
+      if (empty ($fullname) || empty ($username) || empty ($email) || empty ($phone_number) || empty ($pwd) || empty ($cpwd) || empty ($address)) {
         array_push($errors, "Fill up required fields");
       }
 
@@ -182,7 +188,7 @@ if (isset($_SESSION['user'])) {
       }
 
       require_once "../config.php"; //database config file
-
+    
 
       // ==== check for duplicate email =====
       $sql = "SELECT * FROM admin WHERE email = '$email'";
@@ -209,7 +215,7 @@ if (isset($_SESSION['user'])) {
         }
       } else {
 
-       
+
 
         // insert data into database
         $sql = "INSERT INTO admin(fullname, username, email, phone_number, pwd, address,pic)
@@ -223,16 +229,16 @@ if (isset($_SESSION['user'])) {
         if ($prepareStmt) {
           $pic = 'user_profile_default.png';
 
-          mysqli_stmt_bind_param($stmt, "sssisss", $fullname, $username, $email, $phone_number, $pwdHash, $address,$pic);
-          mysqli_stmt_execute($stmt);   
+          mysqli_stmt_bind_param($stmt, "sssisss", $fullname, $username, $email, $phone_number, $pwdHash, $address, $pic);
+          mysqli_stmt_execute($stmt);
           echo "<section class='alert-success-msg register__admin'>Successfully Registered!!! Proceed to login</section>";
         } else {
-          die("Something went wrong"); 
+          die ("Something went wrong");
         }
       }
     }
 
- 
+
     ?>
 
 
