@@ -108,6 +108,8 @@ if (isset ($_POST['request'])) {
                 </div>
             </div>
 
+
+
             <!-- PHP code to display books and handle book request submission -->
             <?php
             // Fetch book data from the database
