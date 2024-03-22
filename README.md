@@ -1,46 +1,41 @@
 ===== READIFY LIBRARY MANAGEMENT SYSTEM =====
-- an ongoing project with my friend. Stay tuned for updates as we shape the future of READIFY together
 
-  Project Members:
+Members:
    1. Bishant Kayastha
    2. Veerin Bajracharya
 
   Tools used in Project:
-    - UI Design : Figma
-    - Frontend : HTML,CSS, JavaScript, Bootstrap
-    - Backend : php
-    - Database : MySQL
+       - UI Design : Figma
+       - Frontend : HTML,CSS, JavaScript, Bootstrap
+       - Backend : php
+       - Database : MySQL
 
 ======  System Functionalities ======
 
 For USER:
 
-1. Register
-    - After registering, activate the student account and verify it with the librarian.
-2. Later on, User can login too
-3. Update their profile.
-4. Search the required book
-5. Can see their borrowed book with details like (book name,submission date, book issue date etc)
-6. Can receive notification if librarian send any message regarding book or library
-7. Can reply to librarian message
-8. Logout
+1. Register for a new account
+2. Login to account
+3. Edit their profile
+4. Update their password
+5. Search the required book
+6. Can see their borrowed book with details like (Approve status, Book Submission Date, Book Returned Date)
+7. Can receive notification if admin send any message regarding book
+8. See their Fine due details
+9. Logout
 
 For ADMIN:
 
 1. Login
-2. Must have an admin dashboard
-3. Add new book
-4. Edit book details
-5. Update book details
-6. Delete book
-7. Verify student details and Issue them book
-8. Can add return book by students to stock
-9. Can Search books available in stock as per publication or author name
-10. Can see list of students/members of library
-11. Can see how many students have book right now
-12. Send message to students regarding their books pending to submit until due date
-13. Charge fine (if necessary)
-14. Logout
+2. Admin Dashboard
+3. Manage Books (Create, Read, Update, Delete Books)
+4. Verify student details and Issue them book
+5. Approve requested book
+6. Mark books as Returned after user returns book
+7. Can search books available in stock
+8. Can see list of library members
+9. Send message to students regarding their books approval
+10. Charge fine if book submission is delayed
+11. Logout
 
-Preview Link :
-    https://vee309bajracharya.github.io/Readify-Library-Management-System/pages/index.html
+Preview index page : https://vee309bajracharya.github.io/Readify-Library-Management-System/pages/index.html
