@@ -107,7 +107,7 @@ if (isset($_POST['request'])) {
             $search = mysqli_real_escape_string($conn, $_POST['search']);
             $searchBarQuery = mysqli_query($conn, "SELECT * FROM library_books WHERE books_name LIKE '%$search%'");
         } else {
-            $searchBarQuery = mysqli_query($conn, "SELECT * FROM `library_books` ORDER BY `library_books`.`books_name` ASC;");
+            $searchBarQuery = mysqli_query($conn, "SELECT * FROM `library_books` ORDER BY `library_books`.`books_id` ASC;");
         }
 
 

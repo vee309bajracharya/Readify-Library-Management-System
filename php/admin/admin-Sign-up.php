@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['user'])) {
+if (isset($_SESSION['admin'])) {
   header("Location: ./adminDashboard.php"); //if admin is registered , redirect it to  home/dashboard page no need to signup again
 }
 ?>

@@ -12,7 +12,8 @@
 
 :root{
   --bg-dark-grey-color :  #d7d7ff;
-  --sidebar-hover-color : rgba(170, 170, 170, 0.40);
+  --outline-color: #9C9A9A;
+  --bg-secondary: #f2f2f2;
   --bold-font-weight: 500;
   --white-color: #fff;
   --dark-color: #000;
@@ -27,6 +28,7 @@
   --content-bg-color : #EEEEEE;
   --info-msg-color : #5131F1;
   --bg-dark-purple : rgb(55, 49, 241);
+  --btn-color-1: #FFF174;
 
 
 
@@ -254,7 +256,8 @@ table th{
   color: var(--primary-color);
 }
 .dropdown-menu.custom-dropdown.show{
-  margin: 2rem 0;
+  margin-top: 2rem;
+  margin-left: 1.5rem !important;
 }
 .dropdown-item{
   font-size: 1.7rem;
@@ -386,4 +389,34 @@ span#navbarDropdown.dropdown-toggle::after{
 .btn-container{
   display: table;
   text-align: left;
+}
+
+/* admin dashboard */
+.primary-action{
+  margin: 3rem 0;
+  padding: 3rem;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  width: 41%;
+  border-radius: 5px;
+}
+.custom-bx{
+  font-size: 4.5rem !important;
+  float: inline-end;
+  margin-top: 0.6rem;
+}
+.btn-custom{
+  padding: 1rem 2rem !important;
+  color: var(--dark-color) !important;
+  background-color: var(--btn-color-1) !important;
+}
+.admin-dashboard-actions{
+  display: flex;
+  gap: 3rem;
+}
+.secondary-action{
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--outline-color);
+  /* box-shadow: var(--box-shadow-color); */
+  color: var(--dark-color);
 }
