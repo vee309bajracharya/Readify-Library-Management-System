@@ -393,11 +393,12 @@ span#navbarDropdown.dropdown-toggle::after{
 
 /* admin dashboard */
 .primary-action{
-  margin: 3rem 0;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
   padding: 3rem;
   background-color: var(--primary-color);
   color: var(--white-color);
-  width: 41%;
+  width: 31%;
   border-radius: 5px;
 }
 .custom-bx{
@@ -417,6 +418,5 @@ span#navbarDropdown.dropdown-toggle::after{
 .secondary-action{
   background-color: var(--bg-secondary);
   border: 1px solid var(--outline-color);
-  /* box-shadow: var(--box-shadow-color); */
   color: var(--dark-color);
 }

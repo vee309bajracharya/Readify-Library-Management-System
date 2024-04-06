@@ -28,19 +28,7 @@ require_once "../config.php"; // Include database connection file
 
     <div class="list_container">
         <div id="main">
-            <!--  ===== Searchbar for books ===== -->
-            <div class="searchBar__wrapper">
-                <h1> List of Users </h1>
-
-                <form action="" class="navbar-form-c" method="POST" name="form-1">
-                    <div class="search searchBar_field">
-                        <input class="form-control-search" type="text" name="search" placeholder="Search User"
-                            style="width:100%" ; required>
-                        <button type="submit" name="submit" class="btn-search">Search</button>
-                    </div>
-                </form>
-            </div>
-
+                <h1>Fine Details </h1>
 
             <?php
             // ========== Search user names =================
@@ -67,7 +55,7 @@ require_once "../config.php"; // Include database connection file
                     echo "book id";
                     echo "</th>";
                     echo "<th>";
-                    echo "returned";
+                    echo "Returned";
                     echo "</th>";
                     echo "<th>";
                     echo "Days";
@@ -112,7 +100,7 @@ require_once "../config.php"; // Include database connection file
                         echo "book id";
                         echo "</th>";
                         echo "<th>";
-                        echo "returned";
+                        echo "Returned";
                         echo "</th>";
                         echo "<th>";
                         echo "Days";
