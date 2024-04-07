@@ -83,7 +83,7 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
                 echo "<th>";echo "Books Name";echo "</th>";
                 echo "<th>";echo "Authors";echo "</th>";
                 echo "<th>";echo "Edition";echo "</th>";
-                echo "<th>";echo "Book Issueed Date";echo "</th>";
+                echo "<th>";echo "Book issued Date";echo "</th>";
                 echo "<th>";echo "Book Return Date";echo "</th>";
 
                 echo "</tr>";

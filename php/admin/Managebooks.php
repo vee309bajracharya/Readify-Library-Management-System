@@ -63,12 +63,12 @@
           //Table header
           echo "<th>"; echo "Books ID"; echo "</th>";
           echo "<th>"; echo "Books Name"; echo "</th>";
+          echo "<th>"; echo "Book Cover"; echo "</th>";
           echo "<th>"; echo "Edition"; echo "</th>";
           echo "<th>"; echo "Authors"; echo "</th>";
           echo "<th>"; echo "Status"; echo "</th>";
           echo "<th>"; echo "Quantity"; echo "</th>";
           echo "<th>"; echo "Department"; echo "</th>";
-          echo "<th>"; echo "Date and time"; echo "</th>";
           echo "<th>"; echo "Action"; echo "</th>";
           echo "</tr>";
   
@@ -77,13 +77,13 @@
               //fetch data from library_books table
               echo "<td>" . $row['books_id'] . "</td>";
               echo "<td>" . $row['books_name'] . "</td>";
+              echo "<td style='text-align:center;'><img src='../admin/covers/" . $row['book_cover'] . "' alt='Book Cover' width='120' style='object-fit: cover; border-radius: 5px;'></td>";
               echo "<td>" . $row['edition'] . "</td>";
               echo "<td>" . $row['authors'] . "</td>";
               echo "<td>" . $row['status'] . "</td>";
               echo "<td>" . $row['quantity'] . "</td>";
               echo "<td>" . $row['department'] . "</td>";
-              echo "<td>" . $row['Added_at'] . "</td>";
-              echo "<td class='action-div'><button type='button' class='btn btn-warning' style='margin-right: 5px;' onclick=\"window.location.href='Edit.php?id={$row['books_id']}'\"><i class='bi bi-pencil-square'></i></button> <a href='Delete.php?id={$row['books_id']}' class='btn btn-danger' onclick='return confirm(\"Are you sure you want to delete this book?\")'><i class='bi bi-trash3-fill'></i></a>";
+              echo "<td class='action-div'><button type='button' class='btn btn-warning' onclick=\"window.location.href='Edit.php?id={$row['books_id']}'\"><i class='bi bi-pencil-square'></i></button> <a href='Delete.php?id={$row['books_id']}' class='btn btn-danger' onclick='return confirm(\"Are you sure you want to delete this book?\")'><i class='bi bi-trash3-fill'></i></a>";
               echo "</tr>";
           }
           echo "</table>";
@@ -97,12 +97,12 @@
               //Table header
               echo "<th>"; echo "Books ID"; echo "</th>";
               echo "<th>"; echo "Books Name"; echo "</th>";
+              echo "<th>"; echo "Book Cover"; echo "</th>";
               echo "<th>"; echo "Edition"; echo "</th>";
               echo "<th>"; echo "Authors"; echo "</th>";
               echo "<th>"; echo "Status"; echo "</th>";
               echo "<th>"; echo "Quantity"; echo "</th>";
               echo "<th>"; echo "Department"; echo "</th>";
-              echo "<th>"; echo "Date and time"; echo "</th>";
               echo "<th>"; echo "Action"; echo "</th>";
               echo "</tr>";
   
@@ -111,13 +111,13 @@
                   //fetch data from library_books table
                   echo "<td>" . $row['books_id'] . "</td>";
                   echo "<td>" . $row['books_name'] . "</td>";
+                echo "<td style='text-align:center;'><img src='../admin/covers/" . $row['book_cover'] . "' alt='Book Cover' width='120' style='object-fit: cover; border-radius: 5px;'></td>";
                   echo "<td>" . $row['edition'] . "</td>";
                   echo "<td>" . $row['authors'] . "</td>";
                   echo "<td>" . $row['status'] . "</td>";
                   echo "<td>" . $row['quantity'] . "</td>";
                   echo "<td>" . $row['department'] . "</td>";
-                  echo "<td>" . $row['Added_at'] . "</td>";
-                  echo "<td class='action-div'><button type='button' class='btn btn-warning' style='margin-right: 5px;' onclick=\"window.location.href='Edit.php?id={$row['books_id']}'\"><i class='bi bi-pencil-square'></i></button> <a href='Delete.php?id={$row['books_id']}' class='btn btn-danger' onclick='return confirm(\"Are you sure you want to delete this book?\")'><i class='bi bi-trash3-fill'></i></a>";
+                  echo "<td class='action-div'><button type='button' class='btn btn-warning' onclick=\"window.location.href='Edit.php?id={$row['books_id']}'\"><i class='bi bi-pencil-square'></i></button> <a href='Delete.php?id={$row['books_id']}' class='btn btn-danger' onclick='return confirm(\"Are you sure you want to delete this book?\")'><i class='bi bi-trash3-fill'></i></a>";
                   echo "</tr>";
               }
               echo "</table>";

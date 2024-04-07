@@ -212,6 +212,11 @@ section{
   font-size: 2rem;
   /* margin-right: 1.3rem; */
 }
+.center-text{
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.3rem;
+}
 
 
 

@@ -15,15 +15,37 @@ if (isset($_POST['submit'])) {
     $status = $_POST['status'];
     $quantity = $_POST['quantity'];
     $department = $_POST['department'];
+    $book_cover_url = $_POST['book_cover_url'];
 
-    // Update the book information in the database
+        // Check if a new book cover URL is provided
+        if (!empty($book_cover_url)) {
+            // Fetch book cover from URL and save it locally
+            $image_data = file_get_contents($book_cover_url);
+            $book_cover_name = basename($book_cover_url);
+            $book_cover_path = "./covers/" . $book_cover_name;
+            file_put_contents($book_cover_path, $image_data);
+    
+            // Update book cover in the database
+            $sql_cover = "UPDATE library_books SET book_cover = ? WHERE books_id = ?";
+            $stmt_cover = $conn->prepare($sql_cover);
+            $stmt_cover->bind_param("si", $book_cover_name, $books_id);
+    
+            if (!$stmt_cover->execute()) {
+                $errorMessage = "Error updating book cover: " . $stmt_cover->error;
+            }
+    
+            $stmt_cover->close();
+        }
+
+
+    // Update other book information in the database
     $sql = "UPDATE library_books SET books_name = ?, authors = ?, edition = ?, status = ?, quantity = ?, department = ? WHERE books_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssssssi", $books_name, $authors, $edition, $status, $quantity, $department, $books_id);
 
     if ($stmt->execute()) {
         $successMessage = "Book Updated Successfully :)";
-        header("location: viewBook.php");
+        header("location: Managebooks.php");
         exit;
     } else {
         $errorMessage = "Error Updating Book: " . $stmt->error;
@@ -52,6 +74,7 @@ if (isset($_GET['id'])) {
         $status = $row['status'];
         $quantity = $row['quantity'];
         $department = $row['department'];
+        $book_cover = $row['book_cover'];
     }
 
     $stmt->close();
@@ -125,6 +148,11 @@ if (isset($_GET['id'])) {
                         <div class="field input">
                             <label for="bookDept">Book Department</label>
                             <input type="text" name="department" id="department" value="<?php echo $department; ?>" required=""><br>
+                        </div>
+
+                        <div class="field input">
+                            <label for="bookCover">Book Cover</label>
+                            <input type="text" name="book_cover_url" id="book_cover_url" value="<?php echo $book_cover; ?>"required="">
                         </div>
 
 

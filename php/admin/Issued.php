@@ -7,15 +7,27 @@ require_once "../config.php"; //database connection file
 
 if (isset($_POST['submit'])) {
     if (isset($_SESSION['admin'])) {
+
+        $book_cover_url = $_POST['book_cover_url'];
+
+        // Fetch the image from the provided URL and save it locally
+        $image_data = file_get_contents($book_cover_url);
+        $book_cover_name = basename($book_cover_url);
+        $book_cover_path = "./covers/" . $book_cover_name;
+        file_put_contents($book_cover_path, $image_data);
+
         $books_name = $_POST['books_name'];
         $authors = $_POST['authors'];
         $edition = $_POST['edition'];
         $status = $_POST['status'];
         $quantity = $_POST['quantity'];
         $department = $_POST['department'];
+        $book_cover = $book_cover_name;
 
-        $stmt = $conn->prepare("INSERT INTO library_books (books_name, authors, edition, status, quantity, department) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssis", $books_name, $authors, $edition, $status, $quantity, $department);
+
+        $stmt = $conn->prepare("INSERT INTO library_books (books_name, authors, edition, status, quantity, department, book_cover) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssiss", $books_name, $authors, $edition, $status, $quantity, $department, $book_cover);
+
 
         if ($stmt->execute()) {
             echo "<script>alert('Successfully Books Added')</script>";
@@ -67,7 +79,7 @@ if (isset($_POST['submit'])) {
                     </div>
 
 
-                    <form action="./Issued.php" method="POST" class="bookForm">
+                    <form action="./Issued.php" method="POST" class="bookForm" enctype="multipart/form-data">
 
                         <div class="field input">
                             <label for="bookName">Book Name</label>
@@ -99,20 +111,16 @@ if (isset($_POST['submit'])) {
                             <input type="text" name="department" id="department" required="">
                         </div>
 
+                        <div class="field input">
+                            <label for="bookCover">Book Cover</label>
+                            <input type="text" name="book_cover_url" id="book_cover_url" placeholder="Book Img URL">
+                        </div>
+
                         <div class="btn-container">
                             <button class="btn-search" type="submit" name="submit" value="submit">Confirm</button>
                         </div>
 
                     </form>
-
-
-
-
-
-
-
-
-
 
                 </div>
             </section>

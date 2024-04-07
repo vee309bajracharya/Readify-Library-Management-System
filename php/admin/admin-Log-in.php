@@ -80,6 +80,10 @@
         $email = $_POST['email'];
         $pwd = $_POST['pwd'];
 
+              //if form is submitted empty
+      if(empty($email)|| empty($pwd)){
+        echo "<section class='center-text'>Enter email and password</section>";
+      }else{
         //check if the entered email and password exists on database or not
 
         require_once "../config.php";
@@ -99,12 +103,13 @@
             header("Location: ./adminDashboard.php");
             die();
           }else{
-            echo "<section class='alert-warning-msg'>Password does not match</section>";
+            echo "<section class='center-text'>Password does not match</section>";
           }
 
         }else{
-          echo "<section class='alert-warning-msg'>Email does not exist</section>";
+          echo "<section class='center-text'>Email does not exist</section>";
         }
+      }
       }
       
     
