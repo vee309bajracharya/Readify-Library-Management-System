@@ -64,10 +64,9 @@
             //Table header
             echo "<th>";echo "Books ID";echo "</th>";
             echo "<th>";echo "Books Name";echo "</th>";
+            echo "<th>";echo "Book Cover";echo "</th>";
             echo "<th>";echo "Edition";echo "</th>";
             echo "<th>";echo "Authors";echo "</th>";
-            echo "<th>";echo "Status";echo "</th>";
-            echo "<th>";echo "Quantity";echo "</th>";
             echo "<th>";echo "Department";echo "</th>";
 
             echo "</tr>";
@@ -77,10 +76,9 @@
                 //fetch data from library_books table
                 echo "<td>" . $row['books_id'] . "</td>";
                 echo "<td>" . $row['books_name'] . "</td>";
+                echo "<td style='text-align:center;'><img src='../admin/covers/" . $row['book_cover'] . "' alt='Book Cover' width='100' style='object-fit: cover; border-radius: 5px;'></td>";
                 echo "<td>" . $row['edition'] . "</td>";
                 echo "<td>" . $row['authors'] . "</td>";
-                echo "<td>" . $row['status'] . "</td>";
-                echo "<td>" . $row['quantity'] . "</td>";
                 echo "<td>" . $row['department'] . "</td>";
                 echo "</tr>";
             }
@@ -91,7 +89,6 @@
 
     </div>
     </div>
-
 </body>
 
 </html>

@@ -47,9 +47,6 @@ if (isset ($_SESSION['admin'])) {
                     <div class="searchBar__wrapper">
                         <h2>Book Status </h2>
 
-                        <div class="searchBar_container">
-
-                            <div class="requestBar__wrapper">
                                 <!-- Form for username search -->
                                 <form action="" class="navbar-form-c" method="POST" name="form-1">
                                     <div class="searchBar_field">
@@ -61,9 +58,6 @@ if (isset ($_SESSION['admin'])) {
                                         <button type="submit" name="submit" class="btn-search">Mark as Returned</button>
                                     </div>
                                 </form>
-                            </div>
-
-                        </div>
 
                     </div>
 

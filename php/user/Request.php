@@ -117,7 +117,7 @@ if (isset ($_POST['request'])) {
                 $search = mysqli_real_escape_string($conn, $_POST['search']);
                 $searchBarQuery = mysqli_query($conn, "SELECT * FROM library_books WHERE books_name LIKE '%$search%'");
             } else {
-                $searchBarQuery = mysqli_query($conn, "SELECT * FROM `library_books` ORDER BY `library_books`.`books_name` ASC;");
+                $searchBarQuery = mysqli_query($conn, "SELECT * FROM `library_books` ORDER BY `library_books`.`books_id` ASC;");
             }
 
 
@@ -132,27 +132,12 @@ if (isset ($_POST['request'])) {
                 echo "<table class='table table-bordered table-hover'>";
                 echo "<tr>";
                 //Table header
-                echo "<th>";
-                echo "Books ID";
-                echo "</th>";
-                echo "<th>";
-                echo "Books Name";
-                echo "</th>";
-                echo "<th>";
-                echo "Edition";
-                echo "</th>";
-                echo "<th>";
-                echo "Authors";
-                echo "</th>";
-                echo "<th>";
-                echo "Status";
-                echo "</th>";
-                echo "<th>";
-                echo "Quantity";
-                echo "</th>";
-                echo "<th>";
-                echo "Department";
-                echo "</th>";
+                echo "<th>";echo "Books ID";echo "</th>";
+                echo "<th>";echo "Books Name";echo "</th>";
+                echo "<th>";echo "Book Cover";echo "</th>";
+                echo "<th>";echo "Edition";echo "</th>";
+                echo "<th>";echo "Authors";echo "</th>";
+                echo "<th>";echo "Department";echo "</th>";
                 echo "</tr>";
 
                 while ($row = mysqli_fetch_assoc($searchBarQuery)) {
@@ -161,10 +146,9 @@ if (isset ($_POST['request'])) {
                     //fetch data from library_books table
                     echo "<td>" . $row['books_id'] . "</td>";
                     echo "<td>" . $row['books_name'] . "</td>";
+                    echo "<td style='text-align:center;'><img src='../admin/covers/" . $row['book_cover'] . "' alt='Book Cover' width='100' style='object-fit: cover; border-radius: 5px;'></td>";
                     echo "<td>" . $row['edition'] . "</td>";
                     echo "<td>" . $row['authors'] . "</td>";
-                    echo "<td>" . $row['status'] . "</td>";
-                    echo "<td>" . $row['quantity'] . "</td>";
                     echo "<td>" . $row['department'] . "</td>";
                     echo "</tr>";
                 }

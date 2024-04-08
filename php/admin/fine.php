@@ -64,12 +64,12 @@ if (!$searchBarQuery) {
                     </div>
                 </form>
             </div>
-            <div class="filter-buttons">
                 <form method="post">
-                    <button type="submit" name="filter" value="unpaid" class="btn btn-primary">Unpaid</button>
-                    <button type="submit" name="filter" value="all" class="btn btn-primary">All information</button>
-                    <button type="submit" name="filter" value="paid" class="btn btn-primary">Paid</button>
+                    <button type="submit" name="filter" value="unpaid" class="btn btn-default">Unpaid</button>
+                    <button type="submit" name="filter" value="all" class="btn btn-default">All information</button>
+                    <button type="submit" name="filter" value="paid" class="btn btn-default">Paid</button>
                 </form>
+
 
                 <?php
                 if (mysqli_num_rows($searchBarQuery) == 0) {
@@ -84,7 +84,7 @@ if (!$searchBarQuery) {
                     echo "<tr>";
                     echo "<th>Username</th>";
                     echo "<th>book id</th>";
-                    echo "<th>returned</th>";
+                    echo "<th>Returned</th>";
                     echo "<th>Days</th>";
                     echo "<th>Fine</th>";
                     echo "<th>Status</th>";
@@ -112,7 +112,6 @@ if (!$searchBarQuery) {
                     echo "</div>";
                 }
                 ?>
-            </div>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         </div>
 </body>

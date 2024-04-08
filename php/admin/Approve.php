@@ -61,7 +61,7 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
 
                     <div class="field input">
                             <label for="bookApprove">Approve Book</label>
-                            <input type="text" name="approve" placeholder="Approve" required>
+                            <input type="text" name="approve" placeholder="Yes" required>
                     </div>
 
                     <div class="field input">

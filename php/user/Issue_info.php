@@ -58,7 +58,7 @@ if (isset ($_SESSION['user'])) {
                     echo "</th>";
                     // echo "<th>";echo "Request Date";echo "</th>";
                     echo "<th>";
-                    echo "Book Issueed Date";
+                    echo "Book Issued Date";
                     echo "</th>";
                     echo "<th>";
                     echo "Book Return Date";
