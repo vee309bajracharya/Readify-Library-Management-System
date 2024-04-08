@@ -1,16 +1,20 @@
-===== READIFY LIBRARY MANAGEMENT SYSTEM =====
+![logo-1](https://github.com/vee309bajracharya/Readify-Library-Management-System/assets/102459306/b965f890-6da0-4e08-82d1-0ebe4554059a)         
+****Readify Library Management System****
 
-Members:
-   1. Bishant Kayastha
-   2. Veerin Bajracharya
 
-  Tools used in Project:
-       - UI Design : Figma
-       - Frontend : HTML,CSS, JavaScript, Bootstrap
-       - Backend : php
-       - Database : MySQL
+**Project Members:**
+- Bishant Kayastha
+- Veerin Bajracharya
 
-======  System Functionalities ======
+
+  **Tools used in Project:**
+1.  UI/Front-end Design : Figma
+2. Front-end : HTML, CSS, JavaScript, Bootstrap Framework
+3. Back-end : php
+4. Database : mySQL
+
+
+**System Functionalities**
 
 For USER:
 
