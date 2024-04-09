@@ -105,14 +105,14 @@ require_once "../config.php"; // Include database connection file
                         echo "<table class='table table-bordered table-hover'>";
                         echo "<tr>";
                         // Table headers
-                        echo "<th>Student Username</th>";
+                        echo "<th>Username</th>";
                         echo "<th>User ID</th>";
                         echo "<th>Book ID</th>";
                         echo "<th>Books Name</th>";
                         echo "<th>Authors</th>";
                         echo "<th>Edition</th>";
                         echo "<th>Status</th>";
-                        echo "<th>Book Issueed Date</th>";
+                        echo "<th>Book Issued Date</th>";
                         echo "<th>Book Return Date</th>";
                         echo "</tr>";
                         while ($row = mysqli_fetch_assoc($res)) {

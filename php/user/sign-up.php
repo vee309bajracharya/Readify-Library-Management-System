@@ -211,7 +211,8 @@ if (isset($_SESSION['user'])) {
 
           mysqli_stmt_bind_param($stmt, "sssissss", $fullname, $username, $email, $phone_number, $pwdHash, $address, $library_card_number, $pic);
           mysqli_stmt_execute($stmt);
-          echo "<section class='alert-success-msg'>Successfully Registered!!! Your Library Card Number is $library_card_number. Proceed to Login</section>";
+          echo "<section class='alert-success-msg'>Successfully Registered!!! Your Library Card Number is $library_card_number. Proceed to 
+          <a href='./log-in.php' class='heading-small' style='color: white; font-family: var(--primary-font);'>Login</a></section>";
         } else {
           die("Something went wrong");
         }

@@ -55,20 +55,16 @@ if (!$searchBarQuery) {
     <div class="list_container">
         <div id="main">
             <div class="searchBar__wrapper">
-                <h1>List of Users</h1>
-                <form action="" class="navbar-form-c" method="POST" name="form-1">
-                    <div class="search searchBar_field">
-                        <input class="form-control-search" type="text" name="search" placeholder="Search User"
-                            style="width:100%" ; required>
-                        <button type="submit" name="submit" class="btn-search">Search</button>
-                    </div>
+                <h1>Users Fine List</h1>
+            </div>
+            <div style="margin-top: 2rem;">
+                <form method="post">
+                        <button type="submit" name="filter" value="all" class="btn btn-default">All information</button>
+                        <button type="submit" name="filter" value="unpaid" class="btn btn-default">Unpaid</button>
+                        <button type="submit" name="filter" value="paid" class="btn btn-default">Paid</button>
                 </form>
             </div>
-                <form method="post">
-                    <button type="submit" name="filter" value="unpaid" class="btn btn-default">Unpaid</button>
-                    <button type="submit" name="filter" value="all" class="btn btn-default">All information</button>
-                    <button type="submit" name="filter" value="paid" class="btn btn-default">Paid</button>
-                </form>
+
 
 
                 <?php
@@ -103,7 +99,7 @@ if (!$searchBarQuery) {
                         echo "<form method='POST'>";
                         echo "<input type='hidden' name='username' value='" . $row['username'] . "'>";
                         echo "<input type='hidden' name='book_id' value='" . $row['bid'] . "'>";
-                        echo "<button type='submit' name='submit' class='btn btn-primary'>Mark as paid</button>";
+                        echo "<button type='submit' name='submit' class='btn btn-secondary'>Mark as Paid</button>";
                         echo "</form>";
                         echo "</td>";
                         echo "</tr>";
@@ -112,7 +108,6 @@ if (!$searchBarQuery) {
                     echo "</div>";
                 }
                 ?>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         </div>
 </body>
 

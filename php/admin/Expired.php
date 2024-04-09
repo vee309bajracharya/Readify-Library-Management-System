@@ -34,12 +34,12 @@ if (isset ($_SESSION['admin'])) {
 <body>
     <!-- include Sidebar -->
     <?php
-    include "./adminSidebar.php";
+        include "./adminSidebar.php";
     ?>
 
     <div class="list_container">
         <div id="main">
-            <div class="container   ">
+            <div class="container">
 
                 <?php
                 if (isset ($_SESSION['admin'])) {
@@ -62,11 +62,14 @@ if (isset ($_SESSION['admin'])) {
                     </div>
 
                     <!-- Form for filter buttons -->
+                    <div style='margin-top:2rem;'>
                     <form action="" method="POST">
                         <button type="submit" name="submit1" class="btn btn-default">All Information</button>
                         <button type="submit" name="submit2" class="btn btn-default">Returned</button>
                         <button type="submit" name="submit3" class="btn btn-default">Expired</button>
                     </form>
+                    </div>
+
 
                     <?php
 

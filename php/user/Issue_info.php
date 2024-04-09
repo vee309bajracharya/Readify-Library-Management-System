@@ -54,7 +54,7 @@ if (isset ($_SESSION['user'])) {
                     echo "Book ID";
                     echo "</th>";
                     echo "<th>";
-                    echo "Approve Status";
+                    echo "Approve/Book Status";
                     echo "</th>";
                     // echo "<th>";echo "Request Date";echo "</th>";
                     echo "<th>";
@@ -86,6 +86,10 @@ if (isset ($_SESSION['user'])) {
                 echo "<h2> Please log in first <h2>";
             }
             ?>
+
+            <div class="request-msg">
+                <p>Note: Any requested book will be dispatched promptly and will reach to you within 48 hours.</p>
+            </div>
         </div>
     </div>
 

@@ -59,7 +59,7 @@ include "./userNavbar.php";
 
                     echo "<div class='row'>";
                     echo "<div class='col-md-4'>";
-                    echo "<img class='profile-img' width='300' src='./images/" . $_SESSION['pic'] . "'>";
+                    echo "<img class='profile-img' width='300' height='400' style='object-fit:cover; border-radius:10px;' src='./images/" . $_SESSION['pic'] . "'>";
                     echo "</div>";
 
                     echo "<div class='col-md-8'>";
@@ -160,7 +160,7 @@ include "./userNavbar.php";
                         if (mysqli_query($conn, $sql1)) {
                             // Update the session variable with the new image filename
                             $_SESSION['pic'] = $pic;
-                            echo "<section class='submit-success'>Update Success!!</section>";
+                            echo "<section class='submit-success' id='success-msg'>Update Success!!</section>";
                         } else {
                             echo "<section class='submit-error submit-success'>Error updating record: " . mysqli_error($conn) . "</section>";
                         }

@@ -39,7 +39,7 @@ include "./userNavbar.php";
 
                     echo "<div class='row'>";
                     echo "<div class='col-md-4'>";
-                    echo "<img class='profile-img' width='300' src='./images/" . $_SESSION['pic'] . "'>";
+                    echo "<img class='profile-img' width='300' height='400' style='object-fit:cover; border-radius:10px;' src='./images/" . $_SESSION['pic'] . "'>";
                     echo "</div>";
 
                     echo "<div class='col-md-8'>";
