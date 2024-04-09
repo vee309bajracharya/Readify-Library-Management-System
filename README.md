@@ -7,7 +7,7 @@
 - Veerin Bajracharya
 
 
-  **Tools used in Project:**
+**Tools used in Project:**
 1.  UI/Front-end Design : Figma
 2. Front-end : HTML, CSS, JavaScript, Bootstrap Framework
 3. Back-end : php
