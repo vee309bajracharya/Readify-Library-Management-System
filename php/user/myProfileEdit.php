@@ -160,18 +160,23 @@ include "./userNavbar.php";
                         if (mysqli_query($conn, $sql1)) {
                             // Update the session variable with the new image filename
                             $_SESSION['pic'] = $pic;
-                            echo "<section class='submit-success' id='success-msg'>Update Success!!</section>";
+                            $_SESSION['msg'] = 'Profile Updated!!';
+                            $_SESSION['msg_code'] = "success";
                         } else {
-                            echo "<section class='submit-error submit-success'>Error updating record: " . mysqli_error($conn) . "</section>";
+                            $_SESSION['msg'] = 'Error updating record';
+                            $_SESSION['msg_code'] = "error";
                         }
                     } else {
-                        echo "<section class='submit-error submit-success'>Only alphanumeric characters and underscores are valid</section>";
+                        $_SESSION['msg'] = 'Only alphanumeric characters and underscores are valid';
+                        $_SESSION['msg_code'] = "error";
                     }
                 } else {
-                    echo "<section class='submit-error submit-success'>Please provide a valid email</section>";
+                    $_SESSION['msg'] = 'Provide a valid email';
+                    $_SESSION['msg_code'] = "error";
                 }
             } else {
-                echo "<section class='submit-error submit-success'>Invalid phone number length. Please provide a 10-digit phone number</section>";
+                $_SESSION['msg'] = 'Provide a 10-digit phone number';
+                $_SESSION['msg_code'] = "error";
             }
         }
         ?>
@@ -183,6 +188,22 @@ include "./userNavbar.php";
 
     <!-- === Bootstrap JavaScript Link==== -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</body>
 
+    <!-- jquery, popper, bootstrapJS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    
+    <!-- === sweetAlert link === -->
+    <script src="../sweetAlert/sweetalert.js"></script>
+
+    <?php 
+          include ('../sweetAlert/sweetalert_actions.php');
+    ?>
+
+
+
+
+
+</body>
 </html>

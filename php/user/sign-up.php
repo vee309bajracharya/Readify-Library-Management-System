@@ -256,7 +256,5 @@ if (isset($_SESSION['user'])) {
       form.reset(); //reset form
     }
   </script>
-
 </body>
-
 </html>
