@@ -111,12 +111,10 @@ if (isset($_SESSION['user'])) {
           header("Location: ./list_book_for_user.php");
           die();
         } else {
-          // echo "<section class='center-text'>Password does not match</section>";
           $_SESSION['msg'] = "Password does not match";
           $_SESSION['msg_code'] = "error";
         }
       } else {
-        // echo "<section class='center-text'>Email does not exist</section>";
         $_SESSION['msg'] = "Email does not exist";
         $_SESSION['msg_code'] = "error";
       }

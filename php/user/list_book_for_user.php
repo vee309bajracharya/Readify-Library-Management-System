@@ -1,6 +1,6 @@
 <?php
-    include "./userNavbar.php"; // Include navbar along with sidenav
-    require_once "../config.php"; // Include database connection file
+    include "./userNavbar.php";
+    require_once "../config.php";
 
     // Check if the login success message has been shown before
     if (!isset($_SESSION['login_success_shown'])) {

@@ -80,9 +80,10 @@
         $email = $_POST['email'];
         $pwd = $_POST['pwd'];
 
-              //if form is submitted empty
+      //if form is submitted empty
       if(empty($email)|| empty($pwd)){
-        echo "<section class='center-text'>Enter email and password</section>";
+        $_SESSION['msg'] = "Enter email and password!";
+        $_SESSION['msg_code'] = "error";
       }else{
         //check if the entered email and password exists on database or not
 
@@ -96,18 +97,19 @@
           //checking encrypted pwd
           if(password_verify($pwd,$admin['pwd'])){
 
-            //creating session as : dashboard page is available for registered admins only
-            session_start();
+            //creating session as : dashboard page is available for registered admin only
             $_SESSION['admin'] = $admin['username'];
             $_SESSION['pic'] = $admin['pic'];
             header("Location: ./adminDashboard.php");
             die();
           }else{
-            echo "<section class='center-text'>Password does not match</section>";
+            $_SESSION['msg'] = "Password does not match";
+            $_SESSION['msg_code'] = "error";
           }
 
         }else{
-          echo "<section class='center-text'>Email does not exist</section>";
+          $_SESSION['msg'] = "Email does not exist";
+          $_SESSION['msg_code'] = "error";
         }
       }
       }
@@ -117,9 +119,17 @@
     <!-- =========== php section ends ============== -->
   </section>
 
-  <!-- ==== JavaScript Link ==== -->
-  <script src="../../js/app.js"></script>
+      <!-- jquery, popper, bootstrapJS -->
+      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    
+    <!-- === sweetAlert link === -->
+    <script src="../sweetAlert/sweetalert.js"></script>
 
+    <?php 
+          include ('../sweetAlert/sweetalert_actions.php');
+    ?>
   
 </body>
 </html>

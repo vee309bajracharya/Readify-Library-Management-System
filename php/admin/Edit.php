@@ -5,8 +5,6 @@ ini_set('display_errors', 1);
 include "./adminNavbar.php"; // Include navbar along with sidenav
 require_once "../config.php"; // Include database connection file
 
-$errorMessage = "";
-
 if (isset($_POST['submit'])) {
     $books_id = $_POST["books_id"];
     $books_name = $_POST["books_name"];
@@ -31,7 +29,8 @@ if (isset($_POST['submit'])) {
             $stmt_cover->bind_param("si", $book_cover_name, $books_id);
     
             if (!$stmt_cover->execute()) {
-                $errorMessage = "Error updating book cover: " . $stmt_cover->error;
+                $_SESSION['msg'] = "Error updating book image";
+                $_SESSION['msg_code'] = "error";
             }
     
             $stmt_cover->close();
@@ -44,11 +43,11 @@ if (isset($_POST['submit'])) {
     $stmt->bind_param("ssssssi", $books_name, $authors, $edition, $status, $quantity, $department, $books_id);
 
     if ($stmt->execute()) {
-        $successMessage = "Book Updated Successfully :)";
-        header("location: Managebooks.php");
-        exit;
+        $_SESSION['msg'] = "Book Updated Successfully!!";
+        $_SESSION['msg_code'] = "success";
     } else {
-        $errorMessage = "Error Updating Book: " . $stmt->error;
+        $_SESSION['msg'] = "Error updating book info";
+        $_SESSION['msg_code'] = "error";
     }
 
     $stmt->close();
@@ -65,7 +64,8 @@ if (isset($_GET['id'])) {
     $result = $stmt->get_result();
 
     if ($result->num_rows === 0) {
-        $errorMessage = "Book not found";
+        $_SESSION['msg'] = "Book not found";
+        $_SESSION['msg_code'] = "error";
     } else {
         $row = $result->fetch_assoc();
         $books_name = $row['books_name'];
@@ -152,7 +152,7 @@ if (isset($_GET['id'])) {
 
                         <div class="field input">
                             <label for="bookCover">Book Cover</label>
-                            <input type="text" name="book_cover_url" id="book_cover_url" value="<?php echo $book_cover; ?>"required="">
+                            <input type="text" name="book_cover_url" id="book_cover_url" value="" required="">
                         </div>
 
 
@@ -160,20 +160,22 @@ if (isset($_GET['id'])) {
                             <button class="btn-search" type="submit" name="submit" value="submit">Save</button>
                         </div>
                     </form>
-
-
-
-
-
                 </div>
             </section>
-
-
-
-
-
         </div>
     </div>
-</body>
 
+
+          <!-- jquery, popper, bootstrapJS -->
+          <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+          <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    
+    <!-- === sweetAlert link === -->
+    <script src="../sweetAlert/sweetalert.js"></script>
+
+    <?php 
+          include ('../sweetAlert/sweetalert_actions.php');
+    ?>
+</body>
 </html>

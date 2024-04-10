@@ -79,11 +79,6 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
                         </div>
 
                     </form>
-
-
-
-
-
                 </div>
         </section>
 
@@ -119,9 +114,11 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
                             mysqli_query($conn, "UPDATE library_books SET status='not-available' WHERE books_id='$books_id'");
                         }
 
-                        echo '<script>alert("Updated Successfully"); window.location="request.php";</script>';
+                        $_SESSION['msg'] = "Book Approved !!";
+                        $_SESSION['msg_code'] = "success";
                     } else {
-                        echo "Error updating record: " . mysqli_error($conn);
+                        $_SESSION['msg'] = "Error in Approving book !!";
+                        $_SESSION['msg_code'] = "error";
                     }
 
                     mysqli_close($conn);
@@ -129,7 +126,16 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
                 ?>
             </div>
         </div>
+        <!-- jquery, popper, bootstrapJS -->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    
+    <!-- === sweetAlert link === -->
+    <script src="../sweetAlert/sweetalert.js"></script>
 
+    <?php 
+          include ('../sweetAlert/sweetalert_actions.php');
+    ?>
 </body>
-
 </html>

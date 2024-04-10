@@ -30,11 +30,11 @@ if (isset($_POST['submit'])) {
 
 
         if ($stmt->execute()) {
-            echo "<script>alert('Successfully Books Added')</script>";
-            echo "<script>window.location.href = './viewBook.php';</script>";
-            exit; // Stop execution after redirection
+            $_SESSION['msg'] = "Book Added Successfully !!";
+            $_SESSION['msg_code'] = "success";
         } else {
-            echo "<script>alert('Error Adding Book: " . $stmt->error . "')</script>";
+            $_SESSION['msg'] = "Error Adding Book !!";
+            $_SESSION['msg_code'] = "error";
         }
 
         $stmt->close();
@@ -127,7 +127,16 @@ if (isset($_POST['submit'])) {
 
         </div>
     </div>
+        <!-- jquery, popper, bootstrapJS -->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+        
+        <!-- === sweetAlert link === -->
+        <script src="../sweetAlert/sweetalert.js"></script>
 
+        <?php 
+            include ('../sweetAlert/sweetalert_actions.php');
+        ?>
 </body>
-
 </html>
