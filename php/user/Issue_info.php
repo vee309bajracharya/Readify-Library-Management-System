@@ -9,7 +9,7 @@
         issue_book.books_id, 
         library_books.books_name, 
         library_books.book_cover, 
-        issue_book.approve, 
+        issue_book.approve,
         issue_book.issue, 
         issue_book.
         `return` FROM issue_book INNER JOIN library_books ON issue_book.books_id = library_books.books_id WHERE issue_book.username='$_SESSION[user]'");

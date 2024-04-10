@@ -59,84 +59,27 @@ require_once "../config.php"; // Include database connection file
 
             <?php
             // ========== Search user names =================
-            if (isset($_POST['submit'])) {
-                $search = mysqli_real_escape_string($conn, $_POST['search']);
-                $searchBarQuery = mysqli_query($conn, "SELECT * FROM fine WHERE username LIKE '%$search%'");
-
-                if (mysqli_num_rows($searchBarQuery) == 0) {
-                    echo "<section>";
-                    echo "<div class='error_container'>";
-                    echo "<img src='../../images/user_not_found.png' alt='User not found image' id='notFound'>";
-                    echo "</div>";
-                    echo "</section>";
-                } else {
-                    echo "<div>";
-                    echo "<table class='table table-bordered table-hover'>";
-                    echo "<tr>";
-                    //Table header
-                    echo "<th>";
-                    echo "Username";
-                    echo "</th>";
-                    echo "<th>";
-                    echo "book id";
-                    echo "</th>";
-                    echo "<th>";
-                    echo "Returned";
-                    echo "</th>";
-                    echo "<th>";
-                    echo "Days";
-                    echo "</th>";
-                    echo "<th>";
-                    echo "Fine";
-                    echo "</th>";
-                    echo "<th>";
-                    echo "Status";
-                    echo "</th>";
-
-                    echo "</tr>";
-
-                    while ($row = mysqli_fetch_assoc($searchBarQuery)) {
-                        echo "<tr>";
-                        //fetch data from fine table
-                        echo "<td>" . $row['username'] . "</td>";
-                        echo "<td>" . $row['bid'] . "</td>";
-                        echo "<td>" . $row['returned'] . "</td>";
-                        echo "<td>" . $row['days'] . "</td>";
-                        echo "<td>" . $row['fine'] . "</td>";
-                        echo "<td>" . $row['status'] . "</td>";
-                        echo "</tr>";
-                    }
-                    echo "</table>";
-                    echo "</div>";
-                }
-            } else {
                 // Fetch data for the logged-in user
                 if (isset($_SESSION['user'])) {
                     $loggedInUser = $_SESSION['user'];
-                    $result = mysqli_query($conn, "SELECT * FROM `fine` WHERE username = '$loggedInUser'");
+                    $loggedInUser = $_SESSION['user'];
+                    $result = mysqli_query($conn, "SELECT fine.*, library_books.books_name, library_books.book_cover 
+                                                    FROM `fine` 
+                                                    INNER JOIN library_books ON fine.bid = library_books.books_id 
+                                                    WHERE fine.username = '$loggedInUser'");
                     if ($result) {
                         echo "<div>";
                         echo "<table class='table table-bordered table-hover'>";
                         echo "<tr>";
                         //Table header
-                        echo "<th>";
-                        echo "Username";
-                        echo "</th>";
-                        echo "<th>";
-                        echo "book id";
-                        echo "</th>";
-                        echo "<th>";
-                        echo "Returned";
-                        echo "</th>";
-                        echo "<th>";
-                        echo "Days";
-                        echo "</th>";
-                        echo "<th>";
-                        echo "Fine";
-                        echo "</th>";
-                        echo "<th>";
-                        echo "Status";
-                        echo "</th>";
+                        echo "<th>";echo "Username";echo "</th>";
+                        echo "<th>";echo "Book ID";echo "</th>";
+                        echo "<th>";echo "Books Name";echo "</th>";
+                        echo "<th>";echo "Book Cover";echo "</th>";
+                        echo "<th>";echo "Returned";echo "</th>";
+                        echo "<th>";echo "Days";echo "</th>";
+                        echo "<th>";echo "Fine";echo "</th>";
+                        echo "<th>";echo "Status";echo "</th>";
 
                         echo "</tr>";
 
@@ -145,6 +88,8 @@ require_once "../config.php"; // Include database connection file
                             //fetch data from fine table
                             echo "<td>" . $row['username'] . "</td>";
                             echo "<td>" . $row['bid'] . "</td>";
+                            echo "<td>" . $row['books_name'] . "</td>";
+                            echo "<td style='text-align:center;'><img src='../admin/covers/" . $row['book_cover'] . "' alt='Book Cover' width='100' style='object-fit: cover; border-radius: 5px;'></td>";
                             echo "<td>" . $row['returned'] . "</td>";
                             echo "<td>" . $row['days'] . "</td>";
                             echo "<td>" . $row['fine'] . "</td>";
@@ -160,7 +105,6 @@ require_once "../config.php"; // Include database connection file
                 } else {
                     echo "Session variable 'user' not set.";
                 }
-            }
             ?>
         </div>
     </div>

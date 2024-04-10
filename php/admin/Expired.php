@@ -110,13 +110,15 @@ if (isset($_SESSION['admin'])) {
                                     }
 
                                     // Output fine details
-                                    echo "Fine details:<br>";
-                                    echo "Username: $username<br>";
-                                    echo "Book ID: $books_id<br>";
-                                    echo "Return Date: $returnDate<br>";
-                                    echo "Current Date: $currentDate<br>";
-                                    echo "Difference in Days: $differenceInDays<br>";
-                                    echo "Fine: रु " . number_format($fine, 2);
+                                    echo '<div class="fine-details">';
+                                    echo '<h2>Fine details:</h2>';
+                                    echo '<p><span class="highlight">Username:</span> ' . $username . '</p>';
+                                    echo '<p><span class="highlight">Book ID:</span> ' . $books_id . '</p>';
+                                    echo '<p><span class="highlight">Return Date:</span> ' . $returnDate . '</p>';
+                                    echo '<p><span class="highlight">Current Date:</span> ' . $currentDate . '</p>';
+                                    echo '<p><span class="highlight">Difference in Days:</span> ' . $differenceInDays . '</p>';
+                                    echo '<p><span class="highlight">Fine:</span> रु ' . number_format($fine, 2) . '</p>';
+                                    echo '</div>';
                                 } else {
                                     // Book is returned before the return date
                                     // Update status to "Returned" without charging any fine
@@ -124,17 +126,17 @@ if (isset($_SESSION['admin'])) {
                                     mysqli_query($conn, $updateQuery);
 
                                     // Output message indicating book returned before return date
-                                    echo "Book returned before the return date. No fine charged.";
+                                    $_SESSION['msg'] = "Book returned before the return date. No fine charged";
                                 }
                             } else {
                                 // No record found for the given username and book ID
                                 $updateQuery = "UPDATE issue_book SET approve='<p> Returned </p>' WHERE username='$username' AND books_id='$books_id'";
                                 mysqli_query($conn, $updateQuery);
-                                echo "Book returned before the return date. No fine charged.";
+                                $_SESSION['msg'] = "Book returned before the return date. No fine charged";
                             }
                         } else {
-                            // Form fields not filled properly
-                            echo "Error: Please fill in all the fields.";
+                            $_SESSION['msg'] = "Please fill in all the fields";
+                            $_SESSION['msg_code'] = "error";
                         }
                     }
 
@@ -142,32 +144,65 @@ if (isset($_SESSION['admin'])) {
 
                     // Handle filter button actions
                     if (isset($_POST['submit1'])) {
-                        $sql = "SELECT library_users.username, user_id, issue_book.books_id, library_books.books_name, library_books.authors, 
-                        library_books.edition, issue_book.approve, issue_book.issue, issue_book.return                
+                        $sql = "SELECT 
+                        library_users.username,
+                        user_id,
+                        issue_book.books_id,
+                        library_books.books_name,
+                        library_books.book_cover,
+                        library_books.authors, 
+                        issue_book.approve,
+                        issue_book.issue,
+                        issue_book.return                
                         FROM library_users INNER JOIN issue_book ON library_users.username = issue_book.username 
                         INNER JOIN library_books ON issue_book.books_id = library_books.books_id ORDER BY issue_book.return DESC";
                     }
 
                     if (isset($_POST['submit2'])) {
                         $ret = '<p> Returned </p>';
-                        $sql = "SELECT library_users.username, user_id, issue_book.books_id, library_books.books_name, library_books.authors, 
-                        library_books.edition, issue_book.approve, issue_book.issue, issue_book.return                
+                        $sql = "SELECT 
+                        library_users.username,
+                        user_id,
+                        issue_book.books_id,
+                        library_books.books_name,
+                        library_books.book_cover,
+                        library_books.authors, 
+                        issue_book.approve,
+                        issue_book.issue,
+                        issue_book.return                
                         FROM library_users INNER JOIN issue_book ON library_users.username = issue_book.username 
                         INNER JOIN library_books ON issue_book.books_id = library_books.books_id WHERE issue_book.approve = '$ret' ORDER BY issue_book.return DESC";
                     }
 
                     if (isset($_POST['submit3'])) {
                         $exp = '<p> Expired </P>';
-                        $sql = "SELECT library_users.username, user_id, issue_book.books_id, library_books.books_name, library_books.authors, 
-                        library_books.edition, issue_book.approve, issue_book.issue, issue_book.return                
+                        $sql = "SELECT 
+                        library_users.username,
+                        user_id,
+                        issue_book.books_id,
+                        library_books.books_name,
+                        library_books.book_cover,
+                        library_books.authors, 
+                        library_books.edition,
+                        issue_book.approve,
+                        issue_book.issue,
+                        issue_book.return                
                         FROM library_users INNER JOIN issue_book ON library_users.username = issue_book.username 
                         INNER JOIN library_books ON issue_book.books_id = library_books.books_id WHERE issue_book.approve = '$exp' ORDER BY issue_book.return DESC";
                     }
 
                     // Default display if no filter is selected
                     if (!isset($_POST['submit1']) && !isset($_POST['submit2']) && !isset($_POST['submit3'])) {
-                        $sql = "SELECT library_users.username, user_id, issue_book.books_id, library_books.books_name,
-                            library_books.authors, library_books.edition, issue_book.approve, issue_book.issue, issue_book.return                
+                        $sql = "SELECT 
+                        library_users.username,
+                        user_id,
+                        issue_book.books_id,
+                        library_books.books_name,
+                        library_books.book_cover,
+                        library_books.authors,
+                        issue_book.approve,
+                        issue_book.issue,
+                        issue_book.return                
                             FROM library_users 
                             INNER JOIN issue_book ON library_users.username = issue_book.username 
                             INNER JOIN library_books ON issue_book.books_id = library_books.books_id 
@@ -187,8 +222,7 @@ if (isset($_SESSION['admin'])) {
                         echo "<th>User ID</th>";
                         echo "<th>Book ID</th>";
                         echo "<th>Books Name</th>";
-                        echo "<th>Authors</th>";
-                        echo "<th>Edition</th>";
+                        echo "<th>Book Cover</th>";
                         echo "<th>Status</th>";
                         echo "<th>Book Issued Date</th>";
                         echo "<th>Book Return Date</th>";
@@ -200,8 +234,7 @@ if (isset($_SESSION['admin'])) {
                             echo "<td>" . $row["user_id"] . "</td>";
                             echo "<td>" . $row['books_id'] . "</td>";
                             echo "<td>" . $row['books_name'] . "</td>";
-                            echo "<td>" . $row['authors'] . "</td>";
-                            echo "<td>" . $row['edition'] . "</td>";
+                            echo "<td style='text-align:center;'><img src='../admin/covers/" . $row['book_cover'] . "' alt='Book Cover' width='100' style='object-fit: cover; border-radius: 5px;'></td>";
                             echo "<td>" . $row['approve'] . "</td>";
                             echo "<td>" . $row['issue'] . "</td>";
                             echo "<td>" . $row['return'] . "</td>";
@@ -222,6 +255,18 @@ if (isset($_SESSION['admin'])) {
             </div>
         </div>
     </div>
-</body>
 
+
+            <!-- jquery, popper, bootstrapJS -->
+      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    
+    <!-- === sweetAlert link === -->
+    <script src="../sweetAlert/sweetalert.js"></script>
+
+    <?php 
+          include ('../sweetAlert/sweetalert_actions.php');
+    ?>
+</body>
 </html>

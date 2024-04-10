@@ -35,7 +35,9 @@ require_once "../config.php"; // Include database connection file
                         echo "रु॰ " . $fine;
                         ?>
                     </h3>
-                    <p>Check for more fines <a href="./fine.php">Here</a> </p>
+                    <span>Check for more fines 
+                        <a href="./fine.php" class="fine-link">Here</a>
+                     </span>
                 </div>
 
 
@@ -51,13 +53,23 @@ require_once "../config.php"; // Include database connection file
                     $loggedInUsername = $_SESSION['user'];
 
                     // SQL query to retrieve information for the logged-in user
-                    $sql = "SELECT library_users.username, user_id, issue_book.books_id, library_books.books_name, library_books.authors, 
-                library_books.edition, issue_book.approve, issue_book.issue, issue_book.return                
-                FROM library_users 
-                INNER JOIN issue_book ON library_users.username = issue_book.username 
-                INNER JOIN library_books ON issue_book.books_id = library_books.books_id 
-                WHERE library_users.username = '{$_SESSION['user']}'
-                ORDER BY issue_book.return DESC";
+                    //All information
+                    $sql = "SELECT 
+                            library_users.username, 
+                            user_id, 
+                            issue_book.books_id,
+                            library_books.books_name,
+                            library_books.book_cover,
+                            library_books.authors, 
+                            issue_book.approve,
+                            issue_book.issue,
+                            issue_book.return 
+
+                        FROM library_users 
+                        INNER JOIN issue_book ON library_users.username = issue_book.username 
+                        INNER JOIN library_books ON issue_book.books_id = library_books.books_id 
+                        WHERE library_users.username = '{$_SESSION['user']}'
+                        ORDER BY issue_book.return DESC";
 
                     // Execute the SQL query
                     $res = mysqli_query($conn, $sql);
@@ -74,20 +86,39 @@ require_once "../config.php"; // Include database connection file
 
                         if (isset($_POST['submit1'])) {
                             // Display all information for the logged-in user
-                            // The SQL query is already prepared to fetch all information for the logged-in user
+            
                         } elseif (isset($_POST['submit2'])) {
+                            //Returned
                             $ret = '<p> Returned </p>';
-                            $sql = "SELECT library_users.username, user_id, issue_book.books_id, library_books.books_name, library_books.authors, 
-                            library_books.edition, issue_book.approve, issue_book.issue, issue_book.return                
+                            $sql = "SELECT 
+                                    library_users.username,
+                                    user_id,
+                                    issue_book.books_id,
+                                    library_books.books_name,
+                                    library_books.book_cover,
+                                    library_books.authors, 
+                                    issue_book.approve,
+                                    issue_book.issue,
+                                    issue_book.return                
                             FROM library_users 
                             INNER JOIN issue_book ON library_users.username = issue_book.username 
                             INNER JOIN library_books ON issue_book.books_id = library_books.books_id 
                             WHERE issue_book.approve = '$ret' AND library_users.username = '{$_SESSION['user']}'
                             ORDER BY issue_book.return DESC";
+
+                            
                         } elseif (isset($_POST['submit3'])) {
                             $exp = '<p> Expired </P>';
-                            $sql = "SELECT library_users.username, user_id, issue_book.books_id, library_books.books_name, library_books.authors, 
-                            library_books.edition, issue_book.approve, issue_book.issue, issue_book.return                
+                            $sql = "SELECT 
+                                    library_users.username,
+                                    user_id,
+                                    issue_book.books_id,
+                                    library_books.books_name,
+                                    library_books.book_cover,
+                                    library_books.authors, 
+                                    issue_book.approve,
+                                    issue_book.issue,
+                                    issue_book.return                
                             FROM library_users 
                             INNER JOIN issue_book ON library_users.username = issue_book.username 
                             INNER JOIN library_books ON issue_book.books_id = library_books.books_id
@@ -107,8 +138,8 @@ require_once "../config.php"; // Include database connection file
                         echo "<th>User ID</th>";
                         echo "<th>Book ID</th>";
                         echo "<th>Books Name</th>";
+                        echo "<th>Book Cover</th>";
                         echo "<th>Authors</th>";
-                        echo "<th>Edition</th>";
                         echo "<th>Status</th>";
                         echo "<th>Book Issued Date</th>";
                         echo "<th>Book Return Date</th>";
@@ -120,8 +151,8 @@ require_once "../config.php"; // Include database connection file
                             echo "<td>" . $row["user_id"] . "</td>";
                             echo "<td>" . $row['books_id'] . "</td>";
                             echo "<td>" . $row['books_name'] . "</td>";
+                            echo "<td style='text-align:center;'><img src='../admin/covers/" . $row['book_cover'] . "' alt='Book Cover' width='100' style='object-fit: cover; border-radius: 5px;'></td>";
                             echo "<td>" . $row['authors'] . "</td>";
-                            echo "<td>" . $row['edition'] . "</td>";
                             echo "<td>" . $row['approve'] . "</td>";
                             echo "<td>" . $row['issue'] . "</td>";
                             echo "<td>" . $row['return'] . "</td>";
@@ -139,11 +170,7 @@ require_once "../config.php"; // Include database connection file
                 }
                 ?>
             </div>
-
-
-
         </div>
     </div>
 </body>
-
 </html>

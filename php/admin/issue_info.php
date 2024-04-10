@@ -53,9 +53,9 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
                     library_users.username, 
                     user_id, 
                     issue_book.books_id, 
-                    library_books.books_name, 
+                    library_books.books_name,
+                    library_books.book_cover, 
                     library_books.authors, 
-                    library_books.edition,
                     issue_book.issue,
                     issue_book.return                
                     FROM 
@@ -81,9 +81,9 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
                 echo "<th>";echo "User ID";echo "</th>";
                 echo "<th>";echo "Book ID";echo "</th>";
                 echo "<th>";echo "Books Name";echo "</th>";
+                echo "<th>";echo "Book Cover";echo "</th>";
                 echo "<th>";echo "Authors";echo "</th>";
-                echo "<th>";echo "Edition";echo "</th>";
-                echo "<th>";echo "Book issued Date";echo "</th>";
+                echo "<th>";echo "Book Issued Date";echo "</th>";
                 echo "<th>";echo "Book Return Date";echo "</th>";
 
                 echo "</tr>";
@@ -107,8 +107,8 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
                     echo "<td>" . $row["user_id"] . "</td>";
                     echo "<td>" . $row['books_id'] . "</td>";
                     echo "<td>" . $row['books_name'] . "</td>";
+                    echo "<td style='text-align:center;'><img src='../admin/covers/" . $row['book_cover'] . "' alt='Book Cover' width='100' style='object-fit: cover; border-radius: 5px;'></td>";
                     echo "<td>" . $row['authors'] . "</td>";
-                    echo "<td>" . $row['edition'] . "</td>";
                     echo "<td>" . $row['issue'] . "</td>";
                     echo "<td>" . $row['return'] . "</td>";
 
@@ -125,8 +125,5 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
         </div>
     </div>
 
-
-
-
-    <body>
-    </html>
+<body>
+</html>

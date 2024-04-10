@@ -413,3 +413,36 @@ span#navbarDropdown.dropdown-toggle::after {
   margin-top: -5rem;
   height: 30rem;
 }
+
+/* fine  */
+.bookStatus-container .fine-link{
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+.fine-details {
+  border: 1px solid #ccc;
+  box-shadow: var(--box-shadow-color);
+  border-radius: 5px;
+  padding: 10px;
+  margin: 2rem 0;
+  width: 35%;
+  text-align: center;
+}
+
+.fine-details h2 {
+  margin: 1.3rem 0;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.fine-details p {
+  margin: 1rem 0;
+  line-height: 1.6;
+  font-size: 1.5rem;
+}
+
+.fine-details .highlight {
+  font-weight: bold;
+  color: var(--primary-color);
+}

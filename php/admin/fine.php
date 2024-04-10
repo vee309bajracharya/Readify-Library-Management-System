@@ -3,31 +3,44 @@ include "./adminNavbar.php";
 require_once "../config.php";
 
 // Function to update the status from unpaid to paid
-if (isset ($_POST["submit"])) {
+if (isset($_POST["submit"])) {
     $username = $_POST["username"];
     $book_id = $_POST["book_id"];
-    // Assuming you have a function to update the status in your database
-    // Replace 'updateStatusFunction' with your actual function name
+
     $update_query = "UPDATE fine SET status = 'paid' WHERE username = '$username' AND bid = '$book_id'";
     $update_result = mysqli_query($conn, $update_query);
 
     if ($update_result) {
-        echo "Status updated successfully.";
+        $_SESSION['msg'] = "Status Updated Successfully!!";
+        $_SESSION['msg_code'] = "success";
     } else {
-        echo "Error updating status: " . mysqli_error($conn);
+        $_SESSION['msg'] = "Error updating status";
+        $_SESSION['msg_code'] = "error";
     }
 }
 
 // Handle filtering based on status
-if (isset ($_POST["filter"])) {
+if (isset($_POST["filter"])) {
     $status = $_POST["filter"];
     if ($status === "unpaid" || $status === "paid") {
-        $sql = "SELECT * FROM fine WHERE status = '$status'";
+        $sql = "SELECT fine.*,
+        library_books.books_name,
+        library_books.book_cover 
+        FROM fine INNER JOIN library_books
+        ON fine.bid = library_books.books_id WHERE fine.status = '$status'";
     } else {
-        $sql = "SELECT * FROM fine";
+        $sql = "SELECT fine.*,
+        library_books.books_name,
+        library_books.book_cover 
+        FROM fine INNER JOIN library_books 
+        ON fine.bid = library_books.books_id";
     }
 } else {
-    $sql = "SELECT * FROM fine";
+    $sql = "SELECT fine.*,
+    library_books.books_name,
+    library_books.book_cover
+    FROM fine INNER JOIN library_books
+    ON fine.bid = library_books.books_id";
 }
 
 $searchBarQuery = mysqli_query($conn, $sql);
@@ -37,6 +50,7 @@ if (!$searchBarQuery) {
     exit;
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -79,7 +93,9 @@ if (!$searchBarQuery) {
                     echo "<table class='table table-bordered table-hover'>";
                     echo "<tr>";
                     echo "<th>Username</th>";
-                    echo "<th>book id</th>";
+                    echo "<th>Book ID</th>";
+                    echo "<th>Books Name</th>";
+                    echo "<th>Book Cover</th>";
                     echo "<th>Returned</th>";
                     echo "<th>Days</th>";
                     echo "<th>Fine</th>";
@@ -91,6 +107,8 @@ if (!$searchBarQuery) {
                         echo "<tr>";
                         echo "<td>" . $row['username'] . "</td>";
                         echo "<td>" . $row['bid'] . "</td>";
+                        echo "<td>" . $row['books_name'] . "</td>";
+                        echo "<td style='text-align:center;'><img src='../admin/covers/" . $row['book_cover'] . "' alt='Book Cover' width='100' style='object-fit: cover; border-radius: 5px;'></td>";
                         echo "<td>" . $row['returned'] . "</td>";
                         echo "<td>" . $row['days'] . "</td>";
                         echo "<td>" . $row['fine'] . "</td>";
@@ -109,6 +127,17 @@ if (!$searchBarQuery) {
                 }
                 ?>
         </div>
-</body>
 
+                    <!-- jquery, popper, bootstrapJS -->
+      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    
+    <!-- === sweetAlert link === -->
+    <script src="../sweetAlert/sweetalert.js"></script>
+
+    <?php 
+          include ('../sweetAlert/sweetalert_actions.php');
+    ?>
+</body>
 </html>
