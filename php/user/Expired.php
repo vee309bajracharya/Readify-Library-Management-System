@@ -1,5 +1,6 @@
 <?php
 include "./userNavbar.php"; // Include navbar along with sidenav
+
 require_once "../config.php"; // Include database connection file
 
 ?>
@@ -29,12 +30,8 @@ require_once "../config.php"; // Include database connection file
             <div class="bookStatus-container">
                 <div class="my-5">
 
-
-                    <?php
-
-                    ?>
                     <h3>Your fine is :
-                        <?php
+                        <?php include "./fineinfo.php";
                         echo "रु॰ " . $fine;
                         ?>
                     </h3>
@@ -48,7 +45,7 @@ require_once "../config.php"; // Include database connection file
                 $searchBarQuery = null;
 
                 // Check if the user is logged in
-                if (isset ($_SESSION['user'])) {
+                if (isset($_SESSION['user'])) {
                     // Retrieve the username of the logged-in user
                     $loggedInUsername = $_SESSION['user'];
 
@@ -74,10 +71,10 @@ require_once "../config.php"; // Include database connection file
                     </form>
                 ';
 
-                        if (isset ($_POST['submit1'])) {
+                        if (isset($_POST['submit1'])) {
                             // Display all information for the logged-in user
                             // The SQL query is already prepared to fetch all information for the logged-in user
-                        } elseif (isset ($_POST['submit2'])) {
+                        } elseif (isset($_POST['submit2'])) {
                             $ret = '<p> Returned </p>';
                             $sql = "SELECT library_users.username, user_id, issue_book.books_id, library_books.books_name, library_books.authors, 
                             library_books.edition, issue_book.approve, issue_book.issue, issue_book.return                
@@ -86,7 +83,7 @@ require_once "../config.php"; // Include database connection file
                             INNER JOIN library_books ON issue_book.books_id = library_books.books_id 
                             WHERE issue_book.approve = '$ret' AND library_users.username = '{$_SESSION['user']}'
                             ORDER BY issue_book.return DESC";
-                        } elseif (isset ($_POST['submit3'])) {
+                        } elseif (isset($_POST['submit3'])) {
                             $exp = '<p> Expired </P>';
                             $sql = "SELECT library_users.username, user_id, issue_book.books_id, library_books.books_name, library_books.authors, 
                             library_books.edition, issue_book.approve, issue_book.issue, issue_book.return                
