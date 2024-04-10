@@ -24,15 +24,25 @@ require_once "../config.php"; // Include database connection file
     <!-- include Dashboard -->
     <?php
     include "./userDashboard.php";
+
     ?>
+
 
     <div class="list_container">
         <div id="main">
-                <h1>Fine Details </h1>
+            <h1>Fine Details </h1>
+
+            <h3>Your fine is :
+                <?php
+                include "./fineinfo.php";
+                echo "रु॰ " . $fine;
+                ?>
+            </h3>
+
 
             <?php
             // ========== Search user names =================
-            if (isset ($_POST['submit'])) {
+            if (isset($_POST['submit'])) {
                 $search = mysqli_real_escape_string($conn, $_POST['search']);
                 $searchBarQuery = mysqli_query($conn, "SELECT * FROM fine WHERE username LIKE '%$search%'");
 
@@ -42,7 +52,6 @@ require_once "../config.php"; // Include database connection file
                     echo "<img src='../../images/user_not_found.png' alt='User not found image' id='notFound'>";
                     echo "</div>";
                     echo "</section>";
-
                 } else {
                     echo "<div>";
                     echo "<table class='table table-bordered table-hover'>";
@@ -85,7 +94,7 @@ require_once "../config.php"; // Include database connection file
                 }
             } else {
                 // Fetch data for the logged-in user
-                if (isset ($_SESSION['user'])) {
+                if (isset($_SESSION['user'])) {
                     $loggedInUser = $_SESSION['user'];
                     $result = mysqli_query($conn, "SELECT * FROM `fine` WHERE username = '$loggedInUser'");
                     if ($result) {

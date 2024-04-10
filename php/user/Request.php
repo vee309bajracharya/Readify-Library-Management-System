@@ -3,10 +3,10 @@ include "./userNavbar.php";
 require_once "../config.php";
 
 // Check if the request form is submitted
-if (isset ($_POST['request'])) {
+if (isset($_POST['request'])) {
 
     // Check if user is logged in
-    if (isset ($_SESSION['user'])) {
+    if (isset($_SESSION['user'])) {
 
         // Get the book ID from the form
         $books_id = mysqli_real_escape_string($conn, $_POST['books_id']);
@@ -19,6 +19,11 @@ if (isset ($_POST['request'])) {
             // Book exists in the database, proceed with insertion
 
             // Check if the user has already requested this book
+            $books_name_query = "SELECT * FROM library_books WHERE books_id = '$books_id'";
+            $books_name_result = mysqli_query($conn, $books_name_query);
+            $book_row = mysqli_fetch_assoc($books_name_result);
+            $books_name = $book_row['books_name'];
+
             $username = mysqli_real_escape_string($conn, $_SESSION['user']);
             $existing_request_query = "SELECT * FROM issue_book WHERE username = '$username' AND books_id = '$books_id'";
             $existing_request_result = mysqli_query($conn, $existing_request_query);
@@ -28,7 +33,7 @@ if (isset ($_POST['request'])) {
                 echo "<script>alert('You have already requested this book');</script>";
             } else {
                 // User has not requested this book yet, proceed with insertion
-                $books_name = mysqli_real_escape_string($conn, $_POST['books_name']);
+
 
                 $query = "INSERT INTO issue_book (username, books_id, books_name) VALUES ('$username', '$books_id','$books_name')";
 
@@ -88,8 +93,7 @@ if (isset ($_POST['request'])) {
 
                         <form action="" class="navbar-form-c" method="POST" name="form-1">
                             <div class="searchBar_field">
-                                <input class="form-control-search" type="text" name="books_id"
-                                    placeholder="Enter book id" style="width:100%" required>
+                                <input class="form-control-search" type="text" name="books_id" placeholder="Enter book id" style="width:100%" required>
                                 <button type="submit" name="request" class="btn-search">Request Book</button>
                             </div>
                         </form>
@@ -98,8 +102,7 @@ if (isset ($_POST['request'])) {
                     <div class="requestBar__wrapper">
                         <form action="" class="navbar-form-c" method="POST" name="form-1">
                             <div class="searchBar_field">
-                                <input class="form-control-search" type="text" name="search"
-                                    placeholder="Type Book Name" style="width:100%" required>
+                                <input class="form-control-search" type="text" name="search" placeholder="Type Book Name" style="width:100%" required>
                                 <button type="submit" name="submit" class="btn-search">Search Book</button>
                             </div>
                         </form>
@@ -113,7 +116,7 @@ if (isset ($_POST['request'])) {
             <!-- PHP code to display books and handle book request submission -->
             <?php
             // Fetch book data from the database
-            if (isset ($_POST['submit'])) {
+            if (isset($_POST['submit'])) {
                 $search = mysqli_real_escape_string($conn, $_POST['search']);
                 $searchBarQuery = mysqli_query($conn, "SELECT * FROM library_books WHERE books_name LIKE '%$search%'");
             } else {
@@ -132,12 +135,24 @@ if (isset ($_POST['request'])) {
                 echo "<table class='table table-bordered table-hover'>";
                 echo "<tr>";
                 //Table header
-                echo "<th>";echo "Books ID";echo "</th>";
-                echo "<th>";echo "Books Name";echo "</th>";
-                echo "<th>";echo "Book Cover";echo "</th>";
-                echo "<th>";echo "Edition";echo "</th>";
-                echo "<th>";echo "Authors";echo "</th>";
-                echo "<th>";echo "Department";echo "</th>";
+                echo "<th>";
+                echo "Books ID";
+                echo "</th>";
+                echo "<th>";
+                echo "Books Name";
+                echo "</th>";
+                echo "<th>";
+                echo "Book Cover";
+                echo "</th>";
+                echo "<th>";
+                echo "Edition";
+                echo "</th>";
+                echo "<th>";
+                echo "Authors";
+                echo "</th>";
+                echo "<th>";
+                echo "Department";
+                echo "</th>";
                 echo "</tr>";
 
                 while ($row = mysqli_fetch_assoc($searchBarQuery)) {
