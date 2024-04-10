@@ -111,7 +111,9 @@ if (isset($_SESSION['user'])) {
       <!-- =========== content right ============= -->
       <div class="signup__content__right">
         <div class="welcome__content">
-          <img src="../../svg/R__logo_1.svg" alt="">
+          <a href="../../pages/index.html">
+            <img src="../../svg/R__logo_1.svg" alt="Readify Logo">
+          </a>
           <h3>Welcome to <br><span>Readify</span> </h3>
         </div>
 

@@ -42,13 +42,13 @@
         <div class="login__intro">
           <a href="../../pages/index.html"><img src="../../svg/R__logo_2.svg"></a>
           <h2>Login</h2>
-          <p>Welcome Back Admin!<br>
-            <span>Please login to get back to your dashboard</span>
+          <p>Welcome Admin!<br>
+            <span>Login to get back to your dashboard</span>
           </p>
         </div>
 
         <!-- ========= Form ============== -->
-        <form action="./admin-Log-in.php" method="POST">
+        <form action="./admin-Log-in.php" method="POST" style='margin-top: 3rem;'>
 
         <div class="field input">
             <label for="email">Email</label>
@@ -64,12 +64,6 @@
             <input type="submit" class="btn-primary btn-submit" name="login" value="Login" required>
 
           </div>
-
-          <div class="links">Don't have an account ?
-            <a href="./admin-Sign-up.php">Sign Up</a>
-          </div>
-
-
         </form>
       </div>
     </div>

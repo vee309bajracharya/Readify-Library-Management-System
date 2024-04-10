@@ -383,7 +383,6 @@ span#navbarDropdown.dropdown-toggle::after {
 /* admin dashboard */
 .primary-action {
   margin-top: 1rem;
-  margin-bottom: 3rem;
   padding: 3rem;
   background-color: var(--primary-color);
   color: var(--white-color);
@@ -408,4 +407,9 @@ span#navbarDropdown.dropdown-toggle::after {
   background-color: var(--bg-secondary);
   border: 1px solid var(--outline-color);
   color: var(--dark-color);
+}
+
+.content-book{
+  margin-top: -5rem;
+  height: 30rem;
 }

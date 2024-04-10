@@ -1,6 +1,6 @@
 <?php
-include "./adminNavbar.php"; //navbar along with sidenav
-require_once "../config.php"; //database connection file
+include "./adminNavbar.php";
+require_once "../config.php";
 
     // Check if the login success message has been shown before
     if (!isset($_SESSION['login_success_shown'])) {
@@ -123,13 +123,13 @@ if ($fine_book) {
     <div class="list_container">
         <div id="main">
 
-            <div class="dashboard-wrapper d-flex flex-column gap-4 h-75 " style="margin-top:-4rem;">
+            <div class="dashboard-wrapper d-flex flex-column gap-4">
 
                 <!-- ==== Content Top ===== -->
                 <div class="content-book">
 
-                    <h1>Books Information</h1>
-                    <span>Track and Update Book Information</span>
+                    <h2>Books Information</h2>
+                    <small>Track and Update Book Information</small>
 
                     <div class="admin-dashboard-actions">
                         <div class="primary-action">
@@ -181,8 +181,8 @@ if ($fine_book) {
                 <!-- ==== Content Bottom ==== -->
 
                 <div class="content-user">
-                    <h1>Users Information</h1>
-                    <span>Track and Interact with Members</span>
+                    <h2>Users Information</h2>
+                    <small>Track and Interact with Members</small>
 
                     <div class="admin-dashboard-actions">
                         <div class="primary-action">
