@@ -32,12 +32,29 @@ require_once "../config.php"; // Include database connection file
         <div id="main">
             <h1>Fine Details </h1>
 
-            <h3>Your fine is :
+            <h3>
                 <?php
-                include "./fineinfo.php";
-                echo "रु॰ " . $fine;
-                ?>
-            </h3>
+                if (isset($_SESSION['user'])) {
+                    $fine = 0;
+
+                    $exp = '<p> Expired </p>';
+
+                    $query = "SELECT fine FROM fine";
+                    $result = mysqli_query($conn, $query);
+
+                    if ($result) {
+                        $sum = 0;
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $sum += $row['fine'];
+                        }
+                        $fine = $sum;
+                        echo "Total fine   : रु॰ $fine";
+                    } else {
+                        echo "No fine";
+                    }
+                }
+
+                ?> </h3>
 
 
             <?php

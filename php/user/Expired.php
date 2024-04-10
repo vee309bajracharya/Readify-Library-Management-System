@@ -30,11 +30,12 @@ require_once "../config.php"; // Include database connection file
             <div class="bookStatus-container">
                 <div class="my-5">
 
-                    <h3>Your fine is :
+                    <h3> Expired Book's Fine :
                         <?php include "./fineinfo.php";
                         echo "रु॰ " . $fine;
                         ?>
                     </h3>
+                    <p>Check for more fines <a href="./fine.php">Here</a> </p>
                 </div>
 
 
