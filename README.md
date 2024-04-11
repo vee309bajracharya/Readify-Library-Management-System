@@ -42,4 +42,27 @@ For ADMIN:
 10. Charge fine if book submission is delayed
 11. Logout
 
+
+### **User : Login and SignUp**
+![Screenshot_9-4-2024_132330_localhost](https://github.com/vee309bajracharya/Readify-Library-Management-System/assets/102459306/ca59f0b6-ab2f-4457-a7c6-3f643a36fbe5)
+![Screenshot_11-4-2024_9038_localhost](https://github.com/vee309bajracharya/Readify-Library-Management-System/assets/102459306/3e64ef8d-4e14-49aa-9b8b-2d70cf37d220)
+
+### **Admin: Login**
+![Screenshot_11-4-2024_11118_localhost](https://github.com/vee309bajracharya/Readify-Library-Management-System/assets/102459306/c5f5c752-9458-4367-88cc-7cc9fc907639)
+
+
+### **Admin Dashboard**
+![Screenshot_11-4-2024_111436_localhost](https://github.com/vee309bajracharya/Readify-Library-Management-System/assets/102459306/943c8b3c-dbf3-4fef-b2b5-f1f75a0f85c1)
+
+### **Manage Books**
+![Screenshot 2024-04-11 112032](https://github.com/vee309bajracharya/Readify-Library-Management-System/assets/102459306/1df5cb37-d2e5-4881-bb55-0bc0883581ac)
+
+
+### **Edit Book Details**
+![Screenshot 2024-04-11 112047](https://github.com/vee309bajracharya/Readify-Library-Management-System/assets/102459306/531301bf-0888-4d69-b8ac-cfa4b938dba0)
+
+### **Add a New Book**
+![Screenshot 2024-04-11 112218](https://github.com/vee309bajracharya/Readify-Library-Management-System/assets/102459306/78d498cd-9525-4101-a2c5-ba46a9e75e39)
+
+
 Preview index page : https://vee309bajracharya.github.io/Readify-Library-Management-System/pages/index.html
