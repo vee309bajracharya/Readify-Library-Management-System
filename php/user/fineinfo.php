@@ -1,6 +1,6 @@
 <?php
 if (isset($_SESSION['user'])) {
-    $fine = 0;
+    $fineinfo = 0;
 
     $exp = '<p> Expired </p>';
 
@@ -28,7 +28,7 @@ if (isset($_SESSION['user'])) {
                 // Calculate the fine if overdue
                 if ($differenceInDays > 0) {
                     // Calculate the fine
-                    $fine += $differenceInDays * 40;
+                    $fineinfo += $differenceInDays * 40;
 
                     // Output the number of days overdue
                     // echo "Number of days overdue: " . $differenceInDays . " days<br>";

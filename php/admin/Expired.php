@@ -45,6 +45,10 @@ if (isset($_SESSION['admin'])) {
                 if (isset($_SESSION['admin'])) {
                 ?>
                     <div class="searchBar__wrapper">
+
+
+
+
                         <h2>Book Status </h2>
 
                         <!-- Form for username search -->
@@ -154,8 +158,11 @@ if (isset($_SESSION['admin'])) {
                         issue_book.approve,
                         issue_book.issue,
                         issue_book.return                
-                        FROM library_users INNER JOIN issue_book ON library_users.username = issue_book.username 
-                        INNER JOIN library_books ON issue_book.books_id = library_books.books_id ORDER BY issue_book.return DESC";
+                    FROM library_users 
+                    INNER JOIN issue_book ON library_users.username = issue_book.username 
+                    INNER JOIN library_books ON issue_book.books_id = library_books.books_id
+                    WHERE NOT (issue_book.approve = '' OR issue_book.approve = 'No')
+                    ORDER BY issue_book.return DESC";
                     }
 
                     if (isset($_POST['submit2'])) {
@@ -170,8 +177,11 @@ if (isset($_SESSION['admin'])) {
                         issue_book.approve,
                         issue_book.issue,
                         issue_book.return                
-                        FROM library_users INNER JOIN issue_book ON library_users.username = issue_book.username 
-                        INNER JOIN library_books ON issue_book.books_id = library_books.books_id WHERE issue_book.approve = '$ret' ORDER BY issue_book.return DESC";
+                    FROM library_users 
+                    INNER JOIN issue_book ON library_users.username = issue_book.username 
+                    INNER JOIN library_books ON issue_book.books_id = library_books.books_id 
+                    WHERE issue_book.approve = '$ret' OR (issue_book.approve = '' AND issue_book.approve LIKE '%NO%')
+                    ORDER BY issue_book.return DESC";
                     }
 
                     if (isset($_POST['submit3'])) {
@@ -187,8 +197,11 @@ if (isset($_SESSION['admin'])) {
                         issue_book.approve,
                         issue_book.issue,
                         issue_book.return                
-                        FROM library_users INNER JOIN issue_book ON library_users.username = issue_book.username 
-                        INNER JOIN library_books ON issue_book.books_id = library_books.books_id WHERE issue_book.approve = '$exp' ORDER BY issue_book.return DESC";
+                    FROM library_users 
+                    INNER JOIN issue_book ON library_users.username = issue_book.username 
+                    INNER JOIN library_books ON issue_book.books_id = library_books.books_id 
+                    WHERE issue_book.approve = '$exp' OR (issue_book.approve = '' AND issue_book.approve LIKE '%NO%')
+                    ORDER BY issue_book.return DESC";
                     }
 
                     // Default display if no filter is selected
@@ -206,6 +219,7 @@ if (isset($_SESSION['admin'])) {
                             FROM library_users 
                             INNER JOIN issue_book ON library_users.username = issue_book.username 
                             INNER JOIN library_books ON issue_book.books_id = library_books.books_id 
+                            WHERE NOT (issue_book.approve = '' OR issue_book.approve = 'No')
                             ORDER BY issue_book.return DESC";
                     }
 
@@ -257,16 +271,17 @@ if (isset($_SESSION['admin'])) {
     </div>
 
 
-            <!-- jquery, popper, bootstrapJS -->
-      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-    
+    <!-- jquery, popper, bootstrapJS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+
     <!-- === sweetAlert link === -->
     <script src="../sweetAlert/sweetalert.js"></script>
 
-    <?php 
-          include ('../sweetAlert/sweetalert_actions.php');
+    <?php
+    include('../sweetAlert/sweetalert_actions.php');
     ?>
 </body>
+
 </html>

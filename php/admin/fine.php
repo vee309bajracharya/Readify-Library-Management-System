@@ -7,7 +7,8 @@ if (isset($_POST["submit"])) {
     $username = $_POST["username"];
     $book_id = $_POST["book_id"];
 
-    $update_query = "UPDATE fine SET status = 'paid' WHERE username = '$username' AND bid = '$book_id'";
+    $update_query = "UPDATE fine SET status = 'paid', fine = 0 WHERE username = '$username' AND bid = '$book_id'";
+
     $update_result = mysqli_query($conn, $update_query);
 
     if ($update_result) {
@@ -73,71 +74,74 @@ if (!$searchBarQuery) {
             </div>
             <div style="margin-top: 2rem;">
                 <form method="post">
-                        <button type="submit" name="filter" value="all" class="btn btn-default">All information</button>
-                        <button type="submit" name="filter" value="unpaid" class="btn btn-default">Unpaid</button>
-                        <button type="submit" name="filter" value="paid" class="btn btn-default">Paid</button>
+                    <button type="submit" name="filter" value="all" class="btn btn-default">All information</button>
+                    <button type="submit" name="filter" value="unpaid" class="btn btn-default">Unpaid</button>
+                    <button type="submit" name="filter" value="paid" class="btn btn-default">Paid</button>
                 </form>
             </div>
 
 
 
-                <?php
-                if (mysqli_num_rows($searchBarQuery) == 0) {
-                    echo "<section>";
-                    echo "<div class='error_container'>";
-                    echo "<img src='../../images/user_not_found.png' alt='User not found image' id='notFound'>";
-                    echo "</div>";
-                    echo "</section>";
-                } else {
-                    echo "<div>";
-                    echo "<table class='table table-bordered table-hover'>";
-                    echo "<tr>";
-                    echo "<th>Username</th>";
-                    echo "<th>Book ID</th>";
-                    echo "<th>Books Name</th>";
-                    echo "<th>Book Cover</th>";
-                    echo "<th>Returned</th>";
-                    echo "<th>Days</th>";
-                    echo "<th>Fine</th>";
-                    echo "<th>Status</th>";
-                    echo "<th>Update Status</th>";
-                    echo "</tr>";
+            <?php
+            if (mysqli_num_rows($searchBarQuery) == 0) {
+                echo "<section>";
+                echo "<div class='error_container'>";
+                echo "<img src='../../images/user_not_found.png' alt='User not found image' id='notFound'>";
+                echo "</div>";
+                echo "</section>";
+            } else {
+                echo "<div>";
+                echo "<table class='table table-bordered table-hover'>";
+                echo "<tr>";
+                echo "<th>Username</th>";
+                echo "<th>Book ID</th>";
+                echo "<th>Books Name</th>";
+                echo "<th>Book Cover</th>";
+                echo "<th>Returned</th>";
+                echo "<th>Days</th>";
+                echo "<th>Fine</th>";
+                echo "<th>Status</th>";
+                echo "<th>Update Status</th>";
+                echo "</tr>";
 
-                    while ($row = mysqli_fetch_assoc($searchBarQuery)) {
-                        echo "<tr>";
-                        echo "<td>" . $row['username'] . "</td>";
-                        echo "<td>" . $row['bid'] . "</td>";
-                        echo "<td>" . $row['books_name'] . "</td>";
-                        echo "<td style='text-align:center;'><img src='../admin/covers/" . $row['book_cover'] . "' alt='Book Cover' width='100' style='object-fit: cover; border-radius: 5px;'></td>";
-                        echo "<td>" . $row['returned'] . "</td>";
-                        echo "<td>" . $row['days'] . "</td>";
-                        echo "<td>" . $row['fine'] . "</td>";
-                        echo "<td>" . $row['status'] . "</td>";
-                        echo "<td>";
-                        echo "<form method='POST'>";
-                        echo "<input type='hidden' name='username' value='" . $row['username'] . "'>";
-                        echo "<input type='hidden' name='book_id' value='" . $row['bid'] . "'>";
-                        echo "<button type='submit' name='submit' class='btn btn-secondary'>Mark as Paid</button>";
-                        echo "</form>";
-                        echo "</td>";
-                        echo "</tr>";
-                    }
-                    echo "</table>";
-                    echo "</div>";
+                while ($row = mysqli_fetch_assoc($searchBarQuery)) {
+                    echo "<tr>";
+                    echo "<td>" . $row['username'] . "</td>";
+                    echo "<td>" . $row['bid'] . "</td>";
+                    echo "<td>" . $row['books_name'] . "</td>";
+                    echo "<td style='text-align:center;'><img src='../admin/covers/" . $row['book_cover'] . "' alt='Book Cover' width='100' style='object-fit: cover; border-radius: 5px;'></td>";
+                    echo "<td>" . $row['returned'] . "</td>";
+                    echo "<td>" . $row['days'] . "</td>";
+                    echo "<td>" . $row['fine'] . "</td>";
+                    echo "<td>" . $row['status'] . "</td>";
+                    echo "<td>";
+                    echo "<form method='POST'>";
+                    echo "<input type='hidden' name='username' value='" . $row['username'] . "'>";
+                    echo "<input type='hidden' name='book_id' value='" . $row['bid'] . "'>";
+                    echo "<button type='submit' name='submit' class='btn btn-secondary'>Mark as Paid</button>";
+                    echo "</form>";
+                    echo "</td>";
+                    echo "</tr>";
                 }
-                ?>
+                echo "</table>";
+                echo "</div>";
+            }
+
+
+            ?>
         </div>
 
-                    <!-- jquery, popper, bootstrapJS -->
-      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-    
-    <!-- === sweetAlert link === -->
-    <script src="../sweetAlert/sweetalert.js"></script>
+        <!-- jquery, popper, bootstrapJS -->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 
-    <?php 
-          include ('../sweetAlert/sweetalert_actions.php');
-    ?>
+        <!-- === sweetAlert link === -->
+        <script src="../sweetAlert/sweetalert.js"></script>
+
+        <?php
+        include('../sweetAlert/sweetalert_actions.php');
+        ?>
 </body>
+
 </html>

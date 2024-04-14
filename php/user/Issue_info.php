@@ -1,30 +1,31 @@
 <?php
-    include "./userNavbar.php";
-    require_once "../config.php";
+include "./userNavbar.php";
+require_once "../config.php";
 
-    $searchBarQuery = null; // Set a default value for $searchBarQuery
+$searchBarQuery = null; // Set a default value for $searchBarQuery
 
-    if (isset ($_SESSION['user'])) {
-        $searchBarQuery = mysqli_query($conn, "SELECT 
+if (isset($_SESSION['user'])) {
+    $searchBarQuery = mysqli_query($conn, "SELECT 
         issue_book.books_id, 
         library_books.books_name, 
         library_books.book_cover, 
         issue_book.approve,
-        issue_book.issue, 
+        issue_book.issue,
+        issue_book.remarks,
         issue_book.
         `return` FROM issue_book INNER JOIN library_books ON issue_book.books_id = library_books.books_id WHERE issue_book.username='$_SESSION[user]'");
-    } else {
-        echo "No user specified.";
-    }
+} else {
+    echo "No user specified.";
+}
 
-        // Check if the request book success message has been shown before
-        if (!isset($_SESSION['success_shown'])) {
-            $_SESSION['msg'] = "Book Request Success!!";
-            $_SESSION['msg_code'] = "success";
-    
-            // Set the session variable to indicate that the message has been shown
-            $_SESSION['success_shown'] = true;
-        }
+// Check if the request book success message has been shown before
+if (!isset($_SESSION['success_shown'])) {
+    $_SESSION['msg'] = "Book Request Success!!";
+    $_SESSION['msg_code'] = "success";
+
+    // Set the session variable to indicate that the message has been shown
+    $_SESSION['success_shown'] = true;
+}
 
 ?>
 
@@ -67,13 +68,28 @@
                     echo "<table class='table table-bordered table-hover'>";
                     echo "<tr>";
                     //Table header
-            
-                    echo "<th>";echo "Book ID";echo "</th>";
-                    echo "<th>";echo "Books Name";echo "</th>";
-                    echo "<th>";echo "Book Cover";echo "</th>";
-                    echo "<th>";echo "Approve/Book Status";echo "</th>";
-                    echo "<th>";echo "Book Issued Date";echo "</th>";
-                    echo "<th>";echo "Book Return Date";echo "</th>";
+
+                    echo "<th>";
+                    echo "Book ID";
+                    echo "</th>";
+                    echo "<th>";
+                    echo "Books Name";
+                    echo "</th>";
+                    echo "<th>";
+                    echo "Book Cover";
+                    echo "</th>";
+                    echo "<th>";
+                    echo "Approve/Book Status";
+                    echo "</th>";
+                    echo "<th>";
+                    echo "Book Issued Date";
+                    echo "</th>";
+                    echo "<th>";
+                    echo "Book Return Date";
+                    echo "</th>";
+                    echo "<th>";
+                    echo "Remarks";
+                    echo "</th>";
 
 
                     echo "</tr>";
@@ -86,7 +102,7 @@
                         echo "<td>" . $row['approve'] . "</td>";
                         echo "<td>" . $row['issue'] . "</td>";
                         echo "<td>" . $row['return'] . "</td>";
-
+                        echo "<td>" . $row['remarks'] . "</td>";
                         echo "</tr>";
                     }
                     echo "</table>";
@@ -107,12 +123,13 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-    
+
     <!-- === sweetAlert link === -->
     <script src="../sweetAlert/sweetalert.js"></script>
 
-    <?php 
-          include ('../sweetAlert/sweetalert_actions.php');
+    <?php
+    include('../sweetAlert/sweetalert_actions.php');
     ?>
 </body>
+
 </html>
