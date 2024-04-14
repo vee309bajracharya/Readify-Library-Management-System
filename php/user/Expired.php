@@ -32,12 +32,12 @@ require_once "../config.php"; // Include database connection file
 
                     <h3> Expired Book's Fine :
                         <?php include "./fineinfo.php";
-                        echo "रु॰ " . $fine;
+                        echo "रु॰ " . $fineinfo;
                         ?>
                     </h3>
-                    <span>Check for more fines 
+                    <span>Check for more fines
                         <a href="./fine.php" class="fine-link">Here</a>
-                     </span>
+                    </span>
                 </div>
 
 
@@ -86,7 +86,7 @@ require_once "../config.php"; // Include database connection file
 
                         if (isset($_POST['submit1'])) {
                             // Display all information for the logged-in user
-            
+
                         } elseif (isset($_POST['submit2'])) {
                             //Returned
                             $ret = '<p> Returned </p>';
@@ -105,8 +105,6 @@ require_once "../config.php"; // Include database connection file
                             INNER JOIN library_books ON issue_book.books_id = library_books.books_id 
                             WHERE issue_book.approve = '$ret' AND library_users.username = '{$_SESSION['user']}'
                             ORDER BY issue_book.return DESC";
-
-                            
                         } elseif (isset($_POST['submit3'])) {
                             $exp = '<p> Expired </P>';
                             $sql = "SELECT 
@@ -173,4 +171,5 @@ require_once "../config.php"; // Include database connection file
         </div>
     </div>
 </body>
+
 </html>
