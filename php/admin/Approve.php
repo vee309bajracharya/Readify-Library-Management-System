@@ -22,7 +22,7 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
 
     <style>
         .approve {
-            width: 60%;
+            width: 80%;
         }
 
         .approve_button {
@@ -61,19 +61,22 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
 
                     </div>
 
-                    <form action="" method="post" style="margin-top: 5rem;">
                         <form action="" method="post" style="margin-top: 5rem;">
-                            <!-- YES OR NO -->
-                            <div class="field input">
-                                <label for="bookApprove">Approve Book</label>
-                                <input type="radio" id="yes" name="approve" value="Yes">
-                                <label for="yes">Yes</label><br>
-                                <input type="radio" id="no" name="approve" value="No">
-                                <label for="no">No</label><br>
+                            <div class="fw-bold float-start">Select Approval Status</div> <br>
+
+                            <!-- Approval status -->
+                            <div class="field input mt-5 d-flex align-items-center">
+
+                                <label for="yes">Approve</label>
+                                <input type="radio" id="yes" name="approve" value="Yes" class="custom-radio" checked>
+
+                                <label for="no">Reject</label>
+                                <input type="radio" id="no" name="approve" value="No" class="custom-radio">
                             </div>
 
                             <div class="dropdown" id="feedbackDropdown" style="display: none;">
-                                <textarea name="remarks" id="feedbackText" cols="30" rows="10" placeholder="Please provide a reason for not approving the book"></textarea>
+                                <textarea name="remarks" id="feedbackText" class="p-3 w-100"
+                                placeholder="Please provide a reason for not approving the book"></textarea>
                             </div>
 
                             <div class="field input" id="issueDateField">
@@ -103,13 +106,7 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
                 $username = $_SESSION['username'];
                 $books_id = $_SESSION['books_id']; // Assuming books_id is stored in $_SESSION['bid']
 
-                // Establish database connection
-                $conn = mysqli_connect("localhost", "root", "", "readify_lms");
-
-                // Check connection
-                if (!$conn) {
-                    die("Connection failed: " . mysqli_connect_error());
-                }
+                require_once "../../php/config.php";
 
                 // Update issue_book table
                 $sql = "UPDATE issue_book SET approve='$approve', issue='$issue', `return`='$return', remarks='$remarks' WHERE username='$username' AND books_id='$books_id';";
@@ -125,8 +122,10 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
                         mysqli_query($conn, "UPDATE library_books SET status='not-available' WHERE books_id='$books_id'");
                     }
 
-                    $_SESSION['msg'] = "Book Approved !!";
-                    $_SESSION['msg_code'] = "success";
+                    if ($approve == 'Yes') {
+                        $_SESSION['msg'] = "Book Approved !!";
+                        $_SESSION['msg_code'] = "success";
+                    }
                 } else {
                     $_SESSION['msg'] = "Error in Approving book !!";
                     $_SESSION['msg_code'] = "error";
@@ -151,6 +150,7 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
         const feedbackDropdown = document.getElementById('feedbackDropdown');
         const issueDateField = document.getElementById('issueDateField');
         const returnDateField = document.getElementById('returnDateField');
+        const approveButton = document.querySelector('.approve_button');
 
         yesRadioButton.addEventListener('change', function() {
             if (yesRadioButton.checked) {
@@ -159,6 +159,7 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
                 returnDateField.style.display = 'block';
                 issueDateField.querySelector('input').required = true;
                 returnDateField.querySelector('input').required = true;
+                approveButton.innerText = 'Approve';
             }
         });
 
@@ -169,6 +170,7 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
                 returnDateField.style.display = 'none';
                 issueDateField.querySelector('input').removeAttribute('required');
                 returnDateField.querySelector('input').removeAttribute('required');
+                approveButton.innerText = 'Send';
             }
         });
     </script>
@@ -176,7 +178,7 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
 
 
     <?php
-    include('../sweetAlert/sweetalert_actions.php');
+        include('../sweetAlert/sweetalert_actions.php');
     ?>
 </body>
 

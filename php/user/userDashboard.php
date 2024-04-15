@@ -1,5 +1,5 @@
 <?php
-require_once "../config.php"; //database connection file
+    require_once "../config.php"; //database connection file
 ?>
 <!DOCTYPE html>
 <html lang="en">

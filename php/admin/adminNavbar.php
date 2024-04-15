@@ -31,7 +31,7 @@ if (!isset($_SESSION['admin'])) {
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css" />
 
     <!-- ===== Bootstrap link ======== -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
    
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -46,13 +46,12 @@ if (!isset($_SESSION['admin'])) {
 <body>
     <!-- ====== navbar starts =========== -->
     <header style='position: sticky !important;top: 0;left: 0;right: 0;z-index: 1000'>
-        <nav class="navbar custom-navbar ">
-            <div class="container-fluid custom-navbar fixed-top">
+        <nav class="custom-navbar">
+            <div class="custom-navbar fixed-top">
 
-                <ul class="nav navbar-nav navbar-right custom-ul navbar-flex">
-                    <a href="./Approve.php"><i class='bx bx-bell'></i></a>
-                    <!-- <i class='bx bxs-bell-ring' ></i> -->
-                    <a href="#" style="text-decoration: none;">
+                <ul class="custom-ul navbar-flex flex-row-reverse">
+
+                <a href="#" style="text-decoration: none;">
                         <?php
                         // Display fullname and profile image if user is logged in
                         echo '<div class="custom-links d-flex align-items-center">';
@@ -62,6 +61,10 @@ if (!isset($_SESSION['admin'])) {
                         echo '</div>';
                         ?>
                     </a>
+                    
+                    <a href="./Approve.php"><i class='bx bx-bell'></i></a>
+                    <!-- <i class='bx bxs-bell-ring' ></i> -->
+
                 </ul>
             </div>
         </nav>

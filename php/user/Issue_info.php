@@ -18,15 +18,6 @@ if (isset($_SESSION['user'])) {
     echo "No user specified.";
 }
 
-// Check if the request book success message has been shown before
-if (!isset($_SESSION['success_shown'])) {
-    $_SESSION['msg'] = "Book Request Success!!";
-    $_SESSION['msg_code'] = "success";
-
-    // Set the session variable to indicate that the message has been shown
-    $_SESSION['success_shown'] = true;
-}
-
 ?>
 
 <!DOCTYPE html>

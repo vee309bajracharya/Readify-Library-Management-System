@@ -52,7 +52,7 @@ require_once "../config.php"; //database connection file
         <li><a href="./Issued.php" class="sidebar-links"><i class='bx bxs-book-add'></i> Add New Book</a></li>
       </ul>
 
-      <a href="./Request.php" class="sidebar-links"><i class='bx bx-list-check'></i> Approve Book</a>
+      <a href="./Request.php" class="sidebar-links"><i class='bx bx-list-check'></i> Approval Books List</a>
       <a href="./issue_info.php" class="sidebar-links"><i class='bx bx-list-ul'></i> Approved Books Log</a>
       <a href="./Expired.php" class="sidebar-links"><i class='bx bx-library'></i> Book Status</a>
       <a href="./fine.php" class="sidebar-links"><i class='bx bxs-wallet-alt'></i> Fine Info</a>

@@ -37,14 +37,12 @@ if (isset($_POST['request'])) {
                 // User has not requested this book yet, proceed with insertion
 
                 $query = "INSERT INTO issue_book (username, books_id, books_name) VALUES ('$username', '$books_id','$books_name')";
-
+                
                 if (mysqli_query($conn, $query)) {
-                    echo "<script>
-                        window.location='issue_info.php';
-                    </script>";
-                } else {
-                    // Error message for database insertion error
-                    echo "<script>alert('Error requesting book: " . mysqli_error($conn) . "');</script>";
+                    // Set session variables for success message
+                    $_SESSION['msg'] = "Book Request Success!!";
+                    $_SESSION['msg_code'] = "success";
+                
                 }
             }
         } else {

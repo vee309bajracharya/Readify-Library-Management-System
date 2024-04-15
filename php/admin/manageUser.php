@@ -63,7 +63,6 @@ if (isset($_POST['submit'])) {
         echo "<tr>";
         //Table header
         echo "<th>"; echo "Full Name"; echo "</th>";
-        echo "<th>"; echo "Username"; echo "</th>";
         echo "<th>"; echo "Email"; echo "</th>";
         echo "<th>"; echo "Phone Number"; echo "</th>";
         echo "<th>"; echo "Address"; echo "</th>";
@@ -75,7 +74,6 @@ if (isset($_POST['submit'])) {
             echo "<tr>";
             //fetch data from library_books table
                 echo "<td>" . $row['fullname'] . "</td>";
-                echo "<td>" . $row['username'] . "</td>";
                 echo "<td>" . $row['email'] . "</td>";
                 echo "<td>" . $row['phone_number'] . "</td>";
                 echo "<td>" . $row['address'] . "</td>";
@@ -93,7 +91,6 @@ if (isset($_POST['submit'])) {
             echo "<tr>";
             //Table header
             echo "<th>"; echo "Full Name"; echo "</th>";
-            echo "<th>"; echo "Username"; echo "</th>";
             echo "<th>"; echo "Email"; echo "</th>";
             echo "<th>"; echo "Phone Number"; echo "</th>";
             echo "<th>"; echo "Address"; echo "</th>";
@@ -106,7 +103,6 @@ if (isset($_POST['submit'])) {
                 echo "<tr>";
                 //fetch data from library_books table
                 echo "<td>" . $row['fullname'] . "</td>";
-                echo "<td>" . $row['username'] . "</td>";
                 echo "<td>" . $row['email'] . "</td>";
                 echo "<td>" . $row['phone_number'] . "</td>";
                 echo "<td>" . $row['address'] . "</td>";

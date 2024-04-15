@@ -220,11 +220,11 @@ table {
   width: 100%;
 }
 table th {
-  background-color: var(--primary-color);
+  background-color: var(--primary-color) !important;
   color: var(--white-color) !important;
 }
 .custom-th {
-  background-color: transparent;
+  background-color: transparent !important;
   color: var(--dark-color) !important;
   width: 35%;
 }
@@ -427,7 +427,6 @@ span#navbarDropdown.dropdown-toggle::after {
   padding: 10px;
   margin: 2rem 0;
   width: 35%;
-  text-align: center;
 }
 
 .fine-details h2 {
@@ -445,4 +444,21 @@ span#navbarDropdown.dropdown-toggle::after {
 .fine-details .highlight {
   font-weight: bold;
   color: var(--primary-color);
+}
+.btn-fine{
+  border:  1px solid var(--dark-color) !important;
+  color: var(--dark-color);
+  padding: 1.2rem;
+  border-radius: 5px !important;
+  transition: 0.3s ease-in !important;
+}
+.btn-fine:hover{
+  border: transparent !important;
+  background-color: var(--hover-color1);
+  color: var(--white-color) !important;
+}
+
+/* admin book req handle */
+.custom-radio{
+  height: 2.5rem !important;
 }

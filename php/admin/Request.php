@@ -1,8 +1,8 @@
 <?php
-include "./adminNavbar.php"; //navbar along with sidenav
-require_once "../config.php"; // Include database connection file
+    include "./adminNavbar.php";
+    require_once "../config.php";
 
-$searchBarQuery = null; // Set a default value for $searchBarQuery
+    $searchBarQuery = null; // Set a default value for $searchBarQuery
 
 ?>
 
@@ -26,22 +26,18 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
 
     <!-- include Sidebar -->
     <?php
-    include "./adminSidebar.php";
+        include "./adminSidebar.php";
     ?>
 
     <div class="list_container">
         <div id="main">
-
-
-
-
             <h2> Select Books for Approval </h2>
 
             <form action="" class="navbar-form-c" method="POST" name="form-1">
                 <div class="searchBar_field">
                     <input class="form-control-search" type="text" name="username" placeholder="Username" style="width:100%" required>
                     <input type="text" name="book_id" class="form-control-search" placeholder="books_id" style="width:100%" required>
-                    <button type="submit" name="submit" class="btn-search">Approve</button>
+                    <button type="submit" name="submit" class="btn-search">Process Request</button>
                 </div>
             </form>
 
@@ -81,30 +77,14 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
                 echo "<tr>";
                 //Table header
 
-                echo "<th>";
-                echo "Student Username";
-                echo "</th>";
-                echo "<th>";
-                echo "User ID";
-                echo "</th>";
-                echo "<th>";
-                echo "Book ID";
-                echo "</th>";
-                echo "<th>";
-                echo "Books Name";
-                echo "</th>";
-                echo "<th>";
-                echo "Book Cover";
-                echo "</th>";
-                echo "<th>";
-                echo "Authors";
-                echo "</th>";
-                echo "<th>";
-                echo "Edition";
-                echo "</th>";
-                echo "<th>";
-                echo "Status";
-                echo "</th>";
+                echo "<th>";echo "Student Username";echo "</th>";
+                echo "<th>";echo "User ID";echo "</th>";
+                echo "<th>";echo "Book ID";echo "</th>";
+                echo "<th>";echo "Books Name";echo "</th>";
+                echo "<th>";echo "Book Cover";echo "</th>";
+                echo "<th>";echo "Authors";echo "</th>";
+                echo "<th>";echo "Edition";echo "</th>";
+                echo "<th>";echo "Status";echo "</th>";
 
                 echo "</tr>";
                 while ($row = mysqli_fetch_assoc($res)) {
@@ -126,8 +106,10 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
             }
         } else {
         ?>
-            <br> <br> <br>
-            <h3> You need to login to see the request</h3>
+        <?php
+                    $_SESSION['msg'] = "Login First !!";
+                    $_SESSION['msg_code'] = "error";
+        ?>
 
         <?php
         }
@@ -139,7 +121,7 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
                 window.location = "Approve.php";
             </script>
         <?php
-        }
+            }
         ?>
     </div>
     </div>
@@ -152,7 +134,7 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
     <script src="../sweetAlert/sweetalert.js"></script>
 
     <?php
-    include('../sweetAlert/sweetalert_actions.php');
+        include('../sweetAlert/sweetalert_actions.php');
     ?>
 </body>
 
