@@ -127,15 +127,15 @@ if (isset($_GET['cancel_books_id'])) {
         <!-- display books and handle book request submission -->
         <?php
 
-            if (isset($_POST['request_filter'])) {
-            }
-            // Fetch book data from the database
-            if (isset($_POST['submit'])) {
-                $search = mysqli_real_escape_string($conn, $_POST['search']);
-                $searchBarQuery = mysqli_query($conn, "SELECT * FROM library_books WHERE books_name LIKE '%$search%'");
-            } else {
-                $searchBarQuery = mysqli_query($conn, "SELECT * FROM `library_books` WHERE quantity > 0 ORDER BY `library_books`.`books_id` ASC;");
-            }
+        if (isset($_POST['request_filter'])) {
+        }
+        // Fetch book data from the database
+        if (isset($_POST['submit'])) {
+            $search = mysqli_real_escape_string($conn, $_POST['search']);
+            $searchBarQuery = mysqli_query($conn, "SELECT * FROM library_books WHERE books_name LIKE '%$search%'");
+        } else {
+            $searchBarQuery = mysqli_query($conn, "SELECT * FROM `library_books` ORDER BY `library_books`.`books_id` ASC;");
+        }
 
         if (mysqli_num_rows($searchBarQuery) == 0) {
             echo "<section>";
