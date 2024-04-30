@@ -134,7 +134,7 @@ if (isset($_GET['cancel_books_id'])) {
             $search = mysqli_real_escape_string($conn, $_POST['search']);
             $searchBarQuery = mysqli_query($conn, "SELECT * FROM library_books WHERE books_name LIKE '%$search%'");
         } else {
-            $searchBarQuery = mysqli_query($conn, "SELECT * FROM `library_books` ORDER BY `library_books`.`books_id` ASC;");
+            $searchBarQuery = mysqli_query($conn, "SELECT * FROM `library_books` WHERE quantity > 0 ORDER BY `library_books`.`books_id` ASC;");
         }
 
         if (mysqli_num_rows($searchBarQuery) == 0) {
