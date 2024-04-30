@@ -10,32 +10,33 @@ if (isset($_POST['submit'])) {
     $books_name = $_POST["books_name"];
     $authors = $_POST['authors'];
     $edition = $_POST['edition'];
-    $status = $_POST['status'];
     $quantity = $_POST['quantity'];
     $department = $_POST['department'];
     $book_cover_url = $_POST['book_cover_url'];
 
-        // Check if a new book cover URL is provided
-        if (!empty($book_cover_url)) {
-            // Fetch book cover from URL and save it locally
-            $image_data = file_get_contents($book_cover_url);
-            $book_cover_name = basename($book_cover_url);
-            $book_cover_path = "./covers/" . $book_cover_name;
-            file_put_contents($book_cover_path, $image_data);
-    
-            // Update book cover in the database
-            $sql_cover = "UPDATE library_books SET book_cover = ? WHERE books_id = ?";
-            $stmt_cover = $conn->prepare($sql_cover);
-            $stmt_cover->bind_param("si", $book_cover_name, $books_id);
-    
-            if (!$stmt_cover->execute()) {
-                $_SESSION['msg'] = "Error updating book image";
-                $_SESSION['msg_code'] = "error";
-            }
-    
-            $stmt_cover->close();
+    // Check if the quantity is zero
+    $status = ($quantity == 0) ? "Unavailable" : "Available";
+
+    // Check if a new book cover URL is provided
+    if (!empty($book_cover_url)) {
+        // Fetch book cover from URL and save it locally
+        $image_data = file_get_contents($book_cover_url);
+        $book_cover_name = basename($book_cover_url);
+        $book_cover_path = "./covers/" . $book_cover_name;
+        file_put_contents($book_cover_path, $image_data);
+
+        // Update book cover in the database
+        $sql_cover = "UPDATE library_books SET book_cover = ? WHERE books_id = ?";
+        $stmt_cover = $conn->prepare($sql_cover);
+        $stmt_cover->bind_param("si", $book_cover_name, $books_id);
+
+        if (!$stmt_cover->execute()) {
+            $_SESSION['msg'] = "Error updating book image";
+            $_SESSION['msg_code'] = "error";
         }
 
+        $stmt_cover->close();
+    }
 
     // Update other book information in the database
     $sql = "UPDATE library_books SET books_name = ?, authors = ?, edition = ?, status = ?, quantity = ?, department = ? WHERE books_id = ?";
@@ -71,7 +72,6 @@ if (isset($_GET['id'])) {
         $books_name = $row['books_name'];
         $authors = $row['authors'];
         $edition = $row['edition'];
-        $status = $row['status'];
         $quantity = $row['quantity'];
         $department = $row['department'];
         $book_cover = $row['book_cover'];
@@ -135,10 +135,7 @@ if (isset($_GET['id'])) {
                             <input type="text" name="edition" id="edition" value="<?php echo $edition; ?>" required=""><br>
                         </div>
 
-                        <div class="field input">
-                            <label for="bookStatus">Book Status</label>
-                            <input type="text" name="status" id="status" value="<?php echo $status; ?>" required=""><br>
-                        </div>
+                        <!-- Remove Book Status field -->
 
                         <div class="field input">
                             <label for="bookQty">Book Quantity</label>
@@ -166,16 +163,16 @@ if (isset($_GET['id'])) {
     </div>
 
 
-          <!-- jquery, popper, bootstrapJS -->
-          <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
-          <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-    
+    <!-- jquery, popper, bootstrapJS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+
     <!-- === sweetAlert link === -->
     <script src="../sweetAlert/sweetalert.js"></script>
 
-    <?php 
-          include ('../sweetAlert/sweetalert_actions.php');
+    <?php
+    include ('../sweetAlert/sweetalert_actions.php');
     ?>
 </body>
 </html>

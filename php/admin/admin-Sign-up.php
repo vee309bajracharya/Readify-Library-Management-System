@@ -227,7 +227,7 @@ if (isset ($_SESSION['admin'])) {
         $prepareStmt = mysqli_stmt_prepare($stmt, $sql);
 
         if ($prepareStmt) {
-          $pic = 'user_profile_default.png';
+          $pic = './admin_profile/user__profile__default.png';
 
           mysqli_stmt_bind_param($stmt, "sssisss", $fullname, $username, $email, $phone_number, $pwdHash, $address, $pic);
           mysqli_stmt_execute($stmt);

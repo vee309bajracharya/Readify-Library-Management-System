@@ -38,18 +38,18 @@ if (isset($_GET['approve_book_id'])) {
                     $_SESSION['msg_code'] = "success";
                 } else {
                     // Set session variables for error message (optional)
-                    $_SESSION['msg'] = "Error: Book(s) Not approved";
+                    $_SESSION['msg'] = "Book(s) Not approved";
                     $_SESSION['msg_code'] = "error";
                 }
             } else {
                 // Set session variables for error message (optional)
-                $_SESSION['msg'] = "Error: Book(s) not available";
+                $_SESSION['msg'] = "Book(s) not available";
                 $_SESSION['msg_code'] = "error";
             }
         }
     } else {
         // Set session variables for error message (optional)
-        $_SESSION['msg'] = "Error: No books selected for approval";
+        $_SESSION['msg'] = "No books selected for approval";
         $_SESSION['msg_code'] = "error";
     }
 
@@ -97,9 +97,9 @@ if (isset($_GET['approve_book_id'])) {
             </form>
 
             <form action="" method="get">
-                <button type="submit" name="approve_book_id">Approve Selected</button>
-                <button type="button" onclick="checkAll()">Check All</button>
-                <button type="button" onclick="uncheckAll()">Uncheck All</button>
+                <button type="submit" name="approve_book_id" class="btn btn-default">Approve Selected</button>
+                <button type="button" onclick="checkAll()" class="btn btn-default">Check All</button>
+                <button type="button" onclick="uncheckAll()" class="btn btn-default">Uncheck All</button>
 
                 <?php
                 if (isset($_SESSION['admin'])) {
