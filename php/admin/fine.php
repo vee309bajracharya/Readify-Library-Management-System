@@ -118,7 +118,7 @@ if (!$searchBarQuery) {
                     echo "<form method='POST'>";
                     echo "<input type='hidden' name='username' value='" . $row['username'] . "'>";
                     echo "<input type='hidden' name='book_id' value='" . $row['bid'] . "'>";
-                    echo "<button type='submit' name='submit' class='btn btn-fine'>Mark as Paid</button>";
+                    echo "<button type='submit' name='submit' class='btn btn-action'>Mark as Paid</button>";
                     echo "</form>";
                     echo "</td>";
                     echo "</tr>";

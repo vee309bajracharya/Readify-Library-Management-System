@@ -109,7 +109,6 @@ if (isset($_GET['cancel_books_id'])) {
             <div class="searchBar__wrapper">
                 <h3>Book Request</h3>
 
-                <div class="searchBar_container">
                     <div class="requestBar__wrapper">
                         <form action="" class="navbar-form-c" method="POST" name="form-1">
                             <div class="searchBar_field">
@@ -120,7 +119,6 @@ if (isset($_GET['cancel_books_id'])) {
                         </form>
                     </div>
 
-                </div>
                 <div>
 
                     <?php
@@ -172,27 +170,13 @@ if (isset($_GET['cancel_books_id'])) {
                 echo "<table class='table table-bordered table-hover'>";
                 echo "<tr>";
                 //Table header
-                echo "<th>";
-                echo "Books ID";
-                echo "</th>";
-                echo "<th>";
-                echo "Books Name";
-                echo "</th>";
-                echo "<th>";
-                echo "Book Cover";
-                echo "</th>";
-                echo "<th>";
-                echo "Edition";
-                echo "</th>";
-                echo "<th>";
-                echo "Authors";
-                echo "</th>";
-                echo "<th>";
-                echo "Department";
-                echo "</th>";
-                echo "<th>";
-                echo "Action";
-                echo "</th>"; // Added Action column for the request button
+                echo "<th>";echo "Books ID";echo "</th>";
+                echo "<th>";echo "Books Name";echo "</th>";
+                echo "<th>";echo "Book Cover";echo "</th>";
+                echo "<th>";echo "Edition";echo "</th>";
+                echo "<th>";echo "Authors";echo "</th>";
+                echo "<th>";echo "Department";echo "</th>";
+                echo "<th>";echo "Action";echo "</th>";
                 echo "</tr>";
 
                 while ($row = mysqli_fetch_assoc($searchBarQuery)) {
@@ -214,9 +198,8 @@ if (isset($_GET['cancel_books_id'])) {
 
                         if ($existing_request_result && mysqli_num_rows($existing_request_result) > 0) {
                             // Book is already requested by the user
-                            echo "<p>Requested</p>";
                             echo "<form id='cancelForm' action='' method='POST'>";
-                            echo "<a href='?cancel_books_id=" . $row['books_id'] . "' class='btn bg-warning text-bg-info'>Cancel</a>";
+                            echo "<a href='?cancel_books_id=" . $row['books_id'] . "' class='btn btn-action btn-cancel'>Cancel</a>";
                             echo "</form>";
                         } else {
                             // Check if the user has already requested 5 books
@@ -227,20 +210,19 @@ if (isset($_GET['cancel_books_id'])) {
 
                             if ($total_requests >= 5) {
                                 // User has already requested 5 books
-                                echo "Max Requests Reached   ";
-                                echo "<form id='informForm' action='' method='POST'>";
-                                echo "<button class='btn bg-primary text-bg-info' type='submit' name='inform'><i class='bx bx-info-circle'></i></button>";
+                                echo "<form id='informForm' action='' method='POST' class='ml-3'>";
+                                echo "<button class='btn btn-action' type='submit' name='inform'><i class='bx bx-info-circle'></i></button>";
                                 echo "</form>";
 
                                 if (isset($_POST['inform'])) {
-                                    echo "<script>alert('The maximum number of books a user can request is 5');";
-                                    echo "document.getElementById('informForm').submit();</script>";
+                                        $_SESSION['msg'] = "Only 5 books are allowed to be requested";
+                                        $_SESSION['msg_code'] = "error";
                                 }
                             } else {
                                 // Render the request button
                                 echo "<form action='' method='POST'>";
                                 echo "<input type='hidden' name='books_id' value='" . $row['books_id'] . "'>";
-                                echo "<button type='submit' name='request' class='btn btn-primary'>Request</button>";
+                                echo "<button type='submit' name='request' class='btn btn-action'>Request</button>";
                                 echo "</form>";
                             }
                         }
@@ -259,14 +241,15 @@ if (isset($_GET['cancel_books_id'])) {
     </div>
 
     <!-- jquery, popper, bootstrapJS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
-        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
-        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
-        crossorigin="anonymous"></script>
-</body>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    
+    <!-- === sweetAlert link === -->
+    <script src="../sweetAlert/sweetalert.js"></script>
 
+    <?php 
+          include ('../sweetAlert/sweetalert_actions.php');
+    ?>
+</body>
 </html>

@@ -65,6 +65,27 @@ section {
   outline: none;
   color: var(--bg-white-color);
 }
+/* for any action btn */
+.btn-action{
+  background-color: var(--hover-color1);
+  color: var(--white-color);
+  padding: 1.2rem;
+  border-radius: 5px !important;
+  transition: 0.2s ease-in !important;
+  font-weight: 500 !important;
+}
+.btn-action:hover{
+  color: var(--white-color) !important;
+}
+.btn-cancel{
+  background-color: var(--white-color);
+  border: 1px solid var(--info-msg-color) !important;
+  color: var(--info-msg-color);
+  font-weight: 500 !important;
+}
+.btn-cancel:hover{
+  color: var(--info-msg-color) !important;
+}
 
 .form-control-search {
   padding: 10px;
@@ -445,18 +466,8 @@ span#navbarDropdown.dropdown-toggle::after {
   font-weight: bold;
   color: var(--primary-color);
 }
-.btn-fine{
-  border:  1px solid var(--dark-color) !important;
-  color: var(--dark-color);
-  padding: 1.2rem;
-  border-radius: 5px !important;
-  transition: 0.3s ease-in !important;
-}
-.btn-fine:hover{
-  border: transparent !important;
-  background-color: var(--hover-color1);
-  color: var(--white-color) !important;
-}
+
+
 
 /* admin book req handle */
 .custom-radio{
