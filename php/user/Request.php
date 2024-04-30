@@ -31,12 +31,8 @@ if (isset($_POST['request'])) {
 
             if (mysqli_num_rows($existing_request_result) > 0) {
 
-                // if user has already requested this book
-                $_SESSION['msg'] = "You have already requested this book";
-                $_SESSION['msg_code'] = "error";
             } else {
-                // User has not requested this book yet, proceed with insertion
-
+                //proceed with insertion
                 $query = "INSERT INTO issue_book (username, books_id, books_name) VALUES ('$username', '$books_id','$books_name')";
 
                 if (mysqli_query($conn, $query)) {
@@ -45,10 +41,6 @@ if (isset($_POST['request'])) {
                     $_SESSION['msg_code'] = "success";
                 }
             }
-        } else {
-            // Error message for book not found
-            $_SESSION['msg'] = "Book ID not found in the database";
-            $_SESSION['msg_code'] = "error";
         }
     } else {
         // User not logged in message
@@ -69,7 +61,6 @@ if (isset($_GET['cancel_books_id'])) {
         $_SESSION['msg'] = "Book request cancelled successfully";
         $_SESSION['msg_code'] = "success";
     } else {
-        // Set session variables for error message
         $_SESSION['msg'] = "Error cancelling book request";
         $_SESSION['msg_code'] = "error";
     }
@@ -99,7 +90,7 @@ if (isset($_GET['cancel_books_id'])) {
 <body>
     <!-- include Dashboard -->
     <?php
-    include "./userDashboard.php";
+        include "./userDashboard.php";
     ?>
 
     <div class="list_container">
@@ -108,45 +99,19 @@ if (isset($_GET['cancel_books_id'])) {
             <!-- Search bar for books -->
             <div class="searchBar__wrapper">
                 <h3>Book Request</h3>
-
                     <div class="requestBar__wrapper">
-                        <form action="" class="navbar-form-c" method="POST" name="form-1">
-                            <div class="searchBar_field">
-                                <input class="form-control-search" type="text" name="search"
-                                    placeholder="Type Book Name" style="width:100%" required>
-                                <button type="submit" name="submit" class="btn-search">Search Book</button>
-                            </div>
-                        </form>
+                            <form action="" class="navbar-form-c" method="POST" name="form-1">
+                                <div class="searchBar_field">
+                                    <input class="form-control-search" type="text" name="search"
+                                        placeholder="Type Book Name" style="width:100%" required>
+                                    <button type="submit" name="submit" class="btn-search">Search Book</button>
+                                </div>
+                            </form>
                     </div>
-
-                <div>
-
-                    <?php
-                    if (isset($_POST['request_filter'])) {
-                        // Fetch and display books requested by the user
-                        $username = mysqli_real_escape_string($conn, $_SESSION['user']);
-                        $request_query = "SELECT * FROM issue_book WHERE username = '$username'";
-                        $request_result = mysqli_query($conn, $request_query);
-
-                        if (mysqli_num_rows($request_result) > 0) {
-                            // Loop through the requested books and display their information
-                            echo "<div>";
-                            while ($row = mysqli_fetch_assoc($request_result)) {
-                                echo "<p>Book ID: " . $row['books_id'] . "</p>";
-                                echo "<p>Book Name: " . $row['books_name'] . "</p>";
-                                // Add more information as needed
-                            }
-                            echo "</div>";
-                        } else {
-                            echo "No books requested.";
-                        }
-                    }
-
-                    ?>
                 </div>
             </div>
 
-            <!-- PHP code to display books and handle book request submission -->
+            <!-- display books and handle book request submission -->
             <?php
 
             if (isset($_POST['request_filter'])) {
@@ -228,7 +193,8 @@ if (isset($_GET['cancel_books_id'])) {
                         }
                     } else {
                         // User not logged in
-                        echo "Login to Request";
+                        $_SESSION['msg'] = "Login to request a book";
+                        $_SESSION['msg_code'] = "error";
                     }
                     echo "</td>";
                     echo "</tr>";
@@ -249,7 +215,7 @@ if (isset($_GET['cancel_books_id'])) {
     <script src="../sweetAlert/sweetalert.js"></script>
 
     <?php 
-          include ('../sweetAlert/sweetalert_actions.php');
+        include ('../sweetAlert/sweetalert_actions.php');
     ?>
 </body>
 </html>
