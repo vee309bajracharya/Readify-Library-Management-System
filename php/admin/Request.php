@@ -1,8 +1,8 @@
 <?php
-    include "./adminNavbar.php";
-    require_once "../config.php";
+include "./adminNavbar.php";
+require_once "../config.php";
 
-    $searchBarQuery = null; // Set a default value for $searchBarQuery
+$searchBarQuery = null; // Set a default value for $searchBarQuery
 
 ?>
 
@@ -26,23 +26,24 @@
 
     <!-- include Sidebar -->
     <?php
-        include "./adminSidebar.php";
+    include "./adminSidebar.php";
     ?>
 
     <div class="list_container">
         <div id="main">
-            <h2> Select Books for Approval </h2>
+            <h2>Incoming Book Request</h2>
 
             <form action="" class="navbar-form-c" method="POST" name="form-1">
                 <div class="searchBar_field">
-                    <input class="form-control-search" type="text" name="username" placeholder="Username" style="width:100%" required>
-                    <input type="text" name="book_id" class="form-control-search" placeholder="books_id" style="width:100%" required>
+                    <input class="form-control-search" type="text" name="username" placeholder="Username"
+                        style="width:100%" required>
+                    <input type="text" name="book_id" class="form-control-search" placeholder="books_id"
+                        style="width:100%" required>
                     <button type="submit" name="submit" class="btn-search">Process Request</button>
                 </div>
             </form>
 
         </div>
-
 
         <?php
         if (isset($_SESSION['admin'])) {
@@ -76,15 +77,31 @@
                 echo "<table class='table table-bordered table-hover'>";
                 echo "<tr>";
                 //Table header
-
-                echo "<th>";echo "Student Username";echo "</th>";
-                echo "<th>";echo "User ID";echo "</th>";
-                echo "<th>";echo "Book ID";echo "</th>";
-                echo "<th>";echo "Books Name";echo "</th>";
-                echo "<th>";echo "Book Cover";echo "</th>";
-                echo "<th>";echo "Authors";echo "</th>";
-                echo "<th>";echo "Edition";echo "</th>";
-                echo "<th>";echo "Status";echo "</th>";
+        
+                echo "<th>";
+                echo "Student Username";
+                echo "</th>";
+                echo "<th>";
+                echo "User ID";
+                echo "</th>";
+                echo "<th>";
+                echo "Book ID";
+                echo "</th>";
+                echo "<th>";
+                echo "Books Name";
+                echo "</th>";
+                echo "<th>";
+                echo "Book Cover";
+                echo "</th>";
+                echo "<th>";
+                echo "Authors";
+                echo "</th>";
+                echo "<th>";
+                echo "Edition";
+                echo "</th>";
+                echo "<th>";
+                echo "Status";
+                echo "</th>";
 
                 echo "</tr>";
                 while ($row = mysqli_fetch_assoc($res)) {
@@ -105,36 +122,41 @@
                 echo "</div>";
             }
         } else {
-        ?>
-        <?php
-                    $_SESSION['msg'] = "Login First !!";
-                    $_SESSION['msg_code'] = "error";
-        ?>
+            ?>
+            <?php
+            $_SESSION['msg'] = "Login First !!";
+            $_SESSION['msg_code'] = "error";
+            ?>
 
-        <?php
+            <?php
         }
         if (isset($_POST['submit'])) {
             $_SESSION['username'] = $_POST['username'];
             $_SESSION['books_id'] = $_POST['book_id'];
-        ?>
+            ?>
             <script>
                 window.location = "Approve.php";
             </script>
-        <?php
-            }
+            <?php
+        }
         ?>
     </div>
     </div>
     <!-- jquery, popper, bootstrapJS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
 
     <!-- === sweetAlert link === -->
     <script src="../sweetAlert/sweetalert.js"></script>
 
     <?php
-        include('../sweetAlert/sweetalert_actions.php');
+    include ('../sweetAlert/sweetalert_actions.php');
     ?>
 </body>
 
