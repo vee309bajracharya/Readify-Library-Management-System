@@ -2,6 +2,7 @@
 include "./userNavbar.php";
 require_once "../config.php";
 
+
 // Check if the request form is submitted
 if (isset($_POST['request'])) {
 
@@ -37,12 +38,11 @@ if (isset($_POST['request'])) {
                 // User has not requested this book yet, proceed with insertion
 
                 $query = "INSERT INTO issue_book (username, books_id, books_name) VALUES ('$username', '$books_id','$books_name')";
-                
+
                 if (mysqli_query($conn, $query)) {
                     // Set session variables for success message
                     $_SESSION['msg'] = "Book Request Success!!";
                     $_SESSION['msg_code'] = "success";
-                
                 }
             }
         } else {
@@ -55,6 +55,28 @@ if (isset($_POST['request'])) {
         $_SESSION['msg'] = "You must log in first to request a book";
         $_SESSION['msg_code'] = "error";
     }
+}
+
+if (isset($_GET['cancel_books_id'])) {
+    // Get the book ID and username from the URL
+    $cancel_books_id = mysqli_real_escape_string($conn, $_GET['cancel_books_id']);
+    $cancel_username = mysqli_real_escape_string($conn, $_SESSION['user']);
+
+    // Delete the entry from the issue_book table
+    $cancel_query = "DELETE FROM issue_book WHERE username = '$cancel_username' AND books_id = '$cancel_books_id'";
+    if (mysqli_query($conn, $cancel_query)) {
+        // Set session variables for success message
+        $_SESSION['msg'] = "Book request cancelled successfully";
+        $_SESSION['msg_code'] = "success";
+    } else {
+        // Set session variables for error message
+        $_SESSION['msg'] = "Error cancelling book request";
+        $_SESSION['msg_code'] = "error";
+    }
+
+    // Redirect to the same page to remove the cancel_books_id parameter from the URL
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
 }
 ?>
 
@@ -88,33 +110,49 @@ if (isset($_POST['request'])) {
                 <h3>Book Request</h3>
 
                 <div class="searchBar_container">
-
-                    <div class="requestBar__wrapper">
-
-                        <form action="" class="navbar-form-c" method="POST" name="form-1">
-                            <div class="searchBar_field">
-                                <input class="form-control-search" type="text" name="books_id" placeholder="Enter book id" style="width:100%" required>
-                                <button type="submit" name="request" class="btn-search">Request Book</button>
-                            </div>
-                        </form>
-                    </div>
-
                     <div class="requestBar__wrapper">
                         <form action="" class="navbar-form-c" method="POST" name="form-1">
                             <div class="searchBar_field">
-                                <input class="form-control-search" type="text" name="search" placeholder="Type Book Name" style="width:100%" required>
+                                <input class="form-control-search" type="text" name="search"
+                                    placeholder="Type Book Name" style="width:100%" required>
                                 <button type="submit" name="submit" class="btn-search">Search Book</button>
                             </div>
                         </form>
                     </div>
 
                 </div>
+                <div>
+
+                    <?php
+                    if (isset($_POST['request_filter'])) {
+                        // Fetch and display books requested by the user
+                        $username = mysqli_real_escape_string($conn, $_SESSION['user']);
+                        $request_query = "SELECT * FROM issue_book WHERE username = '$username'";
+                        $request_result = mysqli_query($conn, $request_query);
+
+                        if (mysqli_num_rows($request_result) > 0) {
+                            // Loop through the requested books and display their information
+                            echo "<div>";
+                            while ($row = mysqli_fetch_assoc($request_result)) {
+                                echo "<p>Book ID: " . $row['books_id'] . "</p>";
+                                echo "<p>Book Name: " . $row['books_name'] . "</p>";
+                                // Add more information as needed
+                            }
+                            echo "</div>";
+                        } else {
+                            echo "No books requested.";
+                        }
+                    }
+
+                    ?>
+                </div>
             </div>
-
-
 
             <!-- PHP code to display books and handle book request submission -->
             <?php
+
+            if (isset($_POST['request_filter'])) {
+            }
             // Fetch book data from the database
             if (isset($_POST['submit'])) {
                 $search = mysqli_real_escape_string($conn, $_POST['search']);
@@ -122,7 +160,6 @@ if (isset($_POST['request'])) {
             } else {
                 $searchBarQuery = mysqli_query($conn, "SELECT * FROM `library_books` ORDER BY `library_books`.`books_id` ASC;");
             }
-
 
             if (mysqli_num_rows($searchBarQuery) == 0) {
                 echo "<section>";
@@ -135,16 +172,30 @@ if (isset($_POST['request'])) {
                 echo "<table class='table table-bordered table-hover'>";
                 echo "<tr>";
                 //Table header
-                echo "<th>";echo "Books ID";echo "</th>";
-                echo "<th>";echo "Books Name";echo "</th>";
-                echo "<th>";echo "Book Cover";echo "</th>";
-                echo "<th>";echo "Edition";echo "</th>";
-                echo "<th>";echo "Authors";echo "</th>";
-                echo "<th>";echo "Department";echo "</th>";
+                echo "<th>";
+                echo "Books ID";
+                echo "</th>";
+                echo "<th>";
+                echo "Books Name";
+                echo "</th>";
+                echo "<th>";
+                echo "Book Cover";
+                echo "</th>";
+                echo "<th>";
+                echo "Edition";
+                echo "</th>";
+                echo "<th>";
+                echo "Authors";
+                echo "</th>";
+                echo "<th>";
+                echo "Department";
+                echo "</th>";
+                echo "<th>";
+                echo "Action";
+                echo "</th>"; // Added Action column for the request button
                 echo "</tr>";
 
                 while ($row = mysqli_fetch_assoc($searchBarQuery)) {
-
                     echo "<tr>";
                     //fetch data from library_books table
                     echo "<td>" . $row['books_id'] . "</td>";
@@ -153,6 +204,51 @@ if (isset($_POST['request'])) {
                     echo "<td>" . $row['edition'] . "</td>";
                     echo "<td>" . $row['authors'] . "</td>";
                     echo "<td>" . $row['department'] . "</td>";
+                    echo "<td>";
+                    if (isset($_SESSION['user'])) {
+                        // Check if the user has already requested this book
+                        $username = mysqli_real_escape_string($conn, $_SESSION['user']);
+                        $books_id = $row['books_id'];
+                        $existing_request_query = "SELECT * FROM issue_book WHERE username = '$username' AND books_id = '$books_id'";
+                        $existing_request_result = mysqli_query($conn, $existing_request_query);
+
+                        if ($existing_request_result && mysqli_num_rows($existing_request_result) > 0) {
+                            // Book is already requested by the user
+                            echo "<p>Requested</p>";
+                            echo "<form id='cancelForm' action='' method='POST'>";
+                            echo "<a href='?cancel_books_id=" . $row['books_id'] . "' class='btn bg-warning text-bg-info'>Cancel</a>";
+                            echo "</form>";
+                        } else {
+                            // Check if the user has already requested 5 books
+                            $existing_requests_query = "SELECT COUNT(*) AS total_requests FROM issue_book WHERE username = '$username'";
+                            $existing_requests_result = mysqli_query($conn, $existing_requests_query);
+                            $row_requests = mysqli_fetch_assoc($existing_requests_result);
+                            $total_requests = $row_requests['total_requests'];
+
+                            if ($total_requests >= 5) {
+                                // User has already requested 5 books
+                                echo "Max Requests Reached   ";
+                                echo "<form id='informForm' action='' method='POST'>";
+                                echo "<button class='btn bg-primary text-bg-info' type='submit' name='inform'><i class='bx bx-info-circle'></i></button>";
+                                echo "</form>";
+
+                                if (isset($_POST['inform'])) {
+                                    echo "<script>alert('The maximum number of books a user can request is 5');";
+                                    echo "document.getElementById('informForm').submit();</script>";
+                                }
+                            } else {
+                                // Render the request button
+                                echo "<form action='' method='POST'>";
+                                echo "<input type='hidden' name='books_id' value='" . $row['books_id'] . "'>";
+                                echo "<button type='submit' name='request' class='btn btn-primary'>Request</button>";
+                                echo "</form>";
+                            }
+                        }
+                    } else {
+                        // User not logged in
+                        echo "Login to Request";
+                    }
+                    echo "</td>";
                     echo "</tr>";
                 }
                 echo "</table>";
@@ -162,18 +258,15 @@ if (isset($_POST['request'])) {
         </div>
     </div>
 
-
-
-        <!-- jquery, popper, bootstrapJS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-    
-    <!-- === sweetAlert link === -->
-    <script src="../sweetAlert/sweetalert.js"></script>
-
-    <?php 
-          include ('../sweetAlert/sweetalert_actions.php');
-    ?>
+    <!-- jquery, popper, bootstrapJS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
