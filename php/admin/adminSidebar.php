@@ -38,7 +38,7 @@ require_once "../config.php"; //database connection file
   <!-- Sidebar starts  -->
   <div id="mySidenav" class="sidenav">
     <div class="logo-container">
-      <a href="./adminDashboard.php">
+      <a href="../../pages/index.html">
         <img src="../../svg/logo-1.svg" alt="Readify Logo">
       </a>
     </div>

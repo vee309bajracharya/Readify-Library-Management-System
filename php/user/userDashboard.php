@@ -36,7 +36,7 @@
     <!-- Sidebar starts -->
     <div id="mySidenav" class="sidenav">
         <div class="logo-container">
-            <a href="./list_book_for_user.php">
+            <a href="../../pages/index.html">
                 <img src="../../svg/logo-1.svg" alt="Readify Logo" class="sidebar_logo">
             </a>
         </div>
