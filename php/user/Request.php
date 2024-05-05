@@ -1,6 +1,38 @@
 <?php
 include "./userNavbar.php";
 require_once "../config.php";
+if (isset($_GET['cancel_books_id'])) {
+    // Get the book ID and username from the URL
+    $cancel_books_id = mysqli_real_escape_string($conn, $_GET['cancel_books_id']);
+    $cancel_username = mysqli_real_escape_string($conn, $_SESSION['user']);
+
+    // Check if the book request has been approved
+    $check_approval_query = "SELECT * FROM issue_book WHERE books_id = '$cancel_books_id' AND (approve = 'Yes' OR approve = '<p> Returned </p>' OR approve = '<p> Expired </p>' OR approve = '<p> Book lost </p>')";
+    $approval_result = mysqli_query($conn, $check_approval_query);
+
+    if (mysqli_num_rows($approval_result) > 0) {
+        // Book has been approved, do not allow cancellation
+        $_SESSION['msg'] = "Error: The book has already been approved, so you cannot cancel the request.";
+        $_SESSION['msg_code'] = "error";
+    } else {
+        // Book request has not been approved, allow cancellation
+        // Delete the entry from the issue_book table
+        $cancel_query = "DELETE FROM issue_book WHERE username = '$cancel_username' AND books_id = '$cancel_books_id'";
+        if (mysqli_query($conn, $cancel_query)) {
+            // Set session variables for success message
+            $_SESSION['msg'] = "Book request cancelled successfully";
+            $_SESSION['msg_code'] = "success";
+        } else {
+            // Set session variables for error message
+            $_SESSION['msg'] = "Error cancelling book request";
+            $_SESSION['msg_code'] = "error";
+        }
+    }
+
+    // Redirect to the same page to remove the cancel_books_id parameter from the URL
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
+}
 
 
 // Check if the request form is submitted
@@ -48,38 +80,6 @@ if (isset($_POST['request'])) {
         $_SESSION['msg'] = "You must log in first to request a book";
         $_SESSION['msg_code'] = "error";
     }
-}
-if (isset($_GET['cancel_books_id'])) {
-    // Get the book ID and username from the URL
-    $cancel_books_id = mysqli_real_escape_string($conn, $_GET['cancel_books_id']);
-    $cancel_username = mysqli_real_escape_string($conn, $_SESSION['user']);
-
-    // Check if the book request has been approved
-    $check_approval_query = "SELECT * FROM issue_book WHERE books_id = '$cancel_books_id' AND (approve = 'Yes' OR approve = '<p> Expired </p>')";
-    $approval_result = mysqli_query($conn, $check_approval_query);
-
-    if (mysqli_num_rows($approval_result) > 0) {
-        // Book has been approved, do not allow cancellation
-        $_SESSION['msg'] = "Error: The book has already been approved, so you cannot cancel the request.";
-        $_SESSION['msg_code'] = "error";
-    } else {
-        // Book request has not been approved, allow cancellation
-        // Delete the entry from the issue_book table
-        $cancel_query = "DELETE FROM issue_book WHERE username = '$cancel_username' AND books_id = '$cancel_books_id'";
-        if (mysqli_query($conn, $cancel_query)) {
-            // Set session variables for success message
-            $_SESSION['msg'] = "Book request cancelled successfully";
-            $_SESSION['msg_code'] = "success";
-        } else {
-            // Set session variables for error message
-            $_SESSION['msg'] = "Error cancelling book request";
-            $_SESSION['msg_code'] = "error";
-        }
-    }
-
-    // Redirect to the same page to remove the cancel_books_id parameter from the URL
-    header("Location: " . $_SERVER['PHP_SELF']);
-    exit();
 }
 
 ?>
