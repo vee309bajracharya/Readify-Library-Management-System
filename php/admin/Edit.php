@@ -46,10 +46,13 @@ if (isset($_POST['submit'])) {
     if ($stmt->execute()) {
         $_SESSION['msg'] = "Book Updated Successfully!!";
         $_SESSION['msg_code'] = "success";
+        header("Location: Managebooks.php");
+        exit(); // Ensure that no other code executes after the redirect
     } else {
         $_SESSION['msg'] = "Error updating book info";
         $_SESSION['msg_code'] = "error";
     }
+
 
     $stmt->close();
 }
@@ -122,29 +125,34 @@ if (isset($_GET['id'])) {
 
                         <div class="field input">
                             <label for="bookName">Book Name</label>
-                            <input type="text" name="books_name" id="books_name" value="<?php echo $books_name; ?>" required=""><br>
+                            <input type="text" name="books_name" id="books_name" value="<?php echo $books_name; ?>"
+                                required=""><br>
                         </div>
 
                         <div class="field input">
                             <label for="bookAuthor">Book Author</label>
-                            <input type="text" name="authors" id="authors" value="<?php echo $authors; ?>" required=""><br>
+                            <input type="text" name="authors" id="authors" value="<?php echo $authors; ?>"
+                                required=""><br>
                         </div>
 
                         <div class="field input">
                             <label for="bookEdition">Book Edition</label>
-                            <input type="text" name="edition" id="edition" value="<?php echo $edition; ?>" required=""><br>
+                            <input type="text" name="edition" id="edition" value="<?php echo $edition; ?>"
+                                required=""><br>
                         </div>
 
                         <!-- Remove Book Status field -->
 
                         <div class="field input">
                             <label for="bookQty">Book Quantity</label>
-                            <input type="number" name="quantity" id="quantity" value="<?php echo $quantity; ?>" required=""><br>
+                            <input type="number" name="quantity" id="quantity" value="<?php echo $quantity; ?>"
+                                required=""><br>
                         </div>
 
                         <div class="field input">
                             <label for="bookDept">Book Department</label>
-                            <input type="text" name="department" id="department" value="<?php echo $department; ?>" required=""><br>
+                            <input type="text" name="department" id="department" value="<?php echo $department; ?>"
+                                required=""><br>
                         </div>
 
                         <div class="field input">
@@ -164,9 +172,14 @@ if (isset($_GET['id'])) {
 
 
     <!-- jquery, popper, bootstrapJS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
 
     <!-- === sweetAlert link === -->
     <script src="../sweetAlert/sweetalert.js"></script>
@@ -175,4 +188,5 @@ if (isset($_GET['id'])) {
     include ('../sweetAlert/sweetalert_actions.php');
     ?>
 </body>
+
 </html>

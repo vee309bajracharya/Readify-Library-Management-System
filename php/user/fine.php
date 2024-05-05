@@ -34,31 +34,10 @@ require_once "../config.php"; // Include database connection file
 
             <h3>
                 <?php
-                if (isset($_SESSION['user'])) {
-                    $fine = 0;
-                    include "./fineinfo.php";
 
-                    $loggedInUser = $_SESSION['user'];
-                    // Assuming $_SESSION['user'] contains the user ID of the logged-in user
-                    $userId = $_SESSION['user'];
-
-                    $query = "SELECT SUM(fine) AS total_fine FROM fine WHERE username = '$loggedInUser'";
-                    $result = mysqli_query($conn, $query);
-
-                    if ($result) {
-                        $row = mysqli_fetch_assoc($result);
-                        $fine = $row['total_fine'];
-                        if ($fine > 0) {
-
-                            echo "Total fine: रु॰ " . $fine + $fineinfo;
-                        } else {
-                            echo "No fine";
-                        }
-                    } else {
-                        echo "Error retrieving fine information";
-                    }
-                }
+                include "./finedbooks.php";
                 ?>
+
             </h3>
 
 
@@ -68,7 +47,7 @@ require_once "../config.php"; // Include database connection file
             if (isset($_SESSION['user'])) {
                 $loggedInUser = $_SESSION['user'];
                 $loggedInUser = $_SESSION['user'];
-                $result = mysqli_query($conn, "SELECT fine.*, library_books.books_name, library_books.book_cover 
+                $result = mysqli_query($conn, "SELECT fine.*, library_books.books_name, library_books.book_cover,book_status
                     FROM `fine` 
                     INNER JOIN library_books ON fine.bid = library_books.books_id 
                     WHERE fine.username = '$loggedInUser' AND fine > 0");
@@ -100,6 +79,10 @@ require_once "../config.php"; // Include database connection file
                     echo "Fine";
                     echo "</th>";
                     echo "<th>";
+                    echo "Book Status";
+                    echo "</th>";
+
+                    echo "<th>";
                     echo "Status";
                     echo "</th>";
 
@@ -115,6 +98,7 @@ require_once "../config.php"; // Include database connection file
                         echo "<td>" . $row['returned'] . "</td>";
                         echo "<td>" . $row['days'] . "</td>";
                         echo "<td>" . $row['fine'] . "</td>";
+                        echo "<td>" . $row['book_status'] . "</td>";
                         echo "<td>" . $row['status'] . "</td>";
 
                         echo "</tr>";

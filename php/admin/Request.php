@@ -86,15 +86,7 @@ if (isset($_GET['approve_book_id'])) {
         <div id="main">
             <h2>Incoming Book Request</h2>
 
-            <form action="" class="navbar-form-c" method="POST" name="form-1">
-                <div class="searchBar_field">
-                    <input class="form-control-search" type="text" name="username" placeholder="Username"
-                        style="width:100%" required>
-                    <input type="text" name="book_id" class="form-control-search" placeholder="books_id"
-                        style="width:100%" required>
-                    <button type="submit" name="submit" class="btn-search">Process Request</button>
-                </div>
-            </form>
+            <!-- searchbar -->
 
             <form action="" method="get">
                 <button type="submit" name="approve_book_id" class="btn btn-default">Approve Selected</button>
@@ -136,7 +128,10 @@ if (isset($_GET['approve_book_id'])) {
                         echo "<table class='table table-bordered table-hover'>";
                         echo "<tr>";
                         //Table header
-                
+                        echo "<th>";
+                        echo "Action";
+                        echo "</th>";
+
                         echo "<th>";
                         echo "User ID";
                         echo "</th>";
@@ -169,25 +164,13 @@ if (isset($_GET['approve_book_id'])) {
                         echo "Quantity";
                         echo "</th>";
 
-                        echo "<th>";
-                        echo "Action";
-                        echo "</th>";
+
 
                         echo "</tr>";
                         while ($row = mysqli_fetch_assoc($res)) {
                             echo "<tr>";
                             //fetch data from issue_book table
                 
-                            echo "<td>" . $row["user_id"] . "</td>";
-                            echo "<td>" . $row['fullname'] . "</td>";
-
-                            echo "<td>" . $row['books_id'] . "</td>";
-                            echo "<td>" . $row['books_name'] . "</td>";
-                            echo "<td style='text-align:center;'><img src='../admin/covers/" . $row['book_cover'] . "' alt='Book Cover' width='100' style='object-fit: cover; border-radius: 5px;'></td>";
-                            echo "<td>" . $row['authors'] . "</td>";
-                            echo "<td>" . $row['edition'] . "</td>";
-                            echo "<td>" . $row['quantity'] . "</td>";
-
                             echo "<td>";
                             if (isset($_SESSION['admin'])) {
                                 // Check if the user has already requested this book
@@ -208,6 +191,18 @@ if (isset($_GET['approve_book_id'])) {
                                 echo "Login to Request";
                             }
                             echo "</td>";
+
+
+                            echo "<td>" . $row["user_id"] . "</td>";
+                            echo "<td>" . $row['fullname'] . "</td>";
+
+                            echo "<td>" . $row['books_id'] . "</td>";
+                            echo "<td>" . $row['books_name'] . "</td>";
+                            echo "<td style='text-align:center;'><img src='../admin/covers/" . $row['book_cover'] . "' alt='Book Cover' width='100' style='object-fit: cover; border-radius: 5px;'></td>";
+                            echo "<td>" . $row['authors'] . "</td>";
+                            echo "<td>" . $row['edition'] . "</td>";
+                            echo "<td>" . $row['quantity'] . "</td>";
+
 
                             echo "</tr>";
                         }
