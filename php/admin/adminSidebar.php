@@ -19,7 +19,9 @@ require_once "../config.php"; //database connection file
   <!-- ==== Google Fonts Link ==== -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@100;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&family=Nunito:wght@300;400;500;600;700;800&family=Poppins:wght@100;400;500;600;700;800&display=swap"
+    rel="stylesheet">
 
   <!-- ==== Boxicons link ==== -->
   <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css" />
@@ -27,7 +29,7 @@ require_once "../config.php"; //database connection file
   <!-- ===== Bootstrap link ======== -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
-    <!-- ===== Bootstrap icon link ======== -->
+  <!-- ===== Bootstrap icon link ======== -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 
@@ -45,16 +47,17 @@ require_once "../config.php"; //database connection file
 
     <div class="links">
       <a href="./adminDashboard.php" class="sidebar-links"><i class='bx bxs-dashboard'></i> Dashboard</a>
-      <a href="./viewBook.php" class="sidebar-links"><i class='bx bx-book-open' style='color:#ffffff'></i> View Books</a>
-      
+      <a href="./viewBook.php" class="sidebar-links"><i class='bx bx-book-open' style='color:#ffffff'></i> View
+        Books</a>
+
       <ul class="manage-books-menu">
         <li><a href="./Managebooks.php" class="sidebar-links"><i class='bx bx-library'></i> Manage Books</a></li>
         <li><a href="./Issued.php" class="sidebar-links"><i class='bx bxs-book-add'></i> Add New Book</a></li>
       </ul>
 
       <a href="./Request.php" class="sidebar-links"><i class='bx bx-list-check'></i> Approval Books List</a>
-      <a href="./issue_info.php" class="sidebar-links"><i class='bx bx-list-ul'></i> Approved Books Log</a>
       <a href="./Expired.php" class="sidebar-links"><i class='bx bx-library'></i> Book Status</a>
+      <a href="./Returned_books.php" class="sidebar-links"><i class='bx bx-list-ul'></i>Returned books</a>
       <a href="./fine.php" class="sidebar-links"><i class='bx bxs-wallet-alt'></i> Fine Info</a>
       <a href="./manageUser.php" class="sidebar-links"><i class='bx bxs-user-account'></i> Users Details</a>
       <a href="./admin-LogOut.php" class="sidebar-links"><i class="bx bx-log-out"></i> Log out</a>
@@ -65,4 +68,5 @@ require_once "../config.php"; //database connection file
 
 
 </body>
+
 </html>
