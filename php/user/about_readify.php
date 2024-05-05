@@ -22,38 +22,8 @@ if (!isset($_SESSION['user'])) {
     <!-- ==== CSS Links ==== -->
     <link rel="stylesheet" href="../../css/custom_bootstrap.css" />
 
-    <!-- inline css -->
-    <style>
-        body {
-            background-color: var(--white-color);
-        }
-        section{
-            padding: 2rem 3rem;
-            margin: 0 auto;
-            max-width: 1200px;
-        }
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-        .about_container {
-            display: grid;
-            place-items: center;
-            padding: 3rem;
-            background-color: var(--hover-color1);
-            box-shadow: var(--box-shadow-color);
-            color: var(--white-color);
-            border-radius: 10px;
-        }
-
-        .about_container .logo__container img {
-            width: 200px;
-            float: center;
-        }
-        .about_container p {
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-            text-align: justify;
-            line-height: 1.6;
-        }
-    </style>
 </head>
 
 <body>
@@ -62,54 +32,184 @@ if (!isset($_SESSION['user'])) {
         include "./userDashboard.php";
     ?>
 
-<div class="list_container">
-<div id="main">
+    <div class="list_container">
+        <div id="main">
+            <h3>Support and Help</h3>
 
-<section class="container-fluid">
-    <div class="about_container">
-        <div class="logo__container">
-            <img src="../../svg/logo-1.svg" alt="Readify Image">
-        </div>
+            <div class="container my-5">
 
+                <!-- Book Request Section -->
+                <h4 class="fw-bold">Book Request</h4>
+                <div class="accordion" id="bookRequestAccordion">
+                    <div class="card">
+                        <div class="card-header" id="bookRequestHeading">
+                            <h5 class="mb-0">
+                                <button class="btn" type="button" data-toggle="collapse" data-target="#bookRequestCollapse" aria-expanded="true" aria-controls="bookRequestCollapse">
+                                    How many books can I request at a time?
+                                </button>
+                            </h5>
+                        </div>
 
+                        <div id="bookRequestCollapse" class="collapse show" aria-labelledby="bookRequestHeading" data-parent="#bookRequestAccordion">
+                            <div class="card-body">
+                                You can request up to 5 books at a time.
+                            </div>
+                        </div>
+                    </div>
 
-        <p>
-            Readify is an innovative software solution designed to transform your library experience. At Readify,
-            we've created a platform with the user in mind, focusing on simplicity, accessibility, and efficiency.
-        </p>
+                    <div class="card">
+                        <div class="card-header" id="bookApprovalHeading">
+                            <h5 class="mb-0">
+                                <button class="btn" type="button" data-toggle="collapse" data-target="#bookApprovalCollapse" aria-expanded="true" aria-controls="bookApprovalCollapse">
+                                    How long does it take for a requested book to be approved and delivered?
+                                </button>
+                            </h5>
+                        </div>
 
-        <p>
-            Our primary mission is to streamline the borrowing process, making it quicker and more convenient for users.
-            Readify aims to bridge the gap between library resources and users by providing a user-friendly online
-            interface, ensuring a seamless and enjoyable experience.
-        </p>
+                        <div id="bookApprovalCollapse" class="collapse" aria-labelledby="bookApprovalHeading" data-parent="#bookRequestAccordion">
+                            <div class="card-body">
+                                After requesting a book, it will be approved by the admin. Once approved, delivery is guaranteed within 24 hours.
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="card">
+                        <div class="card-header" id="bookCancellationHeading">
+                            <h5 class="mb-0">
+                                <button class="btn" type="button" data-toggle="collapse" data-target="#bookCancellationCollapse" aria-expanded="true" aria-controls="bookCancellationCollapse">
+                                    Can I cancel a book after it has been approved?
+                                </button>
+                            </h5>
+                        </div>
 
-        <p>
-            Readify's user interface is crafted for ease of use. With just a few clicks, users can access a wealth of
-            information about available books, empowering them to make informed decisions. The intuitive design ensures
-            that even those unfamiliar with library systems can navigate effortlessly.
-        </p>
+                        <div id="bookCancellationCollapse" class="collapse" aria-labelledby="bookCancellationHeading" data-parent="#bookRequestAccordion">
+                            <div class="card-body">
+                                No, once a book has been approved, it cannot be cancelled.
+                            </div>
+                        </div>
+                    </div>
 
-        <p>
-            One of Readify's key features is its ability to expedite the book borrowing process. Users can search for
-            books, check availability, and borrow items from the comfort of their homes. This streamlined approach not
-            only saves time but also enhances the overall efficiency of library operations.
-        </p>
+                    <div class="card">
+                        <div class="card-header" id="bookReturnRequirementHeading">
+                            <h5 class="mb-0">
+                                <button class="btn" type="button" data-toggle="collapse" data-target="#bookReturnRequirementCollapse" aria-expanded="true" aria-controls="bookReturnRequirementCollapse">
+                                    Do I need to return books to the library physically?
+                                </button>
+                            </h5>
+                        </div>
 
-        <p>
-            Readify goes beyond borrowing by helping users manage their library activities effectively. The system allows
-            users to monitor due dates for borrowed books, reducing the likelihood of late returns. This comprehensive
-            approach ensures that Readify is not just a borrowing platform but a tool for organized and efficient library
-            engagement. Welcome to the future of library services with Readify!
-        </p>
-    </div>
-</section>
+                        <div id="bookReturnRequirementCollapse" class="collapse" aria-labelledby="bookReturnRequirementHeading" data-parent="#bookRequestAccordion">
+                            <div class="card-body">
+                                Yes, books must be returned by visiting our library.
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="card">
+                        <div class="card-header" id="bookReturnRequirementHeading">
+                            <h5 class="mb-0">
+                                <button class="btn" type="button" data-toggle="collapse" data-target="#bookReturnRequirementCollapse" aria-expanded="true" aria-controls="bookReturnRequirementCollapse">
+                                    Is there a time limit for borrowing books?
+                                </button>
+                            </h5>
+                        </div>
 
-</div>
-</div>
+                        <div id="bookReturnRequirementCollapse" class="collapse" aria-labelledby="bookReturnRequirementHeading" data-parent="#bookRequestAccordion">
+                            <div class="card-body">
+                                Yes, the time duration for borrowing a book is 6 months.
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="card">
+                        <div class="card-header" id="bookRequestDetailsHeading">
+                            <h5 class="mb-0">
+                                <button class="btn" type="button" data-toggle="collapse" data-target="#bookRequestDetailsCollapse" aria-expanded="true" aria-controls="bookRequestDetailsCollapse">
+                                    What information will be shown in my system after requesting a book?
+                                </button>
+                            </h5>
+                        </div>
 
+                        <div id="bookRequestDetailsCollapse" class="collapse" aria-labelledby="bookRequestDetailsHeading" data-parent="#bookRequestAccordion">
+                            <div class="card-body">
+                                After requesting a book, your system will display the requested date, book issued date, and return date.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Book Return, Expire and Lost Section -->
+                <h4 class="fw-bold mt-5">Book Return, Expire and Lost</h4>
+                <div class="accordion" id="bookReturnAccordion">
+                    <div class="card">
+                        <div class="card-header" id="bookReturnFineHeading">
+                            <h5 class="mb-0">
+                                <button class="btn" type="button" data-toggle="collapse" data-target="#bookReturnFineCollapse" aria-expanded="true" aria-controls="bookReturnFineCollapse">
+                                    What happens if I return a book after the due date?
+                                </button>
+                            </h5>
+                        </div>
+
+                        <div id="bookReturnFineCollapse" class="collapse show" aria-labelledby="bookReturnFineHeading" data-parent="#bookReturnAccordion">
+                            <div class="card-body">
+                                If you return a book after the due date, a fine of Rs. 40 will be charged for each day until the fine is paid.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header" id="bookExpirationHeading">
+                            <h5 class="mb-0">
+                                <button class="btn" type="button" data-toggle="collapse" data-target="#bookExpirationCollapse" aria-expanded="true" aria-controls="bookExpirationCollapse">
+                                    What happens if a book is not returned within the specified time frame?
+                                </button>
+                            </h5>
+                        </div>
+
+                        <div id="bookExpirationCollapse" class="collapse" aria-labelledby="bookExpirationHeading" data-parent="#bookReturnAccordion">
+                            <div class="card-body">
+                                If a book is not returned within the specified time frame, the status will automatically show as 'Expired'. You will be fined accordingly, and the book will be considered lost.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header" id="bookLostPenaltyHeading">
+                            <h5 class="mb-0">
+                                <button class="btn" type="button" data-toggle="collapse" data-target="#bookLostPenaltyCollapse" aria-expanded="true" aria-controls="bookLostPenaltyCollapse">
+                                    What is the penalty for a lost book?
+                                </button>
+                            </h5>
+                        </div>
+
+                        <div id="bookLostPenaltyCollapse" class="collapse" aria-labelledby="bookLostPenaltyHeading" data-parent="#bookReturnAccordion">
+                            <div class="card-body">
+                                If a book is not returned within 1 month, it will be declared lost. In such a case, a fine penalty of Rs. 5000 is compulsory.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header" id="bookReturnWindowHeading">
+                            <h5 class="mb-0">
+                                <button class="btn" type="button" data-toggle="collapse" data-target="#bookReturnWindowCollapse" aria-expanded="true" aria-controls="bookReturnWindowCollapse">
+                                    Is there a grace period for returning books?
+                                </button>
+                            </h5>
+                        </div>
+
+                        <div id="bookReturnWindowCollapse" class="collapse" aria-labelledby="bookReturnWindowHeading" data-parent="#bookReturnAccordion">
+                            <div class="card-body">
+                                Yes, our library system provides a 1-month grace period for users to return borrowed books.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

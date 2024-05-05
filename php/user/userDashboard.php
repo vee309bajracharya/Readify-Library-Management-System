@@ -49,7 +49,7 @@
             <a href="./issue_info.php" class="sidebar-links"><i class='bx bxs-book'></i> View Requested Books</a>
             <a href="./Expired.php" class="sidebar-links"><i class='bx bx-library'></i> Book Status</a>
             <a href="./fine.php" class="sidebar-links"><i class='bx bxs-wallet-alt'></i> Fine Details</a>
-            <a href="./about_readify.php" class="sidebar-links"><i class='bx bxs-help-circle'></i> About Readify</a>
+            <a href="./about_readify.php" class="sidebar-links"><i class='bx bxs-help-circle'></i> Support and Help</a>
             <a href="./logOut.php" class="sidebar-links"><i class="bx bx-log-out"></i> Log out</a>
         </div>
     </div>

@@ -75,7 +75,8 @@ section {
   font-weight: 500 !important;
 }
 .btn-action:hover{
-  color: var(--white-color) !important;
+  border: 1px solid var(--dark-color);
+  color: var(--dark-color) !important;
 }
 .btn-cancel{
   background-color: var(--white-color);
