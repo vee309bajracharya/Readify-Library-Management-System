@@ -27,51 +27,53 @@ include "./finedbooks.php"; // logic for total fines
     <div class="list_container">
         <div id="main">
             <h3>Book Status</h3>
-        <div class="fine-amount-container d-flex justify-content-between gap-3">
-                <div class="fine-info-list p-5 h-25">
-                    <h3>Expired Books: <?php echo $expiredBooksCount; ?></h3> <br>
-                    <span>NRS <?php echo $expiredFineCharged; ?> Charged</span>
-                </div>
-
-                <div class="fine-info-list p-5 d-flex justify-content-between">
-                    <div>
-                        <h3>Fined Books: <?php echo $finedBooksCount; ?></h3> <br>
-                        <span>NRS <?php echo $totalFineCharged; ?> Charged</span>
+            
+            <div class="count-amount-container d-flex justify-content-between gap-2">
+                    <div class="count-info-list">
+                        <h3 class="fs-3">Expired Books: <?php echo $expiredBooksCount; ?></h3> <br>
+                        <span>NRS <?php echo $expiredFineCharged; ?> Charged</span>
                     </div>
-                    <div class="link-fine">
-                        <a href="./fine.php" class="btn-fine p-4 fw-bold">View More</a>
+
+                    <div class="count-info-list d-flex justify-content-between">
+                        <div>
+                            <h3 class="fs-3">Fined Books: <?php echo $finedBooksCount; ?></h3> <br>
+                            <span>NRS <?php echo $totalFineCharged; ?> Charged</span>
+                        </div>
+                        <div class="link-fine">
+                            <a href="./fine.php" class="btn-fine p-4 fw-bold">View Details</a>
+                        </div>
                     </div>
-                </div>
-            <div class="my-5">
+            </div>
+            <!-- <div class="my-5">
 
-                <h3>
-                    <?php
-                    // Query to count expired books
-                    $expiredCountQuery = "SELECT COUNT(approve) AS expiredCount FROM issue_book WHERE approve = 'Expired' AND username ='" . $_SESSION["user"] . "'";
-                    $expiredCountResult = mysqli_query($conn, $expiredCountQuery);
-                    $expiredCountRow = mysqli_fetch_assoc($expiredCountResult);
-                    $expiredCount = $expiredCountRow['expiredCount'];
 
-                    // Query to count fined books for the current user
-                    $expireCountQuery_fine = "SELECT COUNT(book_status) AS fineBookCount FROM fine WHERE book_status = 'Expired' AND fine > 0 AND username = '" . $_SESSION['user'] . "'";
-                    $fineBookCountResult = mysqli_query($conn, $expireCountQuery_fine);
-                    $fineBookCountRow = mysqli_fetch_assoc($fineBookCountResult);
-                    $fineBookCount = $fineBookCountRow['fineBookCount'];
-
-                    echo "Expired Book's : {$expiredCount} | Fine रु॰{$fineinfo}<br>";
-                    echo "Fined Book's : {$fineBookCount} | Fine रु॰{$fine} ";
-
-                    ?>
-
-                </h3>
                 <span>Check for detailed fines
                     <a href="./fine.php" class="fine-link">Here</a>
                 </span><br>
                 <span>Books returned delayed will be charged <span style="color:red;  font-weight:bold;"> रु॰
                         40</span>
                     per day.</span>
-            </div>
+            </div> -->
+            <h3>
+                    <?php
+                    // Query to count expired books
+                    // $expiredCountQuery = "SELECT COUNT(approve) AS expiredCount FROM issue_book WHERE approve = 'Expired' AND username ='" . $_SESSION["user"] . "'";
+                    // $expiredCountResult = mysqli_query($conn, $expiredCountQuery);
+                    // $expiredCountRow = mysqli_fetch_assoc($expiredCountResult);
+                    // $expiredCount = $expiredCountRow['expiredCount'];
 
+                    // // Query to count fined books for the current user
+                    // $expireCountQuery_fine = "SELECT COUNT(book_status) AS fineBookCount FROM fine WHERE book_status = 'Expired' AND fine > 0 AND username = '" . $_SESSION['user'] . "'";
+                    // $fineBookCountResult = mysqli_query($conn, $expireCountQuery_fine);
+                    // $fineBookCountRow = mysqli_fetch_assoc($fineBookCountResult);
+                    // $fineBookCount = $fineBookCountRow['fineBookCount'];
+
+                    // echo "Expired Book's : {$expiredBooksCount} | Fine रु॰{$fineinfo}<br>";
+                    // echo "Fined Book's : {$finedBookdCount} | Fine रु॰{$fine} ";
+
+                    ?>
+
+                </h3>
             <?php
 
 

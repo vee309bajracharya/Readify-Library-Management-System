@@ -479,11 +479,15 @@ span#navbarDropdown.dropdown-toggle::after {
 
 /* finedbooks */
 
-.fine-info-list{
+.count-info-list{
+  margin: 1.3rem 0;
   background-color: var(--primary-color);
   color: var(--white-color);
   border-radius: 5px;
   width: 40%;
+  height: 10rem;
+  font-size: 1.2rem;
+  padding-left: 1.2rem;
 }
 .btn-fine{
   border-radius: 5px;
@@ -497,4 +501,5 @@ span#navbarDropdown.dropdown-toggle::after {
 }
 .link-fine{
   margin-top: 4rem;
+  margin-right: 4rem;
 }

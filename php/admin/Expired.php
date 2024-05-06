@@ -24,7 +24,7 @@ if (isset($_SESSION['admin'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Issued Books</title>
+    <title>Books Status</title>
     <style>
         .scroll {
             width: 100%;
@@ -37,6 +37,8 @@ if (isset($_SESSION['admin'])) {
             width: 10%;
         }
     </style>
+        <!-- ==== CSS Links ==== -->
+        <link rel="stylesheet" href="../../css/custom_bootstrap.css">
 </head>
 
 <body>
@@ -44,6 +46,7 @@ if (isset($_SESSION['admin'])) {
 
     <div class="list_container">
         <div id="main">
+            <h2>Book Status </h2>
 
                 <?php
 
@@ -65,10 +68,6 @@ if (isset($_SESSION['admin'])) {
 
                 $totalExpiredCount = $expiredCount_issue_book + $expiredCount_fine;
 
-
-
-
-
                 $BookLostCountQuery = "SELECT COUNT(approve) AS BookLostCount FROM issue_book WHERE approve = 'Book Lost '";
                 $BookLostCountResult = mysqli_query($conn, $BookLostCountQuery);
                 $BookLostCountRow = mysqli_fetch_assoc($BookLostCountResult);
@@ -82,14 +81,24 @@ if (isset($_SESSION['admin'])) {
 
                 $totalBookLostCount = $BookLostCount + $BooklostCount_fine;
 
-                echo "Approved Book's : {$approvedCount}";
-                echo "Expired Book's : {$totalExpiredCount}";
-                echo "Lost Book's : {$totalBookLostCount}";
+                echo "<div class='count-amount-container d-flex justify-content-between gap-4'>";
+
+                    echo "<div class='count-info-list'>";
+                    echo "<h3 class='fs-1 my-5'>Approved Books : {$approvedCount}</h3> <br>";
+                    echo "</div>";
+
+                    echo "<div class='count-info-list'>";
+                        echo "<h3 class='fs-1 my-5'>Expired Books : {$totalExpiredCount}</h3> <br>";
+                        echo "</div>";
+                        
+                    echo "<div class='count-info-list'>";
+                        echo "<h3 class='fs-1 my-5'>Lost Books : {$totalBookLostCount}</h3> <br>";
+                        echo "</div>";
+                echo "</div>";
                 ?>
 
                 <?php if (isset($_SESSION['admin'])): ?>
                     <div class="searchBar__wrapper">
-                        <h2>Book Status </h2>
                         <script>
                             function checkBookLost() {
                                 var checkboxes = document.getElementsByName('Returned_books_id[]');
