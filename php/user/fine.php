@@ -1,9 +1,6 @@
 <?php
 include "./userNavbar.php"; // Include navbar along with sidenav
 require_once "../config.php"; // Include database connection file
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -32,13 +29,8 @@ require_once "../config.php"; // Include database connection file
         <div id="main">
             <h1>Fine Details </h1>
 
-            <h3>
-                <?php
-
-                include "./finedbooks.php";
-                ?>
-
-            </h3>
+            <h3><?php include "./finedbooks.php";?> </h3>
+            <h4>Total Fine Amount: NRS <?php echo $totalFineCharged; ?></h4>
 
 
             <?php
@@ -46,8 +38,7 @@ require_once "../config.php"; // Include database connection file
             // Fetch data for the logged-in user
             if (isset($_SESSION['user'])) {
                 $loggedInUser = $_SESSION['user'];
-                $loggedInUser = $_SESSION['user'];
-                $result = mysqli_query($conn, "SELECT fine.*, library_books.books_name, library_books.book_cover,book_status
+                $result = mysqli_query($conn, "SELECT fine.*, library_books.books_name, library_books.book_cover, book_status
                     FROM `fine` 
                     INNER JOIN library_books ON fine.bid = library_books.books_id 
                     WHERE fine.username = '$loggedInUser' AND fine > 0");
@@ -57,34 +48,15 @@ require_once "../config.php"; // Include database connection file
                     echo "<table class='table table-bordered table-hover'>";
                     echo "<tr>";
                     //Table header
-                    echo "<th>";
-                    echo "Username";
-                    echo "</th>";
-                    echo "<th>";
-                    echo "Book ID";
-                    echo "</th>";
-                    echo "<th>";
-                    echo "Books Name";
-                    echo "</th>";
-                    echo "<th>";
-                    echo "Book Cover";
-                    echo "</th>";
-                    echo "<th>";
-                    echo "Returned";
-                    echo "</th>";
-                    echo "<th>";
-                    echo "Days";
-                    echo "</th>";
-                    echo "<th>";
-                    echo "Fine";
-                    echo "</th>";
-                    echo "<th>";
-                    echo "Book Status";
-                    echo "</th>";
-
-                    echo "<th>";
-                    echo "Status";
-                    echo "</th>";
+                    echo "<th>";echo "Username";echo "</th>";
+                    echo "<th>";echo "Book ID";echo "</th>";
+                    echo "<th>";echo "Books Name";echo "</th>";
+                    echo "<th>";echo "Book Cover";echo "</th>";
+                    echo "<th>";echo "Returned";echo "</th>";
+                    echo "<th>";echo "Days";echo "</th>";
+                    echo "<th>";echo "Fine";echo "</th>";
+                    echo "<th>";echo "Book Status";echo "</th>";
+                    echo "<th>";echo "Status";echo "</th>";
 
                     echo "</tr>";
 

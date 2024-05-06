@@ -44,7 +44,6 @@ if (isset($_SESSION['admin'])) {
 
     <div class="list_container">
         <div id="main">
-            <div class="container">
 
                 <?php if (isset($_SESSION['admin'])): ?>
                     <div class="searchBar__wrapper">
@@ -135,7 +134,7 @@ if (isset($_SESSION['admin'])) {
                                             mysqli_query($conn, $deleteQuery);
                                         }
                                         // Output fine details
-                                        echo '<div class="fine-details">';
+                                        echo '<div class="book-info-details">';
                                         echo '<h2>Fine details:</h2>';
                                         echo '<p><span class="highlight">Username:</span> ' . $username . '</p>';
                                         echo '<p><span class="highlight">Book ID:</span> ' . $books_id . '</p>';
@@ -176,11 +175,12 @@ if (isset($_SESSION['admin'])) {
                                         // Insert returned book details into returned_book table
                                         $Markasreturneddate = date('Y-m-d');
 
-                                        echo '<div class="details">';
-                                        echo '<h2>Book Return Details:</h2>';
-                                        echo '<p><span class="highlight">Username:</span> ' . $username . '</p>';
-                                        echo '<p><span class="highlight">Book ID:</span> ' . $books_id . '</p>';
-                                        echo '<p style="color:green";> No fine Charged </p>';
+                                        echo '<div class="book-info-details">';
+                                            echo '<h2>Book Return Details:</h2>';
+                                            echo '<p><span class="highlight">User ID:</span> ' . $user_id . '</p>';
+                                            echo '<p><span class="highlight">Username:</span> ' . $username . '</p>';
+                                            echo '<p><span class="highlight">Book ID:</span> ' . $books_id . '</p>';
+                                            echo '<p><span class="highlight">Book Name:</span> ' . $books_name . '</p>';
                                         echo '</div>';
 
                                         $insertReturnedBookQuery = "INSERT INTO returned_book (username, user_id, books_id, books_name, book_cover, authors, approve, issue, return_date, returned_date, requested) VALUES ('$username','$user_id', '$books_id', '$books_name', '$book_cover', '$authors', '$approve', '$issue','$return','$Markasreturneddate','$requested')";
@@ -200,9 +200,6 @@ if (isset($_SESSION['admin'])) {
                                     // No record found for the given username and book ID
                                     $updateQuery = "UPDATE issue_book SET approve='<p> Returned </p>' WHERE username='$username' AND books_id='$books_id' AND (approve = 'Yes' OR approve = '<p> Expired </p>')";
                                     mysqli_query($conn, $updateQuery);
-
-                                    $_SESSION['msg'] = "Book returned before the return date. No fine charged";
-                                    $_SESSION['msg_code'] = "error";
                                 }
                             }
                         }
@@ -240,17 +237,25 @@ if (isset($_SESSION['admin'])) {
                         }
                         ?>
                         <form action="" method="POST">
-                            <button type="submit" name="markReturned" class="btn btn-default">Mark as Returned</button>
+
+                            <section class="main-container d-flex justify-content-between gap-5">
+
+                                <div class="filter-container d-flex gap-3">
+                                    <button type="submit" name="submit1" class="btn btn-default">All Info</button>
+                                    <button type="submit" name="submit4" class="btn btn-default">Approved</button>
+                                    <button type="submit" name="submit2" class="btn btn-default">Returned</button>
+                                    <button type="submit" name="submit3" class="btn btn-default">Expired</button>  
+                                    </div>
+
+                                <div class="action-container d-flex gap-3">
+                                    <button type="submit" name="markReturned" class="btn btn-success fw-semibold">Mark as Returned</button>
+                                    <button type="submit" name="markLost" onclick="checkBooklost()" class="btn btn-danger fw-semibold">Declare Lost</button>
+                                </div>
 
 
-                            <button type="submit" name="markLost" onclick="checkBooklost()" class="btn btn-default">Declare
-                                Lost</button>
+ 
+                            </section>
 
-                            <!-- Filter buttons -->
-                            <button type="submit" name="submit1" class="btn btn-default">All Info</button>
-                            <button type="submit" name="submit4" class="btn btn-default">Approved</button>
-                            <button type="submit" name="submit2" class="btn btn-default">Returned</button>
-                            <button type="submit" name="submit3" class="btn btn-default">Expired</button>
                             <?php
 
                             // Default SQL query
@@ -391,7 +396,6 @@ if (isset($_SESSION['admin'])) {
                     <h3>Please login first</h3>
                 <?php endif; ?>
 
-            </div>
         </div>
     </div>
 

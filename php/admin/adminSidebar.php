@@ -57,7 +57,7 @@ require_once "../config.php"; //database connection file
 
       <a href="./Request.php" class="sidebar-links"><i class='bx bx-list-check'></i> Approval Books List</a>
       <a href="./Expired.php" class="sidebar-links"><i class='bx bx-library'></i> Book Status</a>
-      <a href="./Returned_books.php" class="sidebar-links"><i class='bx bx-list-ul'></i>Returned books</a>
+      <a href="./Returned_books.php" class="sidebar-links"><i class='bx bx-list-ul'></i> Returned Books List</a>
       <a href="./fine.php" class="sidebar-links"><i class='bx bxs-wallet-alt'></i> Fine Info</a>
       <a href="./manageUser.php" class="sidebar-links"><i class='bx bxs-user-account'></i> Users Details</a>
       <a href="./admin-LogOut.php" class="sidebar-links"><i class="bx bx-log-out"></i> Log out</a>
