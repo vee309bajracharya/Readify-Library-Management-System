@@ -24,7 +24,7 @@ if (isset($_SESSION['admin'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Issued Books</title>
+    <title>Books Status</title>
     <style>
         .scroll {
             width: 100%;
@@ -37,6 +37,8 @@ if (isset($_SESSION['admin'])) {
             width: 10%;
         }
     </style>
+        <!-- ==== CSS Links ==== -->
+        <link rel="stylesheet" href="../../css/custom_bootstrap.css">
 </head>
 
 <body>
@@ -44,7 +46,7 @@ if (isset($_SESSION['admin'])) {
 
     <div class="list_container">
         <div id="main">
-            <div class="container">
+            <h2>Book Status </h2>
 
                 <?php
 
@@ -66,10 +68,6 @@ if (isset($_SESSION['admin'])) {
 
                 $totalExpiredCount = $expiredCount_issue_book + $expiredCount_fine;
 
-
-
-
-
                 $BookLostCountQuery = "SELECT COUNT(approve) AS BookLostCount FROM issue_book WHERE approve = 'Book Lost '";
                 $BookLostCountResult = mysqli_query($conn, $BookLostCountQuery);
                 $BookLostCountRow = mysqli_fetch_assoc($BookLostCountResult);
@@ -83,14 +81,24 @@ if (isset($_SESSION['admin'])) {
 
                 $totalBookLostCount = $BookLostCount + $BooklostCount_fine;
 
-                echo "Approved Book's : {$approvedCount}";
-                echo "Expired Book's : {$totalExpiredCount}";
-                echo "Lost Book's : {$totalBookLostCount}";
+                echo "<div class='count-amount-container d-flex justify-content-between gap-4'>";
+
+                    echo "<div class='count-info-list'>";
+                    echo "<h3 class='fs-1 my-5'>Approved Books : {$approvedCount}</h3> <br>";
+                    echo "</div>";
+
+                    echo "<div class='count-info-list'>";
+                        echo "<h3 class='fs-1 my-5'>Expired Books : {$totalExpiredCount}</h3> <br>";
+                        echo "</div>";
+                        
+                    echo "<div class='count-info-list'>";
+                        echo "<h3 class='fs-1 my-5'>Lost Books : {$totalBookLostCount}</h3> <br>";
+                        echo "</div>";
+                echo "</div>";
                 ?>
 
                 <?php if (isset($_SESSION['admin'])): ?>
                     <div class="searchBar__wrapper">
-                        <h2>Book Status </h2>
                         <script>
                             function checkBookLost() {
                                 var checkboxes = document.getElementsByName('Returned_books_id[]');
@@ -177,7 +185,7 @@ if (isset($_SESSION['admin'])) {
                                             mysqli_query($conn, $deleteQuery);
                                         }
                                         // Output fine details
-                                        echo '<div class="fine-details">';
+                                        echo '<div class="book-info-details">';
                                         echo '<h2>Fine details:</h2>';
                                         echo '<p><span class="highlight">Username:</span> ' . $username . '</p>';
                                         echo '<p><span class="highlight">Book ID:</span> ' . $books_id . '</p>';
@@ -218,11 +226,12 @@ if (isset($_SESSION['admin'])) {
                                         // Insert returned book details into returned_book table
                                         $Markasreturneddate = date('Y-m-d');
 
-                                        echo '<div class="details">';
-                                        echo '<h2>Book Return Details:</h2>';
-                                        echo '<p><span class="highlight">Username:</span> ' . $username . '</p>';
-                                        echo '<p><span class="highlight">Book ID:</span> ' . $books_id . '</p>';
-                                        echo '<p style="color:green";> No fine Charged </p>';
+                                        echo '<div class="book-info-details">';
+                                            echo '<h2>Book Return Details:</h2>';
+                                            echo '<p><span class="highlight">User ID:</span> ' . $user_id . '</p>';
+                                            echo '<p><span class="highlight">Username:</span> ' . $username . '</p>';
+                                            echo '<p><span class="highlight">Book ID:</span> ' . $books_id . '</p>';
+                                            echo '<p><span class="highlight">Book Name:</span> ' . $books_name . '</p>';
                                         echo '</div>';
 
                                         $insertReturnedBookQuery = "INSERT INTO returned_book (username, user_id, books_id, books_name, book_cover, authors, approve, issue, return_date, returned_date, requested) VALUES ('$username','$user_id', '$books_id', '$books_name', '$book_cover', '$authors', '$approve', '$issue','$return','$Markasreturneddate','$requested')";
@@ -242,9 +251,6 @@ if (isset($_SESSION['admin'])) {
                                     // No record found for the given username and book ID
                                     $updateQuery = "UPDATE issue_book SET approve='Returned' WHERE username='$username' AND books_id='$books_id' AND (approve = 'Approved' OR approve = 'Expired')";
                                     mysqli_query($conn, $updateQuery);
-
-                                    $_SESSION['msg'] = "Book returned before the return date. No fine charged";
-                                    $_SESSION['msg_code'] = "error";
                                 }
                             }
                         }
@@ -282,17 +288,25 @@ if (isset($_SESSION['admin'])) {
                         }
                         ?>
                         <form action="" method="POST">
-                            <button type="submit" name="markReturned" class="btn btn-default">Mark as Returned</button>
+
+                            <section class="main-container d-flex justify-content-between gap-5">
+
+                                <div class="filter-container d-flex gap-3">
+                                    <button type="submit" name="submit1" class="btn btn-default">All Info</button>
+                                    <button type="submit" name="submit4" class="btn btn-default">Approved</button>
+                                    <button type="submit" name="submit2" class="btn btn-default">Returned</button>
+                                    <button type="submit" name="submit3" class="btn btn-default">Expired</button>  
+                                    </div>
+
+                                <div class="action-container d-flex gap-3">
+                                    <button type="submit" name="markReturned" class="btn btn-success fw-semibold">Mark as Returned</button>
+                                    <button type="submit" name="markLost" onclick="checkBooklost()" class="btn btn-danger fw-semibold">Declare Lost</button>
+                                </div>
 
 
-                            <button type="submit" name="markLost" onclick="checkBooklost()" class="btn btn-default">Declare
-                                Lost</button>
+ 
+                            </section>
 
-                            <!-- Filter buttons -->
-                            <button type="submit" name="submit1" class="btn btn-default">All Info</button>
-                            <button type="submit" name="submit4" class="btn btn-default">Approved</button>
-                            <button type="submit" name="submit2" class="btn btn-default">Returned</button>
-                            <button type="submit" name="submit3" class="btn btn-default">Expired</button>
                             <?php
 
                             // Default SQL query
@@ -433,7 +447,6 @@ if (isset($_SESSION['admin'])) {
                     <h3>Please login first</h3>
                 <?php endif; ?>
 
-            </div>
         </div>
     </div>
 

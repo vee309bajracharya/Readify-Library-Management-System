@@ -157,7 +157,7 @@ if (isset($_GET['id'])) {
 
                         <div class="field input">
                             <label for="bookCover">Book Cover</label>
-                            <input type="text" name="book_cover_url" id="book_cover_url" value="" required="">
+                            <input type="text" name="book_cover_url" id="book_cover_url" value="<?php echo $book_cover; ?>" required="">
                         </div>
 
 

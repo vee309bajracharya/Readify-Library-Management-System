@@ -46,13 +46,12 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
 
     <div class="list_container">
         <div id="main">
+            <h3>Returned Books List</h3>
 
             <?php
             $c = 0;
             if (isset($_SESSION["admin"])) {
-                $sql = "SELECT * FROM returned_book 
-                  
-                    ";
+                $sql = "SELECT * FROM returned_book";
                 $res = mysqli_query($conn, $sql);
                 echo "<div>";
 
@@ -84,17 +83,8 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
                 echo "Authors";
                 echo "</th>";
 
-
-                echo "<th>";
-                echo "Requested Date";
-                echo "</th>";
-
                 echo "<th>";
                 echo "Book Issued Date";
-                echo "</th>";
-
-                echo "<th>";
-                echo "Book Return Date";
                 echo "</th>";
 
                 echo "<th>";
@@ -124,9 +114,7 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
                     echo "<td style='text-align:center;'><img src='../admin/covers/" . $row['book_cover'] . "' alt='Book Cover' width='100' style='object-fit: cover; border-radius: 5px;'></td>";
                     echo "<td>" . $row['authors'] . "</td>";
 
-                    echo "<td>" . $row['requested'] . "</td>";
                     echo "<td>" . $row['issue'] . "</td>";
-                    echo "<td>" . $row['return_date'] . "</td>";
                     echo "<td>" . $row['returned_date'] . "</td>";
                     echo "<td>" . $row['approve'] . "</td>";
 

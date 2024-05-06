@@ -28,7 +28,7 @@
   --content-bg-color: #eeeeee;
   --info-msg-color: #5131f1;
   --bg-dark-purple: rgb(55, 49, 241);
-  --btn-color-1: #fff174;
+  --btn-color-1: #FFF174;
 }
 
 section {
@@ -445,28 +445,27 @@ span#navbarDropdown.dropdown-toggle::after {
   font-weight: 600;
   color: var(--primary-color);
 }
-.fine-details {
+.book-info-details {
   border: 1px solid #ccc;
   box-shadow: var(--box-shadow-color);
   border-radius: 5px;
   padding: 10px;
   margin: 2rem 0;
-  width: 35%;
 }
 
-.fine-details h2 {
+.book-info-details h2 {
   margin: 1.3rem 0;
   font-size: 3rem;
   font-weight: bold;
 }
 
-.fine-details p {
+.book-info-details p {
   margin: 1rem 0;
   line-height: 1.6;
   font-size: 1.5rem;
 }
 
-.fine-details .highlight {
+.book-info-details .highlight {
   font-weight: bold;
   color: var(--primary-color);
 }
@@ -476,4 +475,31 @@ span#navbarDropdown.dropdown-toggle::after {
 /* admin book req handle */
 .custom-radio{
   height: 2.5rem !important;
+}
+
+/* finedbooks */
+
+.count-info-list{
+  margin: 1.3rem 0;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border-radius: 5px;
+  width: 40%;
+  height: 10rem;
+  font-size: 1.2rem;
+  padding-left: 1.2rem;
+}
+.btn-fine{
+  border-radius: 5px;
+  background-color: var(--btn-color-1);
+  color: var(--dark-color);
+  box-shadow: var(--box-shadow-color);
+  height: 24%;
+}
+.btn-fine:hover{
+  text-decoration: none;
+}
+.link-fine{
+  margin-top: 4rem;
+  margin-right: 4rem;
 }
