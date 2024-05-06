@@ -11,6 +11,9 @@ require_once "../config.php";
         $_SESSION['login_success_shown'] = true;
     }
 
+
+
+
 // Execute the SQL query to count the number of user_ids in the library_users table
 $sql = "SELECT COUNT(user_id) AS user_count FROM library_users";
 
@@ -46,7 +49,7 @@ if ($result_book) {
 // Execute the SQL query to count approve books
 $sqlapprove = "SELECT COUNT(DISTINCT username) AS approve_count
 FROM issue_book
-WHERE approve = 'Yes'";
+WHERE approve = 'Approved'";
 $approve_book = mysqli_query($conn, $sqlapprove); // Execute the query
 
 // Check if the query executed successfully
@@ -64,7 +67,7 @@ if ($approve_book) {
 // Execute the SQL query to count Expired books
 $sqlexpired = "SELECT COUNT(DISTINCT username) AS expired_count
 FROM issue_book
-WHERE approve = '<p> Expired </p>'";
+WHERE approve = 'Expired'";
 $expired_book = mysqli_query($conn, $sqlexpired); // Execute the query
 
 // Check if the query executed successfully

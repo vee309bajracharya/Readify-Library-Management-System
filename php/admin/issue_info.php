@@ -65,7 +65,7 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
                     INNER JOIN 
                     library_books ON issue_book.books_id = library_books.books_id 
                     WHERE 
-                    issue_book.approve = 'Yes' 
+                    issue_book.approve = 'Approved' 
                     ORDER BY 
                     issue_book.return ASC;
                     ";
@@ -97,7 +97,7 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
                     if ($d > $row['return']) {
                         $c = $c + 1;
                         $var = '<p> Expired </P>';
-                        mysqli_query($conn, "UPDATE issue_book SET approve='$var' WHERE `return`='{$row['return']}' AND approve ='Yes' limit $c;");
+                        mysqli_query($conn, "UPDATE issue_book SET approve='$var' WHERE `return`='{$row['return']}' AND approve ='Approved' limit $c;");
                         echo $d . "</br>";
                     }
 

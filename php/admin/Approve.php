@@ -68,7 +68,7 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
                             <div class="field input mt-5 d-flex align-items-center">
 
                                 <label for="yes">Approve</label>
-                                <input type="radio" id="yes" name="approve" value="Yes" class="custom-radio" checked>
+                                <input type="radio" id="yes" name="approve" value="Approved" class="custom-radio" checked>
 
                                 <label for="no">Reject</label>
                                 <input type="radio" id="no" name="approve" value="No" class="custom-radio">
@@ -122,7 +122,7 @@ $searchBarQuery = null; // Set a default value for $searchBarQuery
                         mysqli_query($conn, "UPDATE library_books SET status='not-available' WHERE books_id='$books_id'");
                     }
 
-                    if ($approve == 'Yes') {
+                    if ($approve == 'Approved') {
                         $_SESSION['msg'] = "Book Approved !!";
                         $_SESSION['msg_code'] = "success";
                     }
