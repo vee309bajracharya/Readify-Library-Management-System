@@ -4,15 +4,15 @@ require_once "../config.php";
 
 // Update the status of expired books
 if (isset($_SESSION['admin'])) {
-    $expireQuery = "UPDATE issue_book SET approve = '<p> Expired </p>' WHERE `return` < CURDATE() AND approve = 'Yes'";
+    $expireQuery = "UPDATE issue_book SET approve = 'Expired' WHERE `return` < CURDATE() AND approve = 'Approved'";
     mysqli_query($conn, $expireQuery);
 }
 
 if (isset($_SESSION['admin'])) {
-    // Update the status of books considered lost if their approval status is 'Yes'
+    // Update the status of books considered lost if their approval status is 'Approved'
     $bookLostQuery = "UPDATE issue_book 
-    SET approve = '<p> Book Lost </p>' 
-    WHERE (DATEDIFF(CURDATE(), `return`) > 30) AND (approve = 'Yes' OR approve = '<p> Expired </p>')";
+    SET approve = 'Book Lost ' 
+    WHERE (DATEDIFF(CURDATE(), `return`) > 30) AND (approve = 'Approved' OR approve = 'Expired')";
     mysqli_query($conn, $bookLostQuery);
 }
 
@@ -44,6 +44,48 @@ if (isset($_SESSION['admin'])) {
 
     <div class="list_container">
         <div id="main">
+
+                <?php
+
+                $approvedCountQuery = "SELECT COUNT(approve) AS approvedCount FROM issue_book WHERE approve = 'Approved'";
+                $approvedCountResult = mysqli_query($conn, $approvedCountQuery);
+                $approvedCountRow = mysqli_fetch_assoc($approvedCountResult);
+                $approvedCount = $approvedCountRow['approvedCount'];
+
+
+                $expireCountQuery_issue_book = "SELECT COUNT(approve) AS expireCount FROM issue_book WHERE approve = 'Expired'";
+                $expireCountResult_issue_book = mysqli_query($conn, $expireCountQuery_issue_book);
+                $expiredCountRow_issue_book = mysqli_fetch_assoc($expireCountResult_issue_book);
+                $expiredCount_issue_book = $expiredCountRow_issue_book['expireCount'];
+
+                $expireCountQuery_fine = "SELECT COUNT(book_status) AS expiredCount FROM fine WHERE book_status = 'Expired' AND fine > 0";
+                $expireCountResult_fine = mysqli_query($conn, $expireCountQuery_fine);
+                $expiredCountRow_fine = mysqli_fetch_assoc($expireCountResult_fine);
+                $expiredCount_fine = $expiredCountRow_fine['expiredCount'];
+
+                $totalExpiredCount = $expiredCount_issue_book + $expiredCount_fine;
+
+
+
+
+
+                $BookLostCountQuery = "SELECT COUNT(approve) AS BookLostCount FROM issue_book WHERE approve = 'Book Lost '";
+                $BookLostCountResult = mysqli_query($conn, $BookLostCountQuery);
+                $BookLostCountRow = mysqli_fetch_assoc($BookLostCountResult);
+                $BookLostCount = $BookLostCountRow['BookLostCount'];
+
+                $BooklostountQuery_fine = "SELECT COUNT(book_status) AS BooklostCount FROM fine WHERE book_status = 'Book Lost' AND fine > 0";
+                $BooklostountResult_fine = mysqli_query($conn, $BooklostountQuery_fine);
+                $BooklostCountRow_fine = mysqli_fetch_assoc($BooklostountResult_fine);
+                $BooklostCount_fine = $BooklostCountRow_fine['BooklostCount'];
+
+
+                $totalBookLostCount = $BookLostCount + $BooklostCount_fine;
+
+                echo "Approved Book's : {$approvedCount}";
+                echo "Expired Book's : {$totalExpiredCount}";
+                echo "Lost Book's : {$totalBookLostCount}";
+                ?>
 
                 <?php if (isset($_SESSION['admin'])): ?>
                     <div class="searchBar__wrapper">
@@ -81,7 +123,7 @@ if (isset($_SESSION['admin'])) {
                                 list($books_id, $username) = explode("_", $Returned_book_id);
 
                                 // Query to retrieve return date for the book
-                                $returnDateQuery = "SELECT `return` FROM issue_book WHERE username ='$username' AND books_id ='$books_id' AND (approve = '<p> Expired </p>' OR approve = 'Yes')";
+                                $returnDateQuery = "SELECT `return` FROM issue_book WHERE username ='$username' AND books_id ='$books_id' AND (approve = 'Expired' OR approve = 'Approved')";
                                 $returnDateResult = mysqli_query($conn, $returnDateQuery);
 
                                 if ($returnDateResult && mysqli_num_rows($returnDateResult) > 0) {
@@ -98,12 +140,12 @@ if (isset($_SESSION['admin'])) {
                                         $fine = ($differenceInDays > 0) ? $differenceInDays * 40 : 0;
 
                                         // Update status to "Returned"
-                                        $updateQuery = "UPDATE issue_book SET approve='<p> Returned </p>' WHERE username='$username' AND books_id='$books_id'";
+                                        $updateQuery = "UPDATE issue_book SET approve='Returned' WHERE username='$username' AND books_id='$books_id'";
                                         mysqli_query($conn, $updateQuery);
 
                                         // Insert fine details into fine table if there is a fine
                                         if ($fine > 0) {
-                                            $insertFineQuery = "INSERT INTO fine (username, bid, returned, days, fine, status) VALUES ('$username', '$books_id', '$currentDate', '$differenceInDays', '$fine', 'unpaid')";
+                                            $insertFineQuery = "INSERT INTO fine (username, bid, returned, days, fine, status, book_status) VALUES ('$username', '$books_id', '$currentDate', '$differenceInDays', '$fine', 'unpaid', 'Expired')";
                                             mysqli_query($conn, $insertFineQuery);
                                         }
 
@@ -130,7 +172,7 @@ if (isset($_SESSION['admin'])) {
                                         $insertReturnedBookResult = mysqli_query($conn, $insertReturnedBookQuery);
 
                                         if ($insertReturnedBookResult) {
-                                            $deleteQuery = "DELETE FROM issue_book WHERE username='$username' AND books_id='$books_id' AND approve = '<p> Returned </p>'";
+                                            $deleteQuery = "DELETE FROM issue_book WHERE username='$username' AND books_id='$books_id' AND approve = 'Returned'";
                                             mysqli_query($conn, $deleteQuery);
                                         }
                                         // Output fine details
@@ -147,7 +189,7 @@ if (isset($_SESSION['admin'])) {
                                     } else {
                                         // Book is returned before the return date
                                         // Update status to "Returned" without charging any fine
-                                        $updateQuery = "UPDATE issue_book SET approve='<p> Returned </p>' WHERE username='$username' AND books_id='$books_id' AND (approve = 'Yes' OR approve = '<p> Expired </p>')";
+                                        $updateQuery = "UPDATE issue_book SET approve='Returned' WHERE username='$username' AND books_id='$books_id' AND (approve = 'Approved' OR approve = 'Expired')";
                                         mysqli_query($conn, $updateQuery);
                                         // Retrieve user_id, book details, and other information
                                         $getUserIDQuery = "SELECT user_id FROM library_users WHERE username='$username'";
@@ -191,14 +233,14 @@ if (isset($_SESSION['admin'])) {
                                         $_SESSION['msg'] = "Book returned before the return date. No fine charged";
 
 
-                                        $deleteQuery = "DELETE FROM issue_book WHERE username='$username' AND books_id='$books_id' AND approve = '<p> Returned </p>'";
+                                        $deleteQuery = "DELETE FROM issue_book WHERE username='$username' AND books_id='$books_id' AND approve = 'Returned'";
                                         mysqli_query($conn, $deleteQuery);
 
 
                                     }
                                 } else {
                                     // No record found for the given username and book ID
-                                    $updateQuery = "UPDATE issue_book SET approve='<p> Returned </p>' WHERE username='$username' AND books_id='$books_id' AND (approve = 'Yes' OR approve = '<p> Expired </p>')";
+                                    $updateQuery = "UPDATE issue_book SET approve='Returned' WHERE username='$username' AND books_id='$books_id' AND (approve = 'Approved' OR approve = 'Expired')";
                                     mysqli_query($conn, $updateQuery);
                                 }
                             }
@@ -210,7 +252,7 @@ if (isset($_SESSION['admin'])) {
 
                         if (isset($_POST['markLost'])) {
                             // Retrieve all books_id marked as lost
-                            $lostBooksQuery = "SELECT books_id, username, `return` FROM issue_book WHERE approve = '<p> Book Lost </p>'";
+                            $lostBooksQuery = "SELECT books_id, username, `return` FROM issue_book WHERE approve = 'Book Lost '";
                             $lostBooksResult = mysqli_query($conn, $lostBooksQuery);
                             if ($lostBooksResult) {
                                 while ($row = mysqli_fetch_assoc($lostBooksResult)) {
@@ -344,7 +386,7 @@ if (isset($_SESSION['admin'])) {
                                     FROM library_users 
                                     INNER JOIN issue_book ON library_users.username = issue_book.username 
                                     INNER JOIN library_books ON issue_book.books_id = library_books.books_id 
-                                    WHERE issue_book.approve LIKE '%Yes%'
+                                    WHERE issue_book.approve LIKE '%Approved%'
                                     ORDER BY issue_book.return DESC";
                             }
 

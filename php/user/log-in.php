@@ -3,6 +3,21 @@ session_start();
 if (isset($_SESSION['user'])) {
   header("Location: ./list_book_for_user.php"); //if user is registered , redirect it to  home/dashboard page
 }
+
+
+// Update the status of expired books
+if (isset($_SESSION['admin'])) {
+  $expireQuery = "UPDATE issue_book SET approve = 'Expired' WHERE `return` < CURDATE() AND approve = 'Approved'";
+  mysqli_query($conn, $expireQuery);
+}
+
+if (isset($_SESSION['admin'])) {
+  // Update the status of books considered lost if their approval status is 'Approved'
+  $bookLostQuery = "UPDATE issue_book 
+  SET approve = 'Book Lost ' 
+  WHERE (DATEDIFF(CURDATE(), `return`) > 30) AND (approve = 'Approved' OR approve = 'Expired')";
+  mysqli_query($conn, $bookLostQuery);
+}
 ?>
 
 <!DOCTYPE html>
@@ -112,7 +127,7 @@ if (isset($_SESSION['user'])) {
 
             // Update the status of expired books
             if (isset($_SESSION['user'])) {
-              $expireQuery = "UPDATE issue_book SET approve = '<p> Expired </p>' WHERE `return` < CURDATE() AND approve = 'Yes'";
+              $expireQuery = "UPDATE issue_book SET approve = 'Expired' WHERE `return` < CURDATE() AND approve = 'Approved'";
               mysqli_query($conn, $expireQuery);
             }
 

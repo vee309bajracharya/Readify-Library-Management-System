@@ -7,7 +7,7 @@ if (isset($_GET['cancel_books_id'])) {
     $cancel_username = mysqli_real_escape_string($conn, $_SESSION['user']);
 
     // Check if the book request has been approved
-    $check_approval_query = "SELECT * FROM issue_book WHERE books_id = '$cancel_books_id' AND (approve = 'Yes' OR approve = '<p> Returned </p>' OR approve = '<p> Expired </p>' OR approve = '<p> Book lost </p>')";
+    $check_approval_query = "SELECT * FROM issue_book WHERE books_id = '$cancel_books_id' AND (approve = 'Approved' OR approve = 'Returned' OR approve = 'Expired' OR approve = '<p> Book lost </p>')";
     $approval_result = mysqli_query($conn, $check_approval_query);
 
     if (mysqli_num_rows($approval_result) > 0) {

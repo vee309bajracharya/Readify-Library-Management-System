@@ -42,6 +42,34 @@ include "./finedbooks.php"; // logic for total fines
                         <a href="./fine.php" class="btn-fine p-4 fw-bold">View More</a>
                     </div>
                 </div>
+            <div class="my-5">
+
+                <h3>
+                    <?php
+                    // Query to count expired books
+                    $expiredCountQuery = "SELECT COUNT(approve) AS expiredCount FROM issue_book WHERE approve = 'Expired' AND username ='" . $_SESSION["user"] . "'";
+                    $expiredCountResult = mysqli_query($conn, $expiredCountQuery);
+                    $expiredCountRow = mysqli_fetch_assoc($expiredCountResult);
+                    $expiredCount = $expiredCountRow['expiredCount'];
+
+                    // Query to count fined books for the current user
+                    $expireCountQuery_fine = "SELECT COUNT(book_status) AS fineBookCount FROM fine WHERE book_status = 'Expired' AND fine > 0 AND username = '" . $_SESSION['user'] . "'";
+                    $fineBookCountResult = mysqli_query($conn, $expireCountQuery_fine);
+                    $fineBookCountRow = mysqli_fetch_assoc($fineBookCountResult);
+                    $fineBookCount = $fineBookCountRow['fineBookCount'];
+
+                    echo "Expired Book's : {$expiredCount} | Fine रु॰{$fineinfo}<br>";
+                    echo "Fined Book's : {$fineBookCount} | Fine रु॰{$fine} ";
+
+                    ?>
+
+                </h3>
+                <span>Check for detailed fines
+                    <a href="./fine.php" class="fine-link">Here</a>
+                </span><br>
+                <span>Books returned delayed will be charged <span style="color:red;  font-weight:bold;"> रु॰
+                        40</span>
+                    per day.</span>
             </div>
 
             <?php
@@ -92,7 +120,7 @@ include "./finedbooks.php"; // logic for total fines
 
                     } elseif (isset($_POST['submit2'])) {
                         //Returned
-                        $ret = '<p> Returned </p>';
+                        $ret = 'Returned';
                         $sql = "SELECT 
                                     library_users.username,
                                     library_users.user_id,

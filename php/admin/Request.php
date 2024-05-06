@@ -23,7 +23,7 @@ if (isset($_GET['approve_book_id'])) {
                 $issue_date = date('Y-m-d'); // Current date
                 $return_date = date('Y-m-d', strtotime($issue_date . ' + 6 months')); // Return date after 6 months
 
-                $approve = "Yes"; // Assuming this is the status when a book is approved
+                $approve = "Approved"; // Assuming this is the status when a book is approved
 
                 // Update the entry in the issue_book table
                 $approve_query = "UPDATE issue_book SET approve = '$approve', issue = '$issue_date', `return` = '$return_date' WHERE books_id = '$approve_books_id' AND username = '$approve_username'";
