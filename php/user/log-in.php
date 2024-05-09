@@ -6,12 +6,12 @@ if (isset($_SESSION['user'])) {
 
 
 // Update the status of expired books
-if (isset($_SESSION['admin'])) {
+if (isset($_SESSION['user'])) {
   $expireQuery = "UPDATE issue_book SET approve = 'Expired' WHERE `return` < CURDATE() AND approve = 'Approved'";
   mysqli_query($conn, $expireQuery);
 }
 
-if (isset($_SESSION['admin'])) {
+if (isset($_SESSION['user'])) {
   // Update the status of books considered lost if their approval status is 'Approved'
   $bookLostQuery = "UPDATE issue_book 
   SET approve = 'Book Lost ' 

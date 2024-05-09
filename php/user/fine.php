@@ -29,8 +29,23 @@ require_once "../config.php"; // Include database connection file
         <div id="main">
             <h1>Fine Details </h1>
 
-            <h3><?php include "./finedbooks.php";?> </h3>
-            <h4>Total Fine Amount: NRS <?php echo $totalFineCharged; ?></h4>
+
+            <h4> <?php
+
+            include "./finedbooks.php";
+            include "./fineinfo.php";
+
+
+            echo "Expired's count :{$totalExpiredCount} <br>";
+            echo "Expired's Fine: NRS{$totalExpiredFine} <br>";
+
+
+            echo "  Book Lost count's Fine: NRS {$totalBookLostCount}<br>";
+            echo "  Book Lost's Fine: NRS {$totalLostFine}<br>";
+
+            ?>
+            </h4>
+
 
 
             <?php
@@ -48,15 +63,33 @@ require_once "../config.php"; // Include database connection file
                     echo "<table class='table table-bordered table-hover'>";
                     echo "<tr>";
                     //Table header
-                    echo "<th>";echo "Username";echo "</th>";
-                    echo "<th>";echo "Book ID";echo "</th>";
-                    echo "<th>";echo "Books Name";echo "</th>";
-                    echo "<th>";echo "Book Cover";echo "</th>";
-                    echo "<th>";echo "Returned";echo "</th>";
-                    echo "<th>";echo "Days";echo "</th>";
-                    echo "<th>";echo "Fine";echo "</th>";
-                    echo "<th>";echo "Book Status";echo "</th>";
-                    echo "<th>";echo "Status";echo "</th>";
+                    echo "<th>";
+                    echo "Username";
+                    echo "</th>";
+                    echo "<th>";
+                    echo "Book ID";
+                    echo "</th>";
+                    echo "<th>";
+                    echo "Books Name";
+                    echo "</th>";
+                    echo "<th>";
+                    echo "Book Cover";
+                    echo "</th>";
+                    echo "<th>";
+                    echo "Returned";
+                    echo "</th>";
+                    echo "<th>";
+                    echo "Days";
+                    echo "</th>";
+                    echo "<th>";
+                    echo "Fine";
+                    echo "</th>";
+                    echo "<th>";
+                    echo "Book Status";
+                    echo "</th>";
+                    echo "<th>";
+                    echo "Status";
+                    echo "</th>";
 
                     echo "</tr>";
 

@@ -45,6 +45,7 @@ section {
 ::-webkit-scrollbar-track {
   background-color: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
   background-color: var(--bg-dark-grey-color);
 }
@@ -65,8 +66,9 @@ section {
   outline: none;
   color: var(--bg-white-color);
 }
+
 /* for any action btn */
-.btn-action{
+.btn-action {
   background-color: var(--hover-color1);
   color: var(--white-color);
   padding: 1.2rem;
@@ -74,17 +76,20 @@ section {
   transition: 0.2s ease-in !important;
   font-weight: 500 !important;
 }
-.btn-action:hover{
+
+.btn-action:hover {
   border: 1px solid var(--dark-color);
   color: var(--dark-color) !important;
 }
-.btn-cancel{
+
+.btn-cancel {
   background-color: var(--white-color);
   border: 1px solid var(--info-msg-color) !important;
   color: var(--info-msg-color);
   font-weight: 500 !important;
 }
-.btn-cancel:hover{
+
+.btn-cancel:hover {
   color: var(--info-msg-color) !important;
 }
 
@@ -104,6 +109,7 @@ section {
 .alert-success-msg {
   background-color: var(--success-msg-color);
 }
+
 .alert-error-msg {
   background-color: var(--alert-msg-color);
 }
@@ -114,7 +120,8 @@ section {
   gap: 1.2rem;
   outline-color: transparent;
 }
-.btn-default{
+
+.btn-default {
   font-weight: 600 !important;
 }
 
@@ -133,17 +140,21 @@ section {
   margin-top: 2rem;
   margin-bottom: 0 !important;
 }
+
 .navbar-flex {
   display: flex;
   align-items: center;
 }
-.navbar-brand > img {
+
+.navbar-brand>img {
   margin-top: -2.3rem;
   margin-right: 2rem;
 }
+
 .bx {
   font-size: 2rem !important;
 }
+
 .bx-bell {
   font-size: 2.7rem;
   margin: 7px 2px;
@@ -162,6 +173,7 @@ section {
   color: var(--white-color) !important;
   margin: 0 1rem !important;
 }
+
 .user,
 .admin,
 .profile-img-container {
@@ -178,6 +190,7 @@ section {
   justify-content: center;
   align-items: center;
 }
+
 #notFound {
   width: 400px;
   margin: 5rem 0;
@@ -218,6 +231,7 @@ section {
   color: var(--white-color);
   text-decoration: none;
 }
+
 .logo-container {
   margin-top: -1rem;
   padding: 8px 8px 8px 32px;
@@ -233,6 +247,7 @@ section {
   .sidenav {
     padding-top: 15px;
   }
+
   .sidenav a {
     font-size: 18px;
   }
@@ -244,10 +259,12 @@ table {
   border-radius: 10px;
   width: 100%;
 }
+
 table th {
   background-color: var(--primary-color) !important;
   color: var(--white-color) !important;
 }
+
 .custom-th {
   background-color: transparent !important;
   color: var(--dark-color) !important;
@@ -274,14 +291,17 @@ table th {
   margin-bottom: 3rem;
   color: var(--primary-color);
 }
+
 .dropdown-menu.custom-dropdown.show {
   margin-top: 2.3rem;
   margin-left: 2.1rem !important;
 }
+
 .dropdown-item {
   font-size: 1.7rem;
   margin: 1.5rem 0;
 }
+
 span#navbarDropdown.dropdown-toggle::after {
   display: none;
 }
@@ -323,6 +343,7 @@ span#navbarDropdown.dropdown-toggle::after {
   display: flex;
   gap: 2rem;
 }
+
 .search {
   width: 50%;
 }
@@ -396,9 +417,11 @@ span#navbarDropdown.dropdown-toggle::after {
   grid-gap: 3rem;
   margin-top: 3.3rem;
 }
+
 .book-box {
   width: 60%;
 }
+
 .btn-container {
   display: table;
   text-align: left;
@@ -414,37 +437,42 @@ span#navbarDropdown.dropdown-toggle::after {
   width: 31%;
   border-radius: 5px;
 }
+
 .custom-bx {
   font-size: 4.5rem !important;
   float: inline-end;
   margin-top: 0.6rem;
 }
+
 .btn-custom {
   padding: 1rem 2rem !important;
   color: var(--dark-color) !important;
   background-color: var(--btn-color-1) !important;
 }
+
 .admin-dashboard-actions {
   display: flex;
   gap: 3rem;
 }
+
 .secondary-action {
   background-color: var(--bg-secondary);
   border: 1px solid var(--outline-color);
   color: var(--dark-color);
 }
 
-.content-book{
+.content-book {
   margin-top: -5rem;
   height: 30rem;
 }
 
 /* fine  */
-.bookStatus-container .fine-link{
+.bookStatus-container .fine-link {
   text-decoration: none;
   font-weight: 600;
   color: var(--primary-color);
 }
+
 .book-info-details {
   border: 1px solid #ccc;
   box-shadow: var(--box-shadow-color);
@@ -473,13 +501,13 @@ span#navbarDropdown.dropdown-toggle::after {
 
 
 /* admin book req handle */
-.custom-radio{
+.custom-radio {
   height: 2.5rem !important;
 }
 
 /* finedbooks */
 
-.count-info-list{
+.count-info-list {
   margin: 1.3rem 0;
   background-color: var(--primary-color);
   color: var(--white-color);
@@ -489,17 +517,20 @@ span#navbarDropdown.dropdown-toggle::after {
   font-size: 1.2rem;
   padding-left: 1.2rem;
 }
-.btn-fine{
+
+.btn-fine {
   border-radius: 5px;
   background-color: var(--btn-color-1);
   color: var(--dark-color);
   box-shadow: var(--box-shadow-color);
   height: 24%;
 }
-.btn-fine:hover{
+
+.btn-fine:hover {
   text-decoration: none;
 }
-.link-fine{
+
+.link-fine {
   margin-top: 4rem;
   margin-right: 4rem;
 }
