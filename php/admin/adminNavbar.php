@@ -45,7 +45,7 @@ if (!isset($_SESSION['admin'])) {
 
 <body>
     <!-- ====== navbar starts =========== -->
-    <header style='position: sticky !important;top: 0;left: 0;right: 0;z-index: 1000'>
+    <header style='position: sticky !important;top: 0;left: 0;right: 0;z-index: 1000; display:none;'>
         <nav class="custom-navbar">
             <div class="custom-navbar fixed-top">
 
@@ -55,7 +55,7 @@ if (!isset($_SESSION['admin'])) {
                         <?php
                         // Display fullname and profile image if user is logged in
                         echo '<div class="custom-links d-flex align-items-center">';
-                        echo '<img class="img-circle profile_img" width="35" height="35" src="' . $_SESSION['pic'] . '" style="background-color: white; border-radius: 50%; overflow: hidden; margin-right: 10px; object-fit:cover;">';
+                        echo '<img class="img-circle profile_img" width="35" height="35" src="' . './admin_profile/admin_img.png' . '" style="background-color: white; border-radius: 50%; overflow: hidden; margin-right: 10px; object-fit:cover;">';
                         echo '<span class="admin" style="color:#000; font-size: 1.3rem;">' . $_SESSION['admin']  . ' </span>';
 
                         echo '</div>';

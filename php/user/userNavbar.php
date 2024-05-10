@@ -47,7 +47,7 @@ include "../config.php"; // Include database connection file
 
     <!-- ====== navbar starts =========== -->
 
-    <header style='position: sticky !important;top: 0;left: 0;right: 0;z-index: 1000'>
+    <header style='position: sticky !important;top: 0;left: 0;right: 0;z-index: 1000; display: none;'>
         <nav class="custom-navbar ">
             <div class="custom-navbar fixed-top">
 

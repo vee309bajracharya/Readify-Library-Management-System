@@ -28,7 +28,7 @@ include "./finedbooks.php"; // logic for total fines
         <div id="main">
             <h3>Book Status</h3>
 
-            <div class="count-amount-container d-flex justify-content-between gap-2">
+            <div class="count-amount-container d-flex gap-4">
                 <div class="count-info-list">
                     <h3 class="fs-3">Expired Books: <?php echo $totalExpiredCount; ?></h3> <br>
                     <span>NRS <?php echo $totalExpiredFine; ?> Charged</span>

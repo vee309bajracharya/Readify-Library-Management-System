@@ -99,31 +99,49 @@ $totalBookLostCount = $BookLostCount + $BooklostCount_fine;
 
     <div class="list_container">
         <div id="main">
-            <div class="searchBar__wrapper">
-                <h1>Users Fine List</h1>
-                <p><?php
-                echo "Expired books {$totalExpiredCount} <br>";
-                echo " Total Fine NRS {$totalExpiredFine}";
-                echo "Lost books {$totalBookLostCount}";
-                echo "Total Loss {$totalLostFine}";
-                ?></p>
+            <h2>Users Fine List</h2>
+
+                <div class="count-amount-container d-flex gap-5 my-5">
+                    <div class="custom-sub-container d-flex p-3 gap-2">
+                        <div class="place-icon">
+                            <img src="../../images/expired.png" class="h-75 m-lg-2">
+                        </div>
+                        <div class="mt-4">
+                            <big class="fw-bold fs-4"><?php echo $totalExpiredCount; ?> Books Expired</big> <br>
+                            <small>Total Expired Books Fine Rs.<?php echo $totalExpiredFine; ?></small>
+                        </div>
+                    </div>
+
+                    <div class="custom-sub-container d-flex p-3 gap-2">
+                        <div class="place-icon">
+                            <img src="../../images/lost.png" class="h-75 m-lg-2">
+                        </div>
+                        <div class="mt-4">
+                            <big class="fw-bold fs-4"><?php echo $totalBookLostCount; ?> Books Lost</big> <br>
+                            <small>Total Books Lost Fine Rs.<?php echo $totalLostFine; ?></small>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div style="margin-top: 2rem;">
-                <form method="post">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Search by username" name="search_username">
-                        <button class="btn btn-outline-secondary" type="submit" name="search">Search</button>
-                        <button class="btn btn-outline-secondary" type="submit" name="filter_expired">Expired</button>
-                        <button class="btn btn-outline-secondary" type="submit" name="filter_lost">Book Lost</button>
-                        <button class="btn btn-outline-secondary" type="submit" name="filter_all">All details</button>
+
+            <!-- searchbar for username -->
+            <div class="searchBar__wrapper my-3">
+                <form method="post" class="navbar-form-c">
+                    <div class="search searchBar_field">
+                        <input type="text" class="form-control-search" placeholder="Enter username" name="search_username" style="width:100%" ; required>
+                        <button class="btn-search" type="submit" name="search">Search</button>
                     </div>
                 </form>
             </div>
 
-
-
-
-
+            <!-- filters -->
+                    <form method="post">
+                        <div class="filter-container d-flex gap-3 float-end">
+                            <button class="btn btn-default" type="submit" name="filter_all">All</button>
+                            <button class="btn btn-default" type="submit" name="filter_expired">Expired</button>
+                            <button class="btn btn-default" type="submit" name="filter_lost">Book Lost</button>
+                        </div>
+                    </form>
 
 
             <?php

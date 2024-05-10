@@ -68,92 +68,95 @@ if (isset($_POST['search_username'])) {
 
     <div class="list_container">
         <div id="main">
-            <h3>Returned Books List</h3>
-            <!-- Add a search bar -->
-            <div class="requestBar__wrapper">
-                <form method="post">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Search by username" name="search_username">
-                        <button class="btn btn-outline-secondary" type="submit" name="search">Search</button>
+            <h2>Returned Books List</h2>
+
+            <!-- searchbar for username -->
+            <div class="searchBar__wrapper">
+                <form method="post" class="navbar-form-c">
+                    <div class="search searchBar_field">
+                        <input type="text" class="form-control-search" placeholder="Enter username" name="search_username" style="width:100%" ; required>
+                        <button class="btn-search" type="submit" name="search">Search</button>
                     </div>
                 </form>
             </div>
 
             <?php
-            $c = 0;
-            if (isset($_SESSION["admin"])) {
-                echo "<div>";
-                echo "<table class='table table-bordered table-hover' style='width:100%;'> ";
+                $c = 0;
+                if (isset($_SESSION["admin"])) {
+                    // Fetch all records or filtered records based on search
+                    if (mysqli_num_rows($searchBarQuery) > 0) {
+                        echo "<div>";
+                        echo "<table class='table table-bordered table-hover' style='width:100%;'> ";
 
-                echo "<tr>";
-                //Table header   
-                echo "<th>";
-                echo "User ID";
-                echo "</th>";
-
-                echo "<th>";
-                echo "Student Username";
-                echo "</th>";
-
-                echo "<th>";
-                echo "Book ID";
-                echo "</th>";
-
-                echo "<th>";
-                echo "Books Name";
-                echo "</th>";
-
-                echo "<th>";
-                echo "Book Cover";
-                echo "</th>";
-
-                echo "<th>";
-                echo "Authors";
-                echo "</th>";
-
-                echo "<th>";
-                echo "Book Issued Date";
-                echo "</th>";
-
-                echo "<th>";
-                echo "Returned Date";
-                echo "</th>";
-
-                echo "<th>";
-                echo "Book Status";
-                echo "</th>";
-
-                echo "</tr>";
-
-                // Fetch all records or filtered records based on search
-                if (mysqli_num_rows($searchBarQuery) > 0) {
-                    while ($row = mysqli_fetch_assoc($searchBarQuery)) {
-                        // Fetch data from returned_book table
                         echo "<tr>";
-                        echo "<td>" . $row['user_id'] . "</td>";
-                        echo "<td>" . $row["username"] . "</td>";
-                        echo "<td>" . $row['books_id'] . "</td>";
-                        echo "<td>" . $row['books_name'] . "</td>";
-                        echo "<td style='text-align:center;'><img src='../admin/covers/" . $row['book_cover'] . "' alt='Book Cover' width='100' style='object-fit: cover; border-radius: 5px;'></td>";
-                        echo "<td>" . $row['authors'] . "</td>";
-                        echo "<td>" . $row['issue'] . "</td>";
-                        echo "<td>" . $row['returned_date'] . "</td>";
-                        echo "<td>" . $row['approve'] . "</td>";
+                        //Table header   
+                        echo "<th>";
+                        echo "User ID";
+                        echo "</th>";
+
+                        echo "<th>";
+                        echo "Student Username";
+                        echo "</th>";
+
+                        echo "<th>";
+                        echo "Book ID";
+                        echo "</th>";
+
+                        echo "<th>";
+                        echo "Books Name";
+                        echo "</th>";
+
+                        echo "<th>";
+                        echo "Book Cover";
+                        echo "</th>";
+
+                        echo "<th>";
+                        echo "Authors";
+                        echo "</th>";
+
+                        echo "<th>";
+                        echo "Book Issued Date";
+                        echo "</th>";
+
+                        echo "<th>";
+                        echo "Returned Date";
+                        echo "</th>";
+
+                        echo "<th>";
+                        echo "Book Status";
+                        echo "</th>";
+
                         echo "</tr>";
+
+                        while ($row = mysqli_fetch_assoc($searchBarQuery)) {
+                            // Fetch data from returned_book table
+                            echo "<tr>";
+                            echo "<td>" . $row['user_id'] . "</td>";
+                            echo "<td>" . $row["username"] . "</td>";
+                            echo "<td>" . $row['books_id'] . "</td>";
+                            echo "<td>" . $row['books_name'] . "</td>";
+                            echo "<td style='text-align:center;'><img src='../admin/covers/" . $row['book_cover'] . "' alt='Book Cover' width='100' style='object-fit: cover; border-radius: 5px;'></td>";
+                            echo "<td>" . $row['authors'] . "</td>";
+                            echo "<td>" . $row['issue'] . "</td>";
+                            echo "<td>" . $row['returned_date'] . "</td>";
+                            echo "<td>" . $row['approve'] . "</td>";
+                            echo "</tr>";
+                        }
+                        echo "</table>";
+                        echo "</div>";
+                    } else {
+                        // If no records found
+                        echo "<div class='error_container'>";
+                        echo "<img src='../../images/book_not_found.png' alt='Book not found image' id='notFound'>";
+                        echo "</div>";
                     }
                 } else {
-                    // If no records found
-                    echo "<tr><td colspan='9'>No records found.</td></tr>";
-                }
-
-                echo "</table>";
-                echo "</div>";
-            } else {
                 ?>
                 <h3>Please login first</h3>
                 <?php
-            }
-            ?>
+                }
+                ?>
+
         </div>
     </div>
 </body>

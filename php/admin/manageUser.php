@@ -33,7 +33,7 @@
     
     <!--  ===== Seachbar for books ===== -->
     <div class="searchBar__wrapper">
-        <h1> List of Users </h1>
+        <h2> List of Users </h1>
 
             <form action="" class="navbar-form-c" method="POST" name="form-1">
                 <div class="search searchBar_field">

@@ -209,10 +209,9 @@ section {
   overflow-x: hidden;
   padding-top: 20px;
   z-index: 1000;
-}
-
-.links {
-  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 7rem;
 }
 
 .sidenav .sidebar-links {
@@ -231,6 +230,19 @@ section {
   color: var(--white-color);
   text-decoration: none;
 }
+.links{
+  margin-top: -4rem;
+}
+
+/* user sidebar */
+.bottom-nav-info{
+  background-color: var(--hover-color1);
+  border-radius: 5px;
+  color: var(--white-color);
+  height: 7rem;
+  margin: 3rem;
+
+}
 
 .logo-container {
   margin-top: -1rem;
@@ -241,6 +253,10 @@ section {
   padding: 3rem;
   display: grid;
   margin-left: 30rem;
+}
+.user:hover{
+  text-decoration: none;
+  cursor: pointer;
 }
 
 @media screen and (max-height: 450px) {
@@ -512,7 +528,7 @@ span#navbarDropdown.dropdown-toggle::after {
   background-color: var(--primary-color);
   color: var(--white-color);
   border-radius: 5px;
-  width: 40%;
+  width: 30%;
   height: 10rem;
   font-size: 1.2rem;
   padding-left: 1.2rem;
@@ -532,5 +548,35 @@ span#navbarDropdown.dropdown-toggle::after {
 
 .link-fine {
   margin-top: 4rem;
-  margin-right: 4rem;
+  margin-right: 2rem;
+}
+
+.custom-sub-container{
+  width: 25%;
+  height: 10rem;
+  background-color: var(--white-color);
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.place-icon{
+  width: 30%;
+}
+
+/* filters */
+.filter-options {
+  display: none;
+}
+
+/* Show the filter options when the filter icon is hovered */
+.filters-div:hover .filter-options {
+  display: inline-block;
+  gap: 3rem;
+}
+.filters-div img{
+  margin-top: 1rem;
+  width: 20px;
+  height: 20px;
+}
+.filters-div img:hover{
+  cursor: pointer;
 }

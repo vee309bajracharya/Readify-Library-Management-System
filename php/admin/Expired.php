@@ -1,7 +1,7 @@
 <?php
 include "./adminNavbar.php";
 require_once "../config.php";
-include "fineinfo.php";
+include "./fineinfo.php";
 // Update the status of expired books
 if (isset($_SESSION['admin'])) {
     $expireQuery = "UPDATE issue_book SET approve = 'Expired' WHERE `return` < CURDATE() AND approve = 'Approved'";
@@ -30,8 +30,15 @@ if (isset($_SESSION['admin'])) {
             width: 100%;
             height: 500px;
             overflow: auto;
+            margin-top: 1.2rem;
         }
 
+        .changeButton{
+            width: 100%;
+        }
+        .changeButton:hover{
+            text-decoration: none;
+        }
         .changeButton.hidden {
             display: none;
         }
@@ -86,27 +93,54 @@ if (isset($_SESSION['admin'])) {
 
             $totalBookLostCount = $BookLostCount + $BooklostCount_fine;
 
-            echo "<div class='count-amount-container d-flex gap-1'>";
-
-            echo "<div class='count-info-list'>";
-            echo "<h3 class='fs-3 '>Approved Books : {$approvedCount}</h3> <br>";
-            echo "</div>";
-
-            echo "<div class='count-info-list'>";
-            echo "<h3 class='fs-3 '>Total Expired Books : {$totalExpiredCount}</h3> <br>";
-            echo " Total Fine NRS {$totalExpiredFine}";
-
-
-            echo "</div>";
-
-            echo "<div class='count-info-list'>";
-            echo "<h3 class='fs-3 '>Lost Books : {$totalBookLostCount}</h3> <br>";
-            echo "Total Loss {$totalLostFine}";
-            echo "</div>";
-            echo "</div>";
             ?>
+            <div class="count-amount-container d-flex gap-5 my-5">
 
-            <?php if (isset($_SESSION['admin'])): ?>
+                <div class="custom-sub-container d-flex p-3 gap-2">
+                    <div class="place-icon">
+                        <img src="../../images/approval.png" class="h-75 m-lg-2">
+                    </div>
+                    <div class="mt-4">
+                        <big class="fw-bold fs-4"><?php echo $approvedCount; ?> Books Approved</big>
+                    </div>
+                </div>
+
+                <div class="custom-sub-container d-flex p-3 gap-2">
+                    <div class="place-icon">
+                        <img src="../../images/expired.png" class="h-75 m-lg-2">
+                    </div>
+                    <div class="mt-4">
+                        <big class="fw-bold fs-4"><?php echo $totalExpiredCount; ?> Books Expired</big> <br>
+                        <small>Total Expired Books Fine Rs.<?php echo $totalExpiredFine; ?></small>
+                    </div>
+                </div>
+
+                <div class="custom-sub-container d-flex p-3 gap-2">
+                    <div class="place-icon">
+                        <img src="../../images/lost.png" class="h-75 m-lg-2">
+                    </div>
+                    <div class="mt-4">
+                        <big class="fw-bold fs-4"><?php echo $totalBookLostCount; ?> Books Lost</big> <br>
+                        <small>Total Books Lost Fine Rs.<?php echo $totalLostFine; ?></small>
+                    </div>
+                </div>
+
+            </div>
+            <!-- count and calculate ends -->
+                        <!-- searchbar for username -->
+                        <div class="searchBar__wrapper my-5">
+                <form method="post" class="navbar-form-c">
+                    <div class="search searchBar_field">
+                        <input type="text" class="form-control-search" placeholder="Enter username" name="search_username" style="width:100%" ; required>
+                        <button class="btn-search" type="submit" name="search">Search</button>
+                    </div>
+                </form>
+            </div>
+
+
+
+
+            <?php if (isset($_SESSION['admin'])) : ?>
                 <div class="searchBar__wrapper">
                     <script>
                         function checkBookLost() {
@@ -123,7 +157,7 @@ if (isset($_SESSION['admin'])) {
                                         bookID: bookID,
                                         username: username
                                     },
-                                    success: function (response) {
+                                    success: function(response) {
                                         // If the book is marked as lost, check the checkbox
                                         if (response === 'lost') {
                                             checkboxes[i].checked = true;
@@ -172,7 +206,7 @@ if (isset($_SESSION['admin'])) {
                                     $fine = ($differenceInDays > 0) ? $differenceInDays * 40 : 0;
 
                                     // Update status to "Returned"
-                
+
                                     $updateQuery = "UPDATE issue_book SET approve='Returned' WHERE username='$username' AND books_id='$books_id'";
                                     mysqli_query($conn, $updateQuery);
 
@@ -224,7 +258,7 @@ if (isset($_SESSION['admin'])) {
                                 } else {
                                     // Book is returned before the return date
                                     // Update status to "Returned" without charging any fine
-                
+
                                     $updateQuery = "UPDATE issue_book SET approve='Returned' WHERE username='$username' AND books_id='$books_id' AND (approve = 'Approved' OR approve = 'Expired')";
                                     mysqli_query($conn, $updateQuery);
                                     // Retrieve user_id, book details, and other information
@@ -272,8 +306,6 @@ if (isset($_SESSION['admin'])) {
 
                                     $deleteQuery = "DELETE FROM issue_book WHERE username='$username' AND books_id='$books_id' AND approve = 'Returned'";
                                     mysqli_query($conn, $deleteQuery);
-
-
                                 }
                             } else {
                                 // No record found for the given username and book ID
@@ -296,7 +328,7 @@ if (isset($_SESSION['admin'])) {
                                 $books_id = $row['books_id'];
                                 $username = $row['username'];
                                 $returnDate = $row['return']; // Set return date here
-                
+
                                 // Perform necessary actions for each lost book
                                 $lostBookFine = 0;
                                 $lostCurrentDate = date('Y-m-d');
@@ -312,35 +344,34 @@ if (isset($_SESSION['admin'])) {
                                 }
                             }
                         }
-
                     }
                     ?>
-                    <button id="demoButton" class="btn btn-warning">Demo</button>
+                    <div class=" mx-2 float-end">
+                        <button id="demoButton" class="btn btn-warning fw-medium">Change Book Status</button>
+                    </div>
+                    
 
                     <form action="" method="POST">
-                        <input type="text" name="search_username" placeholder="Enter username">
-                        <button type="submit" name="search" class="btn btn-default">Search</button>
-
-                        <section class="main-container d-flex justify-content-between gap-5">
-
-                            <div class="filter-container d-flex gap-3">
+                    <!-- Filters -->
+                        <div class="main-container d-flex justify-content-between gap-5">
+                            <div class="filters-div float-end">
+                            <img src="../../svg/filter.svg" alt="Filter" id="filter-icon">
+                            <div class="filter-options">
                                 <button type="submit" name="submit1" class="btn btn-default">All Info</button>
                                 <button type="submit" name="submit4" class="btn btn-default">Approved</button>
                                 <button type="submit" name="submit3" class="btn btn-default">Expired</button>
                                 <button type="submit" name="submit2" class="btn btn-default">Book Lost</button>
                             </div>
+                        </div>
 
                             <div class="action-container d-flex gap-3">
 
-                                <button type="submit" name="markReturned" class="btn btn-success fw-semibold">Mark as
+                                <button type="submit" name="markReturned" class="btn btn-success fw-medium">Mark as
                                     Returned</button>
-                                <button type="submit" name="markLost" onclick="checkBooklost()"
-                                    class="btn btn-danger fw-semibold">Declare Lost</button>
+                                <button type="submit" name="markLost" onclick="checkBooklost()" class="btn btn-danger fw-medium">Declare Lost</button>
                             </div>
+                        </div>
 
-
-
-                        </section>
 
                         <?php
 
@@ -367,20 +398,20 @@ if (isset($_SESSION['admin'])) {
                             $search_username = mysqli_real_escape_string($conn, $_POST['search_username']);
                             // Modify the SQL query to include the search condition
                             $sql = "SELECT 
-                library_users.username,
-                library_users.user_id,
-                issue_book.books_id,
-                library_books.books_name,
-                library_books.book_cover,
-                library_books.authors,
-                issue_book.approve,
-                issue_book.issue,
-                issue_book.return,
-                issue_book.returned
-            FROM library_users 
-            INNER JOIN issue_book ON library_users.username = issue_book.username 
-            INNER JOIN library_books ON issue_book.books_id = library_books.books_id
-            WHERE library_users.username LIKE '%$search_username%'"; // Include the search condition here
+                                        library_users.username,
+                                        library_users.user_id,
+                                        issue_book.books_id,
+                                        library_books.books_name,
+                                        library_books.book_cover,
+                                        library_books.authors,
+                                        issue_book.approve,
+                                        issue_book.issue,
+                                        issue_book.return,
+                                        issue_book.returned
+                                    FROM library_users 
+                                    INNER JOIN issue_book ON library_users.username = issue_book.username 
+                                    INNER JOIN library_books ON issue_book.books_id = library_books.books_id
+                                    WHERE library_users.username LIKE '%$search_username%'"; // Include the search condition here
                             $sql .= " ORDER BY issue_book.return DESC"; // Append the ORDER BY clause
                         }
 
@@ -483,13 +514,12 @@ if (isset($_SESSION['admin'])) {
                                 echo "<tr>";
                                 echo "<td>";
 
-                                echo "<input type='checkbox' name='Returned_books_id[]' value='" . $row['books_id'] . "_" . $row['username'] . "' id='returnedCheckbox' class='btn bg-info text-bg-info'></input>
-                                            ";
+                                echo "<input type='checkbox' name='Returned_books_id[]' value='" . $row['books_id'] . "_" . $row['username'] . "' id='returnedCheckbox' class='btn bg-info text-bg-info mb-4' style='display:block;'>";
                                 // Inside the while loop for fetching and displaying table rows
                                 echo "<form method='GET' action='demo.php'>";
                                 echo "<input type='hidden' name='books_id' value='" . $row['books_id'] . "'>";
                                 echo "<input type='hidden' name='username' value='" . $row['username'] . "'>";
-                                echo "<a href='demo.php?books_id=" . $row['books_id'] . "&username=" . $row['username'] . "' class='btn btn-info changeButton'>Change</a>";
+                                echo "<a href='demo.php?books_id=" . $row['books_id'] . "&username=" . $row['username'] . "' class='btn-search fw-medium my-3  changeButton'>Change</a>";
                                 echo "</form>";
 
 
@@ -514,23 +544,20 @@ if (isset($_SESSION['admin'])) {
                         ?>
                     </form>
                 </div>
-            <?php else: ?>
+            <?php else : ?>
                 <h3>Please login first</h3>
             <?php endif; ?>
 
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
-        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
-        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     <!-- === sweetAlert link === -->
     <script src="../sweetAlert/sweetalert.js"></script>
+
     <script>
         // JavaScript function to toggle visibility of Change buttons
         function toggleVisibility() {
@@ -541,19 +568,29 @@ if (isset($_SESSION['admin'])) {
         }
 
         // JavaScript function to handle click event of Demo button
-        document.getElementById('demoButton').addEventListener('click', function () {
+        document.getElementById('demoButton').addEventListener('click', function() {
             toggleVisibility();
         });
 
         // Initially hide the changeButton
         toggleVisibility();
+
+
+        //JS to handle filters
+         $(document).ready(function () {
+            // Handle click event on filter buttons
+            $('.filter-options button').click(function () {
+            // Remove active class from all buttons
+            $('.filter-options button').removeClass('active');
+            // Add active class to the clicked button
+            $(this).addClass('active');
+            });
+        });
     </script>
 
 
-
-
     <?php
-    include ('../sweetAlert/sweetalert_actions.php');
+    include('../sweetAlert/sweetalert_actions.php');
     ?>
 </body>
 

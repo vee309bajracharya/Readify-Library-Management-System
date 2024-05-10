@@ -107,7 +107,7 @@ if (isset($_SESSION['user'])) {
             ?>
 
             <div class="request-msg">
-                <p>Note: Any requested book will be dispatched promptly and will reach to you within 48 hours.</p>
+                <p>Note: Any requested book will be dispatched promptly and will reach to you within 24 hours.</p>
             </div>
         </div>
     </div>
