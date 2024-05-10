@@ -30,21 +30,30 @@ require_once "../config.php"; // Include database connection file
             <h1>Fine Details </h1>
 
 
-            <h4> <?php
+            <?php
 
             include "./finedbooks.php";
             include "./fineinfo.php";
+            // echo "Expired's count :{$totalExpiredCount} <br>";
+            // echo "Expired's Fine: NRS{$totalExpiredFine} <br>";
 
 
-            echo "Expired's count :{$totalExpiredCount} <br>";
-            echo "Expired's Fine: NRS{$totalExpiredFine} <br>";
+            // echo "  Book Lost count's Fine: NRS {$totalBookLostCount}<br>";
+            // echo "  Book Lost's Fine: NRS {$totalLostFine}<br>";
 
-
-            echo "  Book Lost count's Fine: NRS {$totalBookLostCount}<br>";
-            echo "  Book Lost's Fine: NRS {$totalLostFine}<br>";
-
+            $totalFine = $totalExpiredFine + $totalLostFine;
             ?>
-            </h4>
+            <div class="count-amount-container d-flex gap-5 my-5">
+                    <div class="custom-sub-container d-flex p-3 gap-2">
+                        <div class="place-icon">
+                            <img src="../../images/fine.png" class="h-75 m-lg-2">
+                        </div>
+                        <div class="mt-4">
+                            <big class="fw-bold fs-3">Total Fine</big> <br>
+                            <small class="fw-medium fs-3">Rs.<?php echo $totalFine; ?></small>
+                        </div>
+                    </div>
+            </div>
 
 
 

@@ -61,14 +61,29 @@ if (isset($_SESSION['admin'])) {
         <div class="links">
             <a href="./list_book_for_user.php" class="sidebar-links"><i class='bx bxs-dashboard'></i> Dashboard</a>
             <a href="./myProfile.php" class="sidebar-links"><i class='bx bxs-user-circle'></i> My Profile</a>
-            <a href="./change_password.php" class="sidebar-links"><i class="ri-lock-password-fill"></i> Change
-                Password</a>
+            <a href="./change_password.php" class="sidebar-links"><i class="ri-lock-password-fill"></i> Change Password</a>
             <a href="./Request.php" class="sidebar-links"><i class='bx bxs-book'></i> Book Request</a>
             <a href="./issue_info.php" class="sidebar-links"><i class='bx bxs-book'></i> View Requested Books</a>
             <a href="./Expired.php" class="sidebar-links"><i class='bx bx-library'></i> Book Status</a>
             <a href="./fine.php" class="sidebar-links"><i class='bx bxs-wallet-alt'></i> Fine Details</a>
             <a href="./about_readify.php" class="sidebar-links"><i class='bx bxs-help-circle'></i> Support and Help</a>
-            <a href="./logOut.php" class="sidebar-links"><i class="bx bx-log-out"></i> Log out</a>
+        </div>
+
+        <div class="bottom-nav-info d-flex align-items-center gap-3">
+            <div>
+            <img width="70" height="70"
+                  src="./images/<?php echo $_SESSION['pic']; ?>"
+                  style="background-color: white; border-radius: 5px !important; overflow: hidden; object-fit:cover;">
+
+            </div>
+            <div style="display: grid;" class="user">
+                    <a href="./myProfile.php" class="user fw-semibold" style='color: white;'><?php echo $_SESSION['user']; ?></a>
+                <small class="fw-lighter fs-6">User</small>
+            </div>
+            <div>
+            <a href="./logOut.php" class="sidebar-links h-25"><i class="bx bx-log-out"></i></a>
+
+            </div>
         </div>
     </div>
     <!-- Sidebar ends  -->

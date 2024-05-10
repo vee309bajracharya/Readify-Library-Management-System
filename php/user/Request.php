@@ -12,7 +12,7 @@ if (isset($_GET['cancel_books_id'])) {
 
     if (mysqli_num_rows($approval_result) > 0) {
         // Book has been approved, do not allow cancellation
-        $_SESSION['msg'] = "Error: The book has already been approved, so you cannot cancel the request.";
+        $_SESSION['msg'] = "The book has already been approved, can't cancel the request";
         $_SESSION['msg_code'] = "error";
     } else {
         // Book request has not been approved, allow cancellation

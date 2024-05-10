@@ -47,7 +47,11 @@ if (isset($_SESSION['admin'])) {
   <!-- ===== Bootstrap icon link ======== -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-
+  <style>
+    .bottom-nav-info{
+      margin-top: -2rem;
+    }
+  </style>
 </head>
 
 <body>
@@ -75,9 +79,25 @@ if (isset($_SESSION['admin'])) {
       <a href="./Returned_books.php" class="sidebar-links"><i class='bx bx-list-ul'></i> Returned Books List</a>
       <a href="./fine.php" class="sidebar-links"><i class='bx bxs-wallet-alt'></i> Fine Info</a>
       <a href="./manageUser.php" class="sidebar-links"><i class='bx bxs-user-account'></i> Users Details</a>
-      <a href="./admin-LogOut.php" class="sidebar-links"><i class="bx bx-log-out"></i> Log out</a>
 
     </div>
+
+    <div class="bottom-nav-info d-flex align-items-center gap-3">
+            <div>
+            <img width="70" height="70"
+                  src="./admin_profile/admin_img.png"
+                  style="background-color: white; border-radius: 5px !important; overflow: hidden; object-fit:cover;">
+
+            </div>
+            <div style="display: grid;" class="user">
+                    <a class="user fw-semibold" style='color: white;'><?php echo $_SESSION['admin']; ?></a>
+                <small class="fw-lighter fs-6">Admin</small>
+            </div>
+            <div>
+            <a href="./admin-LogOut.php" class="sidebar-links h-25"><i class="bx bx-log-out"></i></a>
+
+            </div>
+        </div>
   </div>
 
 

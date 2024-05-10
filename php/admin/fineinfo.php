@@ -7,8 +7,11 @@ if (isset($_SESSION['admin'])) {
     $exp = 'Expired';
 
     // Query to fetch return dates from issue_book
-    $query = "SELECT `return` FROM issue_book WHERE approve ='$exp'";
-    $result = mysqli_query($conn, $query);
+    $query = "SELECT `return` FROM issue_book WHERE approve = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "s", $exp);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
 
     if ($result) {
         while ($row = mysqli_fetch_assoc($result)) {
@@ -25,8 +28,11 @@ if (isset($_SESSION['admin'])) {
     }
 
     // Query to fetch fines from the fine table
-    $query2 = "SELECT sum(fine) as total_fine FROM fine WHERE book_status ='$exp' AND fine > 0";
-    $result2 = mysqli_query($conn, $query2);
+    $query2 = "SELECT sum(fine) as total_fine FROM fine WHERE book_status = ? AND fine > 0";
+    $stmt2 = mysqli_prepare($conn, $query2);
+    mysqli_stmt_bind_param($stmt2, "s", $exp);
+    mysqli_stmt_execute($stmt2);
+    $result2 = mysqli_stmt_get_result($stmt2);
 
     if ($result2) {
         $fineRow = mysqli_fetch_assoc($result2);
@@ -44,8 +50,11 @@ if (isset($_SESSION['admin'])) {
     $lost = 'Book Lost';
 
     // Query to fetch return dates from issue_book
-    $query3 = "SELECT `return` FROM issue_book WHERE username ='$_SESSION[user]' AND approve ='$lost'";
-    $result3 = mysqli_query($conn, $query3);
+    $query3 = "SELECT `return` FROM issue_book WHERE username = ? AND approve = ?";
+    $stmt3 = mysqli_prepare($conn, $query3);
+    mysqli_stmt_bind_param($stmt3, "ss", $_SESSION['user'], $lost);
+    mysqli_stmt_execute($stmt3);
+    $result3 = mysqli_stmt_get_result($stmt3);
 
     if ($result3) {
         while ($row = mysqli_fetch_assoc($result3)) {
@@ -62,8 +71,11 @@ if (isset($_SESSION['admin'])) {
     }
 
     // Query to fetch fines from the fine table
-    $query4 = "SELECT sum(fine) as total_fine FROM fine WHERE book_status ='$lost'";
-    $result4 = mysqli_query($conn, $query4);
+    $query4 = "SELECT sum(fine) as total_fine FROM fine WHERE book_status = ?";
+    $stmt4 = mysqli_prepare($conn, $query4);
+    mysqli_stmt_bind_param($stmt4, "s", $lost);
+    mysqli_stmt_execute($stmt4);
+    $result4 = mysqli_stmt_get_result($stmt4);
 
     if ($result4) {
         $fineRow = mysqli_fetch_assoc($result4);

@@ -29,10 +29,9 @@
     <div class="list_container">
         <div id="main">
       
-
+        <h2> View Books </h2>
       <!--  ===== Seachbar for books ===== -->
       <div class="searchBar__wrapper">
-          <h2> View Books </h2>
               <form action="" class="navbar-form-c" method="POST" name="form-1">
                   <div class="search searchBar_field">
                       <input class="form-control-search" type="text" name="search" placeholder="Type Book Name" style="width:100%" ; required>
