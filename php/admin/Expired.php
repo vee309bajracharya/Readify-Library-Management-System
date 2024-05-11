@@ -127,8 +127,9 @@ if (isset($_SESSION['admin'])) {
 
             </div>
             <!-- count and calculate ends -->
-                        <!-- searchbar for username -->
-                        <div class="searchBar__wrapper my-5">
+            
+            <!-- searchbar for username -->
+            <div class="searchBar__wrapper my-5">
                 <form method="post" class="navbar-form-c">
                     <div class="search searchBar_field">
                         <input type="text" class="form-control-search" placeholder="Enter username" name="search_username" style="width:100%" ; required>
@@ -136,9 +137,6 @@ if (isset($_SESSION['admin'])) {
                     </div>
                 </form>
             </div>
-
-
-
 
             <?php if (isset($_SESSION['admin'])) : ?>
                 <div class="searchBar__wrapper">

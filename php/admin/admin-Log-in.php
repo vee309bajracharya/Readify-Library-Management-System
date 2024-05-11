@@ -111,7 +111,7 @@ if (isset($_SESSION['admin'])) {
 
             //creating session as : dashboard page is available for registered admin only
             $_SESSION['admin'] = $admin['username'];
-            $_SESSION['pic'] = $admin['pic'];
+            $_SESSION['admin_pic'] = $admin['pic'];
 
 
             // Update the status of expired books
