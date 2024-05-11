@@ -2,14 +2,14 @@
 include "./adminNavbar.php";
 require_once "../config.php";
 
-    // Check if the login success message has been shown before
-    if (!isset($_SESSION['login_success_shown'])) {
-        $_SESSION['msg'] = "Welcome Admin!"; // Set the session message
-        $_SESSION['msg_code'] = "success";
+// Check if the login success message has been shown before
+if (!isset($_SESSION['login_success_shown'])) {
+    $_SESSION['msg'] = "Welcome Admin!"; // Set the session message
+    $_SESSION['msg_code'] = "success";
 
-        //to indicate that the message has been shown
-        $_SESSION['login_success_shown'] = true;
-    }
+    //to indicate that the message has been shown
+    $_SESSION['login_success_shown'] = true;
+}
 
 
 
@@ -49,7 +49,7 @@ if ($result_book) {
 // Execute the SQL query to count approve books
 $sqlapprove = "SELECT COUNT(DISTINCT username) AS approve_count
 FROM issue_book
-WHERE approve = 'Approved'";
+WHERE approve = ''";
 $approve_book = mysqli_query($conn, $sqlapprove); // Execute the query
 
 // Check if the query executed successfully
@@ -82,7 +82,7 @@ if ($expired_book) {
 
 
 // Execute the SQL query to count Fine
-$sqlfine = "SELECT COUNT(DISTINCT username) AS fine_count
+$sqlfine = "SELECT COUNT(username) AS fine_count
 FROM fine
 WHERE status = 'unpaid'";
 $fine_book = mysqli_query($conn, $sqlfine); // Execute the query
@@ -152,13 +152,13 @@ if ($fine_book) {
 
 
                         <div class="primary-action secondary-action">
-                            <h5 style="font-size: 2.8rem;">Approved Books</h5>
+                            <h5 style="font-size: 2.8rem;">Approve Book</h5>
                             <span style="font-size: 1.9rem; font-weight: 400;"><b>
                                     <?php echo $approve_count; ?>
-                                </b> Books have approved</span>
+                                </b>Book requires approval. </span>
 
                             <div class="action-link" style='margin-top: 2rem;'>
-                                <a href="./issue_info.php" class="btn btn-custom" style='margin-top: 1.2rem;'>View
+                                <a href="Request.php" class="btn btn-custom" style='margin-top: 1.2rem;'>View
                                     Details</a>
                                 <i class='bx bx-list-check custom-bx'></i>
                             </div>
@@ -226,16 +226,22 @@ if ($fine_book) {
 
     </div>
 
-        <!-- jquery, popper, bootstrapJS -->
-      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-    
+    <!-- jquery, popper, bootstrapJS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+
     <!-- === sweetAlert link === -->
     <script src="../sweetAlert/sweetalert.js"></script>
 
-    <?php 
-          include ('../sweetAlert/sweetalert_actions.php');
+    <?php
+    include ('../sweetAlert/sweetalert_actions.php');
     ?>
 </body>
+
 </html>
