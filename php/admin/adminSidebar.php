@@ -49,7 +49,7 @@ if (isset($_SESSION['admin'])) {
 
   <style>
     .bottom-nav-info{
-      margin-top: -2rem;
+      margin-top: -3rem;
     }
   </style>
 </head>
