@@ -48,7 +48,7 @@
 // ========== search book names =================
 if (isset($_POST['submit'])) {
     $search = mysqli_real_escape_string($conn, $_POST['search']);
-    $searchBarQuery = mysqli_query($conn, "SELECT fullname, username, email, phone_number, address, library_card_number, pic FROM library_users WHERE fullname LIKE '%$search%'");
+    $searchBarQuery = mysqli_query($conn, "SELECT user_id, fullname, username, email, phone_number, address, library_card_number, pic FROM library_users WHERE fullname LIKE '%$search%'");
 
     if (mysqli_num_rows($searchBarQuery) == 0) {
         echo "<section>";
@@ -62,6 +62,7 @@ if (isset($_POST['submit'])) {
         echo "<table class='table table-bordered table-hover'>";
         echo "<tr>";
         //Table header
+        echo "<th>"; echo "User ID"; echo "</th>";
         echo "<th>"; echo "Full Name"; echo "</th>";
         echo "<th>"; echo "Email"; echo "</th>";
         echo "<th>"; echo "Phone Number"; echo "</th>";
@@ -73,6 +74,7 @@ if (isset($_POST['submit'])) {
         while ($row = mysqli_fetch_assoc($searchBarQuery)) {
             echo "<tr>";
             //fetch data from library_books table
+                echo "<td>" . $row['user_id'] . "</td>";
                 echo "<td>" . $row['fullname'] . "</td>";
                 echo "<td>" . $row['email'] . "</td>";
                 echo "<td>" . $row['phone_number'] . "</td>";
@@ -85,11 +87,12 @@ if (isset($_POST['submit'])) {
         echo "</div>";
         }
         }else {
-            $result = mysqli_query($conn, "SELECT fullname, username, email, phone_number, address, library_card_number, pic FROM `library_users`;");
+            $result = mysqli_query($conn, "SELECT user_id, fullname, username, email, phone_number, address, library_card_number, pic FROM `library_users`;");
             echo "<div>";
             echo "<table class='table table-bordered table-hover'>";
             echo "<tr>";
             //Table header
+            echo "<th>"; echo "User ID"; echo "</th>";
             echo "<th>"; echo "Full Name"; echo "</th>";
             echo "<th>"; echo "Email"; echo "</th>";
             echo "<th>"; echo "Phone Number"; echo "</th>";
@@ -102,6 +105,7 @@ if (isset($_POST['submit'])) {
             while ($row = mysqli_fetch_assoc($result)) {
                 echo "<tr>";
                 //fetch data from library_books table
+                echo "<td>" . $row['user_id'] . "</td>";
                 echo "<td>" . $row['fullname'] . "</td>";
                 echo "<td>" . $row['email'] . "</td>";
                 echo "<td>" . $row['phone_number'] . "</td>";
@@ -119,10 +123,6 @@ if (isset($_POST['submit'])) {
 
 
       </div>
-
-    
-   <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     </div>
 </body>
 </html>

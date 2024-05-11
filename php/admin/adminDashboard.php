@@ -126,7 +126,7 @@ if ($fine_book) {
     <div class="list_container">
         <div id="main">
 
-            <div class="dashboard-wrapper d-flex flex-column gap-5 mt-3">
+            <div class="dashboard-wrapper d-flex flex-column gap-5">
 
                 <!-- ==== Content Top ===== -->
                 <div class="content-book mt-2">
