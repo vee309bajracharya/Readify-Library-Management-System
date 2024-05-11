@@ -85,7 +85,7 @@ require_once "../config.php";
                     $returnDate = $issueDateRow['return'];
                     $approveDate = $issueDateRow['approve'];
 
-                    echo "<big class='fw-bold fs-3 my-5'>Issued Date: </big>" . $issueDate;
+                  
                 } else {
                     echo "Issue date not found.";
                 }

@@ -33,12 +33,14 @@ if (isset($_SESSION['admin'])) {
             margin-top: 1.2rem;
         }
 
-        .changeButton{
+        .changeButton {
             width: 100%;
         }
-        .changeButton:hover{
+
+        .changeButton:hover {
             text-decoration: none;
         }
+
         .changeButton.hidden {
             display: none;
         }
@@ -127,11 +129,12 @@ if (isset($_SESSION['admin'])) {
 
             </div>
             <!-- count and calculate ends -->
-                        <!-- searchbar for username -->
-                        <div class="searchBar__wrapper my-5">
+            <!-- searchbar for username -->
+            <div class="searchBar__wrapper my-5">
                 <form method="post" class="navbar-form-c">
                     <div class="search searchBar_field">
-                        <input type="text" class="form-control-search" placeholder="Enter username" name="search_username" style="width:100%" ; required>
+                        <input type="text" class="form-control-search" placeholder="Enter username"
+                            name="search_username" style="width:100%" ; required>
                         <button class="btn-search" type="submit" name="search">Search</button>
                     </div>
                 </form>
@@ -140,7 +143,7 @@ if (isset($_SESSION['admin'])) {
 
 
 
-            <?php if (isset($_SESSION['admin'])) : ?>
+            <?php if (isset($_SESSION['admin'])): ?>
                 <div class="searchBar__wrapper">
                     <script>
                         function checkBookLost() {
@@ -157,7 +160,7 @@ if (isset($_SESSION['admin'])) {
                                         bookID: bookID,
                                         username: username
                                     },
-                                    success: function(response) {
+                                    success: function (response) {
                                         // If the book is marked as lost, check the checkbox
                                         if (response === 'lost') {
                                             checkboxes[i].checked = true;
@@ -206,7 +209,7 @@ if (isset($_SESSION['admin'])) {
                                     $fine = ($differenceInDays > 0) ? $differenceInDays * 40 : 0;
 
                                     // Update status to "Returned"
-
+                
                                     $updateQuery = "UPDATE issue_book SET approve='Returned' WHERE username='$username' AND books_id='$books_id'";
                                     mysqli_query($conn, $updateQuery);
 
@@ -215,6 +218,8 @@ if (isset($_SESSION['admin'])) {
                                         $insertFineQuery = "INSERT INTO fine (username, bid, returned, days, fine, status, book_status) VALUES ('$username', '$books_id', '$currentDate', '$differenceInDays', '$fine', 'unpaid', 'Expired')";
                                         mysqli_query($conn, $insertFineQuery);
                                     }
+
+
 
                                     // Retrieve user_id, book details, and other information
                                     $getUserIDQuery = "SELECT user_id FROM library_users WHERE username='$username'";
@@ -236,9 +241,11 @@ if (isset($_SESSION['admin'])) {
                                     // Insert returned book details into returned_book table
                                     $Markasreturneddate = date('Y-m-d');
 
-                                    $addquantity = "UPDATE library_books SET quantity = quantity + 1 WHERE books_id = $books_id";
+
                                     $insertReturnedBookQuery = "INSERT INTO returned_book (username, user_id, books_id, books_name, book_cover, authors, approve, issue, return_date, returned_date, requested) VALUES ('$username','$user_id', '$books_id', '$books_name', '$book_cover', '$authors', '$approve', '$issue','$return','$Markasreturneddate','$requested')";
                                     $insertReturnedBookResult = mysqli_query($conn, $insertReturnedBookQuery);
+                                    $addquantity = "UPDATE library_books SET quantity = quantity + 1 WHERE books_id = '$books_id'";
+                                    mysqli_query($conn, $addquantity);
 
                                     if ($insertReturnedBookResult) {
                                         $deleteQuery = "DELETE FROM issue_book WHERE username='$username' AND books_id='$books_id' AND approve = 'Returned'";
@@ -258,7 +265,7 @@ if (isset($_SESSION['admin'])) {
                                 } else {
                                     // Book is returned before the return date
                                     // Update status to "Returned" without charging any fine
-
+                
                                     $updateQuery = "UPDATE issue_book SET approve='Returned' WHERE username='$username' AND books_id='$books_id' AND (approve = 'Approved' OR approve = 'Expired')";
                                     mysqli_query($conn, $updateQuery);
                                     // Retrieve user_id, book details, and other information
@@ -295,13 +302,16 @@ if (isset($_SESSION['admin'])) {
                                     echo '<p><span class="highlight">Book Name:</span> ' . $books_name . '</p>';
                                     echo '</div>';
 
-                                    $addquantity = "UPDATE library_books SET quantity = quantity + 1 WHERE books_id = $books_id";
+
                                     $insertReturnedBookQuery = "INSERT INTO returned_book (username, user_id, books_id, books_name, book_cover, authors, approve, issue, return_date, returned_date, requested) VALUES ('$username','$user_id', '$books_id', '$books_name', '$book_cover', '$authors', '$approve', '$issue','$return','$Markasreturneddate','$requested')";
                                     mysqli_query($conn, $insertReturnedBookQuery);
-
+                                    $addquantity = "UPDATE library_books SET quantity = quantity + 1 WHERE books_id = '$books_id'";
+                                    mysqli_query($conn, $addquantity);
 
                                     // Output message indicating book returned before return date
                                     $_SESSION['msg'] = "Book returned before the return date. No fine charged";
+
+
 
 
                                     $deleteQuery = "DELETE FROM issue_book WHERE username='$username' AND books_id='$books_id' AND approve = 'Returned'";
@@ -328,7 +338,7 @@ if (isset($_SESSION['admin'])) {
                                 $books_id = $row['books_id'];
                                 $username = $row['username'];
                                 $returnDate = $row['return']; // Set return date here
-
+                
                                 // Perform necessary actions for each lost book
                                 $lostBookFine = 0;
                                 $lostCurrentDate = date('Y-m-d');
@@ -349,26 +359,27 @@ if (isset($_SESSION['admin'])) {
                     <div class=" mx-2 float-end">
                         <button id="demoButton" class="btn btn-warning fw-medium">Change Book Status</button>
                     </div>
-                    
+
 
                     <form action="" method="POST">
-                    <!-- Filters -->
+                        <!-- Filters -->
                         <div class="main-container d-flex justify-content-between gap-5">
                             <div class="filters-div float-end">
-                            <img src="../../svg/filter.svg" alt="Filter" id="filter-icon">
-                            <div class="filter-options">
-                                <button type="submit" name="submit1" class="btn btn-default">All Info</button>
-                                <button type="submit" name="submit4" class="btn btn-default">Approved</button>
-                                <button type="submit" name="submit3" class="btn btn-default">Expired</button>
-                                <button type="submit" name="submit2" class="btn btn-default">Book Lost</button>
+                                <img src="../../svg/filter.svg" alt="Filter" id="filter-icon">
+                                <div class="filter-options">
+                                    <button type="submit" name="submit1" class="btn btn-default">All Info</button>
+                                    <button type="submit" name="submit4" class="btn btn-default">Approved</button>
+                                    <button type="submit" name="submit3" class="btn btn-default">Expired</button>
+                                    <button type="submit" name="submit2" class="btn btn-default">Book Lost</button>
+                                </div>
                             </div>
-                        </div>
 
                             <div class="action-container d-flex gap-3">
 
                                 <button type="submit" name="markReturned" class="btn btn-success fw-medium">Mark as
                                     Returned</button>
-                                <button type="submit" name="markLost" onclick="checkBooklost()" class="btn btn-danger fw-medium">Declare Lost</button>
+                                <button type="submit" name="markLost" onclick="checkBooklost()"
+                                    class="btn btn-danger fw-medium">Declare Lost</button>
                             </div>
                         </div>
 
@@ -544,7 +555,7 @@ if (isset($_SESSION['admin'])) {
                         ?>
                     </form>
                 </div>
-            <?php else : ?>
+            <?php else: ?>
                 <h3>Please login first</h3>
             <?php endif; ?>
 
@@ -552,9 +563,14 @@ if (isset($_SESSION['admin'])) {
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
     <!-- === sweetAlert link === -->
     <script src="../sweetAlert/sweetalert.js"></script>
 
@@ -568,7 +584,7 @@ if (isset($_SESSION['admin'])) {
         }
 
         // JavaScript function to handle click event of Demo button
-        document.getElementById('demoButton').addEventListener('click', function() {
+        document.getElementById('demoButton').addEventListener('click', function () {
             toggleVisibility();
         });
 
@@ -577,20 +593,20 @@ if (isset($_SESSION['admin'])) {
 
 
         //JS to handle filters
-         $(document).ready(function () {
+        $(document).ready(function () {
             // Handle click event on filter buttons
             $('.filter-options button').click(function () {
-            // Remove active class from all buttons
-            $('.filter-options button').removeClass('active');
-            // Add active class to the clicked button
-            $(this).addClass('active');
+                // Remove active class from all buttons
+                $('.filter-options button').removeClass('active');
+                // Add active class to the clicked button
+                $(this).addClass('active');
             });
         });
     </script>
 
 
     <?php
-    include('../sweetAlert/sweetalert_actions.php');
+    include ('../sweetAlert/sweetalert_actions.php');
     ?>
 </body>
 
