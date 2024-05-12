@@ -62,9 +62,6 @@ if (!isset($_SESSION['admin'])) {
                         ?>
                     </a>
                     
-                    <a href="./Approve.php"><i class='bx bx-bell'></i></a>
-                    <!-- <i class='bx bxs-bell-ring' ></i> -->
-
                 </ul>
             </div>
         </nav>
