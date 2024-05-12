@@ -35,30 +35,14 @@
             echo "<table class='table table-bordered table-hover'>";
             echo "<tr>";
             //Table header
-            echo "<th>";
-            echo "Books ID";
-            echo "</th>";
-            echo "<th>";
-            echo "Books Name";
-            echo "</th>";
-            echo "<th>";
-            echo "Book Cover";
-            echo "</th>";
-            echo "<th>";
-            echo "Edition";
-            echo "</th>";
-            echo "<th>";
-            echo "Authors";
-            echo "</th>";
-            echo "<th>";
-            echo "Status";
-            echo "</th>";
-            echo "<th>";
-            echo "Quantity";
-            echo "</th>";
-            echo "<th>";
-            echo "Department";
-            echo "</th>";
+            echo "<th>";echo "Books ID";echo "</th>";
+            echo "<th>";echo "Books Name";echo "</th>";
+            echo "<th>";echo "Book Cover";echo "</th>";
+            echo "<th>";echo "Edition";echo "</th>";
+            echo "<th>";echo "Authors";echo "</th>";
+            echo "<th>";echo "Status";echo "</th>";
+            echo "<th>";echo "Quantity";echo "</th>";
+            echo "<th>";echo "Department";echo "</th>";
 
             echo "</tr>";
 
