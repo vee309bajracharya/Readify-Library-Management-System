@@ -24,9 +24,8 @@ For USER:
 4. Update their password
 5. Search the required book
 6. Can see their borrowed book with details like (Approve status, Book Submission Date, Book Returned Date)
-7. Can receive notification if admin send any message regarding book
-8. See their Fine due details
-9. Logout
+7. See their Fine due details
+8. Logout
 
 For ADMIN:
 
@@ -48,3 +47,5 @@ For ADMIN:
 ![Screenshot_11-4-2024_9038_localhost](https://github.com/vee309bajracharya/Readify-Library-Management-System/assets/102459306/3e64ef8d-4e14-49aa-9b8b-2d70cf37d220)
 
 Preview our index page : https://vee309bajracharya.github.io/Readify-Library-Management-System/pages/index.html
+
+Demo Link : https://readifylibrarysystem.000webhostapp.com/pages/index.html
