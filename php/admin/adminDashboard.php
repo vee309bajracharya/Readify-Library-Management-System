@@ -65,7 +65,9 @@ if ($approve_book) {
 
 
 // Execute the SQL query to count Expired books
-$sqlexpired = "SELECT COUNT(username) AS expired_count
+
+$sqlexpired = "SELECT COUNT( username) AS expired_count
+
 FROM issue_book
 WHERE approve = 'Expired'";
 $expired_book = mysqli_query($conn, $sqlexpired); // Execute the query
