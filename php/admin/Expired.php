@@ -129,6 +129,7 @@ if (isset($_SESSION['admin'])) {
 
             </div>
             <!-- count and calculate ends -->
+
             <!-- searchbar for username -->
             <div class="searchBar__wrapper my-5">
                 <form method="post" class="navbar-form-c">
@@ -141,9 +142,8 @@ if (isset($_SESSION['admin'])) {
             </div>
 
 
+            <?php if (isset($_SESSION['admin'])) : ?>
 
-
-            <?php if (isset($_SESSION['admin'])): ?>
                 <div class="searchBar__wrapper">
                     <script>
                         function checkBookLost() {
