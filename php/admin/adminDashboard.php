@@ -47,7 +47,7 @@ if ($result_book) {
 
 
 // Execute the SQL query to count approve books
-$sqlapprove = "SELECT COUNT(DISTINCT username) AS approve_count
+$sqlapprove = "SELECT COUNT(username) AS approve_count
 FROM issue_book
 WHERE approve = ''";
 $approve_book = mysqli_query($conn, $sqlapprove); // Execute the query
@@ -65,7 +65,7 @@ if ($approve_book) {
 
 
 // Execute the SQL query to count Expired books
-$sqlexpired = "SELECT COUNT(DISTINCT username) AS expired_count
+$sqlexpired = "SELECT COUNT( username) AS expired_count
 FROM issue_book
 WHERE approve = 'Expired'";
 $expired_book = mysqli_query($conn, $sqlexpired); // Execute the query

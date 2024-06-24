@@ -3,9 +3,10 @@ include "./adminNavbar.php"; //navbar along with sidenav
 require_once "../config.php"; // Include database connection file
 
 $searchBarQuery = null; // Set a default value for $searchBarQuery
+$dateFilterQuery = null; // Set a default value for $dateFilterQuery
 
 // Check if form is submitted with a username search
-if (isset($_POST['search_username'])) {
+if (isset($_POST['search'])) {
     $search_username = $_POST['search_username'];
     // Modify SQL query to filter results by entered username
     $sql = "SELECT * FROM returned_book WHERE username LIKE '%$search_username%'";
@@ -26,6 +27,50 @@ if (isset($_POST['search_username'])) {
         echo "Error: " . mysqli_error($conn);
         exit;
     }
+}
+
+// Date-wise filter
+$days7 = isset($_POST['days7']);
+$days12 = isset($_POST['days12']);
+$days24 = isset($_POST['days24']);
+
+$currentDate = date('Y-m-d');
+if ($days7) {
+    $dateThreshold = date('Y-m-d', strtotime($currentDate . ' - 7 days'));
+} elseif ($days12) {
+    $dateThreshold = date('Y-m-d', strtotime($currentDate . ' - 12 days'));
+} elseif ($days24) {
+    $dateThreshold = date('Y-m-d', strtotime($currentDate . ' - 24 days'));
+}
+
+if (isset($_POST['filter']) || $days7 || $days12 || $days24) {
+    if (isset($_POST['from']) && isset($_POST['to'])) {
+        $from = $_POST['from'];
+        $to = $_POST['to'];
+
+        // Check if 'to' date is greater than 'from' date
+        if (strtotime($to) < strtotime($from)) {
+            echo "Please enter a valid date range."; // sweet alert here
+            exit;
+        }
+
+        // Modify SQL query to filter results by entered from and to date
+        $sql = "SELECT * FROM returned_book WHERE issue BETWEEN '$from' AND '$to'";
+    } elseif (isset($dateThreshold)) {
+        $sql = "SELECT * FROM returned_book WHERE issue >= '$dateThreshold'";
+    } else {
+        $sql = "SELECT * FROM returned_book";
+    }
+    $dateFilterQuery = mysqli_query($conn, $sql);
+
+    // Check if query executed successfully
+    if (!$dateFilterQuery) {
+        echo "Error: " . mysqli_error($conn);
+        exit;
+    }
+} else {
+    // If no date filter is applied, use the search query results
+    $dateFilterQuery = $searchBarQuery;
 }
 ?>
 
@@ -62,9 +107,7 @@ if (isset($_POST['search_username'])) {
 
 <body>
     <!-- include Sidebar -->
-    <?php
-    include "./adminSidebar.php";
-    ?>
+    <?php include "./adminSidebar.php"; ?>
 
     <div class="list_container">
         <div id="main">
@@ -74,88 +117,76 @@ if (isset($_POST['search_username'])) {
             <div class="searchBar__wrapper">
                 <form method="post" class="navbar-form-c">
                     <div class="search searchBar_field">
-                        <input type="text" class="form-control-search" placeholder="Enter username" name="search_username" style="width:100%" ; required>
+                        <input type="text" class="form-control-search" placeholder="Enter username"
+                            name="search_username" style="width:100%;" required>
                         <button class="btn-search" type="submit" name="search">Search</button>
                     </div>
+                </form>
+
+                <form method="post">
+                    <label>From</label>
+                    <input type="date" name="from" value="<?php echo isset($from) ? htmlspecialchars($from) : ''; ?>" i want in this format YYYY-MM-DD
+                        required>
+                    <label></label>
+                    <input type="date" name="to" value="<?php echo isset($to) ? htmlspecialchars($to) : ''; ?>" i want in this format YYYY-MM-DD
+                        required>
+                    <button type="submit" name="filter">Filter</button>
+                </form>
+
+
+                <form method="post">
+                    <button type="submit" name="all">All data</button>
+                    <button type="submit" name="days7">7 days</button>
+                    <button type="submit" name="days12">12 days</button>
+                    <button type="submit" name="days24">24 days</button>
                 </form>
             </div>
 
             <?php
-                $c = 0;
-                if (isset($_SESSION["admin"])) {
-                    // Fetch all records or filtered records based on search
-                    if (mysqli_num_rows($searchBarQuery) > 0) {
-                        echo "<div>";
-                        echo "<table class='table table-bordered table-hover' style='width:100%;'> ";
+            if (isset($_SESSION["admin"])) {
+                // Fetch all records or filtered records based on search and date filter
+                if (mysqli_num_rows($dateFilterQuery) > 0) {
+                    echo "<div>";
+                    echo "<table class='table table-bordered table-hover' style='width:100%;'> ";
+                    echo "<tr>";
+                    //Table header   
+                    echo "<th>User ID</th>";
+                    echo "<th>Student Username</th>";
+                    echo "<th>Book ID</th>";
+                    echo "<th>Books Name</th>";
+                    echo "<th>Book Cover</th>";
+                    echo "<th>Authors</th>";
+                    echo "<th>Book Issued Date</th>";
+                    echo "<th>Returned Date</th>";
+                    echo "<th>Book Status</th>";
+                    echo "</tr>";
 
+                    while ($row = mysqli_fetch_assoc($dateFilterQuery)) {
+                        // Fetch data from returned_book table
                         echo "<tr>";
-                        //Table header   
-                        echo "<th>";
-                        echo "User ID";
-                        echo "</th>";
-
-                        echo "<th>";
-                        echo "Student Username";
-                        echo "</th>";
-
-                        echo "<th>";
-                        echo "Book ID";
-                        echo "</th>";
-
-                        echo "<th>";
-                        echo "Books Name";
-                        echo "</th>";
-
-                        echo "<th>";
-                        echo "Book Cover";
-                        echo "</th>";
-
-                        echo "<th>";
-                        echo "Authors";
-                        echo "</th>";
-
-                        echo "<th>";
-                        echo "Book Issued Date";
-                        echo "</th>";
-
-                        echo "<th>";
-                        echo "Returned Date";
-                        echo "</th>";
-
-                        echo "<th>";
-                        echo "Book Status";
-                        echo "</th>";
-
+                        echo "<td>" . $row['user_id'] . "</td>";
+                        echo "<td>" . $row["username"] . "</td>";
+                        echo "<td>" . $row['books_id'] . "</td>";
+                        echo "<td>" . $row['books_name'] . "</td>";
+                        echo "<td style='text-align:center;'><img src='../admin/covers/" . $row['book_cover'] . "' alt='Book Cover' width='100' style='object-fit: cover; border-radius: 5px;'></td>";
+                        echo "<td>" . $row['authors'] . "</td>";
+                        echo "<td>" . $row['issue'] . "</td>";
+                        echo "<td>" . $row['returned_date'] . "</td>";
+                        echo "<td>" . $row['approve'] . "</td>";
                         echo "</tr>";
-
-                        while ($row = mysqli_fetch_assoc($searchBarQuery)) {
-                            // Fetch data from returned_book table
-                            echo "<tr>";
-                            echo "<td>" . $row['user_id'] . "</td>";
-                            echo "<td>" . $row["username"] . "</td>";
-                            echo "<td>" . $row['books_id'] . "</td>";
-                            echo "<td>" . $row['books_name'] . "</td>";
-                            echo "<td style='text-align:center;'><img src='../admin/covers/" . $row['book_cover'] . "' alt='Book Cover' width='100' style='object-fit: cover; border-radius: 5px;'></td>";
-                            echo "<td>" . $row['authors'] . "</td>";
-                            echo "<td>" . $row['issue'] . "</td>";
-                            echo "<td>" . $row['returned_date'] . "</td>";
-                            echo "<td>" . $row['approve'] . "</td>";
-                            echo "</tr>";
-                        }
-                        echo "</table>";
-                        echo "</div>";
-                    } else {
-                        // If no records found
-                        echo "<div class='error_container'>";
-                        echo "<img src='../../images/book_not_found.png' alt='Book not found image' id='notFound'>";
-                        echo "</div>";
                     }
+                    echo "</table>";
+                    echo "</div>";
                 } else {
-                ?>
-                <h3>Please login first</h3>
-                <?php
+                    // If no records found
+                    echo "<div class='error_container'>";
+                    echo "<img src='../../images/book_not_found.png' alt='Book not found image' id='notFound'>";
+                    echo "</div>";
                 }
-                ?>
+            } else {
+                echo "<h3>Please login first</h3>";
+            }
+            ?>
 
         </div>
     </div>
