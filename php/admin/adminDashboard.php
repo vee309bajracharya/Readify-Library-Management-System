@@ -65,7 +65,9 @@ if ($approve_book) {
 
 
 // Execute the SQL query to count Expired books
+
 $sqlexpired = "SELECT COUNT( username) AS expired_count
+
 FROM issue_book
 WHERE approve = 'Expired'";
 $expired_book = mysqli_query($conn, $sqlexpired); // Execute the query
@@ -155,7 +157,7 @@ if ($fine_book) {
                             <h5 style="font-size: 2.8rem;">Approve Book</h5>
                             <span style="font-size: 1.9rem; font-weight: 400;"><b>
                                     <?php echo $approve_count; ?>
-                                </b>Book requires approval. </span>
+                                </b>Books require approval </span>
 
                             <div class="action-link" style='margin-top: 2rem;'>
                                 <a href="Request.php" class="btn btn-custom" style='margin-top: 1.2rem;'>View
