@@ -561,21 +561,14 @@ span#navbarDropdown.dropdown-toggle::after {
   width: 30%;
 }
 
-/* filters */
-.filter-options {
-  display: none;
-}
 
-/* Show the filter options when the filter icon is hovered */
-.filters-div:hover .filter-options {
-  display: inline-block;
-  gap: 3rem;
+/* date filter */
+.from-date,.to-date{
+  width: 20% !important;
 }
-.filters-div img{
-  margin-top: 1rem;
-  width: 20px;
-  height: 20px;
-}
-.filters-div img:hover{
-  cursor: pointer;
+.round-holder{
+  border-radius: 15px;
+  padding: 1rem;
+  font-size: 1.7rem;
+  border: 2px solid var(--primary-color);
 }

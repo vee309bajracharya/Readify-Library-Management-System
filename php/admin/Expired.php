@@ -365,7 +365,6 @@ if (isset($_SESSION['admin'])) {
                         <!-- Filters -->
                         <div class="main-container d-flex justify-content-between gap-5">
                             <div class="filters-div float-end">
-                                <img src="../../svg/filter.svg" alt="Filter" id="filter-icon">
                                 <div class="filter-options">
                                     <button type="submit" name="submit1" class="btn btn-default">All Info</button>
                                     <button type="submit" name="submit4" class="btn btn-default">Approved</button>

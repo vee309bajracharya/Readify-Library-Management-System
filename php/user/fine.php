@@ -62,17 +62,34 @@ function sanitize_input($conn, $input)
             </div>
 
             <!-- Form for filtering fine information -->
-            <form action="" method="POST" class="my-4">
-                <div class="input-group mb-3">
-                    <input type="text" name="book_name" class="form-control" placeholder="Search by Book Name">
-                    <button type="submit" name="search" class="btn btn-outline-secondary">Search</button>
+
+
+            <div class="searchBar__wrapper">
+                <div class="requestBar__wrapper">
+                    <form action="" class="navbar-form-c" method="POST">
+                        <div class="searchBar_field">
+                            <input class="form-control-search" type="text" name="book_name" placeholder="Type Book Name"
+                                style="width:100%" required>
+                            <button type="submit" name="search" class="btn-search">Search</button>
+                        </div>
+
+                    </form>
                 </div>
-                <button type="submit" name="submit1" class="btn btn-default">All Information</button>
-                <button type="submit" name="submit3" class="btn btn-default">Expired</button>
-                <button type="submit" name="submit2" class="btn btn-default">Book Lost</button>
-                <button type="submit" name="submit4" class="btn btn-default">Paid</button>
-                <button type="submit" name="submit5" class="btn btn-default">Unpaid</button>
-            </form>
+            </div>
+
+
+            <div class="filter-container d-flex gap-3 float-end">
+                <form action="" method="POST" class="my-4">
+    
+                    <button type="submit" name="submit1" class="btn btn-default">All Information</button>
+                    <button type="submit" name="submit3" class="btn btn-default">Expired</button>
+                    <button type="submit" name="submit2" class="btn btn-default">Book Lost</button>
+                    <button type="submit" name="submit4" class="btn btn-default">Paid</button>
+                    <button type="submit" name="submit5" class="btn btn-default">Unpaid</button>
+                </form>
+
+            </div>
+
 
             <?php
             // Fetch data for the logged-in user

@@ -102,6 +102,7 @@ if (isset($_POST['filter']) || $days7 || $days12 || $days24) {
         td {
             width: 10%;
         }
+
     </style>
 </head>
 
@@ -124,21 +125,38 @@ if (isset($_POST['filter']) || $days7 || $days12 || $days24) {
                 </form>
 
                 <form method="post">
-                    <label>From</label>
-                    <input type="date" name="from" value="<?php echo isset($from) ? htmlspecialchars($from) : ''; ?>" i want in this format YYYY-MM-DD
-                        required>
-                    <label></label>
-                    <input type="date" name="to" value="<?php echo isset($to) ? htmlspecialchars($to) : ''; ?>" i want in this format YYYY-MM-DD
-                        required>
-                    <button type="submit" name="filter">Filter</button>
+                    <h4 class="mt-5 fw-bold">Choose Date</h4>
+                    <div class="date-filter-container my-2 d-flex gap-5 align">
+                        
+                        <div class="from-date d-flex flex-column">
+                            <label>From</label>
+                            <input type="date" class="round-holder"  name="from" value="<?php echo isset($from) ? htmlspecialchars($from) : ''; ?>" i want in this format YYYY-MM-DD
+                            required>
+                        </div>
+
+                        <div class="to-date d-flex flex-column">
+                            <label>To</label>
+                            <input type="date" class="round-holder" name="to" value="<?php echo isset($to) ? htmlspecialchars($to) : ''; ?>" i want in this format YYYY-MM-DD
+                                required>
+                        </div>
+
+                        <div class="date-btn my-5">
+                        <button type="submit" name="filter" class="btn btn-default">Search</button>
+                    </div>
+                    </div>
+
+  
+
+
+         
                 </form>
 
 
                 <form method="post">
-                    <button type="submit" name="all">All data</button>
-                    <button type="submit" name="days7">7 days</button>
-                    <button type="submit" name="days12">12 days</button>
-                    <button type="submit" name="days24">24 days</button>
+                    <button type="submit" name="all" class="btn btn-default">All data</button>
+                    <button type="submit" name="days7" class="btn btn-default">7 days</button>
+                    <button type="submit" name="days12" class="btn btn-default">12 days</button>
+                    <button type="submit" name="days24" class="btn btn-default">24 days</button>
                 </form>
             </div>
 
@@ -180,7 +198,7 @@ if (isset($_POST['filter']) || $days7 || $days12 || $days24) {
                 } else {
                     // If no records found
                     echo "<div class='error_container'>";
-                    echo "<img src='../../images/book_not_found.png' alt='Book not found image' id='notFound'>";
+                    echo "<img src='../../images/user_not_found.png' alt='User not found image' id='notFound'>";
                     echo "</div>";
                 }
             } else {
