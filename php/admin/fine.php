@@ -118,7 +118,7 @@ $paidFineSum = $paidFineRow['PaidFineSum'];
 
     <div class="list_container">
         <div id="main">
-            <h2>Users Fine List</h2>
+            <h2>Users Fine Information</h2>
             <!-- Book expired -->
             <div class="count-amount-container d-flex gap-5 my-5">
                 <div class="custom-sub-container d-flex p-3 gap-2">
@@ -158,7 +158,7 @@ $paidFineSum = $paidFineRow['PaidFineSum'];
                         <img src="../../images/paid.png" class="h-75 m-lg-2">
                     </div>
                     <div class="mt-4">
-                        <big class="fw-bold fs-4"><?php echo $paidFineCount; ?> Paid Fines</big> <br>
+                        <big class="fw-bold fs-4"><?php echo $paidFineCount; ?> Total Fine Received</big> <br>
                         <small>Rs.<?php echo $paidFineSum; ?></small>
                     </div>
                 </div>
