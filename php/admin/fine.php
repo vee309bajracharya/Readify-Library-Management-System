@@ -327,7 +327,14 @@ $paidFineSum = $paidFineRow['PaidFineSum'];
                 echo "<form method='POST'>";
                 echo "<input type='hidden' name='username' value='" . $row['username'] . "'>";
                 echo "<input type='hidden' name='book_id' value='" . $row['bid'] . "'>";
-                echo "<button type='submit' name='submit' class='btn btn-action'>Mark as Paid</button>";
+
+
+                if ($row['status'] !== 'paid') {
+                    echo " <button type='submit' name='submit' class='btn btn-action'>Mark as Paid</button>";
+                } else {
+                    echo " <span class='text-muted'>Already Paid</span>";
+                }
+
                 echo "</form>";
                 echo "</td>";
                 echo "</tr>";

@@ -142,7 +142,7 @@ if (isset($_SESSION['admin'])) {
             </div>
 
 
-            <?php if (isset($_SESSION['admin'])) : ?>
+            <?php if (isset($_SESSION['admin'])): ?>
 
                 <div class="searchBar__wrapper">
                     <script>
@@ -174,156 +174,164 @@ if (isset($_SESSION['admin'])) {
                     <?php
 
                     $fine = null;
-                    if (isset($_POST['markReturned']) && isset($_POST['Returned_books_id'])) {
-                        foreach ($_POST['Returned_books_id'] as $Returned_book_id) {
-                            // Split the returned book ID to extract username and book ID
-                            list($books_id, $username) = explode("_", $Returned_book_id);
+                    if (isset($_POST['markReturned'])) {
+                        if (isset($_POST['Returned_books_id']) && !empty($_POST['Returned_books_id'])) {
+                            $noBooksExist = true;
+                            foreach ($_POST['Returned_books_id'] as $Returned_book_id) {
+                                // Split the returned book ID to extract username and book ID
+                                list($books_id, $username) = explode("_", $Returned_book_id);
 
+                                $checkBookExistQuery = "SELECT `return` FROM issue_book WHERE username ='$username' AND books_id ='$books_id'";
+                                $checkBookExistResult = mysqli_query($conn, $checkBookExistQuery);
 
-                            $checkBooklostQuery = "SELECT `return` FROM issue_book WHERE username ='$username' AND books_id ='$books_id' AND approve = 'Book Lost'";
-                            $checkBooklostResult = mysqli_query($conn, $checkBooklostQuery);
-                            if (mysqli_num_rows($checkBooklostResult) > 0) {
+                                if (mysqli_num_rows($checkBookExistResult) > 0) {
+                                    $noBooksExist = false;
+                                    $checkBooklostQuery = "SELECT `return` FROM issue_book WHERE username ='$username' AND books_id ='$books_id' AND approve = 'Book Lost'";
+                                    $checkBooklostResult = mysqli_query($conn, $checkBooklostQuery);
 
-                                $_SESSION['msg'] = "Book Already Declared Lost";
-                                $_SESSION['msg_code'] = "error";
-                                continue; // Skip the rest of the loop iteration
-                            }
-
-
-
-                            // Query to retrieve return date for the book
-                            $returnDateQuery = "SELECT `return` FROM issue_book WHERE username ='$username' AND books_id ='$books_id' AND (approve = 'Expired' OR approve = 'Approved')";
-                            $returnDateResult = mysqli_query($conn, $returnDateQuery);
-
-                            if ($returnDateResult && mysqli_num_rows($returnDateResult) > 0) {
-                                $returnDateRow = mysqli_fetch_assoc($returnDateResult);
-                                $returnDate = $returnDateRow['return'];
-
-                                // Calculate difference in days between current date and return date
-                                $currentDate = date('Y-m-d');
-                                $differenceInDays = ceil((strtotime($currentDate) - strtotime($returnDate)) / (60 * 60 * 24));
-
-                                // Check if the book is returned before the return date
-                                if ($differenceInDays >= 0) {
-                                    // Book is returned after or on the return date
-                                    $fine = ($differenceInDays > 0) ? $differenceInDays * 40 : 0;
-
-                                    // Update status to "Returned"
-                
-                                    $updateQuery = "UPDATE issue_book SET approve='Returned' WHERE username='$username' AND books_id='$books_id'";
-                                    mysqli_query($conn, $updateQuery);
-
-                                    // Insert fine details into fine table if there is a fine
-                                    if ($fine > 0) {
-                                        $insertFineQuery = "INSERT INTO fine (username, bid, returned, days, fine, status, book_status) VALUES ('$username', '$books_id', '$currentDate', '$differenceInDays', '$fine', 'unpaid', 'Expired')";
-                                        mysqli_query($conn, $insertFineQuery);
+                                    if (mysqli_num_rows($checkBooklostResult) > 0) {
+                                        $_SESSION['msg'] = "Book Already Declared Lost";
+                                        $_SESSION['msg_code'] = "error";
+                                        continue; // Skip the rest of the loop iteration
                                     }
 
+                                    // Query to retrieve return date for the book
+                                    $returnDateQuery = "SELECT `return` FROM issue_book WHERE username ='$username' AND books_id ='$books_id' AND (approve = 'Expired' OR approve = 'Approved')";
+                                    $returnDateResult = mysqli_query($conn, $returnDateQuery);
 
+                                    if ($returnDateResult && mysqli_num_rows($returnDateResult) > 0) {
+                                        $returnDateRow = mysqli_fetch_assoc($returnDateResult);
+                                        $returnDate = $returnDateRow['return'];
 
-                                    // Retrieve user_id, book details, and other information
-                                    $getUserIDQuery = "SELECT user_id FROM library_users WHERE username='$username'";
-                                    $getUserIDResult = mysqli_query($conn, $getUserIDQuery);
-                                    $row = mysqli_fetch_assoc($getUserIDResult);
-                                    $user_id = $row['user_id'];
+                                        // Calculate difference in days between current date and return date
+                                        $currentDate = date('Y-m-d');
+                                        $differenceInDays = ceil((strtotime($currentDate) - strtotime($returnDate)) / (60 * 60 * 24));
 
-                                    $getBookDetailsQuery = "SELECT books_name, book_cover, authors, approve, issue,  `return`,requested FROM issue_book WHERE username='$username' AND books_id='$books_id'";
-                                    $getBookDetailsResult = mysqli_query($conn, $getBookDetailsQuery);
-                                    $bookDetailsRow = mysqli_fetch_assoc($getBookDetailsResult);
-                                    $books_name = $bookDetailsRow['books_name'];
-                                    $book_cover = $bookDetailsRow['book_cover'];
-                                    $authors = $bookDetailsRow['authors'];
-                                    $approve = $bookDetailsRow['approve'];
-                                    $issue = $bookDetailsRow['issue'];
-                                    $return = $bookDetailsRow['return'];
-                                    $requested = $bookDetailsRow['requested'];
+                                        // Check if the book is returned before the return date
+                                        if ($differenceInDays >= 0) {
+                                            // Book is returned after or on the return date
+                                            $fine = ($differenceInDays > 0) ? $differenceInDays * 40 : 0;
 
-                                    // Insert returned book details into returned_book table
-                                    $Markasreturneddate = date('Y-m-d');
+                                            // Update status to "Returned"
+                                            $updateQuery = "UPDATE issue_book SET approve='Returned' WHERE username='$username' AND books_id='$books_id'";
+                                            mysqli_query($conn, $updateQuery);
 
+                                            // Insert fine details into fine table if there is a fine
+                                            if ($fine > 0) {
+                                                $insertFineQuery = "INSERT INTO fine (username, bid, returned, days, fine, status, book_status) VALUES ('$username', '$books_id', '$currentDate', '$differenceInDays', '$fine', 'unpaid', 'Expired')";
+                                                mysqli_query($conn, $insertFineQuery);
+                                            }
 
-                                    $insertReturnedBookQuery = "INSERT INTO returned_book (username, user_id, books_id, books_name, book_cover, authors, approve, issue, return_date, returned_date, requested) VALUES ('$username','$user_id', '$books_id', '$books_name', '$book_cover', '$authors', '$approve', '$issue','$return','$Markasreturneddate','$requested')";
-                                    $insertReturnedBookResult = mysqli_query($conn, $insertReturnedBookQuery);
-                                    $addquantity = "UPDATE library_books SET quantity = quantity + 1 WHERE books_id = '$books_id'";
-                                    mysqli_query($conn, $addquantity);
+                                            // Retrieve user_id, book details, and other information
+                                            $getUserIDQuery = "SELECT user_id FROM library_users WHERE username='$username'";
+                                            $getUserIDResult = mysqli_query($conn, $getUserIDQuery);
+                                            $row = mysqli_fetch_assoc($getUserIDResult);
+                                            $user_id = $row['user_id'];
 
-                                    if ($insertReturnedBookResult) {
-                                        $deleteQuery = "DELETE FROM issue_book WHERE username='$username' AND books_id='$books_id' AND approve = 'Returned'";
-                                        mysqli_query($conn, $deleteQuery);
+                                            $getBookDetailsQuery = "SELECT books_name, book_cover, authors, approve, issue, `return`, requested FROM issue_book WHERE username='$username' AND books_id='$books_id'";
+                                            $getBookDetailsResult = mysqli_query($conn, $getBookDetailsQuery);
+                                            $bookDetailsRow = mysqli_fetch_assoc($getBookDetailsResult);
+                                            $books_name = $bookDetailsRow['books_name'];
+                                            $book_cover = $bookDetailsRow['book_cover'];
+                                            $authors = $bookDetailsRow['authors'];
+                                            $approve = $bookDetailsRow['approve'];
+                                            $issue = $bookDetailsRow['issue'];
+                                            $return = $bookDetailsRow['return'];
+                                            $requested = $bookDetailsRow['requested'];
+
+                                            // Insert returned book details into returned_book table
+                                            $Markasreturneddate = date('Y-m-d');
+                                            $insertReturnedBookQuery = "INSERT INTO returned_book (username, user_id, books_id, books_name, book_cover, authors, approve, issue, return_date, returned_date, requested) VALUES ('$username','$user_id', '$books_id', '$books_name', '$book_cover', '$authors', '$approve', '$issue','$return','$Markasreturneddate','$requested')";
+                                            $insertReturnedBookResult = mysqli_query($conn, $insertReturnedBookQuery);
+
+                                            // Update the quantity of the book
+                                            $addquantity = "UPDATE library_books SET quantity = quantity + 1 WHERE books_id = '$books_id'";
+                                            mysqli_query($conn, $addquantity);
+
+                                            if ($insertReturnedBookResult) {
+                                                $deleteQuery = "DELETE FROM issue_book WHERE username='$username' AND books_id='$books_id' AND approve = 'Returned'";
+                                                mysqli_query($conn, $deleteQuery);
+                                            }
+
+                                            // Output fine details
+                                            echo '<div class="book-info-details">';
+                                            echo '<h2>Fine details:</h2>';
+                                            echo '<p><span class="highlight">Username:</span> ' . $username . '</p>';
+                                            echo '<p><span class="highlight">Book ID:</span> ' . $books_id . '</p>';
+                                            echo '<p><span class="highlight">Return Date:</span> ' . $returnDate . '</p>';
+                                            echo '<p><span class="highlight">Returned Date:</span> ' . $currentDate . '</p>';
+                                            echo '<p><span class="highlight">Difference in Days:</span> ' . $differenceInDays . '</p>';
+                                            echo '<p><span class="highlight">Fine:</span> रु ' . number_format($fine, 2) . '</p>';
+                                            echo '</div>';
+                                        } else {
+                                            // Book is returned before the return date
+                                            // Update status to "Returned" without charging any fine
+                                            $updateQuery = "UPDATE issue_book SET approve='Returned' WHERE username='$username' AND books_id='$books_id' AND (approve = 'Approved' OR approve = 'Expired')";
+                                            mysqli_query($conn, $updateQuery);
+
+                                            // Retrieve user_id, book details, and other information
+                                            $getUserIDQuery = "SELECT user_id FROM library_users WHERE username='$username'";
+                                            $getUserIDResult = mysqli_query($conn, $getUserIDQuery);
+                                            $row = mysqli_fetch_assoc($getUserIDResult);
+                                            $user_id = $row['user_id'];
+
+                                            $getbookInfoQuery = "SELECT book_cover, authors FROM library_books WHERE books_id='$books_id'";
+                                            $getbookInfoResult = mysqli_query($conn, $getbookInfoQuery);
+                                            $getbookInfoRow = mysqli_fetch_assoc($getbookInfoResult);
+                                            $book_cover = $getbookInfoRow['book_cover'];
+                                            $authors = $getbookInfoRow['authors'];
+
+                                            $getBookDetailsQuery = "SELECT books_name, approve, issue, `return`, requested FROM issue_book WHERE username='$username' AND books_id='$books_id'";
+                                            $getBookDetailsResult = mysqli_query($conn, $getBookDetailsQuery);
+                                            $bookDetailsRow = mysqli_fetch_assoc($getBookDetailsResult);
+                                            $books_name = $bookDetailsRow['books_name'];
+                                            $approve = $bookDetailsRow['approve'];
+                                            $issue = $bookDetailsRow['issue'];
+                                            $return = $bookDetailsRow['return'];
+                                            $requested = $bookDetailsRow['requested'];
+
+                                            // Insert returned book details into returned_book table
+                                            $Markasreturneddate = date('Y-m-d');
+                                            $insertReturnedBookQuery = "INSERT INTO returned_book (username, user_id, books_id, books_name, book_cover, authors, approve, issue, return_date, returned_date, requested) VALUES ('$username','$user_id', '$books_id', '$books_name', '$book_cover', '$authors', '$approve', '$issue','$return','$Markasreturneddate','$requested')";
+                                            mysqli_query($conn, $insertReturnedBookQuery);
+
+                                            // Update the quantity of the book
+                                            $addquantity = "UPDATE library_books SET quantity = quantity + 1 WHERE books_id = '$books_id'";
+                                            mysqli_query($conn, $addquantity);
+
+                                            // Output message indicating book returned before return date
+                                            $_SESSION['msg'] = "Book returned before the return date. No fine charged";
+
+                                            $deleteQuery = "DELETE FROM issue_book WHERE username='$username' AND books_id='$books_id' AND approve = 'Returned'";
+                                            mysqli_query($conn, $deleteQuery);
+
+                                            // Output return details
+                                            echo '<div class="book-info-details">';
+                                            echo '<h2>Book Return Details:</h2>';
+                                            echo '<p><span class="highlight">User ID:</span> ' . $user_id . '</p>';
+                                            echo '<p><span class="highlight">Username:</span> ' . $username . '</p>';
+                                            echo '<p><span class="highlight">Book ID:</span> ' . $books_id . '</p>';
+                                            echo '<p><span class="highlight">Book Name:</span> ' . $books_name . '</p>';
+                                            echo '</div>';
+                                        }
+                                    } else {
+                                        // No record found for the given username and book ID
+                                        $updateQuery = "UPDATE issue_book SET approve='Returned' WHERE username='$username' AND books_id='$books_id' AND (approve = 'Approved' OR approve = 'Expired')";
+                                        mysqli_query($conn, $updateQuery);
                                     }
-                                    // Output fine details
-                                    echo '<div class="book-info-details">';
-                                    echo '<h2>Fine details:</h2>';
-                                    echo '<p><span class="highlight">Username:</span> ' . $username . '</p>';
-                                    echo '<p><span class="highlight">Book ID:</span> ' . $books_id . '</p>';
-                                    echo '<p><span class="highlight">Return Date:</span> ' . $returnDate . '</p>';
-                                    echo '<p><span class="highlight">Returned Date:</span> ' . $currentDate . '</p>';
-                                    echo '<p><span class="highlight">Difference in Days:</span> ' . $differenceInDays . '</p>';
-                                    echo '<p><span class="highlight">Fine:</span> रु ' . number_format($fine, 2) . '</p>';
-
-                                    echo '</div>';
-                                } else {
-                                    // Book is returned before the return date
-                                    // Update status to "Returned" without charging any fine
-                
-                                    $updateQuery = "UPDATE issue_book SET approve='Returned' WHERE username='$username' AND books_id='$books_id' AND (approve = 'Approved' OR approve = 'Expired')";
-                                    mysqli_query($conn, $updateQuery);
-                                    // Retrieve user_id, book details, and other information
-                                    $getUserIDQuery = "SELECT user_id FROM library_users WHERE username='$username'";
-                                    $getUserIDResult = mysqli_query($conn, $getUserIDQuery);
-                                    $row = mysqli_fetch_assoc($getUserIDResult);
-                                    $user_id = $row['user_id'];
-
-                                    $getbookInfoQuery = "SELECT book_cover, authors FROM library_books WHERE books_id='$books_id'";
-                                    $getbookInfoResult = mysqli_query($conn, $getbookInfoQuery);
-                                    $getbookInfoRow = mysqli_fetch_assoc($getbookInfoResult);
-                                    $book_cover = $getbookInfoRow['book_cover'];
-                                    $authors = $getbookInfoRow['authors'];
-
-
-                                    $getBookDetailsQuery = "SELECT books_name, approve, issue, `return`, requested FROM issue_book WHERE username='$username' AND books_id='$books_id'";
-                                    $getBookDetailsResult = mysqli_query($conn, $getBookDetailsQuery);
-                                    $bookDetailsRow = mysqli_fetch_assoc($getBookDetailsResult);
-                                    $books_name = $bookDetailsRow['books_name'];
-                                    $approve = $bookDetailsRow['approve'];
-                                    $issue = $bookDetailsRow['issue'];
-                                    $return = $bookDetailsRow['return'];
-                                    $requested = $bookDetailsRow['requested'];
-
-
-                                    // Insert returned book details into returned_book table
-                                    $Markasreturneddate = date('Y-m-d');
-
-                                    echo '<div class="book-info-details">';
-                                    echo '<h2>Book Return Details:</h2>';
-                                    echo '<p><span class="highlight">User ID:</span> ' . $user_id . '</p>';
-                                    echo '<p><span class="highlight">Username:</span> ' . $username . '</p>';
-                                    echo '<p><span class="highlight">Book ID:</span> ' . $books_id . '</p>';
-                                    echo '<p><span class="highlight">Book Name:</span> ' . $books_name . '</p>';
-                                    echo '</div>';
-
-
-                                    $insertReturnedBookQuery = "INSERT INTO returned_book (username, user_id, books_id, books_name, book_cover, authors, approve, issue, return_date, returned_date, requested) VALUES ('$username','$user_id', '$books_id', '$books_name', '$book_cover', '$authors', '$approve', '$issue','$return','$Markasreturneddate','$requested')";
-                                    mysqli_query($conn, $insertReturnedBookQuery);
-                                    $addquantity = "UPDATE library_books SET quantity = quantity + 1 WHERE books_id = '$books_id'";
-                                    mysqli_query($conn, $addquantity);
-
-                                    // Output message indicating book returned before return date
-                                    $_SESSION['msg'] = "Book returned before the return date. No fine charged";
-
-
-
-
-                                    $deleteQuery = "DELETE FROM issue_book WHERE username='$username' AND books_id='$books_id' AND approve = 'Returned'";
-                                    mysqli_query($conn, $deleteQuery);
                                 }
-                            } else {
-                                // No record found for the given username and book ID
-                                $updateQuery = "UPDATE issue_book SET approve='Returned' WHERE username='$username' AND books_id='$books_id' AND (approve = 'Approved' OR approve = 'Expired')";
-                                mysqli_query($conn, $updateQuery);
                             }
+
+                            if ($noBooksExist) {
+                                $_SESSION['msg'] = "No books to be returned.";
+                                $_SESSION['msg_code'] = "error";
+                            }
+                        } else {
+                            $_SESSION['msg'] = "Please select a book.";
+                            $_SESSION['msg_code'] = "error";
                         }
                     }
+
 
 
                     ?>
@@ -333,28 +341,35 @@ if (isset($_SESSION['admin'])) {
                         // Retrieve all books_id marked as lost
                         $lostBooksQuery = "SELECT books_id, username, `return` FROM issue_book WHERE approve = 'Book Lost '";
                         $lostBooksResult = mysqli_query($conn, $lostBooksQuery);
+
                         if ($lostBooksResult) {
-                            while ($row = mysqli_fetch_assoc($lostBooksResult)) {
-                                $books_id = $row['books_id'];
-                                $username = $row['username'];
-                                $returnDate = $row['return']; // Set return date here
+                            if (mysqli_num_rows($lostBooksResult) > 0) {
+                                while ($row = mysqli_fetch_assoc($lostBooksResult)) {
+                                    $books_id = $row['books_id'];
+                                    $username = $row['username'];
+                                    $returnDate = $row['return']; // Set return date here
                 
-                                // Perform necessary actions for each lost book
-                                $lostBookFine = 0;
-                                $lostCurrentDate = date('Y-m-d');
-                                $differenceInDays = ceil((strtotime($lostCurrentDate) - strtotime($returnDate)) / (60 * 60 * 24));
-                                if ($differenceInDays >= 0) {
-                                    $lostBookFine = ($differenceInDays > 0) ? 5000 : 0;
-                                    $insertFineQuery = "INSERT INTO fine (username, bid, returned, days, fine, status, book_status) VALUES ('$username', '$books_id', '$lostCurrentDate', '$differenceInDays', '$lostBookFine', 'unpaid', 'Book Lost')";
-                                    mysqli_query($conn, $insertFineQuery);
-                                    $deleteLostQuery = "DELETE FROM issue_book WHERE books_id = '$books_id' AND username = '$username'";
-                                    mysqli_query($conn, $deleteLostQuery);
-                                } else {
-                                    echo "No books are lost";
+                                    // Perform necessary actions for each lost book
+                                    $lostBookFine = 0;
+                                    $lostCurrentDate = date('Y-m-d');
+                                    $differenceInDays = ceil((strtotime($lostCurrentDate) - strtotime($returnDate)) / (60 * 60 * 24));
+                                    if ($differenceInDays >= 0) {
+                                        $lostBookFine = ($differenceInDays > 0) ? 5000 : 0;
+                                        $insertFineQuery = "INSERT INTO fine (username, bid, returned, days, fine, status, book_status) VALUES ('$username', '$books_id', '$lostCurrentDate', '$differenceInDays', '$lostBookFine', 'unpaid', 'Book Lost')";
+                                        mysqli_query($conn, $insertFineQuery);
+                                        $deleteLostQuery = "DELETE FROM issue_book WHERE books_id = '$books_id' AND username = '$username'";
+                                        mysqli_query($conn, $deleteLostQuery);
+                                        http://localhost/LMS/Readify-Library-Management-System/php/user/list_book_for_user.php       } else {
+                                        $_SESSION['msg'] = "Book returned before the return date. No fine charged";
+                                    }
                                 }
+                            } else {
+                                // No books marked as lost
+                                $_SESSION['msg'] = "No books marked as lost.";
                             }
                         }
                     }
+
                     ?>
                     <div class=" mx-2 float-end">
                         <button id="demoButton" class="btn btn-warning fw-medium">Change Book Status</button>

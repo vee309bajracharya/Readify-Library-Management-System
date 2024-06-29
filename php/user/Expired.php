@@ -1,8 +1,24 @@
 <?php
 include "./userNavbar.php";
 require_once "../config.php";
-include "./fineinfo.php"; // logic for expired books
-include "./finedbooks.php"; // logic for total fines
+
+
+// Count Expired and Lost Books
+$query = "SELECT count(*) as count FROM issue_book WHERE username = '$_SESSION[user]' AND (approve = 'Expired' OR approve = 'Book Lost')";
+$result = mysqli_query($conn, $query);
+$row = mysqli_fetch_assoc($result);
+$expiredAndLostBooksCount = $row['count'];
+
+// Count Unpaid Fines for Expired and Lost Books
+$query1 = "SELECT count(*) as count FROM fine WHERE username = '$_SESSION[user]' AND (book_status = 'Expired' OR book_status = 'Book Lost') AND status = 'unpaid'";
+$result1 = mysqli_query($conn, $query1);
+$row1 = mysqli_fetch_assoc($result1);
+$unpaidFinesCount = $row1['count'];
+
+// Summing the Results
+$finalFineCount = $expiredAndLostBooksCount + $unpaidFinesCount;
+echo $finalFineCount;
+
 ?>
 
 <!DOCTYPE html>
@@ -22,27 +38,28 @@ include "./finedbooks.php"; // logic for total fines
     <!-- include Dashboard -->
     <?php
     include "./userDashboard.php";
+
+
     ?>
 
     <div class="list_container">
         <div id="main">
             <h3>Book Status</h3>
 
-            <div class="count-amount-container d-flex gap-4">
-                <div class="count-info-list">
-                    <h3 class="fs-3">Expired Books: <?php echo $totalExpiredCount; ?></h3> <br>
-                    <span>NRS <?php echo $totalExpiredFine; ?> Charged</span>
-                </div>
 
-                <div class="count-info-list d-flex justify-content-between">
-                    <div>
-                        <h3 class="fs-3">Fined Books: <?php echo $totalBookLostCount; ?></h3> <br>
-                        <span>NRS <?php echo $totalLostFine; ?> Charged</span>
-                    </div>
+
+
+            <div class="count-amount-container ">
+                <div class="count-info-list d-flex gap-4">
+                    <h3 class="fs-3">Expired Books: <?php echo $finalFineCount; ?></h3> <br>
                     <div class="link-fine">
                         <a href="./fine.php" class="btn-fine p-4 fw-bold">View Details</a>
                     </div>
                 </div>
+
+
+
+
             </div>
             <!-- <div class="my-5">
 
