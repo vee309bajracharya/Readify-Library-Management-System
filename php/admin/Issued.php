@@ -7,43 +7,62 @@ require_once "../config.php"; //database connection file
 
 if (isset($_POST['submit'])) {
     if (isset($_SESSION['admin'])) {
-
-        $book_cover_url = $_POST['book_cover_url'];
-
-        // Fetch the image from the provided URL and save it locally
-        $image_data = file_get_contents($book_cover_url);
-        $book_cover_name = basename($book_cover_url);
-        $book_cover_path = "./covers/" . $book_cover_name;
-        file_put_contents($book_cover_path, $image_data);
-
         $books_name = $_POST['books_name'];
         $authors = $_POST['authors'];
         $edition = $_POST['edition'];
         $status = $_POST['status'];
         $quantity = $_POST['quantity'];
         $department = $_POST['department'];
-        $book_cover = $book_cover_name;
+        $book_cover_url = $_POST['book_cover_url'];
 
+        $alphanumericPattern = "/^[a-zA-Z0-9 ]+$/";
+        $alphabetPattern = "/^[a-zA-Z ]+$/";
 
-        $stmt = $conn->prepare("INSERT INTO library_books (books_name, authors, edition, status, quantity, department, book_cover) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssiss", $books_name, $authors, $edition, $status, $quantity, $department, $book_cover);
-
-
-        if ($stmt->execute()) {
-            $_SESSION['msg'] = "Book Added Successfully !!";
-            $_SESSION['msg_code'] = "success";
-            header("Location: Managebooks.php");
-            exit(); // Ensure that no other code executes after the redirect
-        } else {
-            $_SESSION['msg'] = "Error Adding Book !!";
+        if (!preg_match($alphanumericPattern, $books_name)) {
+            $_SESSION['msg'] = "Book Name should be alphanumeric.";
             $_SESSION['msg_code'] = "error";
-        }
+        } elseif (!preg_match($alphabetPattern, $authors)) {
+            $_SESSION['msg'] = "Book Author should contain only alphabet characters.";
+            $_SESSION['msg_code'] = "error";
+        } elseif (!preg_match($alphanumericPattern, $edition)) {
+            $_SESSION['msg'] = "Book Edition should be alphanumeric.";
+            $_SESSION['msg_code'] = "error";
+        } elseif (!preg_match($alphabetPattern, $status)) {
+            $_SESSION['msg'] = "Book Status should contain only alphabet characters.";
+            $_SESSION['msg_code'] = "error";
+        } elseif (!preg_match($alphabetPattern, $department)) {
+            $_SESSION['msg'] = "Book Department should contain only alphabet characters.";
+            $_SESSION['msg_code'] = "error";
+        } else {
+            // Fetch the image from the provided URL and save it locally
+            $image_data = file_get_contents($book_cover_url);
+            if ($image_data === false) {
+                $_SESSION['msg'] = "Error fetching the book cover image.";
+                $_SESSION['msg_code'] = "error";
+            } else {
+                $book_cover_name = basename($book_cover_url);
+                $book_cover_path = "./covers/" . $book_cover_name;
+                file_put_contents($book_cover_path, $image_data);
 
-        $stmt->close();
+                $stmt = $conn->prepare("INSERT INTO library_books (books_name, authors, edition, status, quantity, department, book_cover) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                $stmt->bind_param("ssssiss", $books_name, $authors, $edition, $status, $quantity, $department, $book_cover_name);
+
+                if ($stmt->execute()) {
+                    $_SESSION['msg'] = "Book Added Successfully !!";
+                    $_SESSION['msg_code'] = "success";
+                    header("Location: Managebooks.php");
+                    exit(); // Ensure that no other code executes after the redirect
+                } else {
+                    $_SESSION['msg'] = "Error Adding Book !!";
+                    $_SESSION['msg_code'] = "error";
+                }
+
+                $stmt->close();
+            }
+        }
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -58,8 +77,6 @@ if (isset($_POST['submit'])) {
 
     <!-- ==== CSS Links ==== -->
     <link rel="stylesheet" href="../../css/custom_bootstrap.css">
-
-
 </head>
 
 <body>
@@ -77,40 +94,38 @@ if (isset($_POST['submit'])) {
 
                     <div class="signup__intro">
                         <h2 style="font-weight: bold; color: #5955E7;"><i class='bx bxs-book-add'></i> Add New Book</h2>
-
                     </div>
-
 
                     <form action="./Issued.php" method="POST" class="bookForm" enctype="multipart/form-data">
 
                         <div class="field input">
                             <label for="bookName">Book Name</label>
-                            <input type="text" name="books_name" id="books_name" required=""><br>
+                            <input type="text" name="books_name" id="books_name" required><br>
                         </div>
 
                         <div class="field input">
                             <label for="bookAuthor">Book Author</label>
-                            <input type="text" name="authors" id="authors" required="">
+                            <input type="text" name="authors" id="authors" required>
                         </div>
 
                         <div class="field input">
                             <label for="bookEdition">Book Edition</label>
-                            <input type="text" name="edition" id="edition" required="">
+                            <input type="text" name="edition" id="edition" required>
                         </div>
 
                         <div class="field input">
                             <label for="bookStatus">Book Status</label>
-                            <input type="text" name="status" id="status" placeholder="Available" required="">
+                            <input type="text" name="status" id="status" placeholder="Available" required>
                         </div>
 
                         <div class="field input">
                             <label for="bookQty">Book Quantity</label>
-                            <input type="number" name="quantity" id="quantity" required="">
+                            <input type="number" name="quantity" id="quantity" required>
                         </div>
 
                         <div class="field input">
                             <label for="bookDept">Book Department</label>
-                            <input type="text" name="department" id="department" required="">
+                            <input type="text" name="department" id="department" required>
                         </div>
 
                         <div class="field input">

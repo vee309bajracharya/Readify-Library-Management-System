@@ -92,7 +92,7 @@ include "./userNavbar.php";
                     echo "</div>";
                     echo "</div>";
                 } else {
-                    echo "No user found with the specified username.";
+                    echo "No user found with the specified username. Re-Login to continue.";
                 }
                 ?>
             </div>
