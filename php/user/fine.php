@@ -77,7 +77,9 @@ function sanitize_input($conn, $input)
             </div>
 
             <div class="count-amount-container d-flex gap-5 my-5">
+
                 <div class="custom-sub-container d-flex p-3 gap-2" style="width: 300px;">
+
                     <div class="place-icon">
                         <img src="../../images/paid.png" class="h-75 m-lg-2">
                     </div>
@@ -89,7 +91,9 @@ function sanitize_input($conn, $input)
             </div>
 
 
+
              </div>
+
 
             <!-- Form for filtering fine information -->
 

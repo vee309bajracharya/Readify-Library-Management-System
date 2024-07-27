@@ -47,7 +47,9 @@ if (!isset($_SESSION['user'])) {
                                 <button class="btn" type="button" data-toggle="collapse"
                                     data-target="#bookRequestCollapse" aria-expanded="true"
                                     aria-controls="bookRequestCollapse">
+
                                     <b>How many books can I request at a time?</b>
+
                                 </button>
                             </h5>
                         </div>
@@ -66,7 +68,9 @@ if (!isset($_SESSION['user'])) {
                                 <button class="btn" type="button" data-toggle="collapse"
                                     data-target="#bookApprovalCollapse" aria-expanded="true"
                                     aria-controls="bookApprovalCollapse">
+
                                     <b> How long does it take for a requested book to be approved and delivered?</b>
+
                                 </button>
                             </h5>
                         </div>
@@ -86,7 +90,9 @@ if (!isset($_SESSION['user'])) {
                                 <button class="btn" type="button" data-toggle="collapse"
                                     data-target="#bookCancellationCollapse" aria-expanded="true"
                                     aria-controls="bookCancellationCollapse">
+
                                     <b> Can I cancel a book after it has been approved?</b>
+
                                 </button>
                             </h5>
                         </div>
@@ -105,7 +111,9 @@ if (!isset($_SESSION['user'])) {
                                 <button class="btn" type="button" data-toggle="collapse"
                                     data-target="#bookReturnRequirementCollapse" aria-expanded="true"
                                     aria-controls="bookReturnRequirementCollapse">
+
                                     <b> Do I need to return books and pay fine to the library physically?</b>
+
                                 </button>
                             </h5>
                         </div>
@@ -124,7 +132,11 @@ if (!isset($_SESSION['user'])) {
                                 <button class="btn" type="button" data-toggle="collapse"
                                     data-target="#bookReturnRequirementCollapse" aria-expanded="true"
                                     aria-controls="bookReturnRequirementCollapse">
+
+                                </button>
+
                                     <b> Is there a time limit for borrowing books?</b>                               </button>
+
                             </h5>
                         </div>
 
@@ -142,7 +154,10 @@ if (!isset($_SESSION['user'])) {
                                 <button class="btn" type="button" data-toggle="collapse"
                                     data-target="#bookRequestDetailsCollapse" aria-expanded="true"
                                     aria-controls="bookRequestDetailsCollapse">
+
+
                                     <b> What information will be shown in my system after requesting a book?</b>
+
                                 </button>
                             </h5>
                         </div>
@@ -166,7 +181,9 @@ if (!isset($_SESSION['user'])) {
                                 <button class="btn" type="button" data-toggle="collapse"
                                     data-target="#bookReturnFineCollapse" aria-expanded="true"
                                     aria-controls="bookReturnFineCollapse">
+
                                     <b> What happens if I return a book after the due date?</b>
+
                                 </button>
                             </h5>
                         </div>
@@ -186,7 +203,9 @@ if (!isset($_SESSION['user'])) {
                                 <button class="btn" type="button" data-toggle="collapse"
                                     data-target="#bookExpirationCollapse" aria-expanded="true"
                                     aria-controls="bookExpirationCollapse">
+
                                     <b> What happens if a book is not returned within the specified time frame?</b>
+
                                 </button>
                             </h5>
                         </div>
@@ -206,7 +225,9 @@ if (!isset($_SESSION['user'])) {
                                 <button class="btn" type="button" data-toggle="collapse"
                                     data-target="#bookLostPenaltyCollapse" aria-expanded="true"
                                     aria-controls="bookLostPenaltyCollapse">
+
                                     <b> What is the penalty for a lost book?</b> 
+
                                 </button>
                             </h5>
                         </div>
@@ -226,7 +247,9 @@ if (!isset($_SESSION['user'])) {
                                 <button class="btn" type="button" data-toggle="collapse"
                                     data-target="#bookReturnWindowCollapse" aria-expanded="true"
                                     aria-controls="bookReturnWindowCollapse">
+
                                     <b> Is there a grace period for returning books? </b>
+
                                 </button>
                             </h5>
                         </div>
