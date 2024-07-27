@@ -50,9 +50,9 @@ echo $finalFineCount;
 
 
             <div class="count-amount-container ">
-                <div class="count-info-list d-flex gap-4">
-                    <h3 class="fs-3">Total Lost/Expired: <?php echo $finalFineCount; ?></h3> <br>
-                    <div class="link-fine">
+                <div class="count-info-list d-flex gap-4" style="width: 420px;">
+                    <h3 class="fs-3 mx-3 pt-3">Total Lost/Expired :  <?php echo $finalFineCount; ?></h3> <br>
+                    <div class="link-fine mx-2">
                         <a href="./fine.php" class="btn-fine p-4 fw-bold">View Details</a>
                     </div>
                 </div>
@@ -114,7 +114,7 @@ echo $finalFineCount;
                     // Display the form for buttons
                     echo '
                     <form action="" method="POST" class="my-4"> 
-                        <button type="submit" name="submit1" class="btn btn-default">All Information</button>
+                        <button type="submit" name="submit1" class="btn btn-default">All</button>
                         <button type="submit" name="submit4" class="btn btn-default">Approved</button>
                                 <button type="submit" name="submit3" class="btn btn-default">Expired</button>
                                 <button type="submit" name="submit2" class="btn btn-default">Book Lost</button>
