@@ -373,7 +373,7 @@ if (isset($_SESSION['admin'])) {
 
                     ?>
                     <div class=" mx-2 float-end">
-                        <button id="demoButton" class="btn btn-warning fw-medium">Change Book Status</button>
+                        <button id="demoButton" class="btn btn-warning fw-medium" style="display: none;">Change Book Status</button>
                     </div>
 
 
