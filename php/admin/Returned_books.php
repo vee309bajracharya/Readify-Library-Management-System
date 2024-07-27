@@ -141,7 +141,7 @@ if (isset($_POST['filter']) || $days7 || $days12 || $days24) {
                         </div>
 
                         <div class="date-btn my-5">
-                        <button type="submit" name="filter" class="btn btn-default">Search</button>
+                        <button type="submit" name="filter" class="btn-search" style="width: 100%; height:100%;">Search</button>
                     </div>
                     </div>
 
@@ -153,7 +153,7 @@ if (isset($_POST['filter']) || $days7 || $days12 || $days24) {
 
 
                 <form method="post">
-                    <button type="submit" name="all" class="btn btn-default">All data</button>
+                    <button type="submit" name="all" class="btn btn-default">All</button>
                     <button type="submit" name="days7" class="btn btn-default">7 days</button>
                     <button type="submit" name="days12" class="btn btn-default">12 days</button>
                     <button type="submit" name="days24" class="btn btn-default">24 days</button>
