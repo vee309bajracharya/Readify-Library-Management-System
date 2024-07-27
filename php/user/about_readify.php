@@ -106,49 +106,6 @@ if (!isset($_SESSION['user'])) {
                     </div>
 
                     <div class="card">
-                        <div class="card-header" id="bookReturnRequirementHeading">
-                            <h5 class="mb-0">
-                                <button class="btn" type="button" data-toggle="collapse"
-                                    data-target="#bookReturnRequirementCollapse" aria-expanded="true"
-                                    aria-controls="bookReturnRequirementCollapse">
-
-                                    <b> Do I need to return books and pay fine to the library physically?</b>
-
-                                </button>
-                            </h5>
-                        </div>
-
-                        <div id="bookReturnRequirementCollapse" class="collapse"
-                            aria-labelledby="bookReturnRequirementHeading" data-parent="#bookRequestAccordion">
-                            <div class="card-body">
-                                Yes, books must be returned and pay fine by visiting our library.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header" id="bookReturnRequirementHeading">
-                            <h5 class="mb-0">
-                                <button class="btn" type="button" data-toggle="collapse"
-                                    data-target="#bookReturnRequirementCollapse" aria-expanded="true"
-                                    aria-controls="bookReturnRequirementCollapse">
-
-                                </button>
-
-                                    <b> Is there a time limit for borrowing books?</b>                               </button>
-
-                            </h5>
-                        </div>
-
-                        <div id="bookReturnRequirementCollapse" class="collapse"
-                            aria-labelledby="bookReturnRequirementHeading" data-parent="#bookRequestAccordion">
-                            <div class="card-body">
-                                Yes, the time duration for borrowing a book is 6 months.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
                         <div class="card-header" id="bookRequestDetailsHeading">
                             <h5 class="mb-0">
                                 <button class="btn" type="button" data-toggle="collapse"
@@ -174,7 +131,32 @@ if (!isset($_SESSION['user'])) {
 
                 <!-- Book Return, Expire and Lost Section -->
                 <h4 class="fw-bold mt-5">Book Return, Expire and Lost</h4>
+
                 <div class="accordion" id="bookReturnAccordion">
+
+            
+                <div class="card">
+                        <div class="card-header" id="bookReturnFineHeading">
+                            <h5 class="mb-0">
+                                <button class="btn" type="button" data-toggle="collapse"
+                                    data-target="#bookReturnFineCollapse" aria-expanded="true"
+                                    aria-controls="bookReturnFineCollapse">
+
+                                    <b> For How long can I borrow the book?</b>
+
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="bookReturnFineCollapse" class="collapse show" aria-labelledby="bookReturnFineHeading"
+                            data-parent="#bookReturnAccordion">
+                            <div class="card-body">
+                                The time period for borrow book is 6months.
+                            </div>
+                        </div>
+                    </div>
+
+
+
                     <div class="card">
                         <div class="card-header" id="bookReturnFineHeading">
                             <h5 class="mb-0">
@@ -182,7 +164,7 @@ if (!isset($_SESSION['user'])) {
                                     data-target="#bookReturnFineCollapse" aria-expanded="true"
                                     aria-controls="bookReturnFineCollapse">
 
-                                    <b> What happens if I return a book after the due date?</b>
+                                    <b> What happens if I excceed the return date of the book?</b>
 
                                 </button>
                             </h5>
@@ -191,7 +173,7 @@ if (!isset($_SESSION['user'])) {
                         <div id="bookReturnFineCollapse" class="collapse show" aria-labelledby="bookReturnFineHeading"
                             data-parent="#bookReturnAccordion">
                             <div class="card-body">
-                                If you return a book after the due date, a fine of Rs. 40 will be charged for each day
+                            After entering the 7th month, a fine of Rs. 40 will be charged for each day
                                 until the fine is paid.
                             </div>
                         </div>
@@ -204,7 +186,7 @@ if (!isset($_SESSION['user'])) {
                                     data-target="#bookExpirationCollapse" aria-expanded="true"
                                     aria-controls="bookExpirationCollapse">
 
-                                    <b> What happens if a book is not returned within the specified time frame?</b>
+                                    <b> what happens if I exceed the 7th month?</b>
 
                                 </button>
                             </h5>
@@ -213,8 +195,7 @@ if (!isset($_SESSION['user'])) {
                         <div id="bookExpirationCollapse" class="collapse" aria-labelledby="bookExpirationHeading"
                             data-parent="#bookReturnAccordion">
                             <div class="card-body">
-                                If a book is not returned within the specified time frame, the status will automatically
-                                show as 'Expired'. You will be fined accordingly, and the book will be considered lost.
+                                After entering the 8th month, The book isn't accepted by system and the status will automatically show as 'Book Lost'.
                             </div>
                         </div>
                     </div>
@@ -235,33 +216,33 @@ if (!isset($_SESSION['user'])) {
                         <div id="bookLostPenaltyCollapse" class="collapse" aria-labelledby="bookLostPenaltyHeading"
                             data-parent="#bookReturnAccordion">
                             <div class="card-body">
-                                If a book is not returned within 1 month, it will be declared lost. In such a case, a
-                                fine penalty of Rs. 5000 is compulsory.
+                                In the case of Book Lost, the penalty of Rs. 5000 is compulsory.
                             </div>
                         </div>
                     </div>
 
                     <div class="card">
-                        <div class="card-header" id="bookReturnWindowHeading">
+                        <div class="card-header" id="bookReturnRequirementHeading">
                             <h5 class="mb-0">
                                 <button class="btn" type="button" data-toggle="collapse"
-                                    data-target="#bookReturnWindowCollapse" aria-expanded="true"
-                                    aria-controls="bookReturnWindowCollapse">
+                                    data-target="#bookReturnRequirementCollapse" aria-expanded="true"
+                                    aria-controls="bookReturnRequirementCollapse">
 
-                                    <b> Is there a grace period for returning books? </b>
+                                    <b> Do I need to return books and pay fine to the library physically?</b>
 
                                 </button>
                             </h5>
                         </div>
 
-                        <div id="bookReturnWindowCollapse" class="collapse" aria-labelledby="bookReturnWindowHeading"
-                            data-parent="#bookReturnAccordion">
+                        <div id="bookReturnRequirementCollapse" class="collapse"
+                            aria-labelledby="bookReturnRequirementHeading" data-parent="#bookRequestAccordion">
                             <div class="card-body">
-                                Yes, our library system provides a 1-month grace period for users to return borrowed
-                                books.
+                                Yes, books must be returned and pay fine by visiting our library.
                             </div>
                         </div>
                     </div>
+
+
                 </div>
             </div>
 
