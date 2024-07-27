@@ -360,7 +360,8 @@ if (isset($_SESSION['admin'])) {
                                         $deleteLostQuery = "DELETE FROM issue_book WHERE books_id = '$books_id' AND username = '$username'";
                                         mysqli_query($conn, $deleteLostQuery);
                                         http://localhost/LMS/Readify-Library-Management-System/php/user/list_book_for_user.php       } else {
-                                        $_SESSION['msg'] = "Book returned before the return date. No fine charged";
+                                        $_SESSION['msg'] = "Book Declared Lost. Please check in Fine info ";
+
                                     }
                                 }
                             } else {

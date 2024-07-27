@@ -51,7 +51,7 @@ echo $finalFineCount;
 
             <div class="count-amount-container ">
                 <div class="count-info-list d-flex gap-4">
-                    <h3 class="fs-3">Expired Books: <?php echo $finalFineCount; ?></h3> <br>
+                    <h3 class="fs-3">Total Lost/Expired: <?php echo $finalFineCount; ?></h3> <br>
                     <div class="link-fine">
                         <a href="./fine.php" class="btn-fine p-4 fw-bold">View Details</a>
                     </div>
