@@ -50,7 +50,9 @@ if (isset($_POST['filter']) || $days7 || $days12 || $days24) {
 
         // Check if 'to' date is greater than 'from' date
         if (strtotime($to) < strtotime($from)) {
-            echo "Please enter a valid date range."; // sweet alert here
+            $_SESSION['msg'] = "Please enter a valid date range";
+            $_SESSION['msg_code'] = "error";
+            header('Location: Returned_books.php');
             exit;
         }
 
@@ -102,7 +104,6 @@ if (isset($_POST['filter']) || $days7 || $days12 || $days24) {
         td {
             width: 10%;
         }
-
     </style>
 </head>
 
@@ -127,28 +128,31 @@ if (isset($_POST['filter']) || $days7 || $days12 || $days24) {
                 <form method="post">
                     <h4 class="mt-5 fw-bold">Choose Date</h4>
                     <div class="date-filter-container my-2 d-flex gap-5 align">
-                        
+
                         <div class="from-date d-flex flex-column">
                             <label>From</label>
-                            <input type="date" class="round-holder"  name="from" value="<?php echo isset($from) ? htmlspecialchars($from) : ''; ?>" i want in this format YYYY-MM-DD
-                            required>
+                            <input type="date" class="round-holder" name="from"
+                                value="<?php echo isset($from) ? htmlspecialchars($from) : ''; ?>" i want in this format
+                                YYYY-MM-DD required>
                         </div>
 
                         <div class="to-date d-flex flex-column">
                             <label>To</label>
-                            <input type="date" class="round-holder" name="to" value="<?php echo isset($to) ? htmlspecialchars($to) : ''; ?>" i want in this format YYYY-MM-DD
-                                required>
+                            <input type="date" class="round-holder" name="to"
+                                value="<?php echo isset($to) ? htmlspecialchars($to) : ''; ?>" i want in this format
+                                YYYY-MM-DD required>
                         </div>
 
                         <div class="date-btn my-5">
-                        <button type="submit" name="filter" class="btn-search" style="width: 100%; height:100%;">Search</button>
+                            <button type="submit" name="filter" class="btn-search"
+                                style="width: 100%; height:100%;">Search</button>
+                        </div>
                     </div>
-                    </div>
-
-  
 
 
-         
+
+
+
                 </form>
 
 
@@ -208,6 +212,22 @@ if (isset($_POST['filter']) || $days7 || $days12 || $days24) {
 
         </div>
     </div>
+    <!-- jquery, popper, bootstrapJS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+
+    <!-- === sweetAlert link === -->
+    <script src="../sweetAlert/sweetalert.js"></script>
+
+    <?php
+    include ('../sweetAlert/sweetalert_actions.php');
+    ?>
 </body>
 
 </html>
