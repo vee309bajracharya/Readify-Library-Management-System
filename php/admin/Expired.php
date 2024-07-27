@@ -190,7 +190,7 @@ if (isset($_SESSION['admin'])) {
                                     $checkBooklostResult = mysqli_query($conn, $checkBooklostQuery);
 
                                     if (mysqli_num_rows($checkBooklostResult) > 0) {
-                                        $_SESSION['msg'] = "Book Already Declared Lost";
+                                        $_SESSION['msg'] = "Invalid Action: Use the Declare Lost button";
                                         $_SESSION['msg_code'] = "error";
                                         continue; // Skip the rest of the loop iteration
                                     }
@@ -301,6 +301,7 @@ if (isset($_SESSION['admin'])) {
 
                                             // Output message indicating book returned before return date
                                             $_SESSION['msg'] = "Book returned before the return date. No fine charged";
+                                            $_SESSION['msg_code'] = "success";
 
                                             $deleteQuery = "DELETE FROM issue_book WHERE username='$username' AND books_id='$books_id' AND approve = 'Returned'";
                                             mysqli_query($conn, $deleteQuery);
