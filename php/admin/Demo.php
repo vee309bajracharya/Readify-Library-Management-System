@@ -27,6 +27,7 @@ require_once "../config.php";
             font-size: 12px;
             border-radius: 15px;
         }
+
         .btn-circle.btn-lg {
             width: 50px;
             height: 50px;
@@ -51,11 +52,12 @@ require_once "../config.php";
     <div class="list_container">
         <div id="main">
 
-        <div>
-            <form method="post">
-                <a href="Expired.php" type="submit" name="Change_date" class="btn btn-default btn-circle btn-lg" alt="Back to Book Status"><i class='bx bx-arrow-back' style='text-align:center;'></i></a>
-            </form>
-        </div>
+            <div>
+                <form method="post">
+                    <a href="Expired.php" type="submit" name="Change_date" class="btn btn-default btn-circle btn-lg"
+                        alt="Back to Book Status"><i class='bx bx-arrow-back' style='text-align:center;'></i></a>
+                </form>
+            </div>
 
             <?php
             error_reporting(E_ALL);
@@ -69,6 +71,7 @@ require_once "../config.php";
             $approveDate = null;
             $formattedIssueDate = null;
             $formattedReturnDate = null;
+            $formattedReturnDategoesin = null;
             $currentDate = date('Y-m-d');
 
             // Fetch issue date based on books_id and username from URL parameters
@@ -85,7 +88,7 @@ require_once "../config.php";
                     $returnDate = $issueDateRow['return'];
                     $approveDate = $issueDateRow['approve'];
 
-                  
+
                 } else {
                     echo "Issue date not found.";
                 }
@@ -118,8 +121,11 @@ require_once "../config.php";
 
                     $formattedIssueDate = date('Y-m-d', strtotime($issueDateupdated));
                     $formattedReturnDate = date('Y-m-d', strtotime($returnDateupdated));
+                    // Subtract 30 days from $returnDateupdated and format it
+                    $formattedReturnDategoesin = date('Y-m-d', strtotime($returnDateupdated . ' - 30 days'));
 
-                    $sqlchangedate = "UPDATE issue_book SET issue = '$formattedIssueDate', `return` = '$formattedReturnDate', approve = '$approveDate' WHERE books_id = '$books_id' AND username = '$username'";
+
+                    $sqlchangedate = "UPDATE issue_book SET issue = '$formattedIssueDate', `return` = '$formattedReturnDategoesin ', approve = '$approveDate' WHERE books_id = '$books_id' AND username = '$username'";
 
                     if (mysqli_query($conn, $sqlchangedate)) {
                         $_SESSION['msg'] = "Date Updated Successfully";
@@ -150,13 +156,13 @@ require_once "../config.php";
             }
             ?>
 
-                <section class="container-form">
-                    <div class="form__box custom__box w-75">
-                        <div class="signup__intro">
-                            <h2 style="font-weight: bold; color: #5955E7;">Book Status Changer</h2>
-                        </div>
+            <section class="container-form">
+                <div class="form__box custom__box w-75">
+                    <div class="signup__intro">
+                        <h2 style="font-weight: bold; color: #5955E7;">Book Status Changer</h2>
+                    </div>
 
-                <form method="post">
+                    <form method="post">
                         <div class="field input">
                             <big class="fw-bold fs-3">Issued Date: </big>
                             <small class="fs-3"><?php echo "$issueDate" ?></small>
@@ -166,8 +172,8 @@ require_once "../config.php";
                             <big class="fw-bold fs-3">Return Date: </big>
                             <small class="fs-3"><?php echo "$returnDate" ?></small>
                         </div>
-                        
-                    <label for="changedDates" class="fw-semibold my-4">Changed Dates : </label> <br>
+
+                        <label for="changedDates" class="fw-semibold my-4">Changed Dates : </label> <br>
 
                         <div class="field input">
                             <big class="fw-bold fs-3">Issued Date: </big>
@@ -176,7 +182,7 @@ require_once "../config.php";
 
                         <div class="field input">
                             <big class="fw-bold fs-3">Returned Date: </big>
-                            <small class="fs-3"><?php echo "$formattedReturnDate" ?></small>
+                            <small class="fs-3"><?php echo "$formattedReturnDategoesin" ?></small>
                         </div>
 
                         <div class="field input">
@@ -185,29 +191,34 @@ require_once "../config.php";
                         </div>
 
 
-                    <div class="my-4">
-                        <button type="submit" name="Expire" class="btn btn-default">Change to Expired</button>
-                        <button type="submit" name="Lost_Book" class="btn btn-default">Change to Book Lost</button>
-                        <button type="submit" name="Approved" class="btn btn-default">Change to Approved</button>
-                    </div>
+                        <div class="my-4">
+                            <button type="submit" name="Expire" class="btn btn-default">Change to Expired</button>
+                            <button type="submit" name="Lost_Book" class="btn btn-default">Change to Book Lost</button>
+                            <button type="submit" name="Approved" class="btn btn-default">Change to Approved</button>
+                        </div>
 
-                </form>
+                    </form>
 
                 </div>
-                </section>
+            </section>
         </div>
     </div>
 
     <!-- jquery, popper, bootstrapJS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
 
     <!-- === sweetAlert link === -->
     <script src="../sweetAlert/sweetalert.js"></script>
 
     <?php
-        include('../sweetAlert/sweetalert_actions.php');
+    include ('../sweetAlert/sweetalert_actions.php');
     ?>
 </body>
 

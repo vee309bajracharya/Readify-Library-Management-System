@@ -37,20 +37,35 @@ function sanitize_input($conn, $input)
             <h1>Fine Details</h1>
 
             <?php
-            // Calculate total unpaid fine
+            // Get the logged-in user
             $loggedInUser = $_SESSION['user'];
-            $sql = "SELECT SUM(fine) AS totalUnpaidFine
-                    FROM fine 
-                    WHERE username = '$loggedInUser' AND status = 'unpaid'";
 
+            // Prepare the SQL query to calculate total unpaid and paid fines
+            $sql = "
+    SELECT 
+        SUM(CASE WHEN status = 'unpaid' THEN fine ELSE 0 END) AS totalUnpaidFine,
+        SUM(CASE WHEN status = 'paid' THEN fine ELSE 0 END) AS totalPaidFine
+    FROM fine 
+    WHERE username = '$loggedInUser'";
+
+            // Execute the query
             $result = mysqli_query($conn, $sql);
+
+            // Fetch the result
             $row = mysqli_fetch_assoc($result);
+
+            // Get the total unpaid and paid fines
             $totalUnpaidFine = $row['totalUnpaidFine'];
+            $totalPaidFine = $row['totalPaidFine'];
+
+
             ?>
 
+
             <!-- Display total unpaid fine -->
-            <div class="count-amount-container d-flex gap-5 my-5">
-                <div class="custom-sub-container d-flex p-3 gap-2">
+             <div class="d-flex justify-content-start gap-5">
+             <div class="count-amount-container d-flex gap-5 my-5">
+                <div class="custom-sub-container d-flex p-3 gap-2" style="width: 300px;">
                     <div class="place-icon">
                         <img src="../../images/fine.png" class="h-75 m-lg-2">
                     </div>
@@ -60,6 +75,21 @@ function sanitize_input($conn, $input)
                     </div>
                 </div>
             </div>
+
+            <div class="count-amount-container d-flex gap-5 my-5">
+                <div class="custom-sub-container d-flex p-3 gap-2" style="width: 300px;">
+                    <div class="place-icon">
+                        <img src="../../images/paid.png" class="h-75 m-lg-2">
+                    </div>
+                    <div class="mt-4">
+                        <big class="fw-bold fs-3">Total Paid Fine</big> <br>
+                        <small class="fw-medium fs-3">Rs.<?php echo $totalPaidFine; ?></small>
+                    </div>
+                </div>
+            </div>
+
+
+             </div>
 
             <!-- Form for filtering fine information -->
 
@@ -80,7 +110,7 @@ function sanitize_input($conn, $input)
 
             <div class="filter-container d-flex gap-3 float-end">
                 <form action="" method="POST" class="my-4">
-    
+
                     <button type="submit" name="submit1" class="btn btn-default">All Information</button>
                     <button type="submit" name="submit3" class="btn btn-default">Expired</button>
                     <button type="submit" name="submit2" class="btn btn-default">Book Lost</button>
